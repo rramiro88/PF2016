@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Bienvenido</title>
+
+        <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
+        <h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
+        <h:outputScript library="js" name="bootstrap.js"/>
+
+
+    </h:head>
+    <h:body>
+
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Crear nuevo equipo</h1>
+                <p>Elige tu usuario y password</p> 
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+
+                    <h:graphicImage value="#{resource['images:logo.png']}" styleClass="img-responsive"/>
+
+
+                </div>
+                <div class="col-sm-4">
+
+                     <h:form>
+                        
+                        <div class="form-group">
+                            <label for="usuarioNuevo">Usuario</label>
+                            <p:inputText value="#{nuevoUsuarioController.usuario}" styleClass="form-control" id="usuarioNuevo"></p:inputText>
+                            <label for="passNuevo">Pass</label>
+                            <p:password value="#{nuevoUsuarioController.password}" styleClass="form-control" id="passNuevo" ></p:password>
+                            <label for="clubNuevo">Nombre del nuevo club</label>
+                            <p:inputText value="#{nuevoUsuarioController.nombreClub}" styleClass="form-control" id="clubNuevo"></p:inputText>
+                        </div>
+                        <p:commandLink action="#{nuevoUsuarioController.crearUsuario}" styleClass="btn btn-primary btn-lg" value="Crear equipo">    
+                            <span class="glyphicon glyphicon-ok"> </span>
+
+                        </p:commandLink>
+                    </h:form>
+                    
+                </div>
+                <div class="col-sm-4">
+
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+
+    </h:body>
+
+
+
+
+</html>
+

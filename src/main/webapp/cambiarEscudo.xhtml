@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./templateEscritorio.xhtml">
+
+            <ui:define name="centro">
+
+              
+                <h:form rendered="#{not empty user}">
+
+                    <p:growl id="growl1" life="2000"></p:growl>
+                    
+                    <div class="form-group">
+
+                        <div id="datosClub" class="col-sm-offset-4">
+
+                            <p:graphicImage id="urlEscudo" value="#{user.club.urlEscudo}" styleClass="img-responsive"></p:graphicImage>
+                            <h3><h:outputText id="etiquetaNombre" value="#{user.club.nombre}" styleClass="text-center" ></h:outputText></h3>
+                        </div>
+
+
+                        <br/><br/>
+                        <label for="passNuevo">Nueva URL del escudo:</label>
+                        <p:inputText value="#{user.club.urlEscudo}" styleClass="form-control" id="nombre"></p:inputText>
+
+                    </div>
+                    <p:commandLink actionListener="#{sesionController.actualizarUsuario}" update="growl1 urlEscudo" styleClass="btn btn-primary btn-lg" value="Actualizar Escudo">    
+                        <span class="glyphicon glyphicon-ok"> </span>
+
+                    </p:commandLink>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
