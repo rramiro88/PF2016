@@ -8,11 +8,8 @@ package dao;
 import entidades.Club;
 import entidades.Estadio;
 import entidades.Jugador;
-import entidades.Usuario;
-import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *

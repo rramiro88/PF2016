@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
@@ -29,6 +30,7 @@ public class Jugador implements Serializable {
     private String nombre;
     
     @ManyToOne
+    @JoinColumn(name="club_id", nullable = true)
     private Club club;
     
     private Double cotizacion;
