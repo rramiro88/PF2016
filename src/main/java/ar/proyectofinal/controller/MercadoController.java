@@ -50,13 +50,17 @@ public class MercadoController {
         System.out.println("en controller!");
         
         this.listaDeLibres.remove(j);
-        
-       
-        
-        
+
         
     }
-    
+
+    public void liberarJugador(Jugador j, Club c){
+        
+        
+        miLogicaMercado.liberarJugador(j,c);
+        this.listaDeLibres = listarLibres();
+        
+    }
     
     @PostConstruct
     public void inicializar(){

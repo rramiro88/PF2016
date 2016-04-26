@@ -8,6 +8,7 @@ package dao;
 import entidades.Jugador;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -94,11 +95,35 @@ public class JugadorDAO {
         for (String nombre : nombres) {
             
             jugador = new Jugador();
+            
             jugador.setNombre(nombre);
+            jugador.setArquero(randInt(0, 10));
+            jugador.setCabezazo(randInt(0, 10));
+            jugador.setCotizacion(1.0*randInt(0, 10000000));
+            jugador.setEntradas(randInt(0, 10));
+            jugador.setMarca(randInt(0, 10));
+            jugador.setMentalidad(randInt(0, 10));
+            jugador.setPelotaParada(randInt(0, 10));
+            jugador.setPotenciaTiro(randInt(0, 10));
+            jugador.setPrecisionTiro(randInt(0, 10));
+            jugador.setRegate(randInt(0, 10));
+            jugador.setResistencia(randInt(0, 10));
+            jugador.setSalario(1.0*randInt(0, 100000));
+            jugador.setVelocidad(randInt(0, 10));
+            
             crearJugador(jugador);
         }
        
        
+    }
+    
+    public static int randInt(int min, int max) {
+
+        Random rand = new Random();
+
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
     }
 
 }

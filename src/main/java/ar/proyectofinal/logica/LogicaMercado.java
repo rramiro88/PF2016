@@ -5,6 +5,7 @@
  */
 package ar.proyectofinal.logica;
 
+import dao.ClubDAO;
 import dao.JugadorDAO;
 import entidades.Club;
 import entidades.Jugador;
@@ -34,13 +35,27 @@ public class LogicaMercado implements Serializable{
         boolean respuesta = false;
         
         JugadorDAO jugadorDAO = new JugadorDAO();
+        ClubDAO clubDAO  = new ClubDAO();
         
         System.out.println("en logica!");
         j.setClub(c);
+        c.agregarJugador(j);
         jugadorDAO.actualizarJugador(j);
+        clubDAO.actualizarClub(c);
         
         
         return true;
+    }
+
+    public void liberarJugador(Jugador j, Club c) {
+        
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        ClubDAO clubDAO  = new ClubDAO();
+        j.setClub(null);
+        c.getPlantel().remove(j);
+        clubDAO.actualizarClub(c);
+        jugadorDAO.actualizarJugador(j);
+        
     }
 
     
