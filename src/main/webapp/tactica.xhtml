@@ -4,31 +4,46 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
+
+
     <body>
 
-        
-        <ui:composition template="./templateEscritorio.xhtml">
+
+
+        <ui:composition template="./templateEscritorio-draggable.xhtml">
 
             <ui:define name="izquierda">
-                izquierda
+
+
+
+
+
             </ui:define>
 
             <ui:define name="centro">
 
-
                 <p:graphicImage name="/images/cancha.jpg"></p:graphicImage>
-                <p:graphicImage name="/images/jugador.jpg">
-                    <p:draggable/>
-                </p:graphicImage>
 
 
-
-
-
+                
             </ui:define>
 
             <ui:define name="derecha">
-                derecha
+
+
+                <p:dataList value="#{user.club.plantel}" var="jugador">
+
+                    <p:graphicImage id="jugador1" name="/images/jugador.png" ></p:graphicImage>
+                    <p:outputLabel value="#{jugador.nombre}" style="margin: 10px"/>
+
+                    <p:draggable for="jugador1" opacity="0.7"/>
+
+
+
+                </p:dataList>
+
+
+
             </ui:define>
 
         </ui:composition>

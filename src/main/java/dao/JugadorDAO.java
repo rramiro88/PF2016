@@ -108,7 +108,7 @@ public class JugadorDAO {
             jugador.setPrecisionTiro(randInt(0, 10));
             jugador.setRegate(randInt(0, 10));
             jugador.setResistencia(randInt(0, 10));
-            jugador.setSalario(1.0*randInt(0, 100000));
+            jugador.setSalario(1.0*randInt(2000, 100000));
             jugador.setVelocidad(randInt(0, 10));
             
             crearJugador(jugador);
