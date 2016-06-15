@@ -37,11 +37,13 @@ public class ClubDAO {
 
             s.save(club);
             s.getTransaction().commit();
-            s.close();
+            
 
         } catch (Exception ex) {
             s.getTransaction().rollback();
             ex.printStackTrace();
+        }finally{
+            s.close();
         }
 
         return club;
@@ -57,11 +59,13 @@ public class ClubDAO {
 
             s.update(club);
             s.getTransaction().commit();
-            s.close();
+            
 
         } catch (Exception ex) {
             s.getTransaction().rollback();
             ex.printStackTrace();
+        }finally{
+            s.close();
         }
     }
 

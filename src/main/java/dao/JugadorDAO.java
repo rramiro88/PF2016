@@ -9,6 +9,7 @@ import entidades.Jugador;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -45,12 +46,14 @@ public class JugadorDAO {
         try {
             s.save(j);
             s.getTransaction().commit();
-            s.close();
+            
         } catch (Exception e) {
             respuesta = false;
             s.getTransaction().rollback();
             System.out.println("ROLLBACK EN TRANSACCION");
 
+        }finally{
+            s.close();
         }
 
         return respuesta;
@@ -70,11 +73,13 @@ public class JugadorDAO {
             s.update(j);
             System.out.println("update exitoso! DAO");
             s.getTransaction().commit();
-            s.close();
+            
         } catch (Exception e) {
             respuesta = false;
             s.getTransaction().rollback();
 
+        }finally{
+            s.close();
         }
 
         return respuesta;
@@ -115,6 +120,32 @@ public class JugadorDAO {
         }
        
        
+    }
+    
+    public List<Jugador> obtenerAlumnosPorNombre(String nombre) {
+        List<Jugador> respuesta;
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+
+        
+//        Query consulta = s.createSQLQuery("select division, nivel, nombreYApellido, turno from Alumno where nombreYApellido like \"%" + nombre +"%\"");
+        Query consulta = s.createQuery("From Jugador where nombre like :parametro");
+        consulta.setParameter("parametro","%"+ nombre +"%" );
+        
+        respuesta = consulta.list();
+        
+        
+//        Criteria c = s.createCriteria(Alumno.class)
+//                .add(Restrictions.like("nombreYApellido", nombre, MatchMode.START));
+//        respuesta = c.list();
+
+        
+
+        s.close();
+
+        return respuesta;
     }
     
     public static int randInt(int min, int max) {

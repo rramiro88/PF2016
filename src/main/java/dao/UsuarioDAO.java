@@ -47,12 +47,14 @@ public class UsuarioDAO {
 
             s.save(u);
             s.getTransaction().commit();
-            s.close();
+            
             respuesta = true;
 
         } catch (Exception ex) {
             s.getTransaction().rollback();
             ex.printStackTrace();
+        }finally{
+            s.close();
         }
 
         return respuesta;

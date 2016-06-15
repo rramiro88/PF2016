@@ -10,13 +10,13 @@
         <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
         <h:outputStylesheet name="webjars/font-awesome/4.5.0/css/font-awesome.css"></h:outputStylesheet>
-        
 
-        
+
+
         <h:outputScript library="js" name="jquery-2.2.2.min.js"/> 
 
-        
-        
+
+
         <h:outputScript library="js" name="bootstrap.js"/>
 
 
@@ -30,8 +30,8 @@
                 $('[data-toggle="tooltip"]').tooltip();
                 $('[data-toggle="popover"]').popover();
             });
-            
-             
+
+
         </script>
 
 
@@ -57,7 +57,17 @@
                                 <li> <a href="#">Modificar Estadio</a> </li> 
                             </ul>
                         </li>
-                        <li><a href="jugadoresLibres.xhtml"><i class="fa fa-exchange fa-3x" data-toggle="tooltip" title="Mercado de Pases" data-placement="bottom"></i></a></li> 
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-exchange fa-3x" data-toggle="tooltip" title="Mercado de Pases" data-placement="right" ></i>
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li> <a href="buscarJugador.xhtml">Buscar Jugador</a> </li>
+                                <li> <a href="#">Buscar por Club</a> </li>
+                                <li> <a href="plantel.xhtml">Liberar Jugador</a> </li>
+                                <li> <a href="jugadoresLibres.xhtml">Buscar Libres</a> </li> 
+                            </ul>
+                        </li>
+                        
                         <li><a href="tactica.xhtml"><i class="fa fa-book fa-3x" data-toggle="tooltip" title="Tacticas" data-placement="bottom"></i></a></li> 
                         <li><a href="#"><i class="fa fa-futbol-o fa-3x" data-toggle="tooltip" title="Partidos" data-placement="bottom"></i></a></li> 
                         <li><a href="plantel.xhtml"><i class="fa fa-users fa-3x" data-toggle="tooltip" title="Plantel" data-placement="bottom"></i></a></li>

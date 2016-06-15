@@ -14,52 +14,49 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-
 @Named
 @SessionScoped
-public class LogicaMercado implements Serializable{
-    
-    
-    public List<Jugador> listarLibres(){
-        
+public class LogicaMercado implements Serializable {
+
+    public List<Jugador> listarLibres() {
+
         JugadorDAO jugadorDAO = new JugadorDAO();
-        
+
         return jugadorDAO.listarLibres();
-        
-        
-        
+
     }
 
     public boolean transferir(Jugador j, Club c, int condicion) {
-       
+
         boolean respuesta = false;
-        
+
         JugadorDAO jugadorDAO = new JugadorDAO();
-        ClubDAO clubDAO  = new ClubDAO();
-        
+        ClubDAO clubDAO = new ClubDAO();
+
         System.out.println("en logica!");
         j.setClub(c);
         c.agregarJugador(j);
         jugadorDAO.actualizarJugador(j);
         clubDAO.actualizarClub(c);
-        
-        
+
         return true;
     }
 
     public void liberarJugador(Jugador j, Club c) {
-        
+
         JugadorDAO jugadorDAO = new JugadorDAO();
-        ClubDAO clubDAO  = new ClubDAO();
+        ClubDAO clubDAO = new ClubDAO();
         j.setClub(null);
         c.getPlantel().remove(j);
         clubDAO.actualizarClub(c);
         jugadorDAO.actualizarJugador(j);
-        
+
     }
 
-    
-    
-    
-    
+    public List<Jugador> buscarJugadoresPorNombre(String nombreJugador) {
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        return jugadorDAO.obtenerAlumnosPorNombre(nombreJugador);
+
+    }
+
 }

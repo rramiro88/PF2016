@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -23,7 +22,7 @@ public class CargadorDB {
     public ArrayList<String> cargarJugadores() {
 
         
-        String archivoCSV =  "/home/ramiro/Escritorio/jugadores.csv";
+        String archivoCSV =  "/home/alumno/Escritorio/jugadores.csv";
         
         BufferedReader br = null;
         String line = "";
