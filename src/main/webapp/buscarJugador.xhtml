@@ -7,11 +7,13 @@
 
     <body>
 
-        <ui:composition template="./templateEscritorio.xhtml">
+        <ui:composition template="./templateEscritorio-draggable.xhtml">
 
 
 
             <ui:define name="centro">
+
+
 
 
                 <h:form>
@@ -20,7 +22,7 @@
 
                         <label for="nombre">Nombre del jugador: </label>
                         <p:inputText id="nombre" styleClass="form-control" value="#{buscarJugadorController.nombreJugador}"/>
-                    
+
                     </div>
                     <p:commandButton value="Buscar" update="tabla" icon="ui-icon-check" action="#{buscarJugadorController.buscarJugadores()}"/>
 
@@ -30,10 +32,50 @@
 
                         <p:column headerText="Nombre">
 
-                            <p:outputLabel value="#{jugador.nombre}"/>
+                            <p:commandLink id="botonNombre" value="#{jugador.nombre}" onclick="PF('habilidades#{jugador.nombre}').show();"/>
+                            <p:dialog header="Detalle del jugador" widgetVar="habilidades#{jugador.nombre}" modal="true">
+                                <p:outputLabel value="Nombre: #{jugador.nombre}"/><br/>
+                                <p:outputLabel value="Velocidad #{jugador.velocidad}"></p:outputLabel><br/>
+                                <p:outputLabel value="Resistencia #{jugador.resistencia}"></p:outputLabel><br/>
+                                <p:outputLabel value="Cabezaso #{jugador.cabezazo}"></p:outputLabel><br/>
+                                <p:outputLabel value="Entradas #{jugador.entradas}"></p:outputLabel><br/>
+                                <p:outputLabel value="Marca #{jugador.marca}"></p:outputLabel><br/>
+                                <p:outputLabel value="Mentalidad #{jugador.mentalidad}"></p:outputLabel><br/>
+                                <p:outputLabel value="Pelota perada #{jugador.pelotaParada}"></p:outputLabel><br/>
+                                <p:outputLabel value="Potencia de tiro #{jugador.potenciaTiro}"></p:outputLabel><br/>
+                                <p:outputLabel value="Precision de tiro #{jugador.precisionTiro}"></p:outputLabel><br/>
+                                <p:outputLabel value="Regate #{jugador.regate}"></p:outputLabel>
+
+
+                                <h:form>
+
+                                    <div class="form-group">
+                                        <p:outputLabel  for="monto" value="Ingrese monto a ofertar"></p:outputLabel>
+                                        <p:inputText styleClass="form-control" id="monto" value="#{buscarJugadorController.montoDeOperacion}"></p:inputText>
+                                    </div>
+                                    <p:commandButton value="Enviar Oferta" action="#{buscarJugadorController.ofertaDeCompra(jugador,user.club)}"></p:commandButton>
+                                </h:form>
+                            </p:dialog>
+
 
                         </p:column>
 
+                        <p:column headerText="Salario">
+
+                            <p:outputLabel value="#{jugador.salario}"/>
+
+                        </p:column>
+                        <p:column headerText="Cotizacion">
+
+                            <p:outputLabel value="#{jugador.cotizacion}"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <p:link value="Iniciar negociaciones"></p:link>
+
+                        </p:column>
 
 
 
@@ -41,10 +83,12 @@
 
 
 
+
                 </h:form>
 
 
             </ui:define>
+
 
 
 

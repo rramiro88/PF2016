@@ -21,7 +21,7 @@ body {
     z-index: 10;
     opacity: 0.8;
     border-color: #2d9a00;
-    box-shadow: 2px 2px 10px rgb(45, 154, 0);
+    box-shadow: 2px 2px 30px rgb(45, 154, 0);
 }
 
 contenido-centrado {
@@ -60,4 +60,8 @@ ul{
 
 .jumbotron{
     margin-bottom: 10%;
+}
+
+.medio{
+    background-image:url("#{resource['images:fondito.png']}");
 }

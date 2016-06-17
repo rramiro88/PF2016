@@ -6,9 +6,10 @@
 package ar.proyectofinal.controller;
 
 import ar.proyectofinal.logica.LogicaMercado;
+import entidades.Club;
 import entidades.Jugador;
+import entidades.Oferta;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -27,6 +28,19 @@ public class buscarJugadorController implements Serializable{
     
     private String nombreJugador;
     private List<Jugador> resultado;
+    private Double montoDeOperacion;
+
+    public Double getMontoDeOperacion() {
+        return montoDeOperacion;
+    }
+
+    public void setMontoDeOperacion(Double montoDeOperacion) {
+        this.montoDeOperacion = montoDeOperacion;
+    }
+
+
+
+   
 
     
     public void buscarJugadores(){
@@ -50,6 +64,18 @@ public class buscarJugadorController implements Serializable{
 
     public void setNombreJugador(String nombreJugador) {
         this.nombreJugador = nombreJugador;
+    }
+    
+    
+    public String ofertaDeCompra(Jugador jugador, Club origen){
+        
+        System.out.println("antes de oferta");
+        logicaMercado.ofertaDeCompra(jugador,origen,montoDeOperacion,Oferta.VENTA);
+        System.out.println("despues de oferta");
+        
+        
+        return "index.xhtml";
+        
     }
     
     

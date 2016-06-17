@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 
 /**
  *
@@ -36,8 +37,13 @@ public class Club implements Serializable {
     private Estadio estadio;
     
     
-    @OneToMany (mappedBy = "club", fetch = EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany (mappedBy = "club", fetch = EAGER, cascade = CascadeType.ALL)
     private List<Jugador> plantel;
+    @OneToMany(mappedBy = "origen", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Oferta> ofertasEnviadas;
+    @OneToMany(mappedBy = "destino", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Oferta> ofertasRecibidas;
+    
 
     public Club(){
         

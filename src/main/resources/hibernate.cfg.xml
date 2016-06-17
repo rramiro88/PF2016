@@ -13,5 +13,6 @@
     <mapping class="entidades.Club"/>
     <mapping class="entidades.Usuario"/>
     <mapping class="entidades.Estadio"/>
+    <mapping class="entidades.Oferta"/>
   </session-factory>
 </hibernate-configuration>

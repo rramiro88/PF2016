@@ -9,6 +9,7 @@ import dao.ClubDAO;
 import dao.JugadorDAO;
 import entidades.Club;
 import entidades.Jugador;
+import entidades.Oferta;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -57,6 +58,24 @@ public class LogicaMercado implements Serializable {
         JugadorDAO jugadorDAO = new JugadorDAO();
         return jugadorDAO.obtenerAlumnosPorNombre(nombreJugador);
 
+    }
+
+    public void ofertaDeCompra(Jugador jugador, Club oferente, Double monto, int condicion) {
+        
+        Club poseedor = jugador.getClub();
+        Oferta oferta = new Oferta();
+        oferta.setDestino(poseedor);
+        oferta.setOrigen(oferente);
+        oferta.setMontoDeOperacion(monto);
+        oferta.setCondicion(condicion);
+        
+        ClubDAO clubDAO = new ClubDAO();
+        clubDAO.actualizarClub(poseedor);
+        clubDAO.actualizarClub(oferente);
+        
+        
+        System.out.println("OFERTA DE COMPRA");
+        
     }
 
 }

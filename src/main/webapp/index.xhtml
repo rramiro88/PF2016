@@ -21,6 +21,8 @@
                 <h1>Bienvenido</h1>
                 <p>Inicia sesion para continuar</p> 
             </div>
+        </div>
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-4">
 
@@ -38,16 +40,29 @@
                             <label for="pass">Pass</label>
                             <p:password  label="Password" value="#{sesionController.password}" styleClass="form-control" id="pass" required="true"></p:password>
                         </div>
-                        <h:commandLink action="#{sesionController.iniciarSesion}" styleClass="btn btn-primary btn-lg" value="Iniciar Sesion">    
-                            <span class="glyphicon glyphicon-ok"> </span>
-                        </h:commandLink>
+                        
+                   
+                            <h:commandLink action="#{sesionController.iniciarSesion}" styleClass="btn btn-primary btn-lg" value="Iniciar Sesion">    
+                                <span class="glyphicon glyphicon-ok"> </span>
+                            </h:commandLink>
+                       
+
                     </h:form>
 
 
 
 
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-1">
+
+
+
+                </div>
+                <div class="col-sm-3" style="padding-top: 5%">
+
+
+                    <h:button outcome="crearEquipo" value="Crear un nuevo equipo" styleClass="btn btn-success btn-lg"/>
+
 
 
                 </div>
@@ -56,20 +71,22 @@
 
             <div class="row">
 
-                <div class="col-lg-4">
-                    
+                <div class="col-sm-4">
+
                 </div>
-                <div class="col-lg-4">
-                    <h:button outcome="crearEquipo" value="Crear un nuevo equipo" styleClass="btn btn-success btn-lg"/>
+                <div class="col-sm-4">
+
                 </div>
-                <div class="col-lg-4">
-                    
-                    
+                <div class="col-sm-4">
+
+
                     <h:form>
+                        <br/>
+                        <br/>
                         <p:commandButton action="#{logicaAdministracion.cargarJugadoresDB()}" value="cargarJugadores"></p:commandButton>
                     </h:form>
-                    
-                    
+
+
                 </div>
             </div>
         </div>
