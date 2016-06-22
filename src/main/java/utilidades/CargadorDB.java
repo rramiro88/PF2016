@@ -22,7 +22,7 @@ public class CargadorDB {
     public ArrayList<String> cargarJugadores() {
 
         
-        String archivoCSV =  "/home/alumno/Escritorio/jugadores.csv";
+        String archivoCSV =  "/home/ramiro/Escritorio/jugadores.csv";
         
         BufferedReader br = null;
         String line = "";

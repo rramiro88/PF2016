@@ -26,9 +26,20 @@ public class SesionController implements Serializable {
     @Inject
     private LogicaSesion miLogicaSesion;
 
+
+    private Usuario usuarioLogueado;
+
     private String usuario;
 
     private String password;
+
+    public Usuario getUsuarioLogueado() {
+        return usuarioLogueado;
+    }
+
+    public void setUsuarioLogueado(Usuario usuarioLogueado) {
+        this.usuarioLogueado = usuarioLogueado;
+    }
 
     public String getUsuario() {
         return usuario;
@@ -48,8 +59,11 @@ public class SesionController implements Serializable {
 
     public String iniciarSesion() {
 
-        if (miLogicaSesion.validarLogin(usuario, password)) {
+        usuarioLogueado = miLogicaSesion.validarLogin(usuario, password);
+        
+        if (usuarioLogueado != null) {
 
+            
             return "escritorio";
         }
 
@@ -65,18 +79,18 @@ public class SesionController implements Serializable {
 
     public void actualizarUsuario(ActionEvent actionEvent) {
 
-        FacesContext context = FacesContext.getCurrentInstance();
+    
 
-        Usuario usuarioObj = (Usuario) context.getExternalContext().getSessionMap().get("user");
+        miLogicaSesion.actualizarUsuario(usuarioLogueado);
 
-        miLogicaSesion.actualizarUsuario(usuarioObj);
-        
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizacion exitosa",  null);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizacion exitosa", null);
         FacesContext.getCurrentInstance().addMessage(null, message);
 
     }
 
     SesionController() {
     }
+    
+  
 
 }

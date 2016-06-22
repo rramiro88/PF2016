@@ -11,23 +11,23 @@
 
             <ui:define name="centro">
 
-              
+
                 <h:form rendered="#{not empty user}">
 
                     <p:growl id="growl1" life="2000"></p:growl>
-                    
+
                     <div class="form-group">
 
                         <div id="datosClub" class="col-sm-offset-4">
 
-                            <p:graphicImage id="urlEscudo" value="#{user.club.urlEscudo}" styleClass="img-responsive"></p:graphicImage>
-                            <h3><h:outputText id="etiquetaNombre" value="#{user.club.nombre}" styleClass="text-center" ></h:outputText></h3>
+                            <p:graphicImage id="urlEscudo" value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive"></p:graphicImage>
+                            <h3><h:outputText id="etiquetaNombre" value="#{sesionController.usuarioLogueado.club.nombre}" styleClass="text-center" ></h:outputText></h3>
                         </div>
 
 
                         <br/><br/>
                         <label for="passNuevo">Nueva URL del escudo:</label>
-                        <p:inputText value="#{user.club.urlEscudo}" styleClass="form-control" id="nombre"></p:inputText>
+                        <p:inputText value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="form-control" id="nombre"></p:inputText>
 
                     </div>
                     <p:commandLink actionListener="#{sesionController.actualizarUsuario}" update="growl1 urlEscudo" styleClass="btn btn-primary btn-lg" value="Actualizar Escudo">    
@@ -35,6 +35,7 @@
 
                     </p:commandLink>
                 </h:form>
+
             </ui:define>
 
         </ui:composition>

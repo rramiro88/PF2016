@@ -6,7 +6,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
-        
+
         <ui:composition template="./templateEscritorio.xhtml">
 
 
@@ -15,15 +15,16 @@
             </ui:define>
 
             <ui:define name="centro">
-                
-                
+
+
                 <h2>Tu plantel actual</h2>
                 <br/>
-                
-             
-                
+
+
+
                 <p:dataTable value="#{user.club.plantel}" var="jugador">
                     <p:column headerText="Nombre">
+                        <h:graphicImage value="#{resource['images:jugador.png']}" styleClass="img-responsive" style="display: inline; padding:10px"/>
                         <h:outputText value="#{jugador.nombre}"></h:outputText>
                     </p:column>
                     <p:column headerText="Salario">
@@ -31,11 +32,11 @@
                     </p:column>
                     <p:column>
                         <h:form>
-                            <h:commandLink action="#{mercadoController.liberarJugador(jugador,user.club)}" value="Liberar"></h:commandLink>
+                            <h:commandLink action="#{mercadoController.liberarJugador(jugador,sesionController.usuarioLogueado.club)}" value="Liberar"></h:commandLink>
                         </h:form>
                     </p:column>
                 </p:dataTable>
-                
+
             </ui:define>
 
             <ui:define name="derecha">

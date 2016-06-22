@@ -7,6 +7,7 @@ package ar.proyectofinal.logica;
 
 import dao.ClubDAO;
 import dao.JugadorDAO;
+import dao.OfertaDAO;
 import entidades.Club;
 import entidades.Jugador;
 import entidades.Oferta;
@@ -60,21 +61,42 @@ public class LogicaMercado implements Serializable {
 
     }
 
-    public void ofertaDeCompra(Jugador jugador, Club oferente, Double monto, int condicion) {
+    
+    /**
+     * 
+     * @param jugador jugador en cuestion
+     * @param oferente club que realiza la oferta
+     * @param monto cantidad de dinero ficticio ofrecido
+     * @param condicion Venta o Prestamo
+     */
+    public String ofertar(Jugador jugador, Club oferente, Double monto, int condicion) {
         
+
         Club poseedor = jugador.getClub();
-        Oferta oferta = new Oferta();
+
+        
+        if(poseedor == null){
+            return "jugadoresLibres";
+        }
+        
+        Oferta oferta = new Oferta();   
         oferta.setDestino(poseedor);
         oferta.setOrigen(oferente);
         oferta.setMontoDeOperacion(monto);
         oferta.setCondicion(condicion);
+        oferta.setJugadorObjetivo(jugador);
         
         ClubDAO clubDAO = new ClubDAO();
+        OfertaDAO ofertaDAO = new OfertaDAO();
+        
+        ofertaDAO.crearOferta(oferta);
         clubDAO.actualizarClub(poseedor);
         clubDAO.actualizarClub(oferente);
         
         
-        System.out.println("OFERTA DE COMPRA");
+        System.out.println("OFERTA DE COMPRA - LogicaMercado");
+        
+        return "";
         
     }
 

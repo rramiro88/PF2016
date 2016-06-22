@@ -24,7 +24,7 @@
                     </p:column>
                     <p:column>
                         <h:form>
-                            <h:commandLink action="#{mercadoController.transferir(jugador,user.club,0)}" value="Ofrecer contrato"></h:commandLink>
+                            <h:commandLink action="#{mercadoController.transferir(jugador,sesionController.usuarioLogueado.club,0)}" value="Ofrecer contrato"></h:commandLink>
                         </h:form>
                     </p:column>
                 </p:dataTable>

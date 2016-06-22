@@ -8,6 +8,7 @@ package ar.proyectofinal.controller;
 import ar.proyectofinal.logica.LogicaMercado;
 import entidades.Club;
 import entidades.Jugador;
+import entidades.Oferta;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -27,6 +28,30 @@ public class MercadoController {
     
     
     private List<Jugador> listaDeLibres;
+    
+    private List<Oferta> ofertasEnviadas;
+
+    
+    
+    private void cargarOfertas(){
+        
+        
+        
+        
+        
+    }
+    
+    
+    public List<Oferta> getOfertasEnviadas() {
+        return ofertasEnviadas;
+    }
+
+    public void setOfertasEnviadas(List<Oferta> ofertasEnviadas) {
+        this.ofertasEnviadas = ofertasEnviadas;
+    }
+    
+    
+    
     
     public MercadoController() {
         

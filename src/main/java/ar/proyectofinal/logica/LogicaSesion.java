@@ -22,9 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 @SessionScoped
 public class LogicaSesion implements Serializable {
 
-    public boolean validarLogin(String user, String pass) {
+    public Usuario validarLogin(String user, String pass) {
 
-        Usuario usuarioObj;
+        Usuario usuarioObj = null;
         UsuarioDAO p = new UsuarioDAO();
 
         if (p.validarLoginUsuario(user, pass)) {
@@ -37,9 +37,9 @@ public class LogicaSesion implements Serializable {
             
             
             
-            return true;
+            
         }
-        return false;
+        return usuarioObj;
 
     }
 

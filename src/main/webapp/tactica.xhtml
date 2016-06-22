@@ -22,7 +22,7 @@
 
             <ui:define name="centro">
 
-                <p:graphicImage name="/images/cancha.jpg"></p:graphicImage>
+                <p:graphicImage value="#{resource['images:cancha.jpg']}" style="margin: auto" styleClass="img-responsive"></p:graphicImage>
 
 
                 
@@ -31,7 +31,7 @@
             <ui:define name="derecha">
 
 
-                <p:dataList value="#{user.club.plantel}" var="jugador">
+                <p:dataList value="#{sesionController.usuarioLogueado.club.plantel}" var="jugador">
 
                     <p:graphicImage id="jugador1" name="/images/jugador.png" ></p:graphicImage>
                     <p:outputLabel value="#{jugador.nombre}" style="margin: 10px"/>

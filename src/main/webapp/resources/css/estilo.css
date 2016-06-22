@@ -11,7 +11,9 @@ and open the template in the editor.
 
 
 body {
+    
     background-image:url("#{resource['images:fondo2.png']}");
+    
 }
 
 
@@ -19,9 +21,10 @@ body {
 
     position: relative;
     z-index: 10;
-    opacity: 0.8;
+/*    opacity: 0.8;*/
     border-color: #2d9a00;
     box-shadow: 2px 2px 30px rgb(45, 154, 0);
+    
 }
 
 contenido-centrado {
@@ -40,12 +43,12 @@ contenido-centrado {
     color: #000;
     /*    background-color: #4ec13d;
         border-radius: 20px;*/
-     
+
     border-color: gray;
     border-style: solid;
     /*box-shadow: 10px 10px 5px #888888;*/
     box-shadow: 1px 1px 30px rgb(45, 154, 0);
-    
+
 }
 
 
@@ -62,6 +65,3 @@ ul{
     margin-bottom: 10%;
 }
 
-.medio{
-    background-image:url("#{resource['images:fondito.png']}");
-}

@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
 
@@ -42,6 +41,19 @@ public class Oferta implements Serializable {
     Double montoDeOperacion;
     @Temporal(javax.persistence.TemporalType.DATE)
     Date desde, hasta;
+    
+    @ManyToOne
+    Jugador jugadorObjetivo;
+
+    public Jugador getJugadorObjetivo() {
+        return jugadorObjetivo;
+    }
+
+    public void setJugadorObjetivo(Jugador jugadorObjetivo) {
+        this.jugadorObjetivo = jugadorObjetivo;
+    }
+    
+    
     
     Integer condicion;
 

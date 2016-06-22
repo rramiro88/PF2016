@@ -25,6 +25,8 @@ public class UsuarioDAO {
         s.beginTransaction();
 
         usuario = (Usuario) s.get(Usuario.class, id);
+        System.out.println(usuario.getClub().getOfertasEnviadas().size());
+        System.out.println(usuario.getClub().getOfertasRecibidas().size());
 
         s.close();
 
@@ -47,19 +49,18 @@ public class UsuarioDAO {
 
             s.save(u);
             s.getTransaction().commit();
-            
+
             respuesta = true;
 
         } catch (Exception ex) {
             s.getTransaction().rollback();
             ex.printStackTrace();
-        }finally{
+        } finally {
             s.close();
         }
 
         return respuesta;
     }
-
 
     public boolean validarLoginUsuario(String usuario, String contrasenia) {
         SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -75,6 +76,7 @@ public class UsuarioDAO {
 
             if (!resultado.isEmpty()) {
                 usuario1 = resultado.get(0);
+
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -97,10 +99,12 @@ public class UsuarioDAO {
                 .add(Restrictions.eq("nombre", nombre)).list();
         u = resultado.get(0);
 
+        System.out.println(u.getClub().getOfertasEnviadas().size());
+        System.out.println(u.getClub().getOfertasRecibidas().size());
+
         s.close();
 
         return u;
     }
-
 
 }

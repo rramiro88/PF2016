@@ -33,7 +33,9 @@
                         
                         <div class="form-group">
                             <label for="usuarioNuevo">Usuario</label>
-                            <p:inputText value="#{nuevoUsuarioController.usuario}" styleClass="form-control" id="usuarioNuevo"></p:inputText>
+                            <p:inputText value="#{nuevoUsuarioController.usuario}" styleClass="form-control" id="usuarioNuevo">
+                                <p:keyFilter regEx="alphanum"/>
+                            </p:inputText>
                             <label for="passNuevo">Pass</label>
                             <p:password value="#{nuevoUsuarioController.password}" styleClass="form-control" id="passNuevo" ></p:password>
                             <label for="clubNuevo">Nombre del nuevo club</label>

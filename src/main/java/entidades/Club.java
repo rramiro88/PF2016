@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.EAGER;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -33,15 +33,17 @@ public class Club implements Serializable {
     private Float presupuesto;
     private String urlEscudo;
     
-    @OneToOne
+
+    
+    @OneToOne(cascade = CascadeType.ALL)
     private Estadio estadio;
     
     
-    @OneToMany (mappedBy = "club", fetch = EAGER, cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "club", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Jugador> plantel;
-    @OneToMany(mappedBy = "origen", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "origen", cascade = CascadeType.ALL)
     private List<Oferta> ofertasEnviadas;
-    @OneToMany(mappedBy = "destino", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "destino", cascade = CascadeType.ALL)
     private List<Oferta> ofertasRecibidas;
     
 
@@ -50,6 +52,25 @@ public class Club implements Serializable {
         
         plantel = new ArrayList<>();
         
+    }
+
+
+
+    
+    public List<Oferta> getOfertasEnviadas() {
+        return ofertasEnviadas;
+    }
+
+    public void setOfertasEnviadas(List<Oferta> ofertasEnviadas) {
+        this.ofertasEnviadas = ofertasEnviadas;
+    }
+
+    public List<Oferta> getOfertasRecibidas() {
+        return ofertasRecibidas;
+    }
+
+    public void setOfertasRecibidas(List<Oferta> ofertasRecibidas) {
+        this.ofertasRecibidas = ofertasRecibidas;
     }
     
     

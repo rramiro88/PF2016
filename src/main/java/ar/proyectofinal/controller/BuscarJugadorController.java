@@ -22,7 +22,7 @@ import javax.inject.Named;
 
 @Named
 @SessionScoped
-public class buscarJugadorController implements Serializable{
+public class BuscarJugadorController implements Serializable{
     @Inject
     LogicaMercado logicaMercado;
     
@@ -67,14 +67,17 @@ public class buscarJugadorController implements Serializable{
     }
     
     
-    public String ofertaDeCompra(Jugador jugador, Club origen){
+    public String realizarOferta(Club origen, Jugador jugador){
         
         System.out.println("antes de oferta");
-        logicaMercado.ofertaDeCompra(jugador,origen,montoDeOperacion,Oferta.VENTA);
-        System.out.println("despues de oferta");
         
+        String respuesta;
         
-        return "index.xhtml";
+        respuesta = logicaMercado.ofertar(jugador,origen,this.getMontoDeOperacion(),Oferta.VENTA);
+        
+        montoDeOperacion = 0D;
+        
+        return respuesta;
         
     }
     

@@ -22,14 +22,14 @@
                         <div class="form-group">
                             
                             <div id="datosClub" class="col-sm-offset-4">
-                                <img src="#{user.club.urlEscudo}" class="img-responsive"></img>
+                                <img src="#{sesionController.usuarioLogueado.club.urlEscudo}" class="img-responsive"></img>
                                 <h3><h:outputText id="etiquetaNombre" value="#{user.club.nombre}" styleClass="text-center" ></h:outputText></h3>
                             </div>
                             
                             
                             <br/><br/>
                             <label for="passNuevo">Ingrese el nuevo nombre para su club:</label>
-                            <p:inputText value="#{user.club.nombre}" styleClass="form-control" id="nombre"></p:inputText>
+                            <p:inputText value="#{sesionController.usuarioLogueado.club.nombre}" styleClass="form-control" id="nombre"></p:inputText>
                             
                         </div>
                      <p:commandLink actionListener="#{sesionController.actualizarUsuario}" update="growl etiquetaNombre" styleClass="btn btn-primary btn-lg" value="Actualizar Nombre">    
