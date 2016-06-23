@@ -37,8 +37,10 @@
 
                 <h:form>
 
+                    <p:commandButton action="#{tacticaController.guardarPosiciones()}" icon="ui-icon-check" value="Grabar Tactica"/> 
+                    <hr/>   
 
-                    <ul>
+                    <ul class="lista">
                         <li>
                             <p:graphicImage id="jugador1" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
                             <p:draggable for="jugador1" opacity="0.7"/>                        
@@ -51,8 +53,62 @@
                             <p:inputText value="#{tacticaController.posicion2}" type="hidden"/>
                             <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(1).nombre}" style="margin: 10px"/>
                         </li>
-                       
-                        
+                        <li>
+                            <p:graphicImage id="jugador3" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
+                            <p:draggable for="jugador3" opacity="0.7"/>                        
+                            <p:inputText value="#{tacticaController.posicion3}" type="hidden"/>
+                            <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(2).nombre}" style="margin: 10px"/>
+                        </li>
+                        <li>
+                            <p:graphicImage id="jugador4" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
+                            <p:draggable for="jugador4" opacity="0.7"/>                        
+                            <p:inputText value="#{tacticaController.posicion4}" type="hidden"/>
+                            <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(3).nombre}" style="margin: 10px"/>
+                        </li>
+                        <li>
+                            <p:graphicImage id="jugador5" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
+                            <p:draggable for="jugador5" opacity="0.7"/>                        
+                            <p:inputText value="#{tacticaController.posicion5}" type="hidden"/>
+                            <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(4).nombre}" style="margin: 10px"/>
+                        </li>
+                        <li>
+                            <p:graphicImage id="jugador6" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
+                            <p:draggable for="jugador6" opacity="0.7"/>                        
+                            <p:inputText value="#{tacticaController.posicion6}" type="hidden"/>
+                            <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(5).nombre}" style="margin: 10px"/>
+                        </li>
+                        <li>
+                            <p:graphicImage id="jugador7" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
+                            <p:draggable for="jugador7" opacity="0.7"/>                        
+                            <p:inputText value="#{tacticaController.posicion7}" type="hidden"/>
+                            <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(6).nombre}" style="margin: 10px"/>
+                        </li>
+                        <li>
+                            <p:graphicImage id="jugador8" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
+                            <p:draggable for="jugador8" opacity="0.7"/>                        
+                            <p:inputText value="#{tacticaController.posicion8}" type="hidden"/>
+                            <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(7).nombre}" style="margin: 10px"/>
+                        </li>
+                        <li>
+                            <p:graphicImage id="jugador9" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
+                            <p:draggable for="jugador9" opacity="0.7"/>                        
+                            <p:inputText value="#{tacticaController.posicion9}" type="hidden"/>
+                            <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(8).nombre}" style="margin: 10px"/>
+                        </li>
+                        <li>
+                            <p:graphicImage id="jugador10" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
+                            <p:draggable for="jugador10" opacity="0.7"/>                        
+                            <p:inputText value="#{tacticaController.posicion10}" type="hidden"/>
+                            <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(9).nombre}" style="margin: 10px"/>
+                        </li>
+                        <li>
+                            <p:graphicImage id="jugador11" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
+                            <p:draggable for="jugador11" opacity="0.7"/>                        
+                            <p:inputText value="#{tacticaController.posicion11}" type="hidden"/>
+                            <p:outputLabel value="#{sesionController.usuarioLogueado.club.plantel.get(10).nombre}" style="margin: 10px"/>
+                        </li>
+
+
                     </ul>
 
 
@@ -61,7 +117,11 @@
 
 
 
-                    <p:commandLink value="Guardar Tactica" action="#{tacticaController.guardarPosiciones}" />
+
+
+
+
+
 
                 </h:form>
 

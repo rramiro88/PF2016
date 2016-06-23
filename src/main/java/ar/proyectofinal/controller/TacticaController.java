@@ -116,7 +116,24 @@ public class TacticaController implements Serializable{
 
    
     public void guardarPosiciones(){
-        System.out.println(posicion1+" - "+posicion2);
+        
+        
+        System.out.println(posicion1);
+        System.out.println(posicion2);
+        System.out.println(posicion3);
+        System.out.println(posicion4);
+        System.out.println(posicion5);
+        System.out.println(posicion6);
+        System.out.println(posicion7);
+        System.out.println(posicion8);
+        System.out.println(posicion9);
+        System.out.println(posicion10);
+        System.out.println(posicion11);
+        
+        
+        
+        
+        
     }
     
     

@@ -13,8 +13,16 @@
 
                 <h2>Listado de jugadores libres</h2>
                 <br/>
+                
+                <h:form>
+                    
+                    
+                    <p:commandButton icon="ui-icon-check" value="Buscar" action="#{mercadoController.actualizar()}" update="tablaLibres"/>
+                    <hr/>
+                    
+                </h:form>
 
-                <p:dataTable value="#{mercadoController.listaDeLibres}" var="jugador">
+                <p:dataTable id="tablaLibres" value="#{mercadoController.listaDeLibres}" var="jugador">
                     <p:column headerText="Nombre">
                         <h:outputText value="#{jugador.nombre}"></h:outputText>
                         

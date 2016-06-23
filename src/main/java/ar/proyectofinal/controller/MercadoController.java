@@ -89,6 +89,10 @@ public class MercadoController {
     
     @PostConstruct
     public void inicializar(){
+        this.actualizar();
+    }
+
+    public void actualizar() {
         listaDeLibres = listarLibres();
     }
     
