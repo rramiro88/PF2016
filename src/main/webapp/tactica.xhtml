@@ -37,10 +37,20 @@
 
                 <h:form>
 
-                    <p:commandButton action="#{tacticaController.guardarPosiciones()}" icon="ui-icon-check" value="Grabar Tactica"/> 
+                    <p:commandButton action="#{tacticaController.guardarPosiciones()}" icon="ui-icon-save" value="Grabar Tactica"/> 
+                    <p:commandButton action="#{tacticaController.cargarTactica()}" icon="ui-icon-chack" value="Cargar Tactica"/> 
+                    <p:selectOneListbox value="#{tacticaController.opcion}">
+                        
+                        <f:selectItem itemLabel="Liga" itemValue="1"/>
+                        <f:selectItem itemLabel="Copa" itemValue="2"/>
+                        <f:selectItem itemLabel="Amistosos" itemValue="3"/>
+                        
+                        
+                        
+                    </p:selectOneListbox>
                     <hr/>   
 
-                    <ul class="lista">
+                    <ul class="lista" id="listaJugadores">
                         <li>
                             <p:graphicImage id="jugador1" name="/images/jugador.png" onmouseup="verPosicionActual(this);"></p:graphicImage>
                             <p:draggable for="jugador1" opacity="0.7"/>                        

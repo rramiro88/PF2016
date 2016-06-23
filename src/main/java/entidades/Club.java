@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
-
+import javax.persistence.JoinColumn;
 
 /**
  *
@@ -24,39 +24,44 @@ import javax.persistence.FetchType;
  */
 @Entity
 public class Club implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
+
     private String nombre;
     private Float presupuesto;
     private String urlEscudo;
-    
 
-    
     @OneToOne(cascade = CascadeType.ALL)
     private Estadio estadio;
-    
-    
-    @OneToMany (mappedBy = "club", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "club", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Jugador> plantel;
     @OneToMany(mappedBy = "origen", cascade = CascadeType.ALL)
     private List<Oferta> ofertasEnviadas;
     @OneToMany(mappedBy = "destino", cascade = CascadeType.ALL)
     private List<Oferta> ofertasRecibidas;
-    
 
-    public Club(){
-        
-        
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Tactica> tacticas;
+
+    public Club() {
+
         plantel = new ArrayList<>();
-        
+        tacticas = new ArrayList<>();
+        ofertasEnviadas = new ArrayList<>();
+        ofertasRecibidas = new ArrayList<>();
     }
 
+    public List<Tactica> getTacticas() {
+        return tacticas;
+    }
 
+    public void setTacticas(List<Tactica> tacticas) {
+        this.tacticas = tacticas;
+    }
 
-    
     public List<Oferta> getOfertasEnviadas() {
         return ofertasEnviadas;
     }
@@ -72,8 +77,7 @@ public class Club implements Serializable {
     public void setOfertasRecibidas(List<Oferta> ofertasRecibidas) {
         this.ofertasRecibidas = ofertasRecibidas;
     }
-    
-    
+
     public long getIdClub() {
         return id;
     }
@@ -129,12 +133,10 @@ public class Club implements Serializable {
     public void setUrlEscudo(String urlEscudo) {
         this.urlEscudo = urlEscudo;
     }
-    
-    public void agregarJugador(Jugador j){
+
+    public void agregarJugador(Jugador j) {
         j.setClub(this);
         this.plantel.add(j);
     }
-    
-    
-    
+
 }

@@ -101,6 +101,9 @@ public class UsuarioDAO {
 
         System.out.println(u.getClub().getOfertasEnviadas().size());
         System.out.println(u.getClub().getOfertasRecibidas().size());
+        if (u.getClub().getTacticas().size() > 0) {
+            System.out.println(u.getClub().getTacticas().get(0).getPosiciones().size());
+        }
 
         s.close();
 

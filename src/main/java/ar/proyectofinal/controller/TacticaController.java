@@ -7,10 +7,13 @@ package ar.proyectofinal.controller;
 
 
 import ar.proyectofinal.logica.LogicaTactica;
+import entidades.Tactica;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -24,8 +27,51 @@ public class TacticaController implements Serializable{
     @Inject
     LogicaTactica logicaTactica;
     
+    @Inject
+    SesionController sesionController;
+    
     private String posicion1,posicion2,posicion3,posicion4,posicion5,posicion6,posicion7,posicion8,posicion9,posicion10,posicion11;
 
+    private String opcion;
+
+    
+    public void cargarTactica(){
+        if(sesionController.getUsuarioLogueado().getClub().getTacticas().size()>0){
+            
+            
+            Tactica tactica = sesionController.getUsuarioLogueado().getClub().getTacticas().get(0);
+            
+            posicion1 = tactica.getPosiciones().get(0);
+            posicion2 = tactica.getPosiciones().get(1);
+            posicion3 = tactica.getPosiciones().get(2);
+            posicion4 = tactica.getPosiciones().get(3);
+            posicion5 = tactica.getPosiciones().get(4);
+            posicion6 = tactica.getPosiciones().get(5);
+            posicion7 = tactica.getPosiciones().get(6);
+            posicion8 = tactica.getPosiciones().get(7);
+            posicion9 = tactica.getPosiciones().get(8);
+            posicion10 = tactica.getPosiciones().get(9);
+            posicion11 = tactica.getPosiciones().get(10);
+            
+            
+            
+            
+            
+        }
+        
+        RequestContext.getCurrentInstance().execute("cargarPosicionesActuales()");
+    }
+    
+    
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
+    }
+    
+    
     public String getPosicion1() {
         return posicion1;
     }
@@ -117,21 +163,30 @@ public class TacticaController implements Serializable{
    
     public void guardarPosiciones(){
         
+        Tactica tactica = new Tactica();
         
-        System.out.println(posicion1);
-        System.out.println(posicion2);
-        System.out.println(posicion3);
-        System.out.println(posicion4);
-        System.out.println(posicion5);
-        System.out.println(posicion6);
-        System.out.println(posicion7);
-        System.out.println(posicion8);
-        System.out.println(posicion9);
-        System.out.println(posicion10);
-        System.out.println(posicion11);
+        tactica.setNombre(opcion);
         
         
+        ArrayList<String> posiciones = new ArrayList<>();
         
+        posiciones.add(posicion1);
+        posiciones.add(posicion2);
+        posiciones.add(posicion3);
+        posiciones.add(posicion4);
+        posiciones.add(posicion5);
+        posiciones.add(posicion6);
+        posiciones.add(posicion7);
+        posiciones.add(posicion8);
+        posiciones.add(posicion9);
+        posiciones.add(posicion10);
+        posiciones.add(posicion11);
+        
+        
+        tactica.setPosiciones(posiciones);
+        
+        sesionController.getUsuarioLogueado().getClub().getTacticas().add(tactica);
+        sesionController.actualizarUsuario();
         
         
     }

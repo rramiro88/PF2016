@@ -81,7 +81,7 @@ public class SesionController implements Serializable {
 
     
 
-        miLogicaSesion.actualizarUsuario(usuarioLogueado);
+        actualizarUsuario();
 
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizacion exitosa", null);
         FacesContext.getCurrentInstance().addMessage(null, message);
@@ -89,6 +89,10 @@ public class SesionController implements Serializable {
     }
 
     SesionController() {
+    }
+
+    public void actualizarUsuario() {
+        miLogicaSesion.actualizarUsuario(usuarioLogueado);
     }
     
   

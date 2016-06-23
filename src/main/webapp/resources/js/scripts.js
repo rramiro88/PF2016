@@ -15,10 +15,19 @@ function verPosicionActual(objetoHTML) {
       
     return false;
     
-    
-    
-    
 
+}
+
+function cargarPosicionesActuales(){
+    
+    
+    var listaDeJugadores = document.getElementById("listaJugadores");
+    
+    
+    alert("Ejecucion del metodo cargar");
+    
+    
+    
 }
 
 
