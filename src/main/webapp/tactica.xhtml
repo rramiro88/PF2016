@@ -35,10 +35,12 @@
 
             <ui:define name="derecha">
 
-                <h:form>
+                <h:form id="formulario">
 
-                    <p:commandButton action="#{tacticaController.guardarPosiciones()}" icon="ui-icon-save" value="Grabar Tactica"/> 
-                    <p:commandButton action="#{tacticaController.cargarTactica()}" icon="ui-icon-chack" value="Cargar Tactica"/> 
+                    <p:commandButton action="#{tacticaController.guardarPosiciones()}" icon="ui-icon-disk" value="Grabar Tactica"/> 
+                    <p:commandButton action="#{tacticaController.cargarTactica()}" icon="ui-icon-check" value="Cargar Tactica" update="formulario"/> 
+                    
+                    <hr/>
                     <p:selectOneListbox value="#{tacticaController.opcion}">
                         
                         <f:selectItem itemLabel="Liga" itemValue="1"/>
