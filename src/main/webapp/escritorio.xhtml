@@ -14,7 +14,7 @@
 
             <ui:define name="izquierda">
 
-                <p:graphicImage value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive" style="width: 150px"></p:graphicImage>
+                <p:graphicImage value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive escudo"></p:graphicImage>
                 <h2>#{sesionController.usuarioLogueado.club.nombre}</h2>    
 
             </ui:define>
@@ -23,6 +23,29 @@
 
             </ui:define>
 
+            <ui:define name="derecha">
+                
+                <h3>Ofertas Recibidas</h3>
+                <hr/>
+                <p:dataTable id="tabla2" value="#{sesionController.usuarioLogueado.club.ofertasRecibidas}" var="oferta" emptyMessage="No hay ofertas    ">
+
+                    
+                    <p:column headerText="Jugador">
+                        <p:outputLabel value="#{oferta.jugadorObjetivo.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Monto Ofrecido">
+                        <p:outputLabel value="#{oferta.montoDeOperacion}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Origen">
+                        <p:outputLabel value="#{oferta.origen.nombre}"/>
+                    </p:column>
+
+                </p:dataTable>
+                
+                
+            </ui:define>
 
 
         </ui:composition>

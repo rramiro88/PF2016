@@ -29,7 +29,7 @@
                 </h:form>
 
                 <hr/>
-                <p:dataTable id="tabla" value="#{buscarJugadorController.resultado}" var="jugador">
+                <p:dataTable id="tabla" value="#{buscarJugadorController.resultado}" var="jugador" emptyMessage="No hay coincidencias">
 
                     <p:column headerText="Nombre" width="30%">
 

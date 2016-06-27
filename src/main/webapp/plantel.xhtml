@@ -11,7 +11,7 @@
 
 
             <ui:define name="izquierda">
-                <p:graphicImage value="#{user.club.urlEscudo}" styleClass="img-responsive" style="width: 150px"></p:graphicImage>
+                <p:graphicImage value="#{user.club.urlEscudo}" styleClass="img-responsive escudo" style="width: 150px"></p:graphicImage>
             </ui:define>
 
             <ui:define name="centro">
@@ -27,7 +27,7 @@
                         <h:graphicImage value="#{resource['images:jugador.png']}" styleClass="img-responsive" style="display: inline; padding:10px"/>
                         <h:outputText value="#{jugador.nombre}"></h:outputText>
                     </p:column>
-                    <p:column headerText="Salario">
+                    <p:column headerText="Salario" sortBy="#{jugador.salario}">
                         <h:outputText value="#{jugador.salario}"></h:outputText>
                     </p:column>
                     <p:column>
