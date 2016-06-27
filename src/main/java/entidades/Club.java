@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 
 /**
  *
@@ -45,6 +44,8 @@ public class Club implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     List<Tactica> tacticas;
+    @OneToMany(mappedBy = "visitante", cascade = CascadeType.ALL)
+    private List<Partido> partidos;
 
     public Club() {
 

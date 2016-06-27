@@ -57,6 +57,10 @@ public class Jugador implements Serializable {
         cotizacion = 0D;
         salario = 0D;
     }
+    
+    public int suma(){
+        return arquero + cabezazo + entradas + marca + mentalidad +pelotaParada +potenciaTiro+precisionTiro+regate+resistencia+velocidad;
+    }
 
     public String getNombre() {
         return nombre;
