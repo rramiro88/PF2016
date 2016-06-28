@@ -122,7 +122,7 @@ public class JugadorDAO {
        
     }
     
-    public List<Jugador> obtenerAlumnosPorNombre(String nombre) {
+    public List<Jugador> obtenerJugadorPorNombre(String nombre) {
         List<Jugador> respuesta;
 
         SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -130,7 +130,7 @@ public class JugadorDAO {
         s.beginTransaction();
 
         
-//        Query consulta = s.createSQLQuery("select division, nivel, nombreYApellido, turno from Alumno where nombreYApellido like \"%" + nombre +"%\"");
+
         Query consulta = s.createQuery("From Jugador where nombre like :parametro");
         consulta.setParameter("parametro","%"+ nombre +"%" );
         

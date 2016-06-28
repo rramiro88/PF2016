@@ -33,6 +33,9 @@ public class LogicaAdministracion implements Serializable{
         
     }
     
+    /**
+     * Metodo no testeado 28/06/2016
+     */
     public void avanzarUnDia(){
         
         
@@ -49,7 +52,7 @@ public class LogicaAdministracion implements Serializable{
                 p.setGolesVisitantes(0);
             }else if(diferenciaGoles < 0 ){
                 p.setGolesLocal(0);
-                p.setGolesVisitantes(diferenciaGoles);
+                p.setGolesVisitantes(-1*diferenciaGoles);
             }else{
                 p.setGolesLocal(0);
                 p.setGolesVisitantes(0);
@@ -58,9 +61,6 @@ public class LogicaAdministracion implements Serializable{
             partidosDAO.actualizarPartido(p);
             
         }
-        
-        
-        
         
     }
     

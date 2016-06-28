@@ -6,7 +6,12 @@
 package dao;
 
 import entidades.Partido;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -15,11 +20,47 @@ import java.util.List;
 public class PartidosDAO {
 
     public List<Partido> obtenerPartidosDeHoy() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Date hoy = Date.valueOf(LocalDate.now());
+        List<Partido> respuesta = null;
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        try {
+
+            s.beginTransaction();
+
+            Query consulta = s.createQuery("From Partido where fecha = :parametro");
+            consulta.setParameter("parametro", hoy.toString());
+            respuesta = consulta.list();
+        } catch (Exception e) {
+        } finally {
+            s.close();
+        }
+
+        return respuesta;
     }
 
-    public void actualizarPartido(Partido p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean actualizarPartido(Partido p) {
+         
+        boolean respuesta = true;
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+
+        try {
+            s.update(p);
+            System.out.println("update exitoso de partido! DAO");
+            s.getTransaction().commit();
+            
+        } catch (Exception e) {
+            respuesta = false;
+            s.getTransaction().rollback();
+
+        }finally{
+            s.close();
+        }
+
+        return respuesta;
     }
-    
+
 }

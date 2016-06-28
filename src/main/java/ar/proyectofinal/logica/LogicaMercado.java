@@ -57,7 +57,7 @@ public class LogicaMercado implements Serializable {
 
     public List<Jugador> buscarJugadoresPorNombre(String nombreJugador) {
         JugadorDAO jugadorDAO = new JugadorDAO();
-        return jugadorDAO.obtenerAlumnosPorNombre(nombreJugador);
+        return jugadorDAO.obtenerJugadorPorNombre(nombreJugador);
 
     }
 

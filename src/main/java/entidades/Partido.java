@@ -21,6 +21,8 @@ import javax.persistence.Temporal;
 
 @Entity
 public class Partido implements Serializable {
+    @ManyToOne
+    private Liga liga;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
