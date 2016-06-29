@@ -7,6 +7,8 @@ package dao;
 
 import entidades.Club;
 import entidades.Estadio;
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -67,6 +69,32 @@ public class ClubDAO {
         }finally{
             s.close();
         }
+    }
+
+    public List<Club> obtenerClubesPorNombre(String nombreClub) {
+        List<Club> respuesta;
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+
+        
+
+        Query consulta = s.createQuery("From Club where nombre like :parametro");
+        consulta.setParameter("parametro","%"+ nombreClub +"%" );
+        
+        respuesta = consulta.list();
+        
+        
+//        Criteria c = s.createCriteria(Alumno.class)
+//                .add(Restrictions.like("nombreYApellido", nombre, MatchMode.START));
+//        respuesta = c.list();
+
+        
+
+        s.close();
+
+        return respuesta;
     }
 
 }

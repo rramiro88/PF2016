@@ -8,6 +8,7 @@ package entidades;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -31,7 +32,7 @@ public class Liga implements Serializable {
     String nombre;
 
     @OneToMany(mappedBy = "liga", cascade = CascadeType.ALL)
-    List<Partido> partidos;
+    List<Partido> partidos = new ArrayList<>();
 
     @ManyToMany
     List<Club> equiposParticipantes;
@@ -44,7 +45,7 @@ public class Liga implements Serializable {
 
                 Partido p = new Partido();
 
-                if (i % 2 != 1) {
+                if (j % 2 != 1) {
                     p.setLocal(equiposParticipantes.get(i));
                     p.setVisitante(equiposParticipantes.get(j));
                 } else {

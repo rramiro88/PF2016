@@ -17,5 +17,6 @@
     <mapping class="entidades.Oferta"/>
     <mapping class="entidades.Tactica"/>
     <mapping class="entidades.Partido"/>
+    <mapping class="entidades.Liga"/>
   </session-factory>
 </hibernate-configuration>

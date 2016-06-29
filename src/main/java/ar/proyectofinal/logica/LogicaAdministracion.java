@@ -5,8 +5,10 @@
  */
 package ar.proyectofinal.logica;
 
+import dao.ClubDAO;
 import dao.JugadorDAO;
 import dao.PartidosDAO;
+import entidades.Club;
 import entidades.Partido;
 import java.io.Serializable;
 import java.util.List;
@@ -62,6 +64,12 @@ public class LogicaAdministracion implements Serializable{
             
         }
         
+    }
+
+    public List<Club> buscarClubesPorNombre(String nombreClub) {
+        ClubDAO clubDAO = new ClubDAO();
+        
+        return clubDAO.obtenerClubesPorNombre(nombreClub);
     }
     
     
