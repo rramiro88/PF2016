@@ -61,7 +61,7 @@
                 <h:form>
                     <p:inputText value="#{administracionController.nombreLiga}"/>
                     <p:commandButton action="#{administracionController.crearLiga()}" value="Crear Liga" update="tablaPartidos"/>
-                    <p:commandButton action="#{administracionController.liga.partidos.clear()}" value="Limpiar"/>
+                    <p:commandButton update="tablaPartidos" action="#{administracionController.liga.partidos.clear()}" value="Limpiar"/>
                 </h:form>
                 
                 <p:dataTable emptyMessage="no hay invitados aun" id="tablaInvitados" value="#{administracionController.clubesInvitados}" var="invitado">
@@ -79,14 +79,21 @@
 
             <ui:define name="derecha">
                 
+                <hr/>
+                
+                <h:form>
+                    
+                    <p:commandButton value="SimularPartidos" action="#{administracionController.simularPartidos()}" update="tablaPartidos"/>
+                    
+                </h:form>
                 <p:dataTable id="tablaPartidos" value="#{administracionController.liga.partidos}" var="partido">
                 
                     <p:column headerText="Local">
-                        #{partido.local.nombre}
+                        #{partido.local.nombre} - #{partido.golesLocal}
                     </p:column>
                 
                     <p:column headerText="Visitante">
-                        #{partido.visitante.nombre}
+                        #{partido.visitante.nombre} - #{partido.golesVisitantes}
                     </p:column>
                     
                 </p:dataTable>

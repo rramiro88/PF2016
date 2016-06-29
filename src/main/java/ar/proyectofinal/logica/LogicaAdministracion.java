@@ -45,6 +45,7 @@ public class LogicaAdministracion implements Serializable{
         
         List<Partido> partidosASimular = partidosDAO.obtenerPartidosDeHoy();
         int diferenciaGoles;
+        
         for (Partido p : partidosASimular) {
             
             diferenciaGoles = Simulador.simular(p.getLocal().getTacticas().get(0).getTitulares(), p.getVisitante().getTacticas().get(0).getTitulares());

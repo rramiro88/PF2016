@@ -8,12 +8,14 @@ package ar.proyectofinal.controller;
 import ar.proyectofinal.logica.LogicaAdministracion;
 import entidades.Club;
 import entidades.Liga;
+import entidades.Partido;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import utilidades.Simulador;
 
 /**
  *
@@ -51,10 +53,31 @@ public class AdministracionController implements Serializable{
         liga.setEquiposParticipantes(clubesInvitados);
         liga.setNombre(nombreLiga);
         liga.organizar();
+
+    }
+    
+    
+    public void simularPartidos(){
         
-        
-        
-        
+        int diferenciaGoles;
+         for (Partido p : liga.getPartidos()) {
+            
+            diferenciaGoles = Simulador.simular(p.getLocal().getTacticas().get(0).getTitulares(), p.getVisitante().getTacticas().get(0).getTitulares());
+            
+            if(diferenciaGoles > 0 ){
+                p.setGolesLocal(diferenciaGoles);
+                p.setGolesVisitantes(0);
+            }else if(diferenciaGoles < 0 ){
+                p.setGolesLocal(0);
+                p.setGolesVisitantes(-1*diferenciaGoles);
+            }else{
+                p.setGolesLocal(0);
+                p.setGolesVisitantes(0);
+            }
+            
+            
+            
+        }
     }
     
     public String getNombreLiga() {

@@ -1,19 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Usuario creado</title>
-    </h:head>
-    <h:body>
-        
-        
-        
-        <p>Usuario creado con exito</p>
-        <h:link value="volver al inicio" outcome="index"></h:link>
-        
-        
-    </h:body>
-</html>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
+    <body>
+
+        <ui:composition template="./templateLogin.xhtml">
+
+
+            <ui:define name="centro">
+                <h3>Usuario creado con exito</h3>
+                <h:link styleClass="btn btn-default btn-lg" value="Iniciar Sesion" outcome="index"></h:link>    
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>
