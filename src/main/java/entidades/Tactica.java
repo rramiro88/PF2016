@@ -7,36 +7,49 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Tactica implements Serializable {
+    @ManyToOne
+    private Club club;
 
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany
-    List<Jugador> titulares;
-
-    @OneToMany
-    List<Jugador> suplentes;
+    
+    
+    @OneToMany(cascade = CascadeType.ALL)                                                                                   
+    List<Jugador> titulares;                                                                                                
+   
+    @OneToMany(cascade = CascadeType.ALL)                                                                                   
+    List<Jugador> suplentes;                                                                                                
+    
+    
 
     String nombre;
 
     @ElementCollection
-    @CollectionTable(name = "Posiciones", joinColumns = @JoinColumn(name = "tactica_id"))
-    @Column(name = "pos")
     private List<String> posiciones;
 
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
+    }
+
+    
+    
     public List<String> getPosiciones() {
         return posiciones;
     }

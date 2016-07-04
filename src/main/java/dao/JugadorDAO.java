@@ -46,13 +46,13 @@ public class JugadorDAO {
         try {
             s.save(j);
             s.getTransaction().commit();
-            
+
         } catch (Exception e) {
             respuesta = false;
             s.getTransaction().rollback();
             System.out.println("ROLLBACK EN TRANSACCION");
 
-        }finally{
+        } finally {
             s.close();
         }
 
@@ -60,8 +60,7 @@ public class JugadorDAO {
     }
 
     public boolean actualizarJugador(Jugador j) {
-        
-        
+
         System.out.println("en actualizar jugador DAO");
         boolean respuesta = true;
 
@@ -73,38 +72,38 @@ public class JugadorDAO {
             s.update(j);
             System.out.println("update exitoso! DAO");
             s.getTransaction().commit();
-            
+
         } catch (Exception e) {
             respuesta = false;
             s.getTransaction().rollback();
 
-        }finally{
+        } finally {
             s.close();
         }
 
         return respuesta;
     }
-    
-    
-    public void crearJugadoresAlAzar(){
+
+    public List<Jugador> crearJugadoresAlAzarLista() {
+
+        List<Jugador> respuesta = new ArrayList<>();
         CargadorDB c = new CargadorDB();
-        
-       ArrayList<String> nombres = c.cargarJugadores();
-       Jugador jugador = null;
-       
-       
-       SessionFactory sf = HibernateUtil.getSessionFactory();
+
+        ArrayList<String> nombres = c.cargarJugadores();
+        Jugador jugador = null;
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
         Session s = sf.openSession();
         s.beginTransaction();
-       
+
         for (String nombre : nombres) {
-            
+
             jugador = new Jugador();
-            
+
             jugador.setNombre(nombre);
             jugador.setArquero(randInt(0, 10));
             jugador.setCabezazo(randInt(0, 10));
-            jugador.setCotizacion(1.0*randInt(0, 10000000));
+            jugador.setCotizacion(1.0 * randInt(0, 10000000));
             jugador.setEntradas(randInt(0, 10));
             jugador.setMarca(randInt(0, 10));
             jugador.setMentalidad(randInt(0, 10));
@@ -113,15 +112,49 @@ public class JugadorDAO {
             jugador.setPrecisionTiro(randInt(0, 10));
             jugador.setRegate(randInt(0, 10));
             jugador.setResistencia(randInt(0, 10));
-            jugador.setSalario(1.0*randInt(2000, 100000));
+            jugador.setSalario(1.0 * randInt(2000, 100000));
             jugador.setVelocidad(randInt(0, 10));
-            
+
+            respuesta.add(jugador);
+        }
+
+        return respuesta;
+    }
+
+    public void crearJugadoresAlAzar() {
+        CargadorDB c = new CargadorDB();
+
+        ArrayList<String> nombres = c.cargarJugadores();
+        Jugador jugador = null;
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+
+        for (String nombre : nombres) {
+
+            jugador = new Jugador();
+
+            jugador.setNombre(nombre);
+            jugador.setArquero(randInt(0, 10));
+            jugador.setCabezazo(randInt(0, 10));
+            jugador.setCotizacion(1.0 * randInt(0, 10000000));
+            jugador.setEntradas(randInt(0, 10));
+            jugador.setMarca(randInt(0, 10));
+            jugador.setMentalidad(randInt(0, 10));
+            jugador.setPelotaParada(randInt(0, 10));
+            jugador.setPotenciaTiro(randInt(0, 10));
+            jugador.setPrecisionTiro(randInt(0, 10));
+            jugador.setRegate(randInt(0, 10));
+            jugador.setResistencia(randInt(0, 10));
+            jugador.setSalario(1.0 * randInt(2000, 100000));
+            jugador.setVelocidad(randInt(0, 10));
+
             crearJugador(jugador);
         }
-       
-       
+
     }
-    
+
     public List<Jugador> obtenerJugadorPorNombre(String nombre) {
         List<Jugador> respuesta;
 
@@ -129,25 +162,19 @@ public class JugadorDAO {
         Session s = sf.openSession();
         s.beginTransaction();
 
-        
-
         Query consulta = s.createQuery("From Jugador where nombre like :parametro");
-        consulta.setParameter("parametro","%"+ nombre +"%" );
-        
+        consulta.setParameter("parametro", "%" + nombre + "%");
+
         respuesta = consulta.list();
-        
-        
+
 //        Criteria c = s.createCriteria(Alumno.class)
 //                .add(Restrictions.like("nombreYApellido", nombre, MatchMode.START));
 //        respuesta = c.list();
-
-        
-
         s.close();
 
         return respuesta;
     }
-    
+
     public static int randInt(int min, int max) {
 
         Random rand = new Random();

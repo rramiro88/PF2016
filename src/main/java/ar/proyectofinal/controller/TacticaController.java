@@ -183,6 +183,9 @@ public class TacticaController implements Serializable{
         posiciones.add(posicion11);
         
         
+        tactica.setTitulares(sesionController.getUsuarioLogueado().getClub().getPlantel().subList(0, 11));
+        
+        
         tactica.setPosiciones(posiciones);
         sesionController.getUsuarioLogueado().getClub().getTacticas().clear();
         sesionController.getUsuarioLogueado().getClub().getTacticas().add(tactica);

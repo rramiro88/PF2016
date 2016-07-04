@@ -7,10 +7,12 @@ package dao;
 
 import entidades.Club;
 import entidades.Estadio;
+import entidades.Jugador;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import utilidades.CargadorDB;
 
 /**
  *
@@ -28,6 +30,12 @@ public class ClubDAO {
         
         Estadio estadio = new Estadio();
         club.setEstadio(estadio);
+        
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        List<Jugador> jugadoresIniciales = jugadorDAO.crearJugadoresAlAzarLista();
+        club.setPlantel(jugadoresIniciales);
+        
+        
 
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session s = sf.openSession();
@@ -35,7 +43,7 @@ public class ClubDAO {
 
         try {
 
-            s.save(estadio);
+//            s.save(estadio);
 
             s.save(club);
             s.getTransaction().commit();
@@ -84,6 +92,11 @@ public class ClubDAO {
         consulta.setParameter("parametro","%"+ nombreClub +"%" );
         
         respuesta = consulta.list();
+        
+        for (Club c : respuesta) {
+            System.out.println(c.getTacticas().size());
+            System.out.println(c.getTacticas().get(0).getTitulares().size());
+        }
         
         
 //        Criteria c = s.createCriteria(Alumno.class)

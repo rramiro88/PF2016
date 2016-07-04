@@ -38,15 +38,20 @@ public class Club implements Serializable {
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Jugador> plantel;
+    
     @OneToMany(mappedBy = "origen", cascade = CascadeType.ALL)
     private List<Oferta> ofertasEnviadas;
+    
     @OneToMany(mappedBy = "destino", cascade = CascadeType.ALL)
     private List<Oferta> ofertasRecibidas;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    
+    @OneToMany(mappedBy = "club")
     List<Tactica> tacticas;
+    
     @OneToMany(mappedBy = "visitante", cascade = CascadeType.ALL)
     private List<Partido> partidos;
+    
     @ManyToMany(mappedBy = "equiposParticipantes")
     private List<Liga> ligas;
 

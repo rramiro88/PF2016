@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -34,7 +35,8 @@ public class Liga implements Serializable {
     @OneToMany(mappedBy = "liga", cascade = CascadeType.ALL)
     List<Partido> partidos = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "liga_id")
     List<Club> equiposParticipantes;
 
     public void organizar() {

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 
 
@@ -23,11 +24,25 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Jugador implements Serializable {
     
+    @Transient
+    public static final String ARQUERO = "arquero";
+    @Transient
+    public static final String MEDIO = "medio";
+    @Transient
+    public static final String DEFENSA = "defensa";
+    @Transient
+    public static final String DELANTERO = "delantero";
+    @Transient
+    public static final String SUPLENTE = "suplente";
+    
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     private String nombre;
+    
+    private String posicionTactica;
     
     @ManyToOne
     @JoinColumn(name="club_id", nullable = true)
@@ -56,12 +71,23 @@ public class Jugador implements Serializable {
         nombre = "Jugador de prueba";
         cotizacion = 0D;
         salario = 0D;
+        posicionTactica = SUPLENTE;
     }
     
     public int suma(){
         return arquero + cabezazo + entradas + marca + mentalidad +pelotaParada +potenciaTiro+precisionTiro+regate+resistencia+velocidad;
     }
 
+    public String getPosicion() {
+        return posicionTactica;
+    }
+
+    public void setPosicion(String posicionTactica) {
+        this.posicionTactica = posicionTactica;
+    }
+
+    
+    
     public String getNombre() {
         return nombre;
     }
