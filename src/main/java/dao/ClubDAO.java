@@ -8,11 +8,12 @@ package dao;
 import entidades.Club;
 import entidades.Estadio;
 import entidades.Jugador;
+import entidades.Tactica;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import utilidades.CargadorDB;
 
 /**
  *
@@ -35,7 +36,15 @@ public class ClubDAO {
         List<Jugador> jugadoresIniciales = jugadorDAO.crearJugadoresAlAzarLista();
         club.setPlantel(jugadoresIniciales);
         
+        for (Jugador jugador : jugadoresIniciales) {
+            jugador.setClub(club);
+        }
         
+        Tactica tactica = new Tactica();
+        tactica.setNombre("Liga");
+        tactica.setTitulares(jugadoresIniciales.subList(0, 11));
+        tactica.setSuplentes(jugadoresIniciales.subList(11, jugadoresIniciales.size()));
+        tactica.setPosiciones(new ArrayList<String>());
 
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session s = sf.openSession();
@@ -43,7 +52,12 @@ public class ClubDAO {
 
         try {
 
-//            s.save(estadio);
+            s.save(estadio);
+            s.save(tactica);
+            
+            for (Jugador j : jugadoresIniciales) {
+                s.saveOrUpdate(j);
+            }
 
             s.save(club);
             s.getTransaction().commit();

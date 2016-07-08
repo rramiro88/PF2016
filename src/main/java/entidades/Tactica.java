@@ -13,13 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Tactica implements Serializable {
-    @ManyToOne
-    private Club club;
 
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,13 +37,6 @@ public class Tactica implements Serializable {
     @ElementCollection
     private List<String> posiciones;
 
-    public Club getClub() {
-        return club;
-    }
-
-    public void setClub(Club club) {
-        this.club = club;
-    }
 
     
     

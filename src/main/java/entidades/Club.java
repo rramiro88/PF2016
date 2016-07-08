@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 /**
@@ -38,20 +39,20 @@ public class Club implements Serializable {
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Jugador> plantel;
-    
+
     @OneToMany(mappedBy = "origen", cascade = CascadeType.ALL)
     private List<Oferta> ofertasEnviadas;
-    
+
     @OneToMany(mappedBy = "destino", cascade = CascadeType.ALL)
     private List<Oferta> ofertasRecibidas;
 
-    
-    @OneToMany(mappedBy = "club")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "club_fk")
     List<Tactica> tacticas;
-    
+
     @OneToMany(mappedBy = "visitante", cascade = CascadeType.ALL)
     private List<Partido> partidos;
-    
+
     @ManyToMany(mappedBy = "equiposParticipantes")
     private List<Liga> ligas;
 
