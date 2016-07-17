@@ -46,8 +46,8 @@ public class Club implements Serializable {
     @OneToMany(mappedBy = "destino", cascade = CascadeType.ALL)
     private List<Oferta> ofertasRecibidas;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "club_fk")
+   
+    @OneToMany(mappedBy = "club", cascade = CascadeType.ALL)
     List<Tactica> tacticas;
 
     @OneToMany(mappedBy = "visitante", cascade = CascadeType.ALL)

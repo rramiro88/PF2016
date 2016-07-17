@@ -5,7 +5,6 @@
  */
 package ar.proyectofinal.controller;
 
-
 import ar.proyectofinal.logica.LogicaTactica;
 import entidades.Tactica;
 import java.io.Serializable;
@@ -19,28 +18,25 @@ import org.primefaces.context.RequestContext;
  *
  * @author ramiro
  */
-
 @Named
 @SessionScoped
-public class TacticaController implements Serializable{
-    
+public class TacticaController implements Serializable {
+
     @Inject
     LogicaTactica logicaTactica;
-    
+
     @Inject
     SesionController sesionController;
-    
-    private String posicion1,posicion2,posicion3,posicion4,posicion5,posicion6,posicion7,posicion8,posicion9,posicion10,posicion11;
+
+    private String posicion1, posicion2, posicion3, posicion4, posicion5, posicion6, posicion7, posicion8, posicion9, posicion10, posicion11;
 
     private String opcion;
 
-    
-    public void cargarTactica(){
-        if(sesionController.getUsuarioLogueado().getClub().getTacticas().size()>0){
-            
-            
+    public void cargarTactica() {
+        if (sesionController.getUsuarioLogueado().getClub().getTacticas().size() > 0) {
+
             Tactica tactica = sesionController.getUsuarioLogueado().getClub().getTacticas().get(0);
-            
+
             posicion1 = tactica.getPosiciones().get(0);
             posicion2 = tactica.getPosiciones().get(1);
             posicion3 = tactica.getPosiciones().get(2);
@@ -52,17 +48,12 @@ public class TacticaController implements Serializable{
             posicion9 = tactica.getPosiciones().get(8);
             posicion10 = tactica.getPosiciones().get(9);
             posicion11 = tactica.getPosiciones().get(10);
-            
-            
-            
-            
-            
+
         }
-        
+
         RequestContext.getCurrentInstance().execute("cargarPosicionesActuales()");
     }
-    
-    
+
     public String getOpcion() {
         return opcion;
     }
@@ -70,8 +61,7 @@ public class TacticaController implements Serializable{
     public void setOpcion(String opcion) {
         this.opcion = opcion;
     }
-    
-    
+
     public String getPosicion1() {
         return posicion1;
     }
@@ -160,40 +150,34 @@ public class TacticaController implements Serializable{
         this.posicion11 = posicion11;
     }
 
-   
-    public void guardarPosiciones(){
-        
-        Tactica tactica = new Tactica();
-        
+    public void guardarPosiciones() {
+
+        Tactica tactica = sesionController.getUsuarioLogueado().getClub().getTacticas().get(0);
+
         tactica.setNombre(opcion);
-        
-        
-        ArrayList<String> posiciones = new ArrayList<>();
-        
-        posiciones.add(posicion1);
-        posiciones.add(posicion2);
-        posiciones.add(posicion3);
-        posiciones.add(posicion4);
-        posiciones.add(posicion5);
-        posiciones.add(posicion6);
-        posiciones.add(posicion7);
-        posiciones.add(posicion8);
-        posiciones.add(posicion9);
-        posiciones.add(posicion10);
-        posiciones.add(posicion11);
-        
-        
-        tactica.setTitulares(sesionController.getUsuarioLogueado().getClub().getPlantel().subList(0, 11));
-        
-        
-        tactica.setPosiciones(posiciones);
-        sesionController.getUsuarioLogueado().getClub().getTacticas().clear();
-        sesionController.getUsuarioLogueado().getClub().getTacticas().add(tactica);
-        
+
+        tactica.getPosiciones().set(0, posicion1);
+        tactica.getPosiciones().set(1, posicion2);
+        tactica.getPosiciones().set(2, posicion3);
+        tactica.getPosiciones().set(3, posicion4);
+        tactica.getPosiciones().set(4, posicion5);
+        tactica.getPosiciones().set(5, posicion6);
+        tactica.getPosiciones().set(6, posicion7);
+        tactica.getPosiciones().set(7, posicion8);
+        tactica.getPosiciones().set(8, posicion9);
+        tactica.getPosiciones().set(9, posicion10);
+        tactica.getPosiciones().set(10, posicion11);
+
+        for (int i = 0; i < 11; i++) {
+
+            tactica.getTitularidad().put(sesionController.getUsuarioLogueado().getClub().getPlantel().get(i).getId(), Boolean.TRUE);
+
+        }
+
+        sesionController.getUsuarioLogueado().getClub().getTacticas().set(0, tactica);
+
         sesionController.actualizarUsuario();
-        
-        
+
     }
-    
-    
+
 }

@@ -43,6 +43,8 @@ public class Jugador implements Serializable {
     private String nombre;
     
     private String posicionTactica;
+
+    
     
     @ManyToOne
     @JoinColumn(name="club_id", nullable = true)
@@ -72,7 +74,19 @@ public class Jugador implements Serializable {
         cotizacion = 0D;
         salario = 0D;
         posicionTactica = SUPLENTE;
+
     }
+
+    public String getPosicionTactica() {
+        return posicionTactica;
+    }
+
+    public void setPosicionTactica(String posicionTactica) {
+        this.posicionTactica = posicionTactica;
+    }
+
+    
+    
     
     public int suma(){
         return arquero + cabezazo + entradas + marca + mentalidad +pelotaParada +potenciaTiro+precisionTiro+regate+resistencia+velocidad;

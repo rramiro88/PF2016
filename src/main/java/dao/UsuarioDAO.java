@@ -99,10 +99,13 @@ public class UsuarioDAO {
                 .add(Restrictions.eq("nombre", nombre)).list();
         u = resultado.get(0);
 
-        System.out.println(u.getClub().getOfertasEnviadas().size());
-        System.out.println(u.getClub().getOfertasRecibidas().size());
+        System.out.println("OFERTAS ENVIADAS---> " + u.getClub().getOfertasEnviadas().size());
+        System.out.println("OFERTAS RECIBIDAS---> " + u.getClub().getOfertasRecibidas().size());
         if (u.getClub().getTacticas().size() > 0) {
-            System.out.println(u.getClub().getTacticas().get(0).getPosiciones().size());
+            System.out.println("POSICIONES---> " + u.getClub().getTacticas().get(0).getPosiciones().size());
+            System.out.println("TITULARIDADES--->" + u.getClub().getTacticas().get(0).getTitularidad().size());
+        }else{
+            System.out.println("NO HAY TACTICAS CARGADAS");
         }
 
         s.close();

@@ -27,24 +27,38 @@ public class ClubDAO {
         club.setPresupuesto(0F);
         club.setUrlEscudo("https://image.freepik.com/iconos-gratis/variante-escudo-con-bordes-blancos-y-negros_318-48076.png");
 
-
-        
         Estadio estadio = new Estadio();
         club.setEstadio(estadio);
-        
+
         JugadorDAO jugadorDAO = new JugadorDAO();
         List<Jugador> jugadoresIniciales = jugadorDAO.crearJugadoresAlAzarLista();
         club.setPlantel(jugadoresIniciales);
-        
+
         for (Jugador jugador : jugadoresIniciales) {
             jugador.setClub(club);
         }
-        
+
         Tactica tactica = new Tactica();
         tactica.setNombre("Liga");
-        tactica.setTitulares(jugadoresIniciales.subList(0, 11));
-        tactica.setSuplentes(jugadoresIniciales.subList(11, jugadoresIniciales.size()));
-        tactica.setPosiciones(new ArrayList<String>());
+        tactica.setClub(club);
+
+        
+        ArrayList<String> posiciones = new ArrayList<>();
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        posiciones.add("100a100");
+        
+        tactica.setPosiciones(posiciones);
+
+        club.getTacticas().add(tactica);
 
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session s = sf.openSession();
@@ -52,27 +66,29 @@ public class ClubDAO {
 
         try {
 
-            s.save(estadio);
-            s.save(tactica);
-            
+//            s.save(estadio);
             for (Jugador j : jugadoresIniciales) {
                 s.saveOrUpdate(j);
             }
 
-            s.save(club);
+            for (int i = 0; i < 11; i++) {
+                tactica.getTitularidad().put(club.getPlantel().get(i).getId(), Boolean.TRUE);
+            }
+
+//            s.save(tactica);
+            s.persist(club);
+
             s.getTransaction().commit();
-            
 
         } catch (Exception ex) {
             s.getTransaction().rollback();
             ex.printStackTrace();
-        }finally{
+        } finally {
             s.close();
         }
 
         return club;
     }
-
 
     public void actualizarClub(Club club) {
         SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -81,14 +97,13 @@ public class ClubDAO {
 
         try {
 
-            s.update(club);
+            s.saveOrUpdate(club);
             s.getTransaction().commit();
-            
 
         } catch (Exception ex) {
             s.getTransaction().rollback();
             ex.printStackTrace();
-        }finally{
+        } finally {
             s.close();
         }
     }
@@ -100,25 +115,19 @@ public class ClubDAO {
         Session s = sf.openSession();
         s.beginTransaction();
 
-        
-
         Query consulta = s.createQuery("From Club where nombre like :parametro");
-        consulta.setParameter("parametro","%"+ nombreClub +"%" );
-        
+        consulta.setParameter("parametro", "%" + nombreClub + "%");
+
         respuesta = consulta.list();
-        
+
         for (Club c : respuesta) {
             System.out.println(c.getTacticas().size());
-            System.out.println(c.getTacticas().get(0).getTitulares().size());
+
         }
-        
-        
+
 //        Criteria c = s.createCriteria(Alumno.class)
 //                .add(Restrictions.like("nombreYApellido", nombre, MatchMode.START));
 //        respuesta = c.list();
-
-        
-
         s.close();
 
         return respuesta;

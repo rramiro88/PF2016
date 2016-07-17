@@ -6,40 +6,55 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import javax.persistence.CascadeType;
+import java.util.Map;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Tactica implements Serializable {
 
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    
-    
-    @OneToMany(cascade = CascadeType.ALL)                                                                                   
-    List<Jugador> titulares;                                                                                                
-   
-    @OneToMany(cascade = CascadeType.ALL)                                                                                   
-    List<Jugador> suplentes;                                                                                                
-    
-    
+    @ElementCollection
+    Map<Long, Boolean> titularidad;
 
     String nombre;
 
     @ElementCollection
     private List<String> posiciones;
 
+    @ManyToOne
+    private Club club;
 
-    
-    
+    public Tactica() {
+        this.titularidad = new HashMap<>();
+    }
+
+    public Map<Long, Boolean> getTitularidad() {
+        return titularidad;
+    }
+
+    public void setTitularidad(Map<Long, Boolean> titularidad) {
+        this.titularidad = titularidad;
+    }
+
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
+    }
+
     public List<String> getPosiciones() {
         return posiciones;
     }
@@ -56,28 +71,25 @@ public class Tactica implements Serializable {
         this.nombre = nombre;
     }
 
-    public List<Jugador> getTitulares() {
-        return titulares;
-    }
-
-    public void setTitulares(List<Jugador> titulares) {
-        this.titulares = titulares;
-    }
-
-    public List<Jugador> getSuplentes() {
-        return suplentes;
-    }
-
-    public void setSuplentes(List<Jugador> suplentes) {
-        this.suplentes = suplentes;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Jugador> getTitulares() {
+        List<Jugador> respuesta = new ArrayList<>();
+
+        for (Jugador j : club.getPlantel()) {
+            if (titularidad.get(j.getId()) != null) {
+                respuesta.add(j);
+            }
+        }
+
+        return respuesta;
+
     }
 
 }
