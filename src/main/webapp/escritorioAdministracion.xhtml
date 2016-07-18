@@ -97,7 +97,25 @@
                     </p:column>
                     
                 </p:dataTable>
-               
+                
+                <hr/>
+                
+                <h:form>
+                    
+                    <p:commandButton value="Ver Posiciones" action="#{administracionController.generarRanking()}" update="tablaRanking"/>
+                    
+                </h:form>
+                <p:dataTable id="tablaRanking" value="#{administracionController.posiciones}" var="posicion">
+                
+                
+                    <p:column headerText="Posiciones">
+                        
+                        #{posicion}
+                        
+                    </p:column>
+                
+                
+                </p:dataTable>
 
             </ui:define>
 

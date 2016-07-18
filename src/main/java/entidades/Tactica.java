@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,12 +25,12 @@ public class Tactica implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     Map<Long, Boolean> titularidad;
 
     String nombre;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> posiciones;
 
     @ManyToOne

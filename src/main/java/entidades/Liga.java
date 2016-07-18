@@ -47,7 +47,7 @@ public class Liga implements Serializable {
 
                 Partido p = new Partido();
 
-                if (j % 2 != 1) {
+                if (i % 2 != 1) {
                     p.setLocal(equiposParticipantes.get(i));
                     p.setVisitante(equiposParticipantes.get(j));
                 } else {

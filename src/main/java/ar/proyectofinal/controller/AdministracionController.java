@@ -6,6 +6,7 @@
 package ar.proyectofinal.controller;
 
 import ar.proyectofinal.logica.LogicaAdministracion;
+import ar.proyectofinal.logica.LogicaLiga;
 import entidades.Club;
 import entidades.Liga;
 import entidades.Partido;
@@ -29,14 +30,30 @@ public class AdministracionController implements Serializable{
     @Inject
     LogicaAdministracion logicaAdministracion;
     
+    @Inject
+    LogicaLiga logicaLiga;
+    
     
     List<Club> resultado;
+    
+    List<String> posiciones;
     
     List<Club> clubesInvitados = new ArrayList<>();
     
     String nombreClub, nombreLiga;
     
     Liga liga = new Liga();
+    
+    
+    public void generarRanking(){
+        
+        
+        posiciones = logicaLiga.obtenerPosicionesLiga(liga);
+        
+        
+    }
+    
+    
     
     
     public void buscarClubesPorNombre(){
@@ -79,6 +96,17 @@ public class AdministracionController implements Serializable{
             
         }
     }
+
+    public List<String> getPosiciones() {
+        return posiciones;
+    }
+
+    public void setPosiciones(List<String> posiciones) {
+        this.posiciones = posiciones;
+    }
+    
+    
+    
     
     public String getNombreLiga() {
         return nombreLiga;
