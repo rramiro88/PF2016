@@ -25,23 +25,25 @@ public class MercadoController {
 
     @Inject
     private LogicaMercado miLogicaMercado;
-    
-    
+
     private List<Jugador> listaDeLibres;
-    
+
     private List<Oferta> ofertasEnviadas;
 
-    
-    
-    private void cargarOfertas(){
-        
-        
-        
-        
-        
+    private Oferta oferta;
+
+    private void cargarOfertas() {
+
     }
-    
-    
+
+    public Oferta getOferta() {
+        return oferta;
+    }
+
+    public void setOferta(Oferta oferta) {
+        this.oferta = oferta;
+    }
+
     public List<Oferta> getOfertasEnviadas() {
         return ofertasEnviadas;
     }
@@ -49,15 +51,12 @@ public class MercadoController {
     public void setOfertasEnviadas(List<Oferta> ofertasEnviadas) {
         this.ofertasEnviadas = ofertasEnviadas;
     }
-    
-    
-    
-    
+
     public MercadoController() {
-        
+
     }
-    
-    public List<Jugador> listarLibres(){
+
+    public List<Jugador> listarLibres() {
         return miLogicaMercado.listarLibres();
     }
 
@@ -68,34 +67,46 @@ public class MercadoController {
     public void setListaDeLibres(List<Jugador> listaDeLibres) {
         this.listaDeLibres = listaDeLibres;
     }
-    
-    public void transferir(Jugador j, Club c, int condicion){
-        
-        miLogicaMercado.transferir(j,c,condicion);
+
+    public void transferir(Jugador j, Club c, int condicion) {
+
+        miLogicaMercado.transferirLibre(j, c, condicion);
         System.out.println("en controller!");
-        
+
         this.listaDeLibres.remove(j);
 
-        
     }
 
-    public void liberarJugador(Jugador j, Club c){
-        
-        
-        miLogicaMercado.liberarJugador(j,c);
+    public void liberarJugador(Jugador j, Club c) {
+
+        miLogicaMercado.liberarJugador(j, c);
         this.listaDeLibres = listarLibres();
-        
+
     }
-    
+
     @PostConstruct
-    public void inicializar(){
+    public void inicializar() {
         this.actualizar();
     }
 
     public void actualizar() {
         listaDeLibres = listarLibres();
     }
+
+    public String evaluarOferta(Oferta oferta) {
+
+        this.oferta = oferta;
+        miLogicaMercado.setOfertaEnCuestion(oferta);
+
+        return "evaluarOferta";
+    }
     
-    
-    
+    public void transferirClubAClub(){
+        
+        miLogicaMercado.transferir(oferta);
+        
+        System.out.println("Jugador transferido");
+        
+    }
+
 }

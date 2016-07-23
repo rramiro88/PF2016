@@ -43,21 +43,20 @@ public class Liga implements Serializable {
 
         for (int i = 0; i < equiposParticipantes.size(); i++) {
 
-            for (int j = 0; j < equiposParticipantes.size() && j != i; j++) {
+            for (int j = 0; j < equiposParticipantes.size(); j++) {
 
-                Partido p = new Partido();
+                if (i != j) {
+                    Partido p = new Partido();
 
-                if (i % 2 != 1) {
                     p.setLocal(equiposParticipantes.get(i));
                     p.setVisitante(equiposParticipantes.get(j));
-                } else {
-                    p.setLocal(equiposParticipantes.get(j));
-                    p.setVisitante(equiposParticipantes.get(i));
+
+                    p.setFecha(Date.valueOf(LocalDate.now()));
+
+                    if (!repetido(p)) {
+                        partidos.add(p);
+                    }
                 }
-
-                p.setFecha(Date.valueOf(LocalDate.now()));
-
-                partidos.add(p);
 
             }
 
@@ -95,6 +94,22 @@ public class Liga implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    private boolean repetido(Partido p) {
+        boolean respuesta = false;
+        
+        
+        for (Partido partido : partidos) {
+            if(p.getLocal().equals(partido.getLocal())&&p.getVisitante().equals(partido.getVisitante())
+                    || (p.getLocal().equals(partido.getVisitante())&&p.getVisitante().equals(partido.getLocal()))){
+                respuesta = true;
+            }
+        }
+        
+        
+        
+        return respuesta;
     }
 
 }

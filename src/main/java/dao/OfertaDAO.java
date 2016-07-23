@@ -38,4 +38,28 @@ public class OfertaDAO {
 
         return respuesta;
     }
+    
+     public boolean eliminarOferta(Oferta oferta) {
+        boolean respuesta = false;
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+
+        try {
+
+            s.delete(oferta);
+            s.getTransaction().commit();
+
+            respuesta = true;
+
+        } catch (Exception ex) {
+            s.getTransaction().rollback();
+            ex.printStackTrace();
+        } finally {
+            s.close();
+        }
+
+        return respuesta;
+    }
 }

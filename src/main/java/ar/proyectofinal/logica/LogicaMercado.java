@@ -20,6 +20,18 @@ import javax.inject.Named;
 @SessionScoped
 public class LogicaMercado implements Serializable {
 
+    private Oferta ofertaEnCuestion;
+
+    public Oferta getOfertaEnCuestion() {
+        return ofertaEnCuestion;
+    }
+
+    public void setOfertaEnCuestion(Oferta ofertaEnCuestion) {
+        this.ofertaEnCuestion = ofertaEnCuestion;
+    }
+    
+    
+    
     public List<Jugador> listarLibres() {
 
         JugadorDAO jugadorDAO = new JugadorDAO();
@@ -28,18 +40,32 @@ public class LogicaMercado implements Serializable {
 
     }
 
-    public boolean transferir(Jugador j, Club c, int condicion) {
+    public boolean transferir(Oferta oferta) {
 
         boolean respuesta = false;
 
         JugadorDAO jugadorDAO = new JugadorDAO();
         ClubDAO clubDAO = new ClubDAO();
+        OfertaDAO ofertaDAO = new OfertaDAO();
 
         System.out.println("en logica!");
-        j.setClub(c);
-        c.agregarJugador(j);
-        jugadorDAO.actualizarJugador(j);
-        clubDAO.actualizarClub(c);
+        
+        
+        
+        
+        
+        oferta.getJugadorObjetivo().setClub(oferta.getOrigen());
+        oferta.getOrigen().agregarJugador(oferta.getJugadorObjetivo());
+        
+        oferta.getDestino().getPlantel().remove(oferta.getJugadorObjetivo());
+        
+        
+        
+        
+        jugadorDAO.actualizarJugador(oferta.getJugadorObjetivo());
+        clubDAO.actualizarClub(oferta.getOrigen());
+        clubDAO.actualizarClub(oferta.getDestino());
+        ofertaDAO.eliminarOferta(oferta);
 
         return true;
     }
@@ -68,6 +94,7 @@ public class LogicaMercado implements Serializable {
      * @param oferente club que realiza la oferta
      * @param monto cantidad de dinero ficticio ofrecido
      * @param condicion Venta o Prestamo
+     * @return 
      */
     public String ofertar(Jugador jugador, Club oferente, Double monto, int condicion) {
         
@@ -98,6 +125,32 @@ public class LogicaMercado implements Serializable {
         
         return "";
         
+    }
+
+    public boolean transferirLibre(Jugador j, Club c, int condicion) {
+        
+        
+        
+        boolean respuesta = false;
+
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        ClubDAO clubDAO = new ClubDAO();
+
+        System.out.println("en logica!");
+        
+        
+        
+        
+        
+        j.setClub(c);
+        c.agregarJugador(j);
+        
+        
+        
+        jugadorDAO.actualizarJugador(j);
+        clubDAO.actualizarClub(c);
+
+        return true;
     }
 
 }

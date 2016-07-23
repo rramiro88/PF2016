@@ -13,7 +13,7 @@ and open the template in the editor.
 body {
     
     background-image:url("#{resource['images:fondo2.png']}");
-    
+
 }
 
 

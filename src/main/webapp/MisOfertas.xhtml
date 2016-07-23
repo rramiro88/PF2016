@@ -2,17 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
         <ui:composition template="./templateEscritorio.xhtml">
 
-           
+
 
             <ui:define name="centro">
 
-                
+
 
                 <p:outputLabel for="tabla" value="Ofertas Enviadas"/>
                 <p:dataTable id="tabla" value="#{sesionController.usuarioLogueado.club.ofertasEnviadas}" var="oferta" emptyMessage="No hay ofertas">
@@ -20,7 +21,7 @@
                     <p:column headerText="Id">
                         <p:outputLabel value="#{oferta.id}"/>
                     </p:column>
-                    
+
                     <p:column headerText="Jugador">
                         <p:outputLabel value="#{oferta.jugadorObjetivo.nombre}"/>
                     </p:column>
@@ -37,28 +38,32 @@
                 <hr/>
                 <p:outputLabel for="tabla2" value="Ofertas Recibidas"/>
                 <p:dataTable id="tabla2" value="#{sesionController.usuarioLogueado.club.ofertasRecibidas}" var="oferta" emptyMessage="No hay ofertas    ">
-
-                    <p:column headerText="Id">
-                        <p:outputLabel value="#{oferta.id}"/>
-                    </p:column>
                     
-                    <p:column headerText="Jugador">
-                        <p:outputLabel value="#{oferta.jugadorObjetivo.nombre}"/>
-                    </p:column>
+                        <p:column headerText="Id">
+                            <p:outputLabel value="#{oferta.id}"/>
+                        </p:column>
 
-                    <p:column headerText="Monto Ofrecido">
-                        <p:outputLabel value="#{oferta.montoDeOperacion}"/>
-                    </p:column>
+                        <p:column headerText="Jugador">
+                            <p:outputLabel value="#{oferta.jugadorObjetivo.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Monto Ofrecido">
+                            <p:outputLabel value="#{oferta.montoDeOperacion}"/>
+                        </p:column>
+
+                        <p:column headerText="Proveniente de">
+                            <p:outputLabel value="#{oferta.origen.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Accion">
+                            <p:commandButton value="Evaluar propuesta" action="#{mercadoController.evaluarOferta(oferta)}"></p:commandButton>
+                        </p:column>
                     
-                    <p:column headerText="Proveniente de">
-                        <p:outputLabel value="#{oferta.origen.nombre}"/>
-                    </p:column>
-
                 </p:dataTable>
 
             </ui:define>
 
-            
+
 
         </ui:composition>
 

@@ -26,11 +26,12 @@
                     <h:graphicImage value="#{resource['images:logo.png']}" styleClass="img-responsive"/>
 
 
+
                 </div>
                 <div class="col-sm-4">
 
-                     <h:form>
-                        
+                    <h:form>
+
                         <div class="form-group">
                             <label for="usuarioNuevo">Usuario</label>
                             <p:inputText value="#{nuevoUsuarioController.usuario}" styleClass="form-control" id="usuarioNuevo">
@@ -46,12 +47,12 @@
 
                         </p:commandLink>
                     </h:form>
-                    
+
                 </div>
                 <div class="col-sm-4">
 
-
-                    
+                    <h:button id="botonVolver" outcome="index.xhtml" style="margin: 20%" image="#{resource['images:boton-volver.png']}"></h:button>
+                    <p:tooltip id="toolTipGrow3" for="botonVolver" value="Volver al inicio" showEffect="explode" hideEffect="explode" position="bottom"/>
 
                 </div>
             </div>
