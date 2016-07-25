@@ -7,7 +7,7 @@
 
     <body>
 
-        <ui:composition template="./DosColumnas.xhtml">
+        <ui:composition template="./templateDosColumnas.xhtml">
 
 
             <ui:define name="titulo">
@@ -15,6 +15,7 @@
             </ui:define>
 
             <ui:define name="centro">
+
 
 
 
@@ -97,6 +98,16 @@
 
 
             </ui:define>
+
+            <ui:define name="izquierda">
+
+                <p:panel header="Opciones" style="margin-top: 50%" toggleable="true">
+                    <p:link href="MisOfertas.xhtml" value="Ver ofertas enviadas / recibidas"></p:link>
+                    <hr/>
+                    <p:link href="jugadoresLibres.xhtml" value="Listar jugadores libres"></p:link>
+                </p:panel>
+            </ui:define>
+
 
 
 

@@ -7,39 +7,66 @@
 
     <body>
 
-        <ui:composition template="./templateEscritorio.xhtml">
+        <ui:composition template="./templateEscritorio2.xhtml">
 
-            
+
 
             <ui:define name="centro">
-                
-                
-                
-                
-                 <h:form rendered="#{not empty user}">
-                        
-                     <p:growl id="growl" life="2000"></p:growl>
-                        <div class="form-group">
-                            
-                            <div id="datosClub" class="col-sm-offset-4">
-                                <img src="#{sesionController.usuarioLogueado.club.urlEscudo}" class="img-responsive"></img>
-                                <h3><h:outputText id="etiquetaNombre" value="#{user.club.nombre}" styleClass="text-center" ></h:outputText></h3>
-                            </div>
-                            
-                            
-                            <br/><br/>
-                            <label for="passNuevo">Ingrese el nuevo nombre para su club:</label>
-                            <p:inputText value="#{sesionController.usuarioLogueado.club.nombre}" styleClass="form-control" id="nombre"></p:inputText>
-                            
-                        </div>
-                     <p:commandLink actionListener="#{sesionController.actualizarUsuario}" update="growl etiquetaNombre" styleClass="btn btn-primary btn-lg" value="Actualizar Nombre">    
-                            <span class="glyphicon glyphicon-ok"> </span>
 
-                        </p:commandLink>
-                    </h:form>
+                <p:growl id="growl" life="2000"></p:growl>
+                <div id="datosClub" class="col-sm-offset-4">
+
+                    <p:graphicImage id="urlEscudo" value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive" style="width: 200px"></p:graphicImage>
+                    <h3><h:outputText id="etiquetaNombre" value="#{sesionController.usuarioLogueado.club.nombre}" styleClass="text-center" ></h:outputText></h3>
+                </div>
+
+                <h:form id="form" rendered="#{not empty user}">
+
+
+
+
+                    <p:accordionPanel id="accordionPanel">
+
+                        <p:tab title="Cambiar Nombre">
+
+
+
+                            <div class="form-group">
+                                <label for="nombre">Ingrese el nuevo nombre para su club:</label>
+                                <p:inputText value="#{sesionController.usuarioLogueado.club.nombre}" styleClass="form-control" id="nombre"></p:inputText>
+
+                            </div>
+
+                            <p:commandLink actionListener="#{sesionController.actualizarUsuario}" update="growl etiquetaNombre" styleClass="btn btn-success btn-lg" value="Actualizar Nombre"/>    
+
+
+                        </p:tab>
+                        <p:tab title="Cambiar Escudo">
+
+
+
+
+                            <div class="form-group">
+
+                                <label for="escudo">Nueva URL del escudo:</label>
+                                <p:inputText value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="form-control" id="escudo"></p:inputText>
+
+                            </div>
+                            <p:commandLink actionListener="#{sesionController.actualizarUsuario}" update="growl urlEscudo" styleClass="btn btn-success btn-lg" value="Actualizar Escudo"/>    
+                               
+
+                        </p:tab>
+
+
+                    </p:accordionPanel>
+
+                </h:form>
+
+
+
             </ui:define>
 
-         
+
 
         </ui:composition>
 

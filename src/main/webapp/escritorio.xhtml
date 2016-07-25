@@ -9,13 +9,14 @@
 
                 
 
-        <ui:composition template="./templateEscritorio.xhtml">
+        <ui:composition template="./templateEscritorio2.xhtml">
 
 
             <ui:define name="izquierda">
 
-                <p:graphicImage value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive escudo"></p:graphicImage>
-                <h2>#{sesionController.usuarioLogueado.club.nombre}</h2>    
+                
+                <p:graphicImage value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive escudo contenido-centrado"></p:graphicImage>
+                <h2 align="center">#{sesionController.usuarioLogueado.club.nombre}</h2>    
 
             </ui:define>
 
@@ -44,7 +45,7 @@
 
                 </p:dataTable>
                 
-                
+        
             </ui:define>
 
 

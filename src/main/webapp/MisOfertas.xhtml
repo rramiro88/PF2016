@@ -7,7 +7,7 @@
 
     <body>
 
-        <ui:composition template="./templateEscritorio.xhtml">
+        <ui:composition template="./templateEscritorio2.xhtml">
 
 
 
@@ -64,6 +64,13 @@
             </ui:define>
 
 
+            <ui:define name="izquierda">
+                <p:panel header="Opciones" style="margin-top: 50%" toggleable="true">
+                    <p:link href="MisOfertas.xhtml" value="Ver ofertas enviadas / recibidas"></p:link>
+                    <hr/>
+                    <p:link href="jugadoresLibres.xhtml" value="Listar jugadores libres"></p:link>
+                </p:panel>
+            </ui:define>
 
         </ui:composition>
 

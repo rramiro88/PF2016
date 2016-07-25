@@ -7,25 +7,25 @@
 
     <body>
 
-        <ui:composition template="./templateEscritorio.xhtml">
+        <ui:composition template="./templateEscritorio2.xhtml">
 
             <ui:define name="centro">
 
                 <h2>Listado de jugadores libres</h2>
                 <br/>
-                
+
                 <h:form>
-                    
-                    
+
+
                     <p:commandButton icon="ui-icon-check" value="Buscar" action="#{mercadoController.actualizar()}" update="tablaLibres"/>
                     <hr/>
-                    
+
                 </h:form>
 
                 <p:dataTable id="tablaLibres" value="#{mercadoController.listaDeLibres}" var="jugador">
                     <p:column headerText="Nombre">
                         <h:outputText value="#{jugador.nombre}"></h:outputText>
-                        
+
                     </p:column>
                     <p:column headerText="Salario">
                         <h:outputText value="#{jugador.salario}"></h:outputText>
@@ -38,6 +38,13 @@
                 </p:dataTable>
             </ui:define>
 
+            <ui:define name="izquierda">
+                <p:panel header="Opciones" style="margin-top: 50%" toggleable="true">
+                    <p:link href="MisOfertas.xhtml" value="Ver ofertas enviadas / recibidas"></p:link>
+                    <hr/>
+                    <p:link href="jugadoresLibres.xhtml" value="Listar jugadores libres"></p:link>
+                </p:panel>
+            </ui:define>
         </ui:composition>
 
     </body>

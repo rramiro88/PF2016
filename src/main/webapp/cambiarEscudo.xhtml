@@ -7,7 +7,7 @@
 
     <body>
 
-        <ui:composition template="./templateEscritorio.xhtml">
+        <ui:composition template="./templateEscritorio2.xhtml">
 
             <ui:define name="centro">
 
@@ -20,7 +20,7 @@
 
                         <div id="datosClub" class="col-sm-offset-4">
 
-                            <p:graphicImage id="urlEscudo" value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive"></p:graphicImage>
+                            <p:graphicImage id="urlEscudo" value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive" style="width: 200px; height: 200px;"></p:graphicImage>
                             <h3><h:outputText id="etiquetaNombre" value="#{sesionController.usuarioLogueado.club.nombre}" styleClass="text-center" ></h:outputText></h3>
                         </div>
 

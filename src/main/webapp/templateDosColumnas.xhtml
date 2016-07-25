@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+
+
+        <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
+        <h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
+        <h:outputScript library="js" name="bootstrap.js"/>
+
+        <ui:insert name="cabecera"/>
+        <ui:insert name="titulo"><title>Bienvenido</title></ui:insert>
+
+
+
+
+
+
+
+    </h:head>
+
+    <h:body>
+            
+       
+
+
+
+
+
+
+        <div class="container-fluid">
+            <p:dock position="bottom" itemWidth="70" maxWidth="100">
+                <p:menuitem value="Escritorio" icon="/resources/images/dock/casa.png" url="escritorio.xhtml"/>
+                <p:menuitem value="Modificar Club" icon="/resources/images/dock/engranajes.png" url="cambiarNombre.xhtml"/>
+                <p:menuitem value="Plantel" icon="/resources/images/dock/equipo.png" url="plantel.xhtml"/>
+                <p:menuitem value="Tacticas" icon="/resources/images/dock/estrategia.png" url="tactica.xhtml"/>
+                <p:menuitem value="Transferencias" icon="/resources/images/dock/exchange.png" url="buscarJugador.xhtml"/>
+                <p:menuitem value="Partidos" icon="/resources/images/dock/pelota.png" url="#"/>
+                <p:menuitem value="Salir" icon="/resources/images/dock/logout.png" url="#"/>
+            </p:dock>
+
+            <div class="row">
+
+
+
+                <div class="col-sm-2">
+                    
+                    <ui:insert name="izquierda"></ui:insert>
+                    
+                </div>
+                <div class="col-sm-9">
+                    <ui:insert name="centro"></ui:insert>
+                </div>
+                <div class="col-sm-1"></div>
+
+
+
+            </div> 
+        </div>
+
+
+    </h:body>
+
+</html>
