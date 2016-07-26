@@ -11,9 +11,18 @@ and open the template in the editor.
 
 
 body {
-    
-    background-image:url("#{resource['images:fondo2.png']}");
 
+    /*        background:url("#{resource['images:piso.png']}");*/
+    font-family: 'Bree Serif', serif;
+
+
+    background: #b7df2d;  
+    background: -moz-linear-gradient(top, #b7df2d 0%, #e3f5ab 16%, white 28%);  
+    background: -webkit-linear-gradient(top, #b7df2d 0%,#e3f5ab 16%,white 28%);  
+    background: linear-gradient(to top, #b7df2d 0%,#e3f5ab 16%,white 28%);  
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom;
 }
 
 
@@ -21,10 +30,10 @@ body {
 
     position: relative;
     z-index: 10;
-/*    opacity: 0.8;*/
+    /*    opacity: 0.8;*/
     border-color: #2d9a00;
     box-shadow: 2px 2px 30px rgb(45, 154, 0);
-    
+
 }
 
 contenido-centrado {
@@ -60,11 +69,21 @@ ul{
 }
 
 .sombreado {
-    box-shadow: 0px 12px 110px -18px rgba(0,0,0,0.90);
+    box-shadow: 0px 11px 150px 15px rgba(0,0,0,0.90);
 }
 
 .jumbotron{
-    margin-bottom: 10%;
+
+
+    height: 350px;
+    background: rgba(210,255,82,1);
+    background:url("#{resource['images:cabecera3.png']}"), -webkit-linear-gradient(left, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%); 
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 3%;
+
+
+
 }
 
 .escudo{
@@ -80,6 +99,33 @@ ul{
     z-index: 1000;
 }
 
+.ui-widget-header{
+    background: rgba(0, 0, 0, 0.23);
+    border: none;
+    border-radius: 35px 35px 0 0;
+    
+    
+}
+
 .ui-accordion-header{
     background-color: whitesmoke !important;
+}
+
+.btn-success {
+    background-color: #91E842;
+    border-color: #91E842;
+
+}
+
+.btn-success:hover {
+    background-color: #00cc33;
+    color: black;
+
+
+}
+
+#datosClub{
+    margin: 0 auto;
+    text-align: center;
+    width: 150px;
 }

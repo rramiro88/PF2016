@@ -153,4 +153,12 @@ public class LogicaMercado implements Serializable {
         return true;
     }
 
+    public void rechazarOferta(Oferta oferta) {
+       /* oferta.getOrigen().getOfertasEnviadas().remove(oferta);
+        oferta.getDestino().getOfertasRecibidas().remove(oferta);*/
+        
+        OfertaDAO ofertaDAO = new OfertaDAO();
+        ofertaDAO.eliminarOferta(oferta);
+    }
+
 }

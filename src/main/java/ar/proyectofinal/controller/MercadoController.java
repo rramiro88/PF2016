@@ -108,5 +108,9 @@ public class MercadoController {
         System.out.println("Jugador transferido");
         
     }
+    
+    public void rechazarOferta(){
+        miLogicaMercado.rechazarOferta(this.oferta);
+    }
 
 }

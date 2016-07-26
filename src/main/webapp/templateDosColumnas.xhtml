@@ -11,6 +11,7 @@
         <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
         <h:outputScript library="js" name="bootstrap.js"/>
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet"/>
 
         <ui:insert name="cabecera"/>
         <ui:insert name="titulo"><title>Bienvenido</title></ui:insert>
@@ -24,33 +25,33 @@
     </h:head>
 
     <h:body>
-            
-       
 
+
+        <p:dock position="bottom" itemWidth="70" maxWidth="100">
+            <p:menuitem value="Escritorio" icon="/resources/images/dock/casa.png" url="escritorio.xhtml"/>
+            <p:menuitem value="Modificar Club" icon="/resources/images/dock/engranajes.png" url="cambiarNombre.xhtml"/>
+            <p:menuitem value="Plantel" icon="/resources/images/dock/equipo.png" url="plantel.xhtml"/>
+            <p:menuitem value="Tacticas" icon="/resources/images/dock/estrategia.png" url="tactica.xhtml"/>
+            <p:menuitem value="Transferencias" icon="/resources/images/dock/exchange.png" url="buscarJugador.xhtml"/>
+            <p:menuitem value="Partidos" icon="/resources/images/dock/pelota.png" url="#"/>
+            <p:menuitem value="Salir" icon="/resources/images/dock/logout.png" url="#"/>
+        </p:dock>
 
 
 
 
 
         <div class="container-fluid">
-            <p:dock position="bottom" itemWidth="70" maxWidth="100">
-                <p:menuitem value="Escritorio" icon="/resources/images/dock/casa.png" url="escritorio.xhtml"/>
-                <p:menuitem value="Modificar Club" icon="/resources/images/dock/engranajes.png" url="cambiarNombre.xhtml"/>
-                <p:menuitem value="Plantel" icon="/resources/images/dock/equipo.png" url="plantel.xhtml"/>
-                <p:menuitem value="Tacticas" icon="/resources/images/dock/estrategia.png" url="tactica.xhtml"/>
-                <p:menuitem value="Transferencias" icon="/resources/images/dock/exchange.png" url="buscarJugador.xhtml"/>
-                <p:menuitem value="Partidos" icon="/resources/images/dock/pelota.png" url="#"/>
-                <p:menuitem value="Salir" icon="/resources/images/dock/logout.png" url="#"/>
-            </p:dock>
+
 
             <div class="row">
 
 
 
                 <div class="col-sm-2">
-                    
+
                     <ui:insert name="izquierda"></ui:insert>
-                    
+
                 </div>
                 <div class="col-sm-9">
                     <ui:insert name="centro"></ui:insert>
