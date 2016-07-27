@@ -102,23 +102,26 @@ public class MercadoController {
 
         return "evaluarOferta";
     }
-    
-    public String transferirClubAClub(){
+
+    public String transferirClubAClub() {
+
+        if (miLogicaMercado.transferir(oferta)) {
+            System.out.println("Jugador transferido");
+            this.addMessage("El jugador fue transferido al club " + oferta.getOrigen().getNombre() + ". Le quedan " + oferta.getMontoDeOperacion() + " limpios por la transaccion.", "");
+            return "plantel";
+        }
         
-        miLogicaMercado.transferir(oferta);
-        
-        System.out.println("Jugador transferido");
-        this.addMessage("El jugador fue transferido al club "+oferta.getOrigen().getNombre()+". Le quedan "+oferta.getMontoDeOperacion()+" limpios por la transaccion.", "");
-        
-        return "plantel";
+        System.out.println("************* la oferta no supero la validacion ***********");
+        this.addMessage("La oferta no supero la validacion del sistema.", "");
+        return "#";
     }
-    
-    public String rechazarOferta(){
+
+    public String rechazarOferta() {
         miLogicaMercado.rechazarOferta(this.oferta);
         this.addMessage("La oferta fue rechazada", "");
         return "plantel";
     }
-    
+
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);

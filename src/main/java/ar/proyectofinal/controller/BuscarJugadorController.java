@@ -8,7 +8,6 @@ package ar.proyectofinal.controller;
 import ar.proyectofinal.logica.LogicaMercado;
 import entidades.Club;
 import entidades.Jugador;
-import entidades.Notificacion;
 import entidades.Oferta;
 import java.io.Serializable;
 import java.util.List;
@@ -63,20 +62,18 @@ public class BuscarJugadorController implements Serializable {
 
     public String realizarOferta(Club origen, Jugador jugador) {
 
-        System.out.println("antes de oferta");
+        if (jugador.getClub() == null) {
+            return "jugadoresLibres";
+        }
+        if (logicaMercado.ofertar(jugador, origen, this.getMontoDeOperacion(), Oferta.VENTA)) {
+               
+            montoDeOperacion = 0D;
+            this.addMessage("La oferta fue enviada", "");
 
-        String respuesta;
-
-        respuesta = logicaMercado.ofertar(jugador, origen, this.getMontoDeOperacion(), Oferta.VENTA);
-        Notificacion notificacion = new Notificacion();
-        notificacion.setMensaje("Ha llegado una oferta por el jugador "+jugador.getNombre());
-        notificacion.setLeida(false);
-        jugador.getClub().getNotificaciones().add(notificacion);
-
-        montoDeOperacion = 0D;
-        this.addMessage("La oferta fue enviada", "");
-
-        return respuesta;
+            return "";
+        }
+        this.addMessage("La oferta no supero la validacion del sistema", "");
+        return "";
 
     }
 

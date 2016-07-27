@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -30,10 +32,11 @@ public class Club implements Serializable {
     private long id;
 
     private String nombre;
-    private Float presupuesto;
+    private Double presupuesto;
     private String urlEscudo;
     
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Notificacion> notificaciones;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -64,7 +67,19 @@ public class Club implements Serializable {
         tacticas = new ArrayList<>();
         ofertasEnviadas = new ArrayList<>();
         ofertasRecibidas = new ArrayList<>();
+        notificaciones = new ArrayList<>();
+        presupuesto = 0D;
     }
+
+    public List<Liga> getLigas() {
+        return ligas;
+    }
+
+    public void setLigas(List<Liga> ligas) {
+        this.ligas = ligas;
+    }
+    
+    
 
     public List<Notificacion> getNotificaciones() {
         return notificaciones;
@@ -132,11 +147,11 @@ public class Club implements Serializable {
         this.nombre = nombre;
     }
 
-    public Float getPresupuesto() {
+    public Double getPresupuesto() {
         return presupuesto;
     }
 
-    public void setPresupuesto(Float presupuesto) {
+    public void setPresupuesto(Double presupuesto) {
         this.presupuesto = presupuesto;
     }
 
@@ -167,6 +182,14 @@ public class Club implements Serializable {
     public void agregarJugador(Jugador j) {
         j.setClub(this);
         this.plantel.add(j);
+    }
+    
+    public void agregarNotificacion(String mensaje){
+        Notificacion n = new Notificacion();
+        n.setMensaje(mensaje);
+        n.setLeida(false);
+        
+        notificaciones.add(n);
     }
 
 }

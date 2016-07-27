@@ -8,9 +8,11 @@ package dao;
 import entidades.Club;
 import entidades.Estadio;
 import entidades.Jugador;
+import entidades.Notificacion;
 import entidades.Tactica;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,7 +26,7 @@ public class ClubDAO {
     public Club crearClub(String nombreClub) {
         Club club = new Club();
         club.setNombre(nombreClub);
-        club.setPresupuesto(0F);
+        club.setPresupuesto(1000000D);
         club.setUrlEscudo("https://image.freepik.com/iconos-gratis/variante-escudo-con-bordes-blancos-y-negros_318-48076.png");
 
         Estadio estadio = new Estadio();
@@ -131,6 +133,20 @@ public class ClubDAO {
         s.close();
 
         return respuesta;
+    }
+
+    public void actualizarNotificaciones(List<Notificacion> notificaciones) {
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+        
+        for (Notificacion notificacion : notificaciones) {
+            s.saveOrUpdate(notificacion);
+        }
+        
+        s.getTransaction().commit();
+        
+        s.close();
     }
 
 }

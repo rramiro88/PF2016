@@ -25,6 +25,14 @@
     </h:head>
 
     <h:body>
+        
+        <p:panel id="estado">
+            <p:clock mode="server" id="reloj"/>
+            <p:outputLabel value="Presupuesto: $ #{sesionController.usuarioLogueado.club.presupuesto}" style="margin-left: 2%"/>
+        </p:panel>
+        
+        <p:sticky target="estado"/>
+        
         <h:form>
             <p:dock position="bottom" itemWidth="70" maxWidth="100">
                 <p:menuitem value="Escritorio" icon="/resources/images/dock/casa.png" url="escritorio.xhtml"/>

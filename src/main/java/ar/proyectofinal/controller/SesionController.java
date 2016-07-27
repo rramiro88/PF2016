@@ -6,6 +6,8 @@
 package ar.proyectofinal.controller;
 
 import ar.proyectofinal.logica.LogicaSesion;
+import dao.ClubDAO;
+import entidades.Notificacion;
 import entidades.Usuario;
 import java.io.IOException;
 import java.io.Serializable;
@@ -115,4 +117,12 @@ public class SesionController implements Serializable {
         miLogicaSesion.actualizarUsuario(usuarioLogueado);
     }
 
+    public void leerNotificaciones(){
+        for (Notificacion notificacion : this.usuarioLogueado.getClub().getNotificaciones()) {
+            notificacion.setLeida(true);
+        }
+        ClubDAO clubDAO = new ClubDAO();
+        clubDAO.actualizarNotificaciones(this.usuarioLogueado.getClub().getNotificaciones());
+    }
+    
 }
