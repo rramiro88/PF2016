@@ -17,7 +17,7 @@
             <ui:define name="centro">
 
 
-
+                <p:growl id="growl2"/>
 
 
                 <h:form>
@@ -63,7 +63,13 @@
                                     <p:inputText type="number" styleClass="form-control" id="monto" value="#{buscarJugadorController.montoDeOperacion}"/>
                                 </div>
 
-                                <p:commandButton value="Ofertar" update="tabla" icon="ui-icon-check" action="#{buscarJugadorController.realizarOferta(sesionController.usuarioLogueado.club, jugador)}"/>
+                                <p:commandButton value="Ofertar" update="tabla growl2" icon="ui-icon-check" action="#{buscarJugadorController.realizarOferta(sesionController.usuarioLogueado.club, jugador)}">
+                                    <p:confirm header="Confirmacion" message="Esta seguro que desea enviar la oferta?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
 
                             </h:form>
 

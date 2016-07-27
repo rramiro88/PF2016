@@ -12,6 +12,8 @@ import entidades.Oferta;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.inject.Inject;
 
@@ -101,16 +103,25 @@ public class MercadoController {
         return "evaluarOferta";
     }
     
-    public void transferirClubAClub(){
+    public String transferirClubAClub(){
         
         miLogicaMercado.transferir(oferta);
         
         System.out.println("Jugador transferido");
+        this.addMessage("El jugador fue transferido al club "+oferta.getOrigen().getNombre()+". Le quedan "+oferta.getMontoDeOperacion()+" limpios por la transaccion.", "");
         
+        return "plantel";
     }
     
-    public void rechazarOferta(){
+    public String rechazarOferta(){
         miLogicaMercado.rechazarOferta(this.oferta);
+        this.addMessage("La oferta fue rechazada", "");
+        return "plantel";
+    }
+    
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
 }

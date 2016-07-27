@@ -31,7 +31,7 @@
                 <div class="col-sm-4">
 
                     <h:form>
-                        <p:growl id="growl1" life="3000"></p:growl>
+                        <p:growl id="growl1" life="3000"/>
                         <div class="form-group">
                             <label for="usuario">Usuario</label>
                             <p:inputText label="Usuario" value="#{sesionController.usuario}" styleClass="form-control" id="usuario" required="true">
@@ -46,7 +46,7 @@
 
                             <h:commandButton id="botonIniciar" style="margin:10%" styleClass="img-responsive" image="#{resource['images:check.png']}" action="#{sesionController.iniciarSesion()}"/>
                             <p:tooltip id="toolTipGrow" for="botonIniciar" value="Iniciar Sesion" showEffect="explode" hideEffect="explode" position="bottom"/>
-                            
+
                         </div>
 
 
@@ -63,9 +63,10 @@
                 </div>
                 <div class="col-sm-3" style="padding-top: 5%">
 
-                    <h:button id="botonCrear" style="margin: 5%" outcome="crearEquipo" image="#{resource['images:mas.png']}"/>
-                    <p:tooltip id="toolTipGrow2" for="botonCrear" value="Crear un nuevo equipo" showEffect="explode" hideEffect="explode" position="bottom"/>
-
+   
+                        <h:button id="botonCrear" style="margin: 5%" outcome="crearEquipo" image="#{resource['images:mas.png']}"/>
+                        <p:tooltip id="toolTipGrow2" for="botonCrear" value="Crear un nuevo equipo" showEffect="explode" hideEffect="explode" position="bottom"/>
+                    
 
                 </div>
             </div>

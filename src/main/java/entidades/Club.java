@@ -32,6 +32,9 @@ public class Club implements Serializable {
     private String nombre;
     private Float presupuesto;
     private String urlEscudo;
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Notificacion> notificaciones;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Estadio estadio;
@@ -62,6 +65,24 @@ public class Club implements Serializable {
         ofertasEnviadas = new ArrayList<>();
         ofertasRecibidas = new ArrayList<>();
     }
+
+    public List<Notificacion> getNotificaciones() {
+        return notificaciones;
+    }
+
+    public void setNotificaciones(List<Notificacion> notificaciones) {
+        this.notificaciones = notificaciones;
+    }
+
+    public List<Partido> getPartidos() {
+        return partidos;
+    }
+
+    public void setPartidos(List<Partido> partidos) {
+        this.partidos = partidos;
+    }
+    
+    
 
     public List<Tactica> getTacticas() {
         return tacticas;

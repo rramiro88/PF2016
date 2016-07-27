@@ -14,39 +14,51 @@
                 <title>Oferta</title>
             </ui:define>
 
-       
+
 
             <ui:define name="centro">
-                
-                <p:fieldset legend="Condiciones">
-                    
-                    El club #{mercadoController.oferta.origen.nombre} envio una oferta por el jugador 
-                    #{mercadoController.oferta.jugadorObjetivo.nombre} bajo las siguientes condiciones:
-                    
-                    <ul>
-                        <li>
-                            <h:outputLabel rendered="#{mercadoController.oferta.condicion == 1}" value="Modalidad: Venta definitiva"/>
-                            <h:outputLabel rendered="#{mercadoController.oferta.condicion == 2}" value="Prestamo"/>
-                        </li>
-                        <li>
-                            Monto: #{mercadoController.oferta.montoDeOperacion}
-                        </li>
-                        
-                            
-                            
 
-                        
-                    </ul>
-                    
-                    <hr/>
-                    
-                    <p:commandButton action="#{mercadoController.transferirClubAClub()}" value="Aceptar Oferta"></p:commandButton>
-                    <p:commandButton action="#{mercadoController.rechazarOferta()}" value="Rechazar Oferta"></p:commandButton>
-                    
-                </p:fieldset>
-                
-                
-                
+                <h:form>
+                    <p:growl id="growl3"/>
+                    <p:fieldset legend="Condiciones">
+
+                        El club #{mercadoController.oferta.origen.nombre} envio una oferta por el jugador 
+                        #{mercadoController.oferta.jugadorObjetivo.nombre} bajo las siguientes condiciones:
+
+                        <ul>
+                            <li>
+                                <h:outputLabel rendered="#{mercadoController.oferta.condicion == 1}" value="Modalidad: Venta definitiva"/>
+                                <h:outputLabel rendered="#{mercadoController.oferta.condicion == 2}" value="Prestamo"/>
+                            </li>
+                            <li>
+                                Monto: #{mercadoController.oferta.montoDeOperacion}
+                            </li>
+
+
+
+
+
+                        </ul>
+
+                        <hr/>
+
+                        <p:commandButton update="growl3" action="#{mercadoController.transferirClubAClub()}" value="Aceptar Oferta">
+                            <p:confirm header="Confirmacion" message="Esta seguro que desea aceptar la oferta? El jugador dejará su equipo." icon="ui-icon-alert" />
+                        </p:commandButton>
+
+                        <p:commandButton update="growl3" action="#{mercadoController.rechazarOferta()}" value="Rechazar Oferta">
+
+                            <p:confirm header="Confirmacion" message="Esta seguro que desea rechazar la oferta?" icon="ui-icon-alert" />
+                        </p:commandButton>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </p:fieldset>
+
+                </h:form>
+
             </ui:define>
 
 
