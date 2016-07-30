@@ -83,6 +83,7 @@ public class MercadoController {
 
         miLogicaMercado.liberarJugador(j, c);
         this.listaDeLibres = listarLibres();
+        this.addMessage("El jugador ahora esta libre.", null);
 
     }
 

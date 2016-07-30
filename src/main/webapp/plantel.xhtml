@@ -16,13 +16,14 @@
 
             <ui:define name="centro">
 
+                <p:growl id="growl4" autoUpdate="true"/>
 
                 <h2>Tu plantel actual</h2>
                 <br/>
 
 
 
-                <p:dataTable value="#{user.club.plantel}" var="jugador">
+                <p:dataTable id="tablaPlantel" value="#{user.club.plantel}" var="jugador">
                     <p:column headerText="Nombre">
                         <h:graphicImage value="#{resource['images:jugador.png']}" styleClass="img-responsive" style="display: inline; padding:10px"/>
                         <h:outputText value="#{jugador.nombre}"></h:outputText>
@@ -32,7 +33,13 @@
                     </p:column>
                     <p:column>
                         <h:form>
-                            <h:commandLink action="#{mercadoController.liberarJugador(jugador,sesionController.usuarioLogueado.club)}" value="Liberar"></h:commandLink>
+                            <p:commandLink update="tablaPlantel" action="#{mercadoController.liberarJugador(jugador,sesionController.usuarioLogueado.club)}" value="Liberar">
+                                <p:confirm header="Confirmacion" message="Esta seguro que desea liberar al jugador? Dejará su equipo inmediatamente, y se le debera pagar lo que resta de contrato" icon="ui-icon-alert" />
+                            </p:commandLink>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
                         </h:form>
                     </p:column>
                 </p:dataTable>
