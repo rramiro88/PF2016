@@ -18,6 +18,7 @@
 
 
 
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/dock/pelota.png']}"/>
 
 
 
@@ -25,16 +26,10 @@
     </h:head>
 
     <h:body>
-        
-        <p:panel id="estado">
-            <p:clock mode="server" id="reloj"/>
-            <p:outputLabel value="Presupuesto: $ #{sesionController.usuarioLogueado.club.presupuesto}" style="margin-left: 2%"/>
-        </p:panel>
-        
-        <p:sticky target="estado"/>
-        
+
+
         <h:form>
-            <p:dock position="bottom" itemWidth="70" maxWidth="100">
+            <p:dock position="top" itemWidth="70" maxWidth="100" proximity="0">
                 <p:menuitem value="Escritorio" icon="/resources/images/dock/casa.png" url="escritorio.xhtml"/>
                 <p:menuitem value="Modificar Club" icon="/resources/images/dock/engranajes.png" url="cambiarNombre.xhtml"/>
                 <p:menuitem value="Plantel" icon="/resources/images/dock/equipo.png" url="plantel.xhtml"/>
@@ -47,6 +42,16 @@
             </p:dock>
 
         </h:form>
+
+
+
+
+
+        <div id="footer-fijo" style="position:fixed; bottom:0; width:100%; text-align: center; z-index: 1000;">
+
+            <p:outputLabel value="Presupuesto: $ #{sesionController.usuarioLogueado.club.presupuesto}" style="margin-right: 2%"/>
+            <p:clock mode="server" id="reloj"/>
+        </div>
 
 
 

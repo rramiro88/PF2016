@@ -100,19 +100,37 @@ ul{
 
 .ui-dock-bottom{
     z-index: 1000;
+
 }
 
 .ui-dock-top{
     z-index: 1000;
+    margin-bottom: 2%;
+}
+
+.ui-dock-top img:hover{
+    -webkit-transform:scale(1.25) rotate(30deg);
+    -moz-transform:scale(1.25) rotate(30deg);
+    -ms-transform:scale(1.25) rotate(30deg);
+    -o-transform:scale(1.25) rotate(30deg);
+    transform:scale(1.25) rotate(30deg);
+
+
+}
+.ui-dock-top img{
+    transition: all 0.2s ease-in-out;
 }
 
 .ui-dock-container-bottom{
     background: rgba(0, 0, 0, 0.23);
     border: none;
     border-radius: 35px 35px 0 0;
-    
-    
+
+
+
 }
+
+
 
 .ui-accordion-header{
     background-color: whitesmoke !important;
