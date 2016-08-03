@@ -16,56 +16,67 @@
             <ui:define name="izquierda">
 
                 <h:button outcome="index.xhtml" image="#{resource['images:boton-volver.png']}"></h:button>
-                
+                <p:panel id="estado">
+                    <p:outputLabel value="El scheduling esta activo" rendered="#{calendarizacionController.schedulerActivo}"/>
+                    <p:outputLabel value="El scheduling esta detenido" rendered="#{!calendarizacionController.schedulerActivo}"/>
+                </p:panel>
+                <hr/>
+                <h:form>
+
+                    <p:commandButton value="Iniciar Scheduler" action="#{calendarizacionController.iniciarScheduler()}" update="estado"/>
+                    <p:commandButton value="Parar Scheduler" action="#{calendarizacionController.pararScheduler()}" update="estado"/>
+                    <p:commandButton value="Agregar Tarea" action="#{calendarizacionController.agregarTrabajo()}"/>
+                </h:form>
+
             </ui:define>
 
             <ui:define name="centro">
-                
+
                 <hr/>
 
                 <h:form>
                     <p:commandButton action="#{logicaAdministracion.cargarJugadoresDB()}" value="cargarJugadores"></p:commandButton>
                 </h:form>
 
-                
+
                 <hr/>
-                
+
                 <h2>Nueva Liga</h2>
                 <h:form>
-                    
+
                     <p:inputText value="#{administracionController.nombreClub}" style="margin-right: 20px; margin-bottom: 5px;"/>
                     <p:commandButton value="Buscar" action="#{administracionController.buscarClubesPorNombre()}" update="tablaClubes"/>
-                    
-                    
-                    
-                    
+
+
+
+
                 </h:form>
-                
+
                 <p:dataTable emptyMessage="no hay clubes" id="tablaClubes" value="#{administracionController.resultado}" var="club">
-                
-                
+
+
                     <p:column headerText="Nombre">
                         #{club.nombre}
                     </p:column>
-                    
+
                     <p:column headerText="Accion">                        
-                            <h:form style="text-align: center">
-                                <p:commandButton action="#{administracionController.invitarCLub(club)}" value="Invitar" update="tablaInvitados"/>
-                            </h:form>                        
+                        <h:form style="text-align: center">
+                            <p:commandButton action="#{administracionController.invitarCLub(club)}" value="Invitar" update="tablaInvitados"/>
+                        </h:form>                        
                     </p:column>
-                
+
                 </p:dataTable>
 
                 <hr/>
-                
+
                 <h2>Invitados</h2>
-                
+
                 <h:form>
                     <p:inputText value="#{administracionController.nombreLiga}"/>
                     <p:commandButton action="#{administracionController.crearLiga()}" value="Crear Liga" update="tablaPartidos"/>
                     <p:commandButton update="tablaPartidos" action="#{administracionController.liga.partidos.clear()}" value="Limpiar"/>
                 </h:form>
-                
+
                 <p:dataTable emptyMessage="no hay invitados aun" id="tablaInvitados" value="#{administracionController.clubesInvitados}" var="invitado">
                     <p:column headerText="Club">
                         #{invitado.nombre}
@@ -80,43 +91,43 @@
             </ui:define>
 
             <ui:define name="derecha">
-                
+
                 <hr/>
-                
+
                 <h:form>
-                    
+
                     <p:commandButton value="SimularPartidos" action="#{administracionController.simularPartidos()}" update="tablaPartidos"/>
-                    
+
                 </h:form>
                 <p:dataTable id="tablaPartidos" value="#{administracionController.liga.partidos}" var="partido">
-                
+
                     <p:column headerText="Local">
                         #{partido.local.nombre} - #{partido.golesLocal}
                     </p:column>
-                
+
                     <p:column headerText="Visitante">
                         #{partido.visitante.nombre} - #{partido.golesVisitantes}
                     </p:column>
-                    
+
                 </p:dataTable>
-                
+
                 <hr/>
-                
+
                 <h:form>
-                    
+
                     <p:commandButton value="Ver Posiciones" action="#{administracionController.generarRanking()}" update="tablaRanking"/>
                     <p:commandButton value="Limpiar" action="#{administracionController.posiciones.clear()}" update="tablaRanking"/>
                 </h:form>
                 <p:dataTable id="tablaRanking" value="#{administracionController.posiciones}" var="posicion">
-                
-                
+
+
                     <p:column headerText="Posiciones">
-                        
+
                         #{posicion}
-                        
+
                     </p:column>
-                
-                
+
+
                 </p:dataTable>
 
             </ui:define>
