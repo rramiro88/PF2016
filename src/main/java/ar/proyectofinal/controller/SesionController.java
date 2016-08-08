@@ -118,11 +118,9 @@ public class SesionController implements Serializable {
     }
 
     public void leerNotificaciones(){
-        for (Notificacion notificacion : this.usuarioLogueado.getClub().getNotificaciones()) {
-            notificacion.setLeida(true);
-        }
+        this.usuarioLogueado.getClub().getNotificaciones().clear();
         ClubDAO clubDAO = new ClubDAO();
-        clubDAO.actualizarNotificaciones(this.usuarioLogueado.getClub().getNotificaciones());
+        clubDAO.actualizarClub(usuarioLogueado.getClub());
     }
     
 }

@@ -5,35 +5,35 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    
+
     <body>
 
-                
+
 
         <ui:composition template="./templateEscritorio2.xhtml">
 
 
             <ui:define name="izquierda">
 
-                
+
                 <p:graphicImage id="imagenEscudo" value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive escudo contenido-centrado"></p:graphicImage>
                 <p:tooltip for="imagenEscudo" value="#{sesionController.usuarioLogueado.club.nombre}"/>
 
             </ui:define>
 
             <ui:define name="centro">
-                
+
                 <p:chart type="line" model="#{estadisticasController.modeloAnimadoLineas}"/>
 
             </ui:define>
 
             <ui:define name="derecha">
-                
+
                 <h3>Ofertas Recibidas</h3>
                 <hr/>
                 <p:dataTable id="tabla2" value="#{sesionController.usuarioLogueado.club.ofertasRecibidas}" var="oferta" emptyMessage="No hay ofertas    ">
 
-                    
+
                     <p:column headerText="Jugador">
                         <p:outputLabel value="#{oferta.jugadorObjetivo.nombre}"/>
                     </p:column>
@@ -41,24 +41,26 @@
                     <p:column headerText="Monto Ofrecido">
                         <p:outputLabel value="#{oferta.montoDeOperacion}"/>
                     </p:column>
-                    
+
                     <p:column headerText="Origen">
                         <p:outputLabel value="#{oferta.origen.nombre}"/>
                     </p:column>
 
                 </p:dataTable>
-                
+
                 <h3>Notificaciones</h3>
                 <hr/>
-                <p:dataList id="notificaciones" value="#{sesionController.usuarioLogueado.club.notificaciones}" var="notificacion" emptyMessage="No hay notificaciones por leer">
-                
-                    <p:outputLabel rendered="#{!notificacion.leida}" value="#{notificacion.mensaje}"/>
-                
-                </p:dataList>
                 <h:form>
                     <p:commandButton update="notificaciones" action="#{sesionController.leerNotificaciones()}" value="Marcar como leidas"/>
                 </h:form>
-        
+                <br/>
+                <p:dataList id="notificaciones" value="#{sesionController.usuarioLogueado.club.notificaciones}" var="notificacion" emptyMessage="No hay notificaciones por leer">
+
+                    <p:outputLabel value="#{notificacion.mensaje}"/>
+
+                </p:dataList>
+
+
             </ui:define>
 
 

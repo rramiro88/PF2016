@@ -11,7 +11,9 @@
 
 
             <ui:define name="izquierda">
-                <p:graphicImage value="#{user.club.urlEscudo}" styleClass="img-responsive escudo" style="width: 150px"></p:graphicImage>
+                <p:panel header="Opciones" style="margin-top: 50%" toggleable="true">
+                    <p:link href="DetallePlantel.xhtml" value="Vista detallada del plantel"></p:link>
+                </p:panel>
             </ui:define>
 
             <ui:define name="centro">

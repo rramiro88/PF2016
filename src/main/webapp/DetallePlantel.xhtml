@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./templateDosColumnas.xhtml">
+
+
+
+            <ui:define name="titulo">
+                <title>Plantel</title>
+            </ui:define>
+
+            <ui:define name="izquierda">
+                <h:graphicImage value="#{resource['images:logo.png']}" styleClass="img-responsive"/>
+            </ui:define>
+
+
+            <ui:define name="centro">
+                <p:dataTable value="#{sesionController.usuarioLogueado.club.plantel}" var="jugador">
+
+                    <p:column headerText="Nombre" sortBy="#{jugador.nombre}">
+                        #{jugador.nombre}
+                    </p:column>
+                    <p:column headerText="Valor" sortBy="#{jugador.cotizacion}">
+                        #{jugador.cotizacion}
+                    </p:column>
+                    <p:column headerText="Velocidad" sortBy="#{jugador.velocidad}">
+                        #{jugador.velocidad}
+                    </p:column>
+                    <p:column headerText="Resistencia" sortBy="#{jugador.resistencia}">
+                        #{jugador.resistencia}
+                    </p:column>
+                    <p:column headerText="Regate" sortBy="#{jugador.regate}">
+                        #{jugador.regate}
+                    </p:column>
+                    <p:column headerText="Marca" sortBy="#{jugador.marca}">
+                        #{jugador.marca}
+                    </p:column>
+                    <p:column headerText="Entradas" sortBy="#{jugador.entradas}">
+                        #{jugador.entradas}
+                    </p:column>
+                    <p:column headerText="Cab" sortBy="#{jugador.cabezazo}">
+                        #{jugador.cabezazo}
+                    </p:column>
+                    <p:column headerText="Prec Tiro" sortBy="#{jugador.precisionTiro}">
+                        #{jugador.precisionTiro}
+                    </p:column>
+                    <p:column headerText="Pot Tiro" sortBy="#{jugador.potenciaTiro}">
+                        #{jugador.potenciaTiro}
+                    </p:column>
+                    <p:column headerText="Mentalidad" sortBy="#{jugador.mentalidad}">
+                        #{jugador.mentalidad}
+                    </p:column>
+                    <p:column headerText="Pelota Parada" sortBy="#{jugador.pelotaParada}">
+                        #{jugador.pelotaParada}
+                    </p:column>
+
+
+                </p:dataTable>
+            </ui:define>
+
+
+
+        </ui:composition>
+
+    </body>
+</html>

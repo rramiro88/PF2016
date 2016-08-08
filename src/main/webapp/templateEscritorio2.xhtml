@@ -36,7 +36,7 @@
                 <p:menuitem value="Tacticas" icon="/resources/images/dock/estrategia.png" url="tactica.xhtml"/>
                 <p:menuitem value="Transferencias" icon="/resources/images/dock/exchange.png" url="buscarJugador.xhtml"/>
                 <p:menuitem value="Estadio" icon="/resources/images/dock/estadio.png" url="#"/>
-                <p:menuitem value="Finanzas" icon="/resources/images/dock/finanzas.png" url="#"/>
+                <p:menuitem value="Finanzas" icon="/resources/images/dock/finanzas.png" url="finanzas.xhtml"/>
                 <p:menuitem value="Partidos" icon="/resources/images/dock/pelota.png" url="#"/>
                 <p:menuitem value="Salir" icon="/resources/images/dock/logout.png" action="#{sesionController.logout()}"/>
             </p:dock>
@@ -47,7 +47,7 @@
 
 
 
-        <div id="footer-fijo" style="position:fixed; bottom:0; width:100%; text-align: center; z-index: 1000;">
+        <div id="footer-fijo">
 
             <p:outputLabel value="Presupuesto: $ #{sesionController.usuarioLogueado.club.presupuesto}" style="margin-right: 2%"/>
             <p:clock mode="server" id="reloj"/>
