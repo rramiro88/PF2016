@@ -35,11 +35,37 @@ public class Tactica implements Serializable {
 
     @ManyToOne
     private Club club;
+    
+    
+    
 
     public Tactica() {
         this.titularidad = new HashMap<>();
     }
 
+    
+    public String getTopPosicion(int indice){
+        
+        
+        String sub = null;
+        
+        sub = posiciones.get(indice).split("a")[1];
+        
+        
+        return sub;
+    }
+    public String getLeftPosicion(int indice){
+        
+        
+        String sub = null;
+        
+        sub = posiciones.get(indice).split("a")[0];
+        
+        
+        return sub;
+    }
+    
+    
     public Map<Long, Boolean> getTitularidad() {
         return titularidad;
     }

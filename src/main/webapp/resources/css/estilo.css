@@ -183,3 +183,11 @@ ul{
     border: none;
     background-color: transparent;
 }
+
+.drag-activo{
+    color: red;
+}
+
+.drag-hover{
+    opacity: 0.7;
+}

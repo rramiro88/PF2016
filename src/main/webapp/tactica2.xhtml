@@ -3,64 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
         <ui:composition template="./templateEscritorio2.xhtml">
 
             <ui:define name="cabecera">
-                <script>
 
-                    //sacado de http://jsfiddle.net/76yRN/1/
-                    jQuery(document).ready(function () {
-
-
-
-                        jQuery.fn.swap = function (b) {
-                            // method from: http://blog.pengoworks.com/index.cfm/2008/9/24/A-quick-and-dirty-swap-method-for-jQuery
-                            b = jQuery(b)[0];
-                            var a = this[0];
-                            var t = a.parentNode.insertBefore(document.createTextNode(''), a);
-                            b.parentNode.insertBefore(a, b);
-                            t.parentNode.insertBefore(b, t);
-                            t.parentNode.removeChild(t);
-                            return this;
-                        };
-
-
-                        $(".dragdrop").draggable({revert: false, helper: "clone"});
-
-                        $(".dragdrop").droppable({
-                            accept: ".dragdrop",
-                            activeClass: "ui-state-hover",
-                            hoverClass: "ui-state-active",
-                            drop: function (event, ui) {
-
-                                var draggable = ui.draggable, droppable = $(this),
-                                        dragPos = draggable.position(), dropPos = droppable.position();
-
-                                draggable.css({
-                                    left: dropPos.left + 'px',
-                                    top: dropPos.top + 'px'
-                                });
-
-                                droppable.css({
-                                    left: dragPos.left + 'px',
-                                    top: dragPos.top + 'px'
-                                });
-                                draggable.swap(droppable);
-                            }
-                        });
-
-
-
-                    });
-
-
-                </script>
-
-
+                <h:outputScript library="js" name="scripts.js"></h:outputScript>
 
 
             </ui:define>
@@ -71,26 +22,38 @@
 
             <ui:define name="izquierda">
 
-                <p:dataTable value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
+                <p:dataList value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
+
 
                     
-                        <p:column headerText="Nombre">
-                            <div class="dragdrop"> ${jugador.nombre} </div>
-                        </p:column>
-                    
+                        <div class="dragdrop">
 
+                            <p:graphicImage value="#{resource['images:jugador.png']}"/>
+                            ${jugador.nombre} 
+                        </div>
+                   
 
-
-
-                </p:dataTable>
+                </p:dataList>
 
 
             </ui:define>
 
             <ui:define name="centro">
 
+                
+                    <p:graphicImage value="#{resource['images:cancha.jpg']}" style="margin: auto; z-index: 0;" styleClass="img-responsive"></p:graphicImage>
 
 
+                   <!-- <ui:repeat value="#{sesionController.usuarioLogueado.club.tacticas.get(0).getTitulares()}" var="titular" varStatus="status">
+                        <div class="dragdrop" style="top: #{sesionController.usuarioLogueado.club.tacticas.get(0).getTopPosicion(status.index)}; left: #{sesionController.usuarioLogueado.club.tacticas.get(0).getLeftPosicion(status.index)}; position: relative;z-index:2500;">
+                            <p:graphicImage value="#{resource['images:jugador.png']}" />
+                            #{titular.nombre}
+
+                        </div>
+
+                    </ui:repeat> -->
+
+                
 
 
 
