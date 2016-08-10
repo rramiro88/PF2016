@@ -136,6 +136,16 @@ ul{
     background-color: whitesmoke !important;
 }
 
+.ui-selectonemenu{
+    
+    padding-right: 0 !important; 
+    
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger{
+    width: 20% !important;
+}
+
 .btn-success {
     background-color: #91E842;
     border-color: #91E842;

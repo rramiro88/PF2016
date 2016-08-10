@@ -8,7 +8,6 @@ package ar.proyectofinal.controller;
 import ar.proyectofinal.logica.LogicaTactica;
 import entidades.Tactica;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,6 +26,10 @@ public class TacticaController implements Serializable {
 
     @Inject
     SesionController sesionController;
+    
+    String posicion;
+    
+    
 
     private String posicion1, posicion2, posicion3, posicion4, posicion5, posicion6, posicion7, posicion8, posicion9, posicion10, posicion11;
 
@@ -54,6 +57,15 @@ public class TacticaController implements Serializable {
         RequestContext.getCurrentInstance().execute("cargarPosicionesActuales()");
     }
 
+    public String getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(String posicion) {
+        this.posicion = posicion;
+    }
+
+    
     public String getOpcion() {
         return opcion;
     }

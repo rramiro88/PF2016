@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templateEscritorio2.xhtml">
+
+            <ui:define name="cabecera">
+                <script>
+
+                    //sacado de http://jsfiddle.net/76yRN/1/
+                    jQuery(document).ready(function () {
+
+
+
+                        jQuery.fn.swap = function (b) {
+                            // method from: http://blog.pengoworks.com/index.cfm/2008/9/24/A-quick-and-dirty-swap-method-for-jQuery
+                            b = jQuery(b)[0];
+                            var a = this[0];
+                            var t = a.parentNode.insertBefore(document.createTextNode(''), a);
+                            b.parentNode.insertBefore(a, b);
+                            t.parentNode.insertBefore(b, t);
+                            t.parentNode.removeChild(t);
+                            return this;
+                        };
+
+
+                        $(".dragdrop").draggable({revert: false, helper: "clone"});
+
+                        $(".dragdrop").droppable({
+                            accept: ".dragdrop",
+                            activeClass: "ui-state-hover",
+                            hoverClass: "ui-state-active",
+                            drop: function (event, ui) {
+
+                                var draggable = ui.draggable, droppable = $(this),
+                                        dragPos = draggable.position(), dropPos = droppable.position();
+
+                                draggable.css({
+                                    left: dropPos.left + 'px',
+                                    top: dropPos.top + 'px'
+                                });
+
+                                droppable.css({
+                                    left: dragPos.left + 'px',
+                                    top: dragPos.top + 'px'
+                                });
+                                draggable.swap(droppable);
+                            }
+                        });
+
+
+
+                    });
+
+
+                </script>
+
+
+
+
+            </ui:define>
+
+            <ui:define name="titulo">
+                <title>Tactica</title>
+            </ui:define>
+
+            <ui:define name="izquierda">
+
+                <p:dataTable value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
+
+                    
+                        <p:column headerText="Nombre">
+                            <div class="dragdrop"> ${jugador.nombre} </div>
+                        </p:column>
+                    
+
+
+
+
+                </p:dataTable>
+
+
+            </ui:define>
+
+            <ui:define name="centro">
+
+
+
+
+
+
+            </ui:define>
+
+            <ui:define name="derecha">
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
