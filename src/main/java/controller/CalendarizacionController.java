@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.proyectofinal.controller;
+package controller;
 
 import calendarizacion.TareaCalendarizada;
 import javax.enterprise.context.ApplicationScoped;

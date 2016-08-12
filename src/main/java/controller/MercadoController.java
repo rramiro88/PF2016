@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.proyectofinal.controller;
+package controller;
 
-import ar.proyectofinal.logica.LogicaMercado;
+import logica.LogicaMercado;
 import entidades.Club;
 import entidades.Jugador;
 import entidades.Oferta;

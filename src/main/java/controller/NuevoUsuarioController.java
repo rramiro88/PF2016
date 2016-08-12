@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.proyectofinal.controller;
+package controller;
 
-import ar.proyectofinal.logica.LogicaSesion;
+import logica.LogicaSesion;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

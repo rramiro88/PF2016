@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.proyectofinal.controller;
+package controller;
 
-import ar.proyectofinal.logica.LogicaAdministracion;
-import ar.proyectofinal.logica.LogicaLiga;
+import logica.LogicaAdministracion;
+import logica.LogicaLiga;
 import entidades.Club;
 import entidades.Liga;
 import entidades.Partido;

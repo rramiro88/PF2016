@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.proyectofinal.controller;
+package controller;
 
-import ar.proyectofinal.logica.LogicaSesion;
+import logica.LogicaSesion;
 import dao.ClubDAO;
 import entidades.Notificacion;
 import entidades.Usuario;

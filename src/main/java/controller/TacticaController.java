@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.proyectofinal.controller;
+package controller;
 
-import ar.proyectofinal.logica.LogicaTactica;
+import logica.LogicaTactica;
 import entidades.Tactica;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
