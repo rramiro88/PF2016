@@ -27,7 +27,7 @@ body {
 
 .ui-widget {
     font-family: 'Bree Serif', serif;
-    font-weight: normal;
+    font-weight: normal !important;
 }
 
 
@@ -190,4 +190,33 @@ ul{
 
 .drag-hover{
     opacity: 0.7;
+}
+
+#menu-navegacion{
+    background-color: #f8f8f8;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0 0 20px 20px;
+    width: 75%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    
+}
+
+#menu-navegacion img{
+    margin-left: 2%;
+}
+
+#menu-navegacion img{
+     transition: all 0.2s ease-in-out;
+}
+
+#menu-navegacion img:hover{
+    -webkit-transform:scale(1.25) rotate(30deg);
+    -moz-transform:scale(1.25) rotate(30deg);
+    -ms-transform:scale(1.25) rotate(30deg);
+    -o-transform:scale(1.25) rotate(30deg);
+    transform:scale(1.25) rotate(30deg);
+    cursor: pointer;
 }

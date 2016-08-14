@@ -3,11 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
-        <ui:composition template="./templateEscritorio2.xhtml">
+        <ui:composition template="./templateTacticas.xhtml">
 
             <ui:define name="cabecera">
 
@@ -20,48 +21,66 @@
                 <title>Tactica</title>
             </ui:define>
 
-            <ui:define name="izquierda">
-
-                <p:dataList value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
-
-
-                    
-                        <div class="dragdrop">
-
-                            <p:graphicImage value="#{resource['images:jugador.png']}"/>
-                            ${jugador.nombre} 
-                        </div>
-                   
-
-                </p:dataList>
-
-
-            </ui:define>
-
             <ui:define name="centro">
 
-                
-                    <p:graphicImage value="#{resource['images:cancha.jpg']}" style="margin: auto; z-index: 0;" styleClass="img-responsive"></p:graphicImage>
+                <p:dataTable id="listaJugadores" value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
 
+                    <p:column headerText="Nombre" sortBy="${jugador.nombre}" width="15%">
+                        <p:outputLabel id="nombre" value="${jugador.nombre}"/>
+                        <p:overlayPanel for="nombre">
+                            
+                            <p:commandButton value="Arquero"/>
+                            <p:commandButton value="Defensa"/>
+                            <p:commandButton value="Medio"/>
+                            <p:commandButton value="Delantero"/>
+                            <p:commandButton value="Suplente"/>
+                            
+                        </p:overlayPanel>
+                    </p:column>
+                    <p:column headerText="Veloc" sortBy="${jugador.velocidad}">
+                        <p:outputLabel value="${jugador.velocidad}"/>
+                    </p:column>
+                    <p:column headerText="Res" sortBy="${jugador.resistencia}">
+                        <p:outputLabel value="${jugador.resistencia}"/>
+                    </p:column>
+                    <p:column headerText="Regate" sortBy="${jugador.regate}">
+                        <p:outputLabel value="${jugador.regate}"/>
+                    </p:column>
+                    <p:column headerText="Marca" sortBy="${jugador.marca}">
+                        <p:outputLabel value="${jugador.marca}"/>
+                    </p:column>
+                    <p:column headerText="Ent" sortBy="${jugador.entradas}">
+                        <p:outputLabel value="${jugador.entradas}"/>
+                    </p:column>
+                    <p:column headerText="Ment" sortBy="${jugador.mentalidad}">
+                        <p:outputLabel value="${jugador.mentalidad}"/>
+                    </p:column>
+                    <p:column headerText="Cab" sortBy="${jugador.cabezazo}">
+                        <p:outputLabel value="${jugador.cabezazo}"/>
+                    </p:column>
+                    <p:column headerText="PotTiro" sortBy="${jugador.potenciaTiro}">
+                        <p:outputLabel value="${jugador.potenciaTiro}"/>
+                    </p:column>
+                    <p:column headerText="PrecTiro" sortBy="${jugador.precisionTiro}">
+                        <p:outputLabel value="${jugador.precisionTiro}"/>
+                    </p:column>
+                    <p:column headerText="Arquero" sortBy="${jugador.arquero}">
+                        <p:outputLabel value="${jugador.arquero}"/>
+                    </p:column>
 
-                   <!-- <ui:repeat value="#{sesionController.usuarioLogueado.club.tacticas.get(0).getTitulares()}" var="titular" varStatus="status">
-                        <div class="dragdrop" style="top: #{sesionController.usuarioLogueado.club.tacticas.get(0).getTopPosicion(status.index)}; left: #{sesionController.usuarioLogueado.club.tacticas.get(0).getLeftPosicion(status.index)}; position: relative;z-index:2500;">
-                            <p:graphicImage value="#{resource['images:jugador.png']}" />
-                            #{titular.nombre}
-
-                        </div>
-
-                    </ui:repeat> -->
-
-                
-
+                </p:dataTable>
 
 
             </ui:define>
 
-            <ui:define name="derecha">
+            <ui:define name="izquierda">
+
+
+                <p:graphicImage value="#{resource['images:cancha.jpg']}" style="margin: auto; z-index: 0;" styleClass="img-responsive"></p:graphicImage>
+
 
             </ui:define>
+
 
         </ui:composition>
 
