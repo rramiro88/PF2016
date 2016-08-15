@@ -67,6 +67,8 @@ public class LogicaMercado implements Serializable {
         oferta.getDestino().agregarNotificacion("El jugador " + oferta.getJugadorObjetivo().getNombre() + " ha sido transferido a " + oferta.getOrigen().getNombre());
         oferta.getOrigen().agregarNotificacion("El club " + oferta.getDestino().getNombre() + " ha aceptado la oferta por " + oferta.getJugadorObjetivo().getNombre() + ". El jugador se incorpora a tu plantel. El gasto total fue de $ " + oferta.getMontoDeOperacion());
 
+        oferta.getJugadorObjetivo().setNumeroCamiseta(oferta.getOrigen().getNumerosLibres().get(0));
+        
         jugadorDAO.actualizarJugador(oferta.getJugadorObjetivo());
         clubDAO.actualizarClub(oferta.getOrigen());
         clubDAO.actualizarClub(oferta.getDestino());
@@ -141,6 +143,7 @@ public class LogicaMercado implements Serializable {
         System.out.println("en logica!");
 
         j.setClub(c);
+        j.setNumeroCamiseta(c.getNumerosLibres().get(0));
         c.agregarJugador(j);
 
         jugadorDAO.actualizarJugador(j);

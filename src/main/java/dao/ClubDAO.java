@@ -12,7 +12,6 @@ import entidades.Notificacion;
 import entidades.Tactica;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -34,6 +33,16 @@ public class ClubDAO {
 
         JugadorDAO jugadorDAO = new JugadorDAO();
         List<Jugador> jugadoresIniciales = jugadorDAO.crearJugadoresAlAzarLista();
+        
+        
+        List<Integer> numerosLibres = club.getNumerosLibres();
+       
+        for (int i = 0; i < jugadoresIniciales.size(); i++) {
+            jugadoresIniciales.get(i).setNumeroCamiseta(numerosLibres.get(i));
+        }
+        
+        
+        
         club.setPlantel(jugadoresIniciales);
 
         for (Jugador jugador : jugadoresIniciales) {

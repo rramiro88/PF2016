@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
@@ -26,6 +25,7 @@
                 <p:dataTable id="listaJugadores" value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
 
                     <p:column headerText="Nombre" sortBy="${jugador.nombre}" width="15%">
+                        <p:outputLabel styleClass="numero" value="${jugador.numeroCamiseta}" style="font-size: x-large; margin-right: 6px;"/>
                         <p:outputLabel id="nombre" value="${jugador.nombre}"/>
                         <p:overlayPanel for="nombre">
                             

@@ -43,6 +43,8 @@ public class Jugador implements Serializable {
     private String nombre;
     
     private String posicionTactica;
+    
+    private Integer numeroCamiseta;
 
     
     
@@ -77,6 +79,16 @@ public class Jugador implements Serializable {
 
     }
 
+    public Integer getNumeroCamiseta() {
+        return numeroCamiseta;
+    }
+
+    public void setNumeroCamiseta(Integer numeroCamiseta) {
+        this.numeroCamiseta = numeroCamiseta;
+    }
+
+    
+    
     public String getPosicionTactica() {
         return posicionTactica;
     }

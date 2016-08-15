@@ -9,7 +9,6 @@ import entidades.Jugador;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -102,19 +101,19 @@ public class JugadorDAO {
             jugador = new Jugador();
 
             jugador.setNombre(nombre);
-            jugador.setArquero(randInt(0, 10));
-            jugador.setCabezazo(randInt(0, 10));
+            jugador.setArquero(randInt(1, 10));
+            jugador.setCabezazo(randInt(1, 10));
             jugador.setCotizacion(1.0 * randInt(0, 10000000));
-            jugador.setEntradas(randInt(0, 10));
-            jugador.setMarca(randInt(0, 10));
-            jugador.setMentalidad(randInt(0, 10));
-            jugador.setPelotaParada(randInt(0, 10));
-            jugador.setPotenciaTiro(randInt(0, 10));
-            jugador.setPrecisionTiro(randInt(0, 10));
-            jugador.setRegate(randInt(0, 10));
-            jugador.setResistencia(randInt(0, 10));
+            jugador.setEntradas(randInt(1, 10));
+            jugador.setMarca(randInt(1, 10));
+            jugador.setMentalidad(randInt(1, 10));
+            jugador.setPelotaParada(randInt(1, 10));
+            jugador.setPotenciaTiro(randInt(1, 10));
+            jugador.setPrecisionTiro(randInt(1, 10));
+            jugador.setRegate(randInt(1, 10));
+            jugador.setResistencia(randInt(1, 10));
             jugador.setSalario(1.0 * randInt(2000, 100000));
-            jugador.setVelocidad(randInt(0, 10));
+            jugador.setVelocidad(randInt(1, 10));
 
             respuesta.add(jugador);
         }
@@ -137,19 +136,19 @@ public class JugadorDAO {
             jugador = new Jugador();
 
             jugador.setNombre(nombre);
-            jugador.setArquero(randInt(0, 10));
-            jugador.setCabezazo(randInt(0, 10));
+            jugador.setArquero(randInt(1, 10));
+            jugador.setCabezazo(randInt(1, 10));
             jugador.setCotizacion(1.0 * randInt(0, 10000000));
-            jugador.setEntradas(randInt(0, 10));
-            jugador.setMarca(randInt(0, 10));
-            jugador.setMentalidad(randInt(0, 10));
-            jugador.setPelotaParada(randInt(0, 10));
-            jugador.setPotenciaTiro(randInt(0, 10));
-            jugador.setPrecisionTiro(randInt(0, 10));
-            jugador.setRegate(randInt(0, 10));
-            jugador.setResistencia(randInt(0, 10));
+            jugador.setEntradas(randInt(1, 10));
+            jugador.setMarca(randInt(1, 10));
+            jugador.setMentalidad(randInt(1, 10));
+            jugador.setPelotaParada(randInt(1, 10));
+            jugador.setPotenciaTiro(randInt(1, 10));
+            jugador.setPrecisionTiro(randInt(1, 10));
+            jugador.setRegate(randInt(1, 10));
+            jugador.setResistencia(randInt(1, 10));
             jugador.setSalario(1.0 * randInt(2000, 100000));
-            jugador.setVelocidad(randInt(0, 10));
+            jugador.setVelocidad(randInt(1, 10));
 
             crearJugador(jugador);
         }

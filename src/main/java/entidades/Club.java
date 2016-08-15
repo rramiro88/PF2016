@@ -191,5 +191,23 @@ public class Club implements Serializable {
         
         notificaciones.add(n);
     }
+    
+    public List<Integer> getNumerosLibres(){
+        ArrayList<Integer> respuesta = new ArrayList();
+        ArrayList<Integer> numerosPosibles = new ArrayList();
+        
+        for (int i = 0; i < 50; i++) {
+            numerosPosibles.add(i);
+        }
+        
+        for (Jugador jugador : plantel) {
+            numerosPosibles.remove(jugador.getNumeroCamiseta());
+        }
+        
+        
+        
+        
+        return numerosPosibles;
+    }
 
 }

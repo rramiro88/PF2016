@@ -2,7 +2,7 @@
 
 jQuery(document).ready(function () {
 
-//    $("#listaJugadores_data").sortable();
+ 
 
 
 });
