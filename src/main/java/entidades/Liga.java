@@ -32,8 +32,9 @@ public class Liga implements Serializable {
 
     String nombre;
 
+    
     @OneToMany(mappedBy = "liga", cascade = CascadeType.ALL)
-    List<Partido> partidos = new ArrayList<>();
+    List<Partido> partidos;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "liga_id")
@@ -55,6 +56,7 @@ public class Liga implements Serializable {
 
                     if (!repetido(p)) {
                         partidos.add(p);
+                        p.setLiga(this);
                     }
                 }
 
@@ -64,6 +66,9 @@ public class Liga implements Serializable {
 
     }
 
+    public Liga(){
+        partidos = new ArrayList<>();
+    }
     public String getNombre() {
         return nombre;
     }

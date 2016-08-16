@@ -71,6 +71,7 @@ public class AdministracionController implements Serializable{
         liga.setNombre(nombreLiga);
         liga.organizar();
 
+        logicaLiga.crearLiga(liga);
     }
     
     

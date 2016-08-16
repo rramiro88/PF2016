@@ -40,11 +40,21 @@ public class LogicaAdministracion implements Serializable{
      */
     public void avanzarUnDia(){
         
-        
         PartidosDAO partidosDAO = new PartidosDAO();
         
+        
         List<Partido> partidosASimular = partidosDAO.obtenerPartidosDeHoy();
-        int diferenciaGoles;
+        
+        
+        this.simularPartidos(partidosASimular);
+       
+        
+        
+    }
+    
+    public void simularPartidos(List<Partido> partidosASimular){
+        PartidosDAO partidosDAO = new PartidosDAO();
+         int diferenciaGoles;
         
         for (Partido p : partidosASimular) {
             
@@ -64,7 +74,6 @@ public class LogicaAdministracion implements Serializable{
             partidosDAO.actualizarPartido(p);
             
         }
-        
     }
 
     public List<Club> buscarClubesPorNombre(String nombreClub) {

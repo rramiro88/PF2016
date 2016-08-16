@@ -7,7 +7,9 @@ package controller;
 
 import calendarizacion.TareaCalendarizada;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import logica.LogicaAdministracion;
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import org.quartz.JobDetail;
@@ -25,6 +27,10 @@ import org.quartz.impl.StdSchedulerFactory;
 @Named
 @ApplicationScoped
 public class CalendarizacionController {
+    
+    @Inject
+    LogicaAdministracion logicaAdministacion;
+    
     private boolean schedulerActivo = false;
 
     
@@ -117,5 +123,9 @@ public class CalendarizacionController {
         this.schedulerActivo = schedulerActivo;
     }
 
+    
+    public void avanzarUnDia(){
+        logicaAdministacion.avanzarUnDia();
+    }
     
 }

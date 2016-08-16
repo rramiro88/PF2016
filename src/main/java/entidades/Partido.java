@@ -23,6 +23,7 @@ import javax.persistence.Temporal;
 public class Partido implements Serializable {
     @ManyToOne
     private Liga liga;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -46,6 +47,14 @@ public class Partido implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Liga getLiga() {
+        return liga;
+    }
+
+    public void setLiga(Liga liga) {
+        this.liga = liga;
     }
     
     

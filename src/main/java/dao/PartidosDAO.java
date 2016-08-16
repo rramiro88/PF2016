@@ -9,6 +9,7 @@ import entidades.Partido;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,9 +30,15 @@ public class PartidosDAO {
             s.beginTransaction();
 
             Query consulta = s.createQuery("From Partido where fecha = :parametro");
-            consulta.setParameter("parametro", hoy.toString());
+            consulta.setParameter("parametro", hoy);
             respuesta = consulta.list();
+            
+            for (Partido p : respuesta) {
+                Hibernate.initialize(p.getLocal().getTacticas());
+                Hibernate.initialize(p.getVisitante().getTacticas());
+            }
         } catch (Exception e) {
+            System.out.println("ERROR en metodo obtenerPartidosDeHoy()");
         } finally {
             s.close();
         }

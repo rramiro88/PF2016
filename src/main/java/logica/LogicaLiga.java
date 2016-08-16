@@ -5,6 +5,7 @@
  */
 package logica;
 
+import dao.LigaDAO;
 import entidades.Club;
 import entidades.Liga;
 import entidades.Partido;
@@ -26,6 +27,12 @@ import javax.inject.Named;
 @Named
 @ApplicationScoped
 public class LogicaLiga {
+    
+    
+    
+    private LigaDAO ligaDAO = new LigaDAO();
+    
+    
 
     public List<String> obtenerPosicionesLiga(Liga liga) {
 
@@ -97,6 +104,10 @@ public class LogicaLiga {
         }
         
         return null;
+    }
+
+    public void crearLiga(Liga liga) {
+        ligaDAO.persistirLiga(liga);
     }
 
 }

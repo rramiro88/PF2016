@@ -27,6 +27,14 @@
                     <p:commandButton value="Parar Scheduler" action="#{calendarizacionController.pararScheduler()}" update="estado"/>
                     <p:commandButton value="Agregar Tarea" action="#{calendarizacionController.agregarTrabajo()}"/>
                 </h:form>
+                
+                <hr/>
+                
+                <h:form>
+                    
+                    <p:commandButton value="Avanzar Un Dia" update="tablaPartidos" action="#{calendarizacionController.avanzarUnDia()}"/>
+                    
+                </h:form>
 
             </ui:define>
 
