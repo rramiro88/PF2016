@@ -9,9 +9,10 @@ import logica.LogicaMercado;
 import entidades.Club;
 import entidades.Jugador;
 import entidades.Oferta;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -22,8 +23,8 @@ import javax.inject.Inject;
  * @author ramiro
  */
 @Named(value = "mercadoController")
-@ApplicationScoped
-public class MercadoController {
+@SessionScoped
+public class MercadoController implements Serializable{
 
     @Inject
     private LogicaMercado miLogicaMercado;
@@ -113,7 +114,7 @@ public class MercadoController {
         }
         
         System.out.println("************* la oferta no supero la validacion ***********");
-        this.addMessage("La oferta no supero la validacion del sistema.", "");
+        this.addMessage("La oferta no supero la validacion del sistema. Verifique si le alcanza el dinero y el tamaño de su plantel", "");
         return "#";
     }
 

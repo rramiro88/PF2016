@@ -14,12 +14,19 @@ import entidades.Oferta;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
 @SessionScoped
 public class LogicaMercado implements Serializable {
+    
+    @Inject
+    LogicaTactica logicaTactica;
 
+    private final int MIN_PLANTEL = 11;
+    private final int MAX_PLANTEL = 30;
+    
     private Oferta ofertaEnCuestion;
 
     public Oferta getOfertaEnCuestion() {
@@ -57,17 +64,22 @@ public class LogicaMercado implements Serializable {
             return false;
         }
 
+        
         oferta.getJugadorObjetivo().setClub(oferta.getOrigen());
         oferta.getOrigen().agregarJugador(oferta.getJugadorObjetivo());
 
         oferta.getDestino().getPlantel().remove(oferta.getJugadorObjetivo());
+        
+        
+        logicaTactica.reorganizarTacticas(oferta);
+        
         oferta.getOrigen().setPresupuesto(oferta.getOrigen().getPresupuesto() - oferta.getMontoDeOperacion());
         oferta.getDestino().setPresupuesto(oferta.getDestino().getPresupuesto() + oferta.getMontoDeOperacion());
 
         oferta.getDestino().agregarNotificacion("El jugador " + oferta.getJugadorObjetivo().getNombre() + " ha sido transferido a " + oferta.getOrigen().getNombre());
         oferta.getOrigen().agregarNotificacion("El club " + oferta.getDestino().getNombre() + " ha aceptado la oferta por " + oferta.getJugadorObjetivo().getNombre() + ". El jugador se incorpora a tu plantel. El gasto total fue de $ " + oferta.getMontoDeOperacion());
 
-        oferta.getJugadorObjetivo().setNumeroCamiseta(oferta.getOrigen().getNumerosLibres().get(0));
+//        oferta.getJugadorObjetivo().setNumeroCamiseta(oferta.getOrigen().getNumerosLibres().get(0));
         
         jugadorDAO.actualizarJugador(oferta.getJugadorObjetivo());
         clubDAO.actualizarClub(oferta.getOrigen());
@@ -168,7 +180,9 @@ public class LogicaMercado implements Serializable {
     private boolean validarCondiciones(Oferta oferta) {
         boolean respuesta = false;
 
-        if (oferta.getMontoDeOperacion() <= oferta.getOrigen().getPresupuesto()) {
+        if (oferta.getMontoDeOperacion() <= oferta.getOrigen().getPresupuesto()
+                && oferta.getDestino().getPlantel().size()>MIN_PLANTEL
+                && oferta.getOrigen().getPlantel().size()<MAX_PLANTEL) {
             respuesta = true;
         }
 

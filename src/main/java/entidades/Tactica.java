@@ -118,5 +118,18 @@ public class Tactica implements Serializable {
         return respuesta;
 
     }
+    
+    public List<Jugador> getNoTitulares() {
+        List<Jugador> respuesta = new ArrayList<>();
+
+        for (Jugador j : club.getPlantel()) {
+            if (titularidad.get(j.getId()) == null || titularidad.get(j.getId()) == false) {
+                respuesta.add(j);
+            }
+        }
+
+        return respuesta;
+
+    }
 
 }

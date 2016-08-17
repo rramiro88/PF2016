@@ -8,7 +8,7 @@ package controller;
 import logica.LogicaTactica;
 import entidades.Tactica;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
@@ -18,7 +18,7 @@ import org.primefaces.context.RequestContext;
  * @author ramiro
  */
 @Named
-@SessionScoped
+@RequestScoped
 public class TacticaController implements Serializable {
 
     @Inject

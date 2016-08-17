@@ -26,6 +26,15 @@ public class Simulador {
         
         int cantidad = jugadoresLocal.size();
         
+        if(jugadoresLocal.size()<11){
+            System.out.println("cantidad inferior a la minima en tactica de "+jugadoresLocal.get(0).getClub().getNombre());
+            return -1;
+        }
+         if(jugadoresVisitante.size()<11){
+            System.out.println("cantidad inferior a la minima en tactica de "+jugadoresVisitante.get(0).getClub().getNombre());
+            return -1;
+         }
+        
         for(int i = 0; i<cantidad; i++){
             if(jugadoresLocal.get(i).suma()>jugadoresVisitante.get(i).suma()){
                 resultado ++;
