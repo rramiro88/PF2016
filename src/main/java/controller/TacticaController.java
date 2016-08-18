@@ -6,7 +6,6 @@
 package controller;
 
 import entidades.Jugador;
-import entidades.PosicionEnCancha;
 import logica.LogicaTactica;
 import entidades.Tactica;
 import java.io.Serializable;
