@@ -5,6 +5,8 @@
  */
 package controller;
 
+import entidades.Jugador;
+import entidades.PosicionEnCancha;
 import logica.LogicaTactica;
 import entidades.Tactica;
 import java.io.Serializable;
@@ -34,6 +36,17 @@ public class TacticaController implements Serializable {
     private String posicion1, posicion2, posicion3, posicion4, posicion5, posicion6, posicion7, posicion8, posicion9, posicion10, posicion11;
 
     private String opcion;
+    
+    
+   public void agregarJugador(Jugador jugador, String posicion){
+       
+       sesionController.getUsuarioLogueado().getClub().getTacticas().get(0).agregarJugador(jugador, posicion);
+       
+   }
+   
+    
+    
+    
 
     public void cargarTactica() {
         if (sesionController.getUsuarioLogueado().getClub().getTacticas().size() > 0) {
@@ -182,7 +195,7 @@ public class TacticaController implements Serializable {
 
         for (int i = 0; i < 11; i++) {
 
-            tactica.getTitularidad().put(sesionController.getUsuarioLogueado().getClub().getPlantel().get(i).getId(), Boolean.TRUE);
+           // tactica.getTitularidad().put(sesionController.getUsuarioLogueado().getClub().getPlantel().get(i).getId(), Boolean.TRUE);
 
         }
 

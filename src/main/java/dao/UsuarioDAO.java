@@ -104,7 +104,7 @@ public class UsuarioDAO {
         System.out.println("NOTIFICACIONES---> "+ u.getClub().getNotificaciones().size());
         if (u.getClub().getTacticas().size() > 0) {
             System.out.println("POSICIONES---> " + u.getClub().getTacticas().get(0).getPosiciones().size());
-            System.out.println("TITULARIDADES--->" + u.getClub().getTacticas().get(0).getTitularidad().size());
+            System.out.println("TITULARIDADES--->" + u.getClub().getTacticas().get(0).getPosicionesEnCancha().size());
         }else{
             System.out.println("NO HAY TACTICAS CARGADAS");
         }

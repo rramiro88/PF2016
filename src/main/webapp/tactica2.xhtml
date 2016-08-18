@@ -25,46 +25,48 @@
                 <p:dataTable id="listaJugadores" value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
 
                     <p:column headerText="Nombre" sortBy="${jugador.nombre}" width="15%">
-                        <p:outputLabel styleClass="numero" value="${jugador.numeroCamiseta}" style="font-size: x-large; margin-right: 6px;"/>
                         <p:outputLabel id="nombre" value="${jugador.nombre}"/>
                         <p:overlayPanel for="nombre">
                             
-                            <p:commandButton value="Arquero"/>
-                            <p:commandButton value="Defensa"/>
-                            <p:commandButton value="Medio"/>
-                            <p:commandButton value="Delantero"/>
-                            <p:commandButton value="Suplente"/>
+                            <p:commandButton value="Arquero" action="${tacticaController.agregarJugador(jugador, 'ARQ')}"/>
+                            <p:commandButton value="Defensa" action="${tacticaController.agregarJugador(jugador, 'CT')}"/>
+                            <p:commandButton value="Medio" action="${tacticaController.agregarJugador(jugador, 'MC')}"/>
+                            <p:commandButton value="Delantero" action="${tacticaController.agregarJugador(jugador, 'DC')}"/>
+                            <p:commandButton value="Suplente" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
                             
                         </p:overlayPanel>
                     </p:column>
-                    <p:column headerText="Veloc" sortBy="${jugador.velocidad}">
+                    <p:column headerText="N°" sortBy="${jugador.numeroCamiseta}">
+                        <p:outputLabel value="${jugador.numeroCamiseta}"/>
+                    </p:column>
+                    <p:column headerText="Vel" sortBy="${jugador.velocidad}">
                         <p:outputLabel value="${jugador.velocidad}"/>
                     </p:column>
                     <p:column headerText="Res" sortBy="${jugador.resistencia}">
                         <p:outputLabel value="${jugador.resistencia}"/>
                     </p:column>
-                    <p:column headerText="Regate" sortBy="${jugador.regate}">
+                    <p:column headerText="Reg" sortBy="${jugador.regate}">
                         <p:outputLabel value="${jugador.regate}"/>
                     </p:column>
-                    <p:column headerText="Marca" sortBy="${jugador.marca}">
+                    <p:column headerText="Mar" sortBy="${jugador.marca}">
                         <p:outputLabel value="${jugador.marca}"/>
                     </p:column>
                     <p:column headerText="Ent" sortBy="${jugador.entradas}">
                         <p:outputLabel value="${jugador.entradas}"/>
                     </p:column>
-                    <p:column headerText="Ment" sortBy="${jugador.mentalidad}">
+                    <p:column headerText="Men" sortBy="${jugador.mentalidad}">
                         <p:outputLabel value="${jugador.mentalidad}"/>
                     </p:column>
                     <p:column headerText="Cab" sortBy="${jugador.cabezazo}">
                         <p:outputLabel value="${jugador.cabezazo}"/>
                     </p:column>
-                    <p:column headerText="PotTiro" sortBy="${jugador.potenciaTiro}">
+                    <p:column headerText="PotT" sortBy="${jugador.potenciaTiro}">
                         <p:outputLabel value="${jugador.potenciaTiro}"/>
                     </p:column>
-                    <p:column headerText="PrecTiro" sortBy="${jugador.precisionTiro}">
+                    <p:column headerText="PreT" sortBy="${jugador.precisionTiro}">
                         <p:outputLabel value="${jugador.precisionTiro}"/>
                     </p:column>
-                    <p:column headerText="Arquero" sortBy="${jugador.arquero}">
+                    <p:column headerText="Arq" sortBy="${jugador.arquero}">
                         <p:outputLabel value="${jugador.arquero}"/>
                     </p:column>
 

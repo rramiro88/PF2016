@@ -8,7 +8,7 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
     <property name="show_sql">true</property>
-    <property name="hbm2ddl.auto">create-drop</property>
+    <property name="hbm2ddl.auto">validate</property>
     
     <mapping class="entidades.Jugador"/>
     <mapping class="entidades.Club"/>
@@ -19,5 +19,6 @@
     <mapping class="entidades.Partido"/>
     <mapping class="entidades.Liga"/>
     <mapping class="entidades.Notificacion"/>
+    <mapping class="entidades.PosicionEnCancha"/>
   </session-factory>
 </hibernate-configuration>
