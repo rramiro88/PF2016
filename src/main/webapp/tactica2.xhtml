@@ -28,11 +28,36 @@
                         <p:outputLabel id="nombre" value="${jugador.nombre}"/>
                         <p:overlayPanel for="nombre">
                             
-                            <p:commandButton value="Arquero" action="${tacticaController.agregarJugador(jugador, 'ARQ')}"/>
-                            <p:commandButton value="Defensa" action="${tacticaController.agregarJugador(jugador, 'CT')}"/>
-                            <p:commandButton value="Medio" action="${tacticaController.agregarJugador(jugador, 'MC')}"/>
-                            <p:commandButton value="Delantero" action="${tacticaController.agregarJugador(jugador, 'DC')}"/>
-                            <p:commandButton value="Suplente" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                            
+                            
+                            <div style="background-color: limegreen; padding: 10px; opacity: 0.9; border-radius: 10px;">
+                            <p:commandButton value="Suplente 1" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                            <p:commandButton value="Suplente 2" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                            <p:commandButton value="Suplente 3" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                            <p:commandButton value="Suplente 4" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                            <p:commandButton value="Suplente 5" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                            </div>
+                            
+                            <hr/>
+
+                            <p:commandButton value="Wing Izq" action="${tacticaController.agregarJugador(jugador, 'DI')}"/>
+                            <p:commandButton value="Delantero centro 1" action="${tacticaController.agregarJugador(jugador, 'DC')}"/>
+                            <p:commandButton value="Delantero centro 2" action="${tacticaController.agregarJugador(jugador, 'DC')}"/>
+                            <p:commandButton value="Wing Der" action="${tacticaController.agregarJugador(jugador, 'DD')}"/>
+                            <hr/>
+                            <p:commandButton value="Medio Izq" action="${tacticaController.agregarJugador(jugador, 'MI')}"/>
+                            <p:commandButton value="Mediocentro 1" action="${tacticaController.agregarJugador(jugador, 'MC')}"/>
+                            <p:commandButton value="Mediocentro 2" action="${tacticaController.agregarJugador(jugador, 'MC')}"/>
+                            <p:commandButton value="Medio Der" action="${tacticaController.agregarJugador(jugador, 'MD')}"/>
+                            <hr/>
+                            <p:commandButton value="Lateral Izq" action="${tacticaController.agregarJugador(jugador, 'LI')}"/>
+                            <p:commandButton value="1er Central" action="${tacticaController.agregarJugador(jugador, 'CT')}"/>
+                            <p:commandButton value="2do Central" action="${tacticaController.agregarJugador(jugador, 'CT')}"/>
+                            <p:commandButton value="Lateral Der" action="${tacticaController.agregarJugador(jugador, 'LD')}"/>
+                            <hr/>
+                            <p:commandButton value="Arquero" action="${tacticaController.agregarJugador(jugador, 'ARQ')}" style="margin-left: 40%"/>
+                        
+                            
                             
                         </p:overlayPanel>
                     </p:column>
@@ -78,9 +103,26 @@
             <ui:define name="izquierda">
 
 
-                <p:graphicImage value="#{resource['images:cancha.jpg']}" style="margin: auto; z-index: 0;" styleClass="img-responsive"></p:graphicImage>
-
-
+                <p:graphicImage id="cancha" value="#{resource['images:cancha.jpg']}" style="margin: auto; z-index: 0;" styleClass="img-responsive"></p:graphicImage>
+                <p:graphicImage id="arquero" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="central1" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="central2" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="lateralizquierdo" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="lateralderecho" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="medioderecho" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="mediocentro1" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="mediocentro2" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="medioizquierdo" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="mediapunta" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="wingderecho" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="nueve1" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="nueve2" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="wingizquierdo" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="suplente1" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="suplente2" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="suplente3" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="suplente4" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
+                <p:graphicImage id="suplente5" value="#{resource['images:jugador.png']}" style="display:none; width: 35px; height: 35px; position: absolute; top: 0px; left: 0px;" />
             </ui:define>
 
 

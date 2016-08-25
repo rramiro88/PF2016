@@ -2,7 +2,7 @@
 
 jQuery(document).ready(function () {
 
- 
+
 
 
 });
@@ -49,6 +49,101 @@ function cargarPosicionesActuales() {
 
 
 }
+
+
+function ubicarArquero() {
+
+
+
+    var jugador = $("#arquero");
+    
+    jugador.draggable();
+
+    jugador.css({
+        display: 'inline',
+        left: 124 + 'px',
+        top: 360 + 'px'
+    });
+
+}
+
+function ubicarCTUnico() {
+
+
+
+    var jugador = $("#central1");
+
+    jugador.css({
+        display: 'inline',
+        left:  124+ 'px',
+        top: 305 + 'px'
+    });
+
+}
+
+function ubicarCT1() {
+
+
+
+    var jugador = $("#central1");
+
+    jugador.css({
+        display: 'inline',
+        left: 90 + 'px',
+        top: 305 + 'px'
+    });
+
+}
+
+function moverCTUnicoACT1() {
+    ubicarCT1();
+}
+
+function ubicarCT2() {
+
+
+
+    var jugador = $("#central2");
+
+    jugador.css({
+        display: 'inline',
+        left: 150 + 'px',
+        top: 305 + 'px'
+    });
+
+}
+
+function ubicarLI() {
+
+
+
+    var jugador = $("#lateralizquierdo");
+
+    jugador.css({
+        display: 'inline',
+        left: 18 + 'px',
+        top: 278 + 'px'
+    });
+
+}
+
+function ubicarLD() {
+
+
+
+    var jugador = $("#lateralderecho");
+
+    jugador.css({
+        display: 'inline',
+        left: 220 + 'px',
+        top: 278 + 'px'
+    });
+
+}
+
+
+
+
 
 //sacado de http://jsfiddle.net/76yRN/1/
 // $(".dragdrop").draggable({revert: "invalid"});
