@@ -7,6 +7,66 @@ jQuery(document).ready(function () {
 
 });
 
+function cargaContextoCanvas(idCanvas) {
+    var elemento = document.getElementById(idCanvas);
+    if (elemento && elemento.getContext) {
+        var contexto = elemento.getContext('2d');
+        if (contexto) {
+            return contexto;
+        }
+    }
+    return false;
+}
+
+
+window.onload = function () {
+    //Recibimos el elemento canvas
+    var ctx = cargaContextoCanvas('canvas');
+    if (ctx) {
+        //Creo una imagen conun objeto Image de Javascript
+        var img = new Image();
+        //indico la URL de la imagen
+        img.src = '/PF2016/javax.faces.resource/images/cancha.jpg';
+        //defino el evento onload del objeto imagen
+        img.onload = function () {
+
+
+            ctx.drawImage(img, 0, 0, 390, 500);
+
+        };
+    }
+};
+
+function limpiarCanvas() {
+    var canvas = document.getElementById('canvas');
+    canvas.width = canvas.width;
+    ctx = canvas.getContext('2d');
+    var img = new Image();
+    //indico la URL de la imagen
+    img.src = '/PF2016/javax.faces.resource/images/cancha.jpg';
+    ctx.drawImage(img, 0, 0, 390, 500);
+
+}
+
+
+function dibujarJugador(x, y) {
+
+    var ctx = cargaContextoCanvas('canvas');
+    
+//    var gradient = ctx.createRadialGradient(x, y, 0, x, y, 20);
+//    gradient.addColorStop(0, 'white');
+//    gradient.addColorStop(1, '#6495ED');
+
+    ctx.beginPath();
+    ctx.arc(x, y, 20, 0, 2 * Math.PI);
+    ctx.fillStyle = '#6495ED';
+    ctx.fill();
+
+    
+}
+
+
+
 
 /**
  * 
@@ -56,7 +116,7 @@ function ubicarArquero() {
 
 
     var jugador = $("#arquero");
-    
+
     jugador.draggable();
 
     jugador.css({
@@ -75,7 +135,7 @@ function ubicarCTUnico() {
 
     jugador.css({
         display: 'inline',
-        left:  124+ 'px',
+        left: 124 + 'px',
         top: 305 + 'px'
     });
 

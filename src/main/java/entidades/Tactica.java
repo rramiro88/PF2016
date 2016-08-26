@@ -123,7 +123,7 @@ public class Tactica implements Serializable {
                 } else {
                     posicionesEnCancha.put(jugador.getId(), posicion);
                 }
-                RequestContext.getCurrentInstance().execute("ubicarArquero()");
+                RequestContext.getCurrentInstance().execute("dibujarJugador(160,470)");
                 break;
             }
             case PosicionEnCancha.SUPLENTE: {
