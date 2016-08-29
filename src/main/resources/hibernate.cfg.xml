@@ -19,6 +19,5 @@
     <mapping class="entidades.Partido"/>
     <mapping class="entidades.Liga"/>
     <mapping class="entidades.Notificacion"/>
-    <mapping class="entidades.PosicionEnCancha"/>
   </session-factory>
 </hibernate-configuration>

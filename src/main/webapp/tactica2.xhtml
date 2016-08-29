@@ -22,6 +22,9 @@
 
             <ui:define name="centro">
 
+                <h:form>
+                    <p:remoteCommand action="${tacticaController.dibujarJugadores()}" autoRun="true"/>
+                </h:form>
                 <p:dataTable id="listaJugadores" value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
 
                     <p:column headerText="Nombre" sortBy="${jugador.nombre}" width="15%">
@@ -41,18 +44,18 @@
                             <hr/>
 
                             <p:commandButton value="Wing Izq" action="${tacticaController.agregarJugador(jugador, 'DI')}"/>
-                            <p:commandButton value="Delantero centro 1" action="${tacticaController.agregarJugador(jugador, 'DC')}"/>
-                            <p:commandButton value="Delantero centro 2" action="${tacticaController.agregarJugador(jugador, 'DC')}"/>
+                            <p:commandButton value="Delantero centro 1" action="${tacticaController.agregarJugador(jugador, 'DC1')}"/>
+                            <p:commandButton value="Delantero centro 2" action="${tacticaController.agregarJugador(jugador, 'DC2')}"/>
                             <p:commandButton value="Wing Der" action="${tacticaController.agregarJugador(jugador, 'DD')}"/>
                             <hr/>
                             <p:commandButton value="Medio Izq" action="${tacticaController.agregarJugador(jugador, 'MI')}"/>
-                            <p:commandButton value="Mediocentro 1" action="${tacticaController.agregarJugador(jugador, 'MC')}"/>
-                            <p:commandButton value="Mediocentro 2" action="${tacticaController.agregarJugador(jugador, 'MC')}"/>
+                            <p:commandButton value="Mediocentro 1" action="${tacticaController.agregarJugador(jugador, 'MC1')}"/>
+                            <p:commandButton value="Mediocentro 2" action="${tacticaController.agregarJugador(jugador, 'MC2')}"/>
                             <p:commandButton value="Medio Der" action="${tacticaController.agregarJugador(jugador, 'MD')}"/>
                             <hr/>
                             <p:commandButton value="Lateral Izq" action="${tacticaController.agregarJugador(jugador, 'LI')}"/>
-                            <p:commandButton value="1er Central" action="${tacticaController.agregarJugador(jugador, 'CT')}"/>
-                            <p:commandButton value="2do Central" action="${tacticaController.agregarJugador(jugador, 'CT')}"/>
+                            <p:commandButton value="1er Central" action="${tacticaController.agregarJugador(jugador, 'CT1')}"/>
+                            <p:commandButton value="2do Central" action="${tacticaController.agregarJugador(jugador, 'CT2')}"/>
                             <p:commandButton value="Lateral Der" action="${tacticaController.agregarJugador(jugador, 'LD')}"/>
                             <hr/>
                             <p:commandButton value="Arquero" action="${tacticaController.agregarJugador(jugador, 'ARQ')}" style="margin-left: 40%"/>

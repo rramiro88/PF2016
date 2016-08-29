@@ -9,6 +9,7 @@ import entidades.Jugador;
 import logica.LogicaTactica;
 import entidades.Tactica;
 import java.io.Serializable;
+import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,25 +28,20 @@ public class TacticaController implements Serializable {
 
     @Inject
     SesionController sesionController;
-    
+
     String posicion;
-    
-    
 
     private String posicion1, posicion2, posicion3, posicion4, posicion5, posicion6, posicion7, posicion8, posicion9, posicion10, posicion11;
 
     private String opcion;
-    
-    
-   public void agregarJugador(Jugador jugador, String posicion){
-       
-       sesionController.getUsuarioLogueado().getClub().getTacticas().get(0).agregarJugador(jugador, posicion);
-       
-   }
-   
-    
-    
-    
+
+    public void agregarJugador(Jugador jugador, String posicion) {
+
+        sesionController.getUsuarioLogueado().getClub().getTacticas().get(0).agregarJugador(jugador, posicion);
+
+        dibujarJugadores();
+
+    }
 
     public void cargarTactica() {
         if (sesionController.getUsuarioLogueado().getClub().getTacticas().size() > 0) {
@@ -77,7 +73,6 @@ public class TacticaController implements Serializable {
         this.posicion = posicion;
     }
 
-    
     public String getOpcion() {
         return opcion;
     }
@@ -194,13 +189,84 @@ public class TacticaController implements Serializable {
 
         for (int i = 0; i < 11; i++) {
 
-           // tactica.getTitularidad().put(sesionController.getUsuarioLogueado().getClub().getPlantel().get(i).getId(), Boolean.TRUE);
-
+            // tactica.getTitularidad().put(sesionController.getUsuarioLogueado().getClub().getPlantel().get(i).getId(), Boolean.TRUE);
         }
 
         sesionController.getUsuarioLogueado().getClub().getTacticas().set(0, tactica);
 
         sesionController.actualizarUsuario();
+
+    }
+
+    public void dibujarJugadores() {
+        RequestContext.getCurrentInstance().execute("limpiarCanvas()");
+
+        Tactica tactica = sesionController.getUsuarioLogueado().getClub().getTacticas().get(0);
+
+        for (Map.Entry<Long, String> pos : tactica.getPosicionesEnCancha().entrySet()) {
+
+            switch (pos.getValue()) {
+
+                case Tactica.ARQUERO: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(160,470)");
+                    break;
+                }
+                case Tactica.DEFENSA_CENTRAL1: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(110,420)");
+                    break;
+                }
+                case Tactica.DEFENSA_CENTRAL2: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(210,420)");
+                    break;
+                }
+                case Tactica.LATERAL_DERECHO: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(280,400)");
+                    break;
+                }
+                case Tactica.LATERAL_IZQUIERDO: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(40,400)");
+                    break;
+                }
+                case Tactica.MEDIO_CENTRO1: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(140,290)");
+                    break;
+                }
+                case Tactica.MEDIO_CENTRO2: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(180,290)");
+                    break;
+                }
+                case Tactica.MEDIO_DERECHO: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(240,220)");
+                    break;
+                }
+                case Tactica.MEDIO_IZQUIERDO: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(80,220)");
+                    break;
+                }
+                case Tactica.MEDIAPUNTA: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(160,180)");
+                    break;
+                }
+                case Tactica.DELANTERO_CENTRO1: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(130,90)");
+                    break;
+                }
+                case Tactica.DELANTERO_CENTRO2: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(190,90)");
+                    break;
+                }
+                case Tactica.DELANTERO_DERECHO: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(270,90)");
+                    break;
+                }
+                case Tactica.DELANTERO_IZQUIERDO: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(50,90)");
+                    break;
+                }
+
+            }
+
+        }
 
     }
 

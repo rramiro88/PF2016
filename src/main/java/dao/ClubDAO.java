@@ -9,7 +9,6 @@ import entidades.Club;
 import entidades.Estadio;
 import entidades.Jugador;
 import entidades.Notificacion;
-import entidades.PosicionEnCancha;
 import entidades.Tactica;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,17 +82,17 @@ public class ClubDAO {
                 s.saveOrUpdate(j);
             }
 
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(0).getId(), PosicionEnCancha.ARQUERO);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(1).getId(), PosicionEnCancha.LATERAL_DERECHO);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(2).getId(), PosicionEnCancha.DEFENSA_CENTRAL);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(3).getId(), PosicionEnCancha.DEFENSA_CENTRAL);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(4).getId(), PosicionEnCancha.LATERAL_IZQUIERDO);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(5).getId(), PosicionEnCancha.MEDIO_CENTRO);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(6).getId(), PosicionEnCancha.MEDIO_DERECHO);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(7).getId(), PosicionEnCancha.MEDIO_IZQUIERDO);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(8).getId(), PosicionEnCancha.MEDIAPUNTA);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(9).getId(), PosicionEnCancha.DELANTERO_CENTRO);
-            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(10).getId(), PosicionEnCancha.DELANTERO_CENTRO);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(0).getId(), Tactica.ARQUERO);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(1).getId(), Tactica.LATERAL_DERECHO);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(2).getId(), Tactica.DEFENSA_CENTRAL1);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(3).getId(), Tactica.DEFENSA_CENTRAL2);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(4).getId(), Tactica.LATERAL_IZQUIERDO);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(5).getId(), Tactica.MEDIO_CENTRO1);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(6).getId(), Tactica.MEDIO_DERECHO);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(7).getId(), Tactica.MEDIO_IZQUIERDO);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(8).getId(), Tactica.MEDIAPUNTA);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(9).getId(), Tactica.DELANTERO_CENTRO1);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(10).getId(), Tactica.DELANTERO_CENTRO2);
             
 
 //            s.save(tactica);

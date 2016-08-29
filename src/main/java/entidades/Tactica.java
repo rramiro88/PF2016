@@ -18,20 +18,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
-import org.primefaces.context.RequestContext;
 
 @Entity
 public class Tactica implements Serializable {
 
+    
     @Transient
-    int arq = 0, li = 0, ld = 0, ct = 0, md = 0, mi = 0, mc = 0, mp = 0, dd = 0, di = 0, dc = 0, sup = 0;
+    public static final String ARQUERO = "ARQ";
+    @Transient
+    public static final String LATERAL_IZQUIERDO = "LI";
+    @Transient
+    public static final String DEFENSA_CENTRAL1 = "CT1";
+    @Transient
+    public static final String DEFENSA_CENTRAL2 = "CT2";
+    @Transient
+    public static final String LATERAL_DERECHO = "LD";
+    @Transient
+    public static final String MEDIO_IZQUIERDO = "MI";
+    @Transient
+    public static final String MEDIO_CENTRO1 = "MC1";
+    @Transient
+    public static final String MEDIO_CENTRO2 = "MC2";
+    @Transient
+    public static final String MEDIO_DERECHO = "MD";
+    @Transient
+    public static final String MEDIAPUNTA = "MP";
+    @Transient
+    public static final String DELANTERO_IZQUIERDO = "DI";
+    @Transient
+    public static final String DELANTERO_DERECHO = "DD";
+    @Transient
+    public static final String DELANTERO_CENTRO1 = "DC1";
+    @Transient
+    public static final String DELANTERO_CENTRO2 = "DC2";
+    @Transient
+    public static final String SUPLENTE = "SUP";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<PosicionEnCancha> posicionesEnCancha;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private Map<Long, String> posicionesEnCancha;
 
@@ -53,7 +80,7 @@ public class Tactica implements Serializable {
 
         for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
 
-            if (!pos.getValue().equals(PosicionEnCancha.SUPLENTE)) {
+            if (!pos.getValue().equals(Tactica.SUPLENTE)) {
                 for (Jugador jugador : respuesta) {
                     if (jugador.getId().equals(pos.getKey())) {
                         respuesta.add(jugador);
@@ -90,179 +117,89 @@ public class Tactica implements Serializable {
 
     }
 
-    public String getTopPosicion(int indice) {
-
-        String sub = null;
-
-        sub = posicionesGraficas.get(indice).split("a")[1];
-
-        return sub;
-    }
-
-    public String getLeftPosicion(int indice) {
-
-        String sub = null;
-
-        sub = posicionesGraficas.get(indice).split("a")[0];
-
-        return sub;
-    }
+   
 
     public void agregarJugador(Jugador jugador, String posicion) {
 
-        if (incluidoEnTactica(jugador)) {
-            quitarJugador(jugador);
+        String posicionAntigua = posicionesEnCancha.get(jugador.getId());
+        
+        if (posicionAntigua != null) { //si ya estaba en la tactica
+            intercambiar(jugador,posicion,posicionAntigua);
+        }else{
+            posicionar(jugador, posicion);
         }
 
-        contarPosiciones();
 
-        switch (posicion) {
-            case PosicionEnCancha.ARQUERO: {
-                if (arq > 0) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-                }
-                RequestContext.getCurrentInstance().execute("dibujarJugador(160,470)");
-                break;
-            }
-            case PosicionEnCancha.SUPLENTE: {
-                if (sup > 4) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-                    RequestContext.getCurrentInstance().execute("ubicarSuplente()");
-                }
+        System.out.println("TACTICA:" + this);
+        
 
-                break;
-            }
-            case PosicionEnCancha.LATERAL_IZQUIERDO: {
-                if (li > 0) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-                }
-                RequestContext.getCurrentInstance().execute("ubicarLI()");
-                break;
-            }
-            case PosicionEnCancha.LATERAL_DERECHO: {
-                if (ld > 0) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-                }
-                RequestContext.getCurrentInstance().execute("ubicarLD()");
-                break;
-            }
-            case PosicionEnCancha.DEFENSA_CENTRAL: {
-                if (ct > 1) {
-                    reemplazar(jugador, posicion);
-                    RequestContext.getCurrentInstance().execute("ubicarCT1()");
-
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-
-                    if (ct == 1) {
-                        RequestContext.getCurrentInstance().execute("ubicarCT2()");
-                        RequestContext.getCurrentInstance().execute("moverCTUnicoACT1()");
-                    } else {
-                        RequestContext.getCurrentInstance().execute("ubicarCTUnico()");
-                    }
-
-                }
-
-                break;
-            }
-            case PosicionEnCancha.MEDIO_DERECHO: {
-                if (md > 0) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-
-                }
-                RequestContext.getCurrentInstance().execute("ubicarMD()");
-                break;
-            }
-            case PosicionEnCancha.MEDIO_IZQUIERDO: {
-                if (mi > 0) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-
-                }
-                RequestContext.getCurrentInstance().execute("ubicarMI()");
-                break;
-            }
-            case PosicionEnCancha.MEDIO_CENTRO: {
-                if (mc > 1) {
-                    reemplazar(jugador, posicion);
-                    RequestContext.getCurrentInstance().execute("ubicarMC1()");
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-                    if (mc == 1) {
-                        RequestContext.getCurrentInstance().execute("ubicarMC2()");
-                        RequestContext.getCurrentInstance().execute("moverMCUnicoAMC1()");
-                    } else {
-                        RequestContext.getCurrentInstance().execute("ubicarMCUnico()");
-                    }
-
-                }
-                break;
-            }
-            case PosicionEnCancha.MEDIAPUNTA: {
-                if (mp > 1) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-                    RequestContext.getCurrentInstance().execute("ubicarMP()");
-                }
-                break;
-            }
-            case PosicionEnCancha.DELANTERO_DERECHO: {
-                if (dd > 0) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-
-                }
-                RequestContext.getCurrentInstance().execute("ubicarDD()");
-
-                break;
-            }
-            case PosicionEnCancha.DELANTERO_IZQUIERDO: {
-                if (di > 0) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-
-                }
-                RequestContext.getCurrentInstance().execute("ubicarDI()");
-
-                break;
-            }
-            case PosicionEnCancha.DELANTERO_CENTRO: {
-                if (dc > 0) {
-                    reemplazar(jugador, posicion);
-                } else {
-                    posicionesEnCancha.put(jugador.getId(), posicion);
-
-                    if (dc == 1) {
-                        RequestContext.getCurrentInstance().execute("ubicarDC2()");
-                        RequestContext.getCurrentInstance().execute("moverDCUnicoADC1()");
-                    } else {
-                        RequestContext.getCurrentInstance().execute("ubicarDCUnico()");
-                    }
-
-                }
-                break;
-            }
-        }
-
-        System.out.println("FIN DEL METODO AGREGARJUGADOR. TAMAÑO DE POSICIONES: " + posicionesEnCancha.size());
-        System.out.println(this.toString());
+        
     }
 
-    public Club getClub() {
+   
+
+   
+
+    @Override
+    public String toString() {
+        
+        
+        String cadena = "Cantidad de titulares: " +getTitulares().size()+"\n";
+        
+        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
+
+            for (Jugador jugador : club.getPlantel()) {
+                if (jugador.getId().equals(pos.getKey())) {
+                    cadena+="\n"+jugador.getNombre() + " - " + pos.getValue();
+                }
+            }
+
+        }
+        
+        
+        return cadena;
+    }
+
+
+
+    
+   
+    private void intercambiar(Jugador jugador, String posicion, String posicionAnterior) {
+        
+        
+        posicionesEnCancha.remove(jugador.getId());
+        
+        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
+            if(posicion.equals(pos.getValue())){
+        
+                pos.setValue(posicionAnterior);
+            }
+        }
+        
+        posicionesEnCancha.put(jugador.getId(), posicion);
+      
+        
+    }
+
+    private void posicionar(Jugador jugador, String posicion) {
+        
+        Long key=null;
+         for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
+            if(posicion.equals(pos.getValue())){
+                
+                key = pos.getKey();
+                
+            }
+        }
+         
+         posicionesEnCancha.remove(key);
+         posicionesEnCancha.put(jugador.getId(), posicion);
+        
+        
+    }
+
+    
+     public Club getClub() {
         return club;
     }
 
@@ -310,97 +247,5 @@ public class Tactica implements Serializable {
         this.id = id;
     }
 
-    private void reemplazar(Jugador jugador, String posicion) {
-
-        Long keyAQuitar = -1L;
-        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
-            if (pos.getValue().equals(posicion)) {
-                keyAQuitar = pos.getKey();
-            }
-        }
-
-        if (keyAQuitar != -1) {
-            posicionesEnCancha.remove(keyAQuitar);
-        }
-
-        posicionesEnCancha.put(jugador.getId(), posicion);
-    }
-
-    @Override
-    public String toString() {
-        String cadena = "";
-
-        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
-            cadena += "\n" + pos.getKey() + " - " + pos.getValue();
-        }
-
-        return cadena;
-    }
-
-    private boolean incluidoEnTactica(Jugador jugador) {
-
-        return posicionesEnCancha.containsKey(jugador.getId());
-    }
-
-    private void quitarJugador(Jugador jugador) {
-
-        posicionesEnCancha.remove(jugador.getId());
-
-    }
-
-    private void contarPosiciones() {
-        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
-            switch (pos.getValue()) {
-                case PosicionEnCancha.ARQUERO: {
-                    arq++;
-                    break;
-                }
-                case PosicionEnCancha.SUPLENTE: {
-                    sup++;
-                    break;
-                }
-                case PosicionEnCancha.LATERAL_IZQUIERDO: {
-                    li++;
-                    break;
-                }
-                case PosicionEnCancha.LATERAL_DERECHO: {
-                    ld++;
-                    break;
-                }
-                case PosicionEnCancha.DEFENSA_CENTRAL: {
-                    ct++;
-                    break;
-                }
-                case PosicionEnCancha.MEDIO_DERECHO: {
-                    md++;
-                    break;
-                }
-                case PosicionEnCancha.MEDIO_IZQUIERDO: {
-                    mi++;
-                    break;
-                }
-                case PosicionEnCancha.MEDIO_CENTRO: {
-                    mc++;
-                    break;
-                }
-                case PosicionEnCancha.MEDIAPUNTA: {
-                    mp++;
-                    break;
-                }
-                case PosicionEnCancha.DELANTERO_DERECHO: {
-                    dd++;
-                    break;
-                }
-                case PosicionEnCancha.DELANTERO_IZQUIERDO: {
-                    di++;
-                    break;
-                }
-                case PosicionEnCancha.DELANTERO_CENTRO: {
-                    dc++;
-                    break;
-                }
-            }
-        }
-    }
-
 }
+
