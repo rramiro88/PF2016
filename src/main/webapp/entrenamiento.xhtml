@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./templateEscritorio2.xhtml">
+
+            <ui:define name="cabecera">
+
+            </ui:define>
+
+            <ui:define name="titulo">
+                <title>Entrenamiento</title>
+            </ui:define>
+
+           
+
+            <ui:define name="centro">
+
+                <h:form>
+                    
+                    <p:commandButton action="${sesionController.actualizarUsuario()}" value="Guardar entrenamientos" icon="ui-icon-disk"/>
+                    <hr/>
+
+                    <p:dataTable value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
+
+                        <p:column headerText="Nombre">
+                            ${jugador.nombre}
+                        </p:column>
+                        <p:column headerText="Entrenando">
+                            <p:selectOneMenu value="${jugador.entrenando}" style="width:70%">
+                                <f:selectItem itemLabel="Defensa" itemValue="defensa"/>
+                                <f:selectItem itemLabel="Cabeza" itemValue="cabeza"/>
+                                <f:selectItem itemLabel="Velocidad" itemValue="velocidad"/>
+                                <f:selectItem itemLabel="Resistencia" itemValue="resistencia"/>
+                                <f:selectItem itemLabel="Pases Cortos" itemValue="pc"/>
+                                <f:selectItem itemLabel="Pases Largos" itemValue="pl"/>
+                                <f:selectItem itemLabel="Remates" itemValue="remates"/>
+                                <f:selectItem itemLabel="Arquero" itemValue="arquero"/>
+                                <f:selectItem itemLabel="Mentalidad" itemValue="mentalidad"/>
+                                <f:selectItem itemLabel="Descanso" itemValue="descanso"/>
+                            </p:selectOneMenu>
+                        </p:column>
+
+
+
+                    </p:dataTable>
+                </h:form>
+
+            </ui:define>
+
+          
+
+        </ui:composition>
+
+    </body>
+</html>

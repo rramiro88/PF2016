@@ -14,47 +14,42 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
-
-
-
 /**
  *
  * @author ramiro
  */
 @Entity
 public class Jugador implements Serializable {
-    
+
     @Transient
-    public static final String ARQUERO = "arquero";
-    @Transient
-    public static final String MEDIO = "medio";
-    @Transient
-    public static final String DEFENSA = "defensa";
-    @Transient
-    public static final String DELANTERO = "delantero";
-    @Transient
-    public static final String SUPLENTE = "suplente";
-    
-    
+    public static final String DEFENSA = "defensa",
+            CABEZA = "cabeza",
+            VELOCIDAD = "velocidad",
+            RESISTENCIA = "resistencia",
+            PASES_CORTOS = "pc",
+            PASES_LARGOS = "pl",
+            REMATES = "remates",
+            ARQUERO = "arquero",
+            MENTALIDAD = "mentalidad",
+            DESCANSO = "descanso";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String nombre;
-    
+
     private String posicionTactica;
-    
+
     private Integer numeroCamiseta;
 
-    
-    
     @ManyToOne
-    @JoinColumn(name="club_id", nullable = true)
+    @JoinColumn(name = "club_id", nullable = true)
     private Club club;
-    
+
     private Double cotizacion;
     private Double salario;
-    
+
     private int velocidad;
     private int resistencia;
     private int marca;
@@ -66,17 +61,127 @@ public class Jugador implements Serializable {
     private int regate;
     private int arquero;
     private int pelotaParada;
+
+    private int progresoVelocidad;
+    private int progresoResistencia;
+    private int progresoMarca;
+    private int progresoEntradas;
+    private int progresoPrecisionTiro;
+    private int progresoPotenciaTiro;
+    private int progresoCabezazo;
+    private int progresoMentalidad;
+    private int progresoRegate;
+    private int progresoArquero;
+    private int progresoPelotaParada;
     
-    
-    
-    
-    public Jugador(){
-        
+    private String entrenando;
+
+    public Jugador() {
+
         nombre = "Jugador de prueba";
         cotizacion = 0D;
         salario = 0D;
-        posicionTactica = SUPLENTE;
 
+    }
+
+    public String getEntrenando() {
+        return entrenando;
+    }
+
+    public void setEntrenando(String entrenando) {
+        this.entrenando = entrenando;
+    }
+
+    
+    
+    
+
+    public int getProgresoVelocidad() {
+        return progresoVelocidad;
+    }
+
+    public void setProgresoVelocidad(int progresoVelocidad) {
+        this.progresoVelocidad = progresoVelocidad;
+    }
+
+    public int getProgresoResistencia() {
+        return progresoResistencia;
+    }
+
+    public void setProgresoResistencia(int progresoResistencia) {
+        this.progresoResistencia = progresoResistencia;
+    }
+
+    public int getProgresoMarca() {
+        return progresoMarca;
+    }
+
+    public void setProgresoMarca(int progresoMarca) {
+        this.progresoMarca = progresoMarca;
+    }
+
+    public int getProgresoEntradas() {
+        return progresoEntradas;
+    }
+
+    public void setProgresoEntradas(int progresoEntradas) {
+        this.progresoEntradas = progresoEntradas;
+    }
+
+    public int getProgresoPrecisionTiro() {
+        return progresoPrecisionTiro;
+    }
+
+    public void setProgresoPrecisionTiro(int progresoPrecisionTiro) {
+        this.progresoPrecisionTiro = progresoPrecisionTiro;
+    }
+
+    public int getProgresoPotenciaTiro() {
+        return progresoPotenciaTiro;
+    }
+
+    public void setProgresoPotenciaTiro(int progresoPotenciaTiro) {
+        this.progresoPotenciaTiro = progresoPotenciaTiro;
+    }
+
+    public int getProgresoCabezazo() {
+        return progresoCabezazo;
+    }
+
+    public void setProgresoCabezazo(int progresoCabezazo) {
+        this.progresoCabezazo = progresoCabezazo;
+    }
+
+    public int getProgresoMentalidad() {
+        return progresoMentalidad;
+    }
+
+    public void setProgresoMentalidad(int progresoMentalidad) {
+        this.progresoMentalidad = progresoMentalidad;
+    }
+
+    public int getProgresoRegate() {
+        return progresoRegate;
+    }
+
+    public void setProgresoRegate(int progresoRegate) {
+        this.progresoRegate = progresoRegate;
+    }
+
+    public int getProgresoArquero() {
+        return progresoArquero;
+    }
+
+    public void setProgresoArquero(int progresoArquero) {
+        this.progresoArquero = progresoArquero;
+    }
+
+    public int getProgresoPelotaParada() {
+        return progresoPelotaParada;
+    }
+
+    public void setProgresoPelotaParada(int progresoPelotaParada) {
+        this.progresoPelotaParada = progresoPelotaParada;
     }
 
     public Integer getNumeroCamiseta() {
@@ -87,8 +192,6 @@ public class Jugador implements Serializable {
         this.numeroCamiseta = numeroCamiseta;
     }
 
-    
-    
     public String getPosicionTactica() {
         return posicionTactica;
     }
@@ -97,11 +200,8 @@ public class Jugador implements Serializable {
         this.posicionTactica = posicionTactica;
     }
 
-    
-    
-    
-    public int suma(){
-        return arquero + cabezazo + entradas + marca + mentalidad +pelotaParada +potenciaTiro+precisionTiro+regate+resistencia+velocidad;
+    public int suma() {
+        return arquero + cabezazo + entradas + marca + mentalidad + pelotaParada + potenciaTiro + precisionTiro + regate + resistencia + velocidad;
     }
 
     public String getPosicion() {
@@ -112,8 +212,6 @@ public class Jugador implements Serializable {
         this.posicionTactica = posicionTactica;
     }
 
-    
-    
     public String getNombre() {
         return nombre;
     }
@@ -129,8 +227,6 @@ public class Jugador implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -244,8 +340,4 @@ public class Jugador implements Serializable {
         this.pelotaParada = pelotaParada;
     }
 
-    
-    
-
-    
 }
