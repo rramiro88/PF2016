@@ -83,6 +83,9 @@ public class Jugador implements Serializable {
         salario = 0D;
 
     }
+    
+    
+   
 
     public String getEntrenando() {
         return entrenando;

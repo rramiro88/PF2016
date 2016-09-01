@@ -19,33 +19,20 @@ function cargaContextoCanvas(idCanvas) {
 }
 
 
-window.onload = function () {
-    //Recibimos el elemento canvas
-    var ctx = cargaContextoCanvas('canvas');
-    if (ctx) {
-        //Creo una imagen conun objeto Image de Javascript
-        var img = new Image();
-        //indico la URL de la imagen
-        img.src = '/PF2016/javax.faces.resource/images/cancha.jpg';
-        //defino el evento onload del objeto imagen
-        img.onload = function () {
 
-
-            ctx.drawImage(img, 0, 0, 390, 500);
-
-        };
-    }
-};
 
 function limpiarCanvas() {
-    var canvas = document.getElementById('canvas');
+
     canvas.width = canvas.width;
+
+}
+
+function dibujarCancha(){
+    var canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
     var img = new Image();
-    //indico la URL de la imagen
     img.src = '/PF2016/javax.faces.resource/images/cancha.jpg';
     ctx.drawImage(img, 0, 0, 390, 500);
-
 }
 
 

@@ -30,7 +30,26 @@
                     <p:dataTable value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
 
                         <p:column headerText="Nombre">
-                            ${jugador.nombre}
+                            <p:link id="botonNombre" value="#{jugador.nombre}" onclick="PF('habilidades#{jugador.nombre}').show();
+                                return false;"/>
+                        
+                        <p:dialog header="Detalle del jugador" widgetVar="habilidades#{jugador.nombre}" modal="true">
+                            <p:outputLabel value="Nombre: #{jugador.nombre}"/><br/>
+                            <p:outputLabel value="Velocidad #{jugador.velocidad}"></p:outputLabel><br/>
+                            <p:outputLabel value="Resistencia #{jugador.resistencia}"></p:outputLabel><br/>
+                            <p:outputLabel value="Cabezazo #{jugador.cabezazo}"></p:outputLabel><br/>
+                            <p:outputLabel value="Entradas #{jugador.entradas}"></p:outputLabel><br/>
+                            <p:outputLabel value="Marca #{jugador.marca}"></p:outputLabel><br/>
+                            <p:outputLabel value="Mentalidad #{jugador.mentalidad}"></p:outputLabel><br/>
+                            <p:outputLabel value="Pelota perada #{jugador.pelotaParada}"></p:outputLabel><br/>
+                            <p:outputLabel value="Potencia de tiro #{jugador.potenciaTiro}"></p:outputLabel><br/>
+                            <p:outputLabel value="Precision de tiro #{jugador.precisionTiro}"></p:outputLabel><br/>
+                            <p:outputLabel value="Regate #{jugador.regate}"></p:outputLabel>
+
+
+                            
+
+                        </p:dialog>
                         </p:column>
                         <p:column headerText="Entrenando">
                             <p:selectOneMenu value="${jugador.entrenando}" style="width:70%">
@@ -52,6 +71,14 @@
                     </p:dataTable>
                 </h:form>
 
+            </ui:define>
+            
+            <ui:define name="derecha">
+
+                <p:panel header="Opciones" style="margin-top: 50%" toggleable="true">
+                    <p:link href="reporteEntrenamiento.xhtml" value="Ver ultimo reporte de entrenamiento"></p:link>
+                    
+                </p:panel>
             </ui:define>
 
           

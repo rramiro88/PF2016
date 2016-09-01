@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./templateEscritorio2.xhtml">
+
+           
+
+            <ui:define name="titulo">
+                <title>Reporte de Entrenamiento</title>
+            </ui:define>
+
+            
+
+            <ui:define name="centro">
+                
+                
+                <p:dataTable value="${sesionController.usuarioLogueado.club.plantel}" var="jugador">
+                
+                    <p:column headerText="Nombre">
+                        <p:link id="botonNombre" value="#{jugador.nombre}" onclick="PF('habilidades#{jugador.nombre}').show();
+                                return false;"/>
+                        
+                        <p:dialog header="Detalle del jugador" widgetVar="habilidades#{jugador.nombre}" modal="true">
+                            <p:outputLabel value="Nombre: #{jugador.nombre}"/><br/>
+                            <p:outputLabel value="Velocidad #{jugador.velocidad}"></p:outputLabel><br/>
+                            <p:outputLabel value="Resistencia #{jugador.resistencia}"></p:outputLabel><br/>
+                            <p:outputLabel value="Cabezazo #{jugador.cabezazo}"></p:outputLabel><br/>
+                            <p:outputLabel value="Entradas #{jugador.entradas}"></p:outputLabel><br/>
+                            <p:outputLabel value="Marca #{jugador.marca}"></p:outputLabel><br/>
+                            <p:outputLabel value="Mentalidad #{jugador.mentalidad}"></p:outputLabel><br/>
+                            <p:outputLabel value="Pelota perada #{jugador.pelotaParada}"></p:outputLabel><br/>
+                            <p:outputLabel value="Potencia de tiro #{jugador.potenciaTiro}"></p:outputLabel><br/>
+                            <p:outputLabel value="Precision de tiro #{jugador.precisionTiro}"></p:outputLabel><br/>
+                            <p:outputLabel value="Regate #{jugador.regate}"></p:outputLabel>
+
+
+                            
+
+                        </p:dialog>
+                    </p:column>
+                    <p:column headerText="entrenando">
+                        ${jugador.entrenando}
+                    </p:column>
+                    <p:column headerText="progreso">
+                        
+                        <p:progressBar value="${jugador.progresoMarca}" rendered="${jugador.entrenando == 'defensa'}" labelTemplate="marca {value}%"  displayOnly="true"/>
+                        <p:progressBar value="${jugador.progresoEntradas}" rendered="${jugador.entrenando == 'defensa'}" labelTemplate="entradas {value}%"  displayOnly="true"/>
+                        <p:progressBar value="${jugador.progresoCabezazo}" rendered="${jugador.entrenando == 'cabeza'}" labelTemplate="cabeza {value}%"  displayOnly="true"/>
+                        <p:progressBar value="${jugador.progresoVelocidad}" rendered="${jugador.entrenando == 'velocidad'}" labelTemplate="velocidad {value}%"  displayOnly="true"/>
+                        <p:progressBar value="${jugador.progresoResistencia}" rendered="${jugador.entrenando == 'resistencia'}" labelTemplate="resistencia{value}%"  displayOnly="true"/>
+                        
+                        <p:progressBar value="${jugador.progresoPotenciaTiro}" rendered="${jugador.entrenando == 'remates'}" labelTemplate="potencia {value}%"  displayOnly="true"/>
+                        <p:progressBar value="${jugador.progresoPrecisionTiro}" rendered="${jugador.entrenando == 'remates'}" labelTemplate="precision {value}%"  displayOnly="true"/>
+                        <p:progressBar value="${jugador.progresoArquero}" rendered="${jugador.entrenando == 'arquero'}" labelTemplate="atajando {value}%"  displayOnly="true"/>
+                        <p:progressBar value="${jugador.progresoMentalidad}" rendered="${jugador.entrenando == 'mentalidad'}" labelTemplate="mentalidad {value}%"  displayOnly="true"/>
+                        
+                    </p:column>
+                
+                
+                
+                </p:dataTable>
+                
+            </ui:define>
+
+            
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -10,6 +10,8 @@ import logica.LogicaTactica;
 import entidades.Tactica;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -200,6 +202,8 @@ public class TacticaController implements Serializable {
 
     public void dibujarJugadores() {
         RequestContext.getCurrentInstance().execute("limpiarCanvas()");
+        RequestContext.getCurrentInstance().execute("dibujarCancha()");
+        
 
         Tactica tactica = sesionController.getUsuarioLogueado().getClub().getTacticas().get(0);
 
