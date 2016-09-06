@@ -26,11 +26,12 @@ public class Jugador implements Serializable {
             CABEZA = "cabeza",
             VELOCIDAD = "velocidad",
             RESISTENCIA = "resistencia",
-            PASES_CORTOS = "pc",
-            PASES_LARGOS = "pl",
+            PASES_CORTOS = "pases",
+            PASES_LARGOS = "pelotazos",
             REMATES = "remates",
             ARQUERO = "arquero",
             MENTALIDAD = "mentalidad",
+            REGATE = "regate",
             DESCANSO = "descanso";
 
     @Id
@@ -61,6 +62,9 @@ public class Jugador implements Serializable {
     private int regate;
     private int arquero;
     private int pelotaParada;
+    private int pasesCortos;
+    private int pasesLargos;
+    
 
     private int progresoVelocidad;
     private int progresoResistencia;
@@ -73,6 +77,8 @@ public class Jugador implements Serializable {
     private int progresoRegate;
     private int progresoArquero;
     private int progresoPelotaParada;
+    private int progresoPases;
+    private int progresoPasesLargos;
     
     private String entrenando;
 
@@ -82,6 +88,40 @@ public class Jugador implements Serializable {
         cotizacion = 0D;
         salario = 0D;
 
+    }
+
+    public int getProgresoPases() {
+        return progresoPases;
+    }
+
+    public void setProgresoPases(int progresoPases) {
+        this.progresoPases = progresoPases;
+    }
+
+    public int getProgresoPasesLargos() {
+        return progresoPasesLargos;
+    }
+
+    public void setProgresoPasesLargos(int progresoPasesLargos) {
+        this.progresoPasesLargos = progresoPasesLargos;
+    }
+    
+    
+
+    public int getPasesCortos() {
+        return pasesCortos;
+    }
+
+    public void setPasesCortos(int pasesCortos) {
+        this.pasesCortos = pasesCortos;
+    }
+
+    public int getPasesLargos() {
+        return pasesLargos;
+    }
+
+    public void setPasesLargos(int pasesLargos) {
+        this.pasesLargos = pasesLargos;
     }
     
     

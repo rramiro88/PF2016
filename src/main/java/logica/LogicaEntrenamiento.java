@@ -53,10 +53,16 @@ public class LogicaEntrenamiento {
                     }
                     break;
                 }case Jugador.PASES_CORTOS:{
-                    //agregar
+                    jugador.setProgresoPases(jugador.getProgresoPases() +1);
+                    if(jugador.getProgresoPases()>99 && jugador.getPasesCortos()<10){
+                        jugador.setPasesCortos(jugador.getPasesCortos()+1);
+                    }
                     break;
                 }case Jugador.PASES_LARGOS:{
-                    //agregar
+                    jugador.setProgresoPasesLargos(jugador.getProgresoPasesLargos()+1);
+                    if(jugador.getProgresoPasesLargos()>99 && jugador.getPasesLargos()<10){
+                        jugador.setPasesLargos(jugador.getPasesLargos()+1);
+                    }
                     break;
                 }case Jugador.REMATES:{
                     jugador.setProgresoPotenciaTiro(jugador.getProgresoPotenciaTiro() +1);
@@ -83,7 +89,14 @@ public class LogicaEntrenamiento {
                         jugador.setVelocidad(jugador.getVelocidad()+1);
                     }
                     break;
+                }case Jugador.REGATE:{
+                    jugador.setProgresoRegate(jugador.getProgresoRegate()+1);
+                    if(jugador.getProgresoRegate()>99 && jugador.getRegate()<10){
+                        jugador.setRegate(jugador.getRegate()+1);
+                    }
+                    break;
                 }
+                
                 
                 
                 

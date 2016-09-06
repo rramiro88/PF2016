@@ -53,11 +53,13 @@
                         <p:progressBar value="${jugador.progresoCabezazo}" rendered="${jugador.entrenando == 'cabeza'}" labelTemplate="cabeza {value}%"  displayOnly="true"/>
                         <p:progressBar value="${jugador.progresoVelocidad}" rendered="${jugador.entrenando == 'velocidad'}" labelTemplate="velocidad {value}%"  displayOnly="true"/>
                         <p:progressBar value="${jugador.progresoResistencia}" rendered="${jugador.entrenando == 'resistencia'}" labelTemplate="resistencia{value}%"  displayOnly="true"/>
-                        
+                        <p:progressBar value="${jugador.progresoRegate}" rendered="${jugador.entrenando == 'regate'}" labelTemplate="regates{value}%"  displayOnly="true"/>
                         <p:progressBar value="${jugador.progresoPotenciaTiro}" rendered="${jugador.entrenando == 'remates'}" labelTemplate="potencia {value}%"  displayOnly="true"/>
                         <p:progressBar value="${jugador.progresoPrecisionTiro}" rendered="${jugador.entrenando == 'remates'}" labelTemplate="precision {value}%"  displayOnly="true"/>
                         <p:progressBar value="${jugador.progresoArquero}" rendered="${jugador.entrenando == 'arquero'}" labelTemplate="atajando {value}%"  displayOnly="true"/>
                         <p:progressBar value="${jugador.progresoMentalidad}" rendered="${jugador.entrenando == 'mentalidad'}" labelTemplate="mentalidad {value}%"  displayOnly="true"/>
+                        <p:progressBar value="${jugador.progresoPases}" rendered="${jugador.entrenando == 'pases'}" labelTemplate="pases cortos {value}%"  displayOnly="true"/>
+                        <p:progressBar value="${jugador.progresoPasesLargos}" rendered="${jugador.entrenando == 'pelotazos'}" labelTemplate="pases largos {value}%"  displayOnly="true"/>
                         
                     </p:column>
                 
