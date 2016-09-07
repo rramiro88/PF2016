@@ -30,6 +30,18 @@ body {
     font-weight: normal !important;
 }
 
+.ui-widget .ui-widget {
+    font-family: 'Bree Serif', serif;
+    font-weight: normal !important;
+}
+
+label{
+    font-weight: normal;
+}
+
+.ui-selectoneradio label{
+    margin-right: 20px;
+}
 
 .navbar-default {
 

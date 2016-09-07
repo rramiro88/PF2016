@@ -114,7 +114,7 @@ public class LogicaMercado implements Serializable {
      * @param condicion Venta o Prestamo
      * @return
      */
-    public boolean ofertar(Jugador jugador, Club oferente, Double monto, int condicion) {
+    public boolean ofertar(Jugador jugador, Club oferente, Double monto, String condicion) {
 
         Club poseedor = jugador.getClub();
 

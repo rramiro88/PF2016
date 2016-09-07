@@ -31,6 +31,23 @@ public class BuscarJugadorController implements Serializable {
     private String nombreJugador;
     private List<Jugador> resultado;
     private Double montoDeOperacion;
+    private Jugador jugadorEnCuestion;
+
+    public String irADetalleOferta(Jugador jugador) {
+        
+        jugadorEnCuestion = jugador;
+        return "detallesOferta";
+    }
+
+    public Jugador getJugadorEnCuestion() {
+        return jugadorEnCuestion;
+    }
+
+    public void setJugadorEnCuestion(Jugador jugadorEnCuestion) {
+        this.jugadorEnCuestion = jugadorEnCuestion;
+    }
+    
+    
 
     public Double getMontoDeOperacion() {
         return montoDeOperacion;
@@ -66,7 +83,7 @@ public class BuscarJugadorController implements Serializable {
             return "jugadoresLibres";
         }
         if (logicaMercado.ofertar(jugador, origen, this.getMontoDeOperacion(), Oferta.VENTA)) {
-               
+
             montoDeOperacion = 0D;
             this.addMessage("La oferta fue enviada", "");
 

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./templateEscritorio2.xhtml">
+
+
+
+            <ui:define name="titulo">
+                <title>Detalles de Oferta</title>
+            </ui:define>
+
+
+
+            <ui:define name="centro">
+
+                <h:form>
+
+                    <p:outputLabel value="${buscarJugadorController.jugadorEnCuestion.nombre}"/>
+                    <h3>Condicion de oferta</h3>
+                    <p:selectOneRadio id="condicion" value="${ofertaController.condicion}">
+                        <f:selectItem itemLabel="Venta" itemValue="venta"/>
+                        <f:selectItem itemLabel="Prestamo"  itemValue="prestamo"/>
+                    </p:selectOneRadio>
+
+                    <hr/>
+
+                    <h3>Prestamo</h3>   
+
+                    <p:calendar id="fechaDesde" value="${ofertaController.prestamoFechaDesde}" style="margin-right: 20px"/>
+                    <p:watermark for="fechaDesde" value="Fecha Desde"/>
+                    <p:calendar id="fechaHasta" value="${ofertaController.prestamoFechaHasta}"/>
+                    <p:watermark for="fechaHasta" value="Fecha Hasta"/>
+
+                    <hr/>
+
+                    <h3>Venta</h3>
+
+                    <p:inputNumber id="monto" value="${ofertaController.monto}" inputStyle="width: 40%; margin-right: 10%"/>
+                    <p:watermark for="monto" value="Monto de la operacion"/>
+                    <p:inputNumber id="porcentaje" value="${ofertaController.porcentaje}" inputStyle="width: 40%" validatorMessage="El valor de porcentaje debe estar entre 0 y 100">
+                        <f:validateDoubleRange minimum="0" maximum="100"/>
+                    </p:inputNumber>
+                    
+                    
+                    <p:watermark for="porcentaje" value="Porcentaje del pase"/>
+                    
+                    <hr/>
+                    
+                    <p:commandButton ajax="false" validateClient="true" value="Enviar Oferta" action="${ofertaController.enviarOferta()}"/>
+
+                    <hr/>
+                    
+                    <p:message for="porcentaje"/>
+
+                </h:form>
+
+
+            </ui:define>
+
+
+
+        </ui:composition>
+
+    </body>
+</html>

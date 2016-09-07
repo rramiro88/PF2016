@@ -23,9 +23,9 @@ import javax.persistence.Transient;
 public class Oferta implements Serializable {
 
     @Transient
-    public static final int VENTA = 1;
+    public static final String VENTA = "venta";
     @Transient
-    public static final int PRESTAMO = 2;
+    public static final String PRESTAMO = "prestamo";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,7 +55,9 @@ public class Oferta implements Serializable {
     
     
     
-    Integer condicion;
+    String condicion;
+    
+    Double porcentaje;
 
     public long getId() {
         return id;
@@ -65,11 +67,11 @@ public class Oferta implements Serializable {
         this.id = id;
     }
 
-    public Integer getCondicion() {
+    public String getCondicion() {
         return condicion;
     }
 
-    public void setCondicion(Integer condicion) {
+    public void setCondicion(String condicion) {
         this.condicion = condicion;
     }
     
