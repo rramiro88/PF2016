@@ -85,14 +85,10 @@ public class SesionController implements Serializable {
                 = ((ServletContext) ctx.getContext()).getContextPath();
 
         try {
-    // Usar el contexto de JSF para invalidar la sesión,
-            // NO EL DE SERVLETS (nada de HttpServletRequest)
+
             ((HttpSession) ctx.getSession(false)).invalidate();
 
-    // Redirección de nuevo con el contexto de JSF,
-            // si se usa una HttpServletResponse fallará.
-            // Sin embargo, como ya está fuera del ciclo de vida 
-            // de JSF se debe usar la ruta completa -_-U
+
             ctx.redirect(ctxPath + "/faces/index.xhtml");
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -103,10 +99,8 @@ public class SesionController implements Serializable {
     public void actualizarUsuario(ActionEvent actionEvent) {
 
         actualizarUsuario();
-
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizacion exitosa", null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-
+        
+        this.addMessage("Actualizacion exitosa", "");
     }
 
     SesionController() {
@@ -114,12 +108,18 @@ public class SesionController implements Serializable {
 
     public void actualizarUsuario() {
         miLogicaSesion.actualizarUsuario(usuarioLogueado);
+        this.addMessage("Actualizacion exitosa", "");
     }
 
     public void leerNotificaciones(){
         this.usuarioLogueado.getClub().getNotificaciones().clear();
         ClubDAO clubDAO = new ClubDAO();
         clubDAO.actualizarClub(usuarioLogueado.getClub());
+    }
+    
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
     
 }

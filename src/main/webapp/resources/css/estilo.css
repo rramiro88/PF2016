@@ -35,6 +35,15 @@ body {
     font-weight: normal !important;
 }
 
+.ui-progressbar.ui-widget-content{
+    height: 25px !important;
+}
+
+.ui-progressbar .ui-progressbar-value.ui-widget-header{
+    height: 25px !important;
+}
+
+
 label{
     font-weight: normal;
 }

@@ -43,17 +43,18 @@ public class OfertaController {
         if (buscarJugadorController.getJugadorEnCuestion().getClub() == null) {
             return "jugadoresLibres";
         }
-        
-        if(logicaMercado.ofertar(buscarJugadorController.getJugadorEnCuestion(), sesionController.getUsuarioLogueado().getClub(), monto, condicion)){
+        if (sesionController.getUsuarioLogueado().getClub().getId()==buscarJugadorController.getJugadorEnCuestion().getClub().getId()) {
+            this.addMessage("No puede ofertar por un jugador propio", "");
+        } else {
+            if (logicaMercado.ofertar(buscarJugadorController.getJugadorEnCuestion(), sesionController.getUsuarioLogueado().getClub(), monto, condicion)) {
 
-           
-            this.addMessage("La oferta fue enviada", "");
+                this.addMessage("La oferta fue enviada", "");
 
-            return "";
+                return "";
+            }
+            this.addMessage("La oferta no supero la validacion del sistema", "");
         }
-        this.addMessage("La oferta no supero la validacion del sistema", "");
-        
-        
+
         return "";
     }
 
@@ -96,7 +97,7 @@ public class OfertaController {
     public void setCondicion(String condicion) {
         this.condicion = condicion;
     }
-    
+
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);

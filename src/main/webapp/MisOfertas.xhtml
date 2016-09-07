@@ -9,6 +9,7 @@
 
         <ui:composition template="./templateEscritorio2.xhtml">
 
+            
 
 
             <ui:define name="centro">
@@ -38,27 +39,29 @@
                 <hr/>
                 <p:outputLabel for="tabla2" value="Ofertas Recibidas"/>
                 <p:dataTable id="tabla2" value="#{sesionController.usuarioLogueado.club.ofertasRecibidas}" var="oferta" emptyMessage="No hay ofertas    ">
-                    
-                        <p:column headerText="Id">
-                            <p:outputLabel value="#{oferta.id}"/>
-                        </p:column>
 
-                        <p:column headerText="Jugador">
-                            <p:outputLabel value="#{oferta.jugadorObjetivo.nombre}"/>
-                        </p:column>
+                    <p:column headerText="Id">
+                        <p:outputLabel value="#{oferta.id}"/>
+                    </p:column>
 
-                        <p:column headerText="Monto Ofrecido">
-                            <p:outputLabel value="#{oferta.montoDeOperacion}"/>
-                        </p:column>
+                    <p:column headerText="Jugador">
+                        <p:outputLabel value="#{oferta.jugadorObjetivo.nombre}"/>
+                    </p:column>
 
-                        <p:column headerText="Proveniente de">
-                            <p:outputLabel value="#{oferta.origen.nombre}"/>
-                        </p:column>
+                    <p:column headerText="Monto Ofrecido">
+                        <p:outputLabel value="#{oferta.montoDeOperacion}"/>
+                    </p:column>
 
-                        <p:column headerText="Accion">
+                    <p:column headerText="Proveniente de">
+                        <p:outputLabel value="#{oferta.origen.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Accion">
+                        <h:form>
                             <p:commandButton value="Evaluar propuesta" action="#{mercadoController.evaluarOferta(oferta)}"></p:commandButton>
-                        </p:column>
-                    
+                        </h:form>
+                    </p:column>
+
                 </p:dataTable>
 
             </ui:define>
