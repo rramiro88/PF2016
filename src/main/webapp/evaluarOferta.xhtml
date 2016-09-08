@@ -27,8 +27,8 @@
 
                         <ul>
                             <li>
-                                <h:outputLabel rendered="#{mercadoController.oferta.condicion == 1}" value="Modalidad: Venta definitiva"/>
-                                <h:outputLabel rendered="#{mercadoController.oferta.condicion == 2}" value="Prestamo"/>
+                                <h:outputLabel value="Modalidad:  ${mercadoController.oferta.condicion}" />
+                                <h:outputLabel value="Porcentaje del pase: %${mercadoController.oferta.porcentaje}"/>
                             </li>
                             <li>
                                 Monto: #{mercadoController.oferta.montoDeOperacion}

@@ -166,5 +166,31 @@ public class ClubDAO {
         
         s.close();
     }
+    
+    public List<Jugador> obtenerJugadoresPorNombreDeClub(String nombreClub) {
+        List<Object[]> resultado;
+        List<Jugador> respuesta = new ArrayList<>();
+
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+
+        Query consulta = s.createQuery("From Jugador j inner join j.club where j.club.nombre like :parametro");
+        consulta.setParameter("parametro", "%" + nombreClub + "%");
+
+        resultado = consulta.list();
+
+        
+
+        s.close();
+        
+        for ( Object[] r : resultado) {
+            
+            respuesta.add((Jugador)r[0]);
+            
+        }
+
+        return respuesta;
+    }
 
 }

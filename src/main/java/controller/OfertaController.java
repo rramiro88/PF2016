@@ -46,7 +46,7 @@ public class OfertaController {
         if (sesionController.getUsuarioLogueado().getClub().getId()==buscarJugadorController.getJugadorEnCuestion().getClub().getId()) {
             this.addMessage("No puede ofertar por un jugador propio", "");
         } else {
-            if (logicaMercado.ofertar(buscarJugadorController.getJugadorEnCuestion(), sesionController.getUsuarioLogueado().getClub(), monto, condicion)) {
+            if (logicaMercado.ofertar(buscarJugadorController.getJugadorEnCuestion(), sesionController.getUsuarioLogueado().getClub(), monto, condicion,porcentaje,prestamoFechaDesde,prestamoFechaHasta)) {
 
                 this.addMessage("La oferta fue enviada", "");
 

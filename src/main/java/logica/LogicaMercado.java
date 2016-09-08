@@ -12,6 +12,7 @@ import entidades.Club;
 import entidades.Jugador;
 import entidades.Oferta;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -112,9 +113,12 @@ public class LogicaMercado implements Serializable {
      * @param oferente club que realiza la oferta
      * @param monto cantidad de dinero ficticio ofrecido
      * @param condicion Venta o Prestamo
-     * @return
+     * @param porcentaje Porcentaje del pase que se ofrece
+     * @param desde inicio del prestamo
+     * @param hasta fin del prestamo
+     * @return true si tuvo exito, false si no pasa la validacion
      */
-    public boolean ofertar(Jugador jugador, Club oferente, Double monto, String condicion) {
+    public boolean ofertar(Jugador jugador, Club oferente, Double monto, String condicion, Double porcentaje, Date desde, Date hasta) {
 
         Club poseedor = jugador.getClub();
 
@@ -124,6 +128,9 @@ public class LogicaMercado implements Serializable {
         oferta.setMontoDeOperacion(monto);
         oferta.setCondicion(condicion);
         oferta.setJugadorObjetivo(jugador);
+        oferta.setPorcentaje(porcentaje);
+        oferta.setDesde(desde);
+        oferta.setHasta(hasta);
 
         if (!validarCondiciones(oferta)) {
 
@@ -187,6 +194,11 @@ public class LogicaMercado implements Serializable {
         }
 
         return respuesta;
+    }
+
+    public List<Jugador> buscarJugadoresPorClub(String nombreClub) {
+        ClubDAO clubDAO = new ClubDAO();
+        return clubDAO.obtenerJugadoresPorNombreDeClub(nombreClub);
     }
 
 }

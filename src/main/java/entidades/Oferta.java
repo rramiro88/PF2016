@@ -59,6 +59,16 @@ public class Oferta implements Serializable {
     
     Double porcentaje;
 
+    public Double getPorcentaje() {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(Double porcentaje) {
+        this.porcentaje = porcentaje;
+    }
+    
+    
+
     public long getId() {
         return id;
     }

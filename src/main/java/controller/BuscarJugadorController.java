@@ -32,6 +32,17 @@ public class BuscarJugadorController implements Serializable {
     private List<Jugador> resultado;
     private Double montoDeOperacion;
     private Jugador jugadorEnCuestion;
+    private String nombreClub;
+
+    public String getNombreClub() {
+        return nombreClub;
+    }
+
+    public void setNombreClub(String nombreClub) {
+        this.nombreClub = nombreClub;
+    }
+    
+    
 
     public String irADetalleOferta(Jugador jugador) {
         
@@ -58,7 +69,18 @@ public class BuscarJugadorController implements Serializable {
     }
 
     public void buscarJugadores() {
-        resultado = logicaMercado.buscarJugadoresPorNombre(this.nombreJugador);
+        
+        if("".equals(nombreJugador)){
+            if("".equals(nombreClub)){
+                resultado=logicaMercado.buscarJugadoresPorNombre("");
+            }else{
+                resultado=logicaMercado.buscarJugadoresPorClub(nombreClub);
+            }
+        }else{
+            nombreClub = "";
+            resultado=logicaMercado.buscarJugadoresPorNombre(nombreJugador);
+        }
+        
     }
 
     public List<Jugador> getResultado() {
@@ -77,22 +99,22 @@ public class BuscarJugadorController implements Serializable {
         this.nombreJugador = nombreJugador;
     }
 
-    public String realizarOferta(Club origen, Jugador jugador) {
-
-        if (jugador.getClub() == null) {
-            return "jugadoresLibres";
-        }
-        if (logicaMercado.ofertar(jugador, origen, this.getMontoDeOperacion(), Oferta.VENTA)) {
-
-            montoDeOperacion = 0D;
-            this.addMessage("La oferta fue enviada", "");
-
-            return "";
-        }
-        this.addMessage("La oferta no supero la validacion del sistema", "");
-        return "";
-
-    }
+//    public String realizarOferta(Club origen, Jugador jugador) {
+//
+//        if (jugador.getClub() == null) {
+//            return "jugadoresLibres";
+//        }
+//        if (logicaMercado.ofertar(jugador, origen, this.getMontoDeOperacion(), Oferta.VENTA)) {
+//
+//            montoDeOperacion = 0D;
+//            this.addMessage("La oferta fue enviada", "");
+//
+//            return "";
+//        }
+//        this.addMessage("La oferta no supero la validacion del sistema", "");
+//        return "";
+//
+//    }
 
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);

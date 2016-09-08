@@ -81,7 +81,7 @@ public class Tactica implements Serializable {
         for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
 
             if (!pos.getValue().equals(Tactica.SUPLENTE)) {
-                for (Jugador jugador : respuesta) {
+                for (Jugador jugador : club.getPlantel()) {
                     if (jugador.getId().equals(pos.getKey())) {
                         respuesta.add(jugador);
                     }
