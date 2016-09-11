@@ -2,7 +2,8 @@
 
 jQuery(document).ready(function () {
 
-
+    limpiarCanvas();
+    dibujarCancha();
 
 
 });
@@ -36,7 +37,7 @@ function dibujarCancha(){
 }
 
 
-function dibujarJugador(x, y) {
+function dibujarJugador(x, y, numero) {
     
 //centro de la cancha: 160 -- 160 250 circulo central
 //50 90 DI, 160 90 DC, 270 90 DD,
@@ -50,6 +51,10 @@ function dibujarJugador(x, y) {
     ctx.arc(x, y, 20, 0, 2 * Math.PI);
     ctx.fillStyle = '#6495ED';
     ctx.fill();
+    
+    ctx.fillStyle = "black";
+    ctx.font = "20px Verdana";
+    ctx.fillText(numero,x-5,y+2);
 
     
 }

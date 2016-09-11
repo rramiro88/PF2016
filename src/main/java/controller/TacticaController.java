@@ -199,6 +199,8 @@ public class TacticaController implements Serializable {
         sesionController.actualizarUsuario();
 
     }
+    
+   
 
     public void dibujarJugadores() {
         RequestContext.getCurrentInstance().execute("limpiarCanvas()");
@@ -208,63 +210,67 @@ public class TacticaController implements Serializable {
         Tactica tactica = sesionController.getUsuarioLogueado().getClub().getTacticas().get(0);
 
         for (Map.Entry<Long, String> pos : tactica.getPosicionesEnCancha().entrySet()) {
+            
+            
+            Jugador j = tactica.obtenerJugadorPorID(pos.getKey());
+            
 
             switch (pos.getValue()) {
 
                 case Tactica.ARQUERO: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(160,470)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(160,470,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.DEFENSA_CENTRAL1: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(110,420)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(110,420,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.DEFENSA_CENTRAL2: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(210,420)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(210,420,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.LATERAL_DERECHO: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(280,400)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(280,400,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.LATERAL_IZQUIERDO: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(40,400)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(40,400,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.MEDIO_CENTRO1: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(140,290)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(140,290,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.MEDIO_CENTRO2: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(180,290)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(180,290,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.MEDIO_DERECHO: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(240,220)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(240,220,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.MEDIO_IZQUIERDO: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(80,220)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(80,220,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.MEDIAPUNTA: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(160,180)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(160,180,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.DELANTERO_CENTRO1: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(130,90)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(130,90,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.DELANTERO_CENTRO2: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(190,90)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(190,90,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.DELANTERO_DERECHO: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(270,90)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(270,90,"+j.getNumeroCamiseta()+")");
                     break;
                 }
                 case Tactica.DELANTERO_IZQUIERDO: {
-                    RequestContext.getCurrentInstance().execute("dibujarJugador(50,90)");
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(50,90,"+j.getNumeroCamiseta()+")");
                     break;
                 }
 

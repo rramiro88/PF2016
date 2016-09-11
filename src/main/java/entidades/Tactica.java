@@ -116,6 +116,19 @@ public class Tactica implements Serializable {
         return copiaPlantel;
 
     }
+    
+     public Jugador obtenerJugadorPorID(Long id){
+        
+         for (Jugador j : club.getPlantel()) {
+             
+             if(j.getId().equals(id)){
+                 return j;
+             }
+             
+         }
+        
+        return null;
+    }
 
    
 

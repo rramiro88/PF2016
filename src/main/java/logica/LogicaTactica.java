@@ -30,13 +30,16 @@ public class LogicaTactica implements Serializable {
         Tactica tacticaVendedor = vendedor.getTacticas().get(0);
 
         
-        //agrega un nuevo jugador, no titular, a los titulares, para suplir la baja del titular.
+      
         
         
         
         List<Jugador> convocados = tacticaVendedor.getConvocados();
         if (convocados.contains(jugador)) {
            
+            convocados.remove(jugador);
+            convocados.add(tacticaVendedor.getNoConvocados().get(0));
+            
         }
 
         jugador.setNumeroCamiseta(comprador.getNumerosLibres().get(0));
