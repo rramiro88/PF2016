@@ -58,7 +58,7 @@ public class Club implements Serializable {
     @OneToMany(mappedBy = "visitante", cascade = CascadeType.ALL)
     private List<Partido> partidos;
 
-    @ManyToMany(mappedBy = "equiposParticipantes")
+    @ManyToMany(mappedBy = "equiposParticipantes", cascade = CascadeType.ALL)
     private List<Liga> ligas;
 
     public Club() {
@@ -68,6 +68,7 @@ public class Club implements Serializable {
         ofertasEnviadas = new ArrayList<>();
         ofertasRecibidas = new ArrayList<>();
         notificaciones = new ArrayList<>();
+        ligas = new ArrayList<>();
         presupuesto = 0D;
     }
 

@@ -105,6 +105,8 @@ public class LogicaEntrenamiento {
             
         }
         
+        
+        jugadores.get(0).getClub().agregarNotificacion("Tu equipo ha entrenado. Puedes revisar los progresos en el reporte de entrenamiento");
         ClubDAO clubDAO = new ClubDAO();
         clubDAO.actualizarClub(jugadores.get(0).getClub());
     }

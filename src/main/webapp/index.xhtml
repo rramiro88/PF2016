@@ -9,14 +9,14 @@
         <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
         <h:outputScript library="js" name="bootstrap.js"/>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 
     </h:head>
     <h:body>
 
 
         <div class="container">
-            <div class="jumbotron sombreado">
+            <div class="img-responsive jumbotron sombreado">
 
             </div>
         
@@ -44,7 +44,7 @@
 
 
                             <h:commandButton id="botonIniciar" style="margin:10%" styleClass="img-responsive" image="#{resource['images:check.png']}" action="#{sesionController.iniciarSesion()}"/>
-                            <p:tooltip id="toolTipGrow" for="botonIniciar" value="Iniciar Sesion" showEffect="explode" hideEffect="explode" position="bottom"/>
+                            
 
                         </div>
 
@@ -63,8 +63,8 @@
                 <div class="col-sm-3" style="padding-top: 5%">
 
    
-                        <h:button id="botonCrear" style="margin: 5%" outcome="crearEquipo" image="#{resource['images:mas.png']}"/>
-                        <p:tooltip id="toolTipGrow2" for="botonCrear" value="Crear un nuevo equipo" showEffect="explode" hideEffect="explode" position="bottom"/>
+                        <h:button id="botonCrear" styleClass="img-responsive" style="margin: 5%" outcome="crearEquipo" image="#{resource['images:mas.png']}"/>
+                        
                     
 
                 </div>

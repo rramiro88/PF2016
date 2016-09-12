@@ -89,6 +89,7 @@ public class LogicaAdministracion implements Serializable {
         for (Club club : clubes) {
 
             logicaEntrenamiento.calcularProgresos(club.getPlantel());
+            
 
         }
 

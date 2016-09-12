@@ -102,6 +102,14 @@ public class UsuarioDAO {
         System.out.println("OFERTAS ENVIADAS---> " + u.getClub().getOfertasEnviadas().size());
         System.out.println("OFERTAS RECIBIDAS---> " + u.getClub().getOfertasRecibidas().size());
         System.out.println("NOTIFICACIONES---> "+ u.getClub().getNotificaciones().size());
+        System.out.println("LIGAS---> "+ u.getClub().getLigas().size());
+        
+        
+        if(u.getClub().getLigas().size()>0){
+            System.out.println("EQUIPOS--->" +u.getClub().getLigas().get(0).getEquiposParticipantes().size());
+            System.out.println("PARTIDOS--->" +u.getClub().getLigas().get(0).getPartidos().size());
+        }
+        
         if (u.getClub().getTacticas().size() > 0) {
             System.out.println("POSICIONES---> " + u.getClub().getTacticas().get(0).getPosiciones().size());
             System.out.println("TITULARIDADES--->" + u.getClub().getTacticas().get(0).getPosicionesEnCancha().size());

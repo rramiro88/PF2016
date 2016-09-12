@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./templateEscritorio2.xhtml">
+
+            
+
+            <ui:define name="titulo">
+                <title>Ligas</title>
+            </ui:define>
+
+            
+
+            <ui:define name="centro">
+                <h3>Ligas en las que estas compitiendo:</h3>
+                <br/>
+                
+                
+                <p:dataTable value="${sesionController.usuarioLogueado.club.ligas}" var="liga">
+                
+                    <p:column headerText="Nombre">
+                        
+                        ${liga.nombre}
+                        
+                    </p:column>
+                    
+                    <p:column headerText="Accion">
+                        
+                        
+                        <h:form>
+                            <p:commandLink value="Ver Liga" action="${ligaController.verDetalles(liga)}"/>
+                        </h:form>
+                        
+                    </p:column>
+                
+                
+                
+                
+                
+                </p:dataTable>
+            </ui:define>
+
+           
+
+        </ui:composition>
+
+    </body>
+</html>

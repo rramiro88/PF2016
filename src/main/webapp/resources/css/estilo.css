@@ -5,10 +5,15 @@ and open the template in the editor.
 */
 /* 
     Created on : 02/08/2014, 22:15:36
-    Author     : usuario
+    Author     : Ramiro
 */
 
 
+@media screen and (max-width: 480px){
+    #footer-fijo{
+        display: none;
+    }
+}
 
 body {
 
@@ -16,7 +21,7 @@ body {
     font-family: 'Bree Serif', serif;
 
 
-    background: #b7df2d;  
+    background: white;  
     background: -moz-linear-gradient(top, #b7df2d 0%, #e3f5ab 16%, white 28%);  
     background: -webkit-linear-gradient(top, #b7df2d 0%,#e3f5ab 16%,white 28%);  
     background: linear-gradient(to top, #b7df2d 0%,#e3f5ab 16%,white 28%);  
@@ -52,25 +57,25 @@ label{
     margin-right: 20px;
 }
 
-.navbar-default {
+/*.navbar-default {
 
     position: relative;
     z-index: 10;
-    /*    opacity: 0.8;*/
+        opacity: 0.8;
     border-color: #2d9a00;
     box-shadow: 2px 2px 30px rgb(45, 154, 0);
 
-}
+}*/
 
 contenido-centrado {
     margin: 0 auto;
 }
 
 
-.navbar-nav > li{
+/*.navbar-nav > li{
     padding-left:60px;
     padding-right:60px;
-}
+}*/
 
 .lista {
 
@@ -111,6 +116,7 @@ ul{
     background-repeat: no-repeat;
     background-position: center;
     margin-top: 3%;
+  
 
 
 
@@ -160,9 +166,9 @@ ul{
 }
 
 .ui-selectonemenu{
-    
+
     padding-right: 0 !important; 
-    
+
 }
 
 .ui-selectonemenu .ui-selectonemenu-trigger{
@@ -215,20 +221,26 @@ ul{
     opacity: 0.7;
 }
 
+.navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+}
+
 #menu-navegacion{
-/*    background: linear-gradient(top, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%); 
-    background: -webkit-linear-gradient(top, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%); 
-    background:-moz-linear-gradient(top, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%); */
-    
-    
+    /*    background: linear-gradient(top, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%); 
+        background: -webkit-linear-gradient(top, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%); 
+        background:-moz-linear-gradient(top, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%); */
+
+
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 0 0 60px 60px;
-    width: 70%;
+    /*    border-radius: 0 0 60px 60px;
+        width: 70%;*/
     padding-top: 1%;
     padding-bottom: 1%;
-    
+    background-color: transparent;
+
 }
 
 #menu-navegacion img{
@@ -236,7 +248,7 @@ ul{
 }
 
 #menu-navegacion img{
-     transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 #menu-navegacion img:hover{
@@ -250,6 +262,6 @@ ul{
 
 .ui-progressbar .ui-progressbar-label{
     font-weight: normal !important;
-    
+
 }
 
