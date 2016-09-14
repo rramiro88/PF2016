@@ -117,6 +117,16 @@ public class Tactica implements Serializable {
 
     }
     
+    public Jugador obtenerReemplazo(){
+        for (Jugador j : club.getPlantel()) {
+            if(!posicionesEnCancha.containsKey(j.getId())){
+                return j;
+            }
+        }
+        
+        return null;
+    }
+    
      public Jugador obtenerJugadorPorID(Long id){
         
          for (Jugador j : club.getPlantel()) {
@@ -258,6 +268,18 @@ public class Tactica implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+   
+
+    public void quitarJugadorDeTactica(Long id) {
+        
+        String pos = posicionesEnCancha.remove(id);
+        if(pos!=null){
+            
+            Jugador j = obtenerReemplazo();
+            posicionesEnCancha.put(j.getId(), pos);
+        }
     }
 
 }

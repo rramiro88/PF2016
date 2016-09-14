@@ -10,7 +10,6 @@ import entidades.Jugador;
 import entidades.Oferta;
 import entidades.Tactica;
 import java.io.Serializable;
-import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -31,16 +30,10 @@ public class LogicaTactica implements Serializable {
 
         
       
+       tacticaVendedor.quitarJugadorDeTactica(jugador.getId()); 
         
         
-        
-        List<Jugador> convocados = tacticaVendedor.getConvocados();
-        if (convocados.contains(jugador)) {
-           
-            convocados.remove(jugador);
-            convocados.add(tacticaVendedor.getNoConvocados().get(0));
-            
-        }
+       
 
         jugador.setNumeroCamiseta(comprador.getNumerosLibres().get(0));
 

@@ -53,7 +53,7 @@ public class LogicaMercado implements Serializable {
      */
     public boolean transferir(Oferta oferta) {
 
-        boolean respuesta = false;
+
 
         JugadorDAO jugadorDAO = new JugadorDAO();
         ClubDAO clubDAO = new ClubDAO();
@@ -65,26 +65,32 @@ public class LogicaMercado implements Serializable {
             return false;
         }
 
-        
+        //Seteo el nuevo club del jugador
         oferta.getJugadorObjetivo().setClub(oferta.getOrigen());
+        //Agrego el jugador al club
         oferta.getOrigen().agregarJugador(oferta.getJugadorObjetivo());
-
+        //Quito al jugador del club anterior
         oferta.getDestino().getPlantel().remove(oferta.getJugadorObjetivo());
         
-        
+        //Acomodo las tacticas en las que participaba el jugador
         logicaTactica.reorganizarTacticas(oferta);
         
+        //Transfiero los fondos
         oferta.getOrigen().setPresupuesto(oferta.getOrigen().getPresupuesto() - oferta.getMontoDeOperacion());
         oferta.getDestino().setPresupuesto(oferta.getDestino().getPresupuesto() + oferta.getMontoDeOperacion());
 
+        //Agrego las notificaciones
         oferta.getDestino().agregarNotificacion("El jugador " + oferta.getJugadorObjetivo().getNombre() + " ha sido transferido a " + oferta.getOrigen().getNombre());
         oferta.getOrigen().agregarNotificacion("El club " + oferta.getDestino().getNombre() + " ha aceptado la oferta por " + oferta.getJugadorObjetivo().getNombre() + ". El jugador se incorpora a tu plantel. El gasto total fue de $ " + oferta.getMontoDeOperacion());
 
-//        oferta.getJugadorObjetivo().setNumeroCamiseta(oferta.getOrigen().getNumerosLibres().get(0));
-        
+
+
+        //Persisto los clubes y jugador
         jugadorDAO.actualizarJugador(oferta.getJugadorObjetivo());
         clubDAO.actualizarClub(oferta.getOrigen());
         clubDAO.actualizarClub(oferta.getDestino());
+        
+        //Elimino la oferta
         ofertaDAO.eliminarOferta(oferta);
 
         return true;
