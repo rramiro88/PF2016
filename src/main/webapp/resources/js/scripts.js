@@ -2,9 +2,7 @@
 
 jQuery(document).ready(function () {
 
-    limpiarCanvas();
-    dibujarCancha();
-
+ 
 
 });
 
@@ -28,13 +26,8 @@ function limpiarCanvas() {
 
 }
 
-function dibujarCancha(){
-    var canvas = document.getElementById('canvas');
-    ctx = canvas.getContext('2d');
-    var img = new Image();
-    img.src = '/PF2016/javax.faces.resource/images/cancha.jpg';
-    ctx.drawImage(img, 0, 0, 390, 500);
-}
+
+
 
 
 function dibujarJugador(x, y, numero) {

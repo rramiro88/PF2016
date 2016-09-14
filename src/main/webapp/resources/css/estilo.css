@@ -15,6 +15,11 @@ and open the template in the editor.
     }
 }
 
+#canvas{
+    background-image: url("#{resource['images:cancha.jpg']}");
+    background-size: cover;
+}
+
 body {
 
     /*        background:url("#{resource['images:piso.png']}");*/
