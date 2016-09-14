@@ -204,7 +204,7 @@ public class TacticaController implements Serializable {
 
     public void dibujarJugadores() {
         RequestContext.getCurrentInstance().execute("limpiarCanvas()");
-        RequestContext.getCurrentInstance().execute("dibujarCancha()");
+       
         
 
         Tactica tactica = sesionController.getUsuarioLogueado().getClub().getTacticas().get(0);
