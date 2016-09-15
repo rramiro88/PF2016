@@ -100,7 +100,7 @@ public class SesionController implements Serializable {
 
         actualizarUsuario();
         
-        this.addMessage("Actualizacion exitosa", "");
+       
     }
 
     SesionController() {

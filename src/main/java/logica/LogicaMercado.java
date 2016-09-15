@@ -91,6 +91,7 @@ public class LogicaMercado implements Serializable {
         clubDAO.actualizarClub(oferta.getDestino());
         
         //Elimino la oferta
+        
         ofertaDAO.eliminarOferta(oferta);
 
         return true;

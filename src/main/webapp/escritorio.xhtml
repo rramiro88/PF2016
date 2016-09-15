@@ -13,7 +13,7 @@
         <ui:composition template="./templateEscritorio2.xhtml">
 
 
-            <ui:define name="izquierda">
+            <ui:define name="derecha">
 
 
                 <p:graphicImage id="imagenEscudo" value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive escudo contenido-centrado"></p:graphicImage>
@@ -27,7 +27,7 @@
 
             </ui:define>
 
-            <ui:define name="derecha">
+            <ui:define name="izquierda">
 
                 <h3>Ofertas Recibidas</h3>
                 <hr/>
@@ -42,8 +42,8 @@
                         <p:outputLabel value="#{oferta.montoDeOperacion}"/>
                     </p:column>
 
-                    <p:column headerText="Origen">
-                        <p:outputLabel value="#{oferta.origen.nombre}"/>
+                    <p:column headerText="Accion">
+                        <p:commandLink value="Evaluar" action="${mercadoController.evaluarOferta(oferta)}"/>
                     </p:column>
 
                 </p:dataTable>
@@ -54,11 +54,13 @@
                     <p:commandButton update="notificaciones" action="#{sesionController.leerNotificaciones()}" value="Marcar como leidas"/>
                 </h:form>
                 <br/>
-                <p:dataList id="notificaciones" value="#{sesionController.usuarioLogueado.club.notificaciones}" var="notificacion" emptyMessage="No hay notificaciones por leer">
+                <p:panel id="notificaciones">
+                    <ui:repeat value="${sesionController.usuarioLogueado.club.notificaciones}" var="notificacion">
 
-                    <p:outputLabel value="#{notificacion.mensaje}"/>
+                        <p:outputLabel value="#{notificacion.mensaje}"/>
 
-                </p:dataList>
+                    </ui:repeat>
+                </p:panel>
 
 
             </ui:define>

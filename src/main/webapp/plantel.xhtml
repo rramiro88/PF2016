@@ -30,10 +30,10 @@
                         <h:graphicImage value="#{resource['images:jugador.png']}" styleClass="img-responsive" style="display: inline; padding:10px"/>
                         <h:outputText value="#{jugador.nombre}"></h:outputText>
                     </p:column>
-                    <p:column headerText="Salario" sortBy="#{jugador.salario}">
+                    <p:column headerText="Salario" sortBy="#{jugador.salario}" width="15%">
                         <h:outputText value="#{jugador.salario}"></h:outputText>
                     </p:column>
-                    <p:column>
+                    <p:column width="15%">
                         <h:form>
                             <p:commandLink update="tablaPlantel" action="#{mercadoController.liberarJugador(jugador,sesionController.usuarioLogueado.club)}" value="Liberar">
                                 <p:confirm header="Confirmacion" message="Esta seguro que desea liberar al jugador? Dejará su equipo inmediatamente, y se le debera pagar lo que resta de contrato" icon="ui-icon-alert" />

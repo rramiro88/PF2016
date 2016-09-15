@@ -28,6 +28,9 @@ public class MercadoController implements Serializable{
 
     @Inject
     private LogicaMercado miLogicaMercado;
+    
+    @Inject
+    private SesionController sesionController;
 
     private List<Jugador> listaDeLibres;
 
@@ -108,6 +111,8 @@ public class MercadoController implements Serializable{
     public String transferirClubAClub() {
 
         if (miLogicaMercado.transferir(oferta)) {
+            
+            sesionController.getUsuarioLogueado().getClub().getOfertasRecibidas().remove(oferta);
             System.out.println("Jugador transferido");
             this.addMessage("El jugador fue transferido al club " + oferta.getOrigen().getNombre() + ". Le quedan " + oferta.getMontoDeOperacion() + " limpios por la transaccion.", "");
             return "plantel";
@@ -119,7 +124,9 @@ public class MercadoController implements Serializable{
     }
 
     public String rechazarOferta() {
+        
         miLogicaMercado.rechazarOferta(this.oferta);
+        sesionController.getUsuarioLogueado().getClub().getOfertasRecibidas().remove(oferta);
         this.addMessage("La oferta fue rechazada", "");
         return "plantel";
     }

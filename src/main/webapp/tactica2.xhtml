@@ -22,6 +22,8 @@
 
             <ui:define name="centro">
 
+                <p:growl autoUpdate="true"/>
+
                 <h:form>
                     <p:remoteCommand action="${tacticaController.dibujarJugadores()}" autoRun="true"/>
                 </h:form>
@@ -30,38 +32,38 @@
                     <p:column headerText="Nombre" sortBy="${jugador.nombre}" width="15%">
                         <p:outputLabel id="nombre" value="${jugador.nombre}"/>
                         <p:overlayPanel for="nombre">
-                            
-                            
-                            
-                            <div style="background-color: limegreen; padding: 10px; opacity: 0.9; border-radius: 10px;">
-                            <p:commandButton value="Suplente 1" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
-                            <p:commandButton value="Suplente 2" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
-                            <p:commandButton value="Suplente 3" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
-                            <p:commandButton value="Suplente 4" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
-                            <p:commandButton value="Suplente 5" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
-                            </div>
-                            
-                            <hr/>
 
-                            <p:commandButton value="Wing Izq" action="${tacticaController.agregarJugador(jugador, 'DI')}"/>
-                            <p:commandButton value="Delantero centro 1" action="${tacticaController.agregarJugador(jugador, 'DC1')}"/>
-                            <p:commandButton value="Delantero centro 2" action="${tacticaController.agregarJugador(jugador, 'DC2')}"/>
-                            <p:commandButton value="Wing Der" action="${tacticaController.agregarJugador(jugador, 'DD')}"/>
-                            <hr/>
-                            <p:commandButton value="Medio Izq" action="${tacticaController.agregarJugador(jugador, 'MI')}"/>
-                            <p:commandButton value="Mediocentro 1" action="${tacticaController.agregarJugador(jugador, 'MC1')}"/>
-                            <p:commandButton value="Mediocentro 2" action="${tacticaController.agregarJugador(jugador, 'MC2')}"/>
-                            <p:commandButton value="Medio Der" action="${tacticaController.agregarJugador(jugador, 'MD')}"/>
-                            <hr/>
-                            <p:commandButton value="Lateral Izq" action="${tacticaController.agregarJugador(jugador, 'LI')}"/>
-                            <p:commandButton value="1er Central" action="${tacticaController.agregarJugador(jugador, 'CT1')}"/>
-                            <p:commandButton value="2do Central" action="${tacticaController.agregarJugador(jugador, 'CT2')}"/>
-                            <p:commandButton value="Lateral Der" action="${tacticaController.agregarJugador(jugador, 'LD')}"/>
-                            <hr/>
-                            <p:commandButton value="Arquero" action="${tacticaController.agregarJugador(jugador, 'ARQ')}" style="margin-left: 40%"/>
-                        
-                            
-                            
+                            <h:form>
+
+                                <div style="background-color: limegreen; padding: 10px; opacity: 0.9; border-radius: 10px;">
+                                    <p:commandButton value="Suplente 1" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                                    <p:commandButton value="Suplente 2" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                                    <p:commandButton value="Suplente 3" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                                    <p:commandButton value="Suplente 4" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                                    <p:commandButton value="Suplente 5" action="${tacticaController.agregarJugador(jugador, 'SUP')}"/>
+                                </div>
+
+                                <hr/>
+
+                                <p:commandButton value="Wing Izq" action="${tacticaController.agregarJugador(jugador, 'DI')}"/>
+                                <p:commandButton value="Delantero centro 1" action="${tacticaController.agregarJugador(jugador, 'DC1')}"/>
+                                <p:commandButton value="Delantero centro 2" action="${tacticaController.agregarJugador(jugador, 'DC2')}"/>
+                                <p:commandButton value="Wing Der" action="${tacticaController.agregarJugador(jugador, 'DD')}"/>
+                                <hr/>
+                                <p:commandButton value="Medio Izq" action="${tacticaController.agregarJugador(jugador, 'MI')}"/>
+                                <p:commandButton value="Mediocentro 1" action="${tacticaController.agregarJugador(jugador, 'MC1')}"/>
+                                <p:commandButton value="Mediocentro 2" action="${tacticaController.agregarJugador(jugador, 'MC2')}"/>
+                                <p:commandButton value="Medio Der" action="${tacticaController.agregarJugador(jugador, 'MD')}"/>
+                                <hr/>
+                                <p:commandButton value="Lateral Izq" action="${tacticaController.agregarJugador(jugador, 'LI')}"/>
+                                <p:commandButton value="1er Central" action="${tacticaController.agregarJugador(jugador, 'CT1')}"/>
+                                <p:commandButton value="2do Central" action="${tacticaController.agregarJugador(jugador, 'CT2')}"/>
+                                <p:commandButton value="Lateral Der" action="${tacticaController.agregarJugador(jugador, 'LD')}"/>
+                                <hr/>
+                                <p:commandButton value="Arquero" action="${tacticaController.agregarJugador(jugador, 'ARQ')}" style="margin-left: 40%"/>
+
+                            </h:form>
+
                         </p:overlayPanel>
                     </p:column>
                     <p:column headerText="N°" sortBy="${jugador.numeroCamiseta}">
@@ -100,7 +102,7 @@
 
                 </p:dataTable>
 
-               
+
 
             </ui:define>
 
@@ -108,11 +110,15 @@
 
 
                 <canvas id="canvas" width="390" height="510">
-                    
+
                     canvas no soportado
-                    
+
                 </canvas>
-               
+
+                <h:form>
+                    <p:commandButton icon="ui-icon-disk" value="Guardar Tactica" action="${sesionController.actualizarUsuario()}"/>
+                </h:form>
+
             </ui:define>
 
 
