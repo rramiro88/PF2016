@@ -11,6 +11,7 @@ import dao.OfertaDAO;
 import entidades.Club;
 import entidades.Jugador;
 import entidades.Oferta;
+import entidades.Prestamo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -21,13 +22,16 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class LogicaMercado implements Serializable {
-    
+
     @Inject
     LogicaTactica logicaTactica;
+    
+    
+    
 
     private final int MIN_PLANTEL = 11;
     private final int MAX_PLANTEL = 30;
-    
+
     private Oferta ofertaEnCuestion;
 
     public Oferta getOfertaEnCuestion() {
@@ -53,8 +57,6 @@ public class LogicaMercado implements Serializable {
      */
     public boolean transferir(Oferta oferta) {
 
-
-
         JugadorDAO jugadorDAO = new JugadorDAO();
         ClubDAO clubDAO = new ClubDAO();
         OfertaDAO ofertaDAO = new OfertaDAO();
@@ -65,16 +67,25 @@ public class LogicaMercado implements Serializable {
             return false;
         }
 
-        //Seteo el nuevo club del jugador
-        oferta.getJugadorObjetivo().setClub(oferta.getOrigen());
-        //Agrego el jugador al club
-        oferta.getOrigen().agregarJugador(oferta.getJugadorObjetivo());
-        //Quito al jugador del club anterior
-        oferta.getDestino().getPlantel().remove(oferta.getJugadorObjetivo());
-        
+        if (oferta.getCondicion().equals(Oferta.VENTA)) {
+            //Seteo el nuevo club del jugador
+            oferta.getJugadorObjetivo().setClub(oferta.getOrigen());
+            //Agrego el jugador al club
+            oferta.getOrigen().agregarJugador(oferta.getJugadorObjetivo());
+            //Quito al jugador del club anterior
+            oferta.getDestino().getPlantel().remove(oferta.getJugadorObjetivo());
+        }else if(oferta.getCondicion().equals(Oferta.PRESTAMO)){
+            
+            
+            
+            programarPrestamo(oferta);
+            
+            
+        }
+
         //Acomodo las tacticas en las que participaba el jugador
         logicaTactica.reorganizarTacticas(oferta);
-        
+
         //Transfiero los fondos
         oferta.getOrigen().setPresupuesto(oferta.getOrigen().getPresupuesto() - oferta.getMontoDeOperacion());
         oferta.getDestino().setPresupuesto(oferta.getDestino().getPresupuesto() + oferta.getMontoDeOperacion());
@@ -83,15 +94,12 @@ public class LogicaMercado implements Serializable {
         oferta.getDestino().agregarNotificacion("El jugador " + oferta.getJugadorObjetivo().getNombre() + " ha sido transferido a " + oferta.getOrigen().getNombre());
         oferta.getOrigen().agregarNotificacion("El club " + oferta.getDestino().getNombre() + " ha aceptado la oferta por " + oferta.getJugadorObjetivo().getNombre() + ". El jugador se incorpora a tu plantel. El gasto total fue de $ " + oferta.getMontoDeOperacion());
 
-
-
         //Persisto los clubes y jugador
         jugadorDAO.actualizarJugador(oferta.getJugadorObjetivo());
         clubDAO.actualizarClub(oferta.getOrigen());
         clubDAO.actualizarClub(oferta.getDestino());
-        
+
         //Elimino la oferta
-        
         ofertaDAO.eliminarOferta(oferta);
 
         return true;
@@ -181,12 +189,12 @@ public class LogicaMercado implements Serializable {
     public void rechazarOferta(Oferta oferta) {
         /* oferta.getOrigen().getOfertasEnviadas().remove(oferta);
          oferta.getDestino().getOfertasRecibidas().remove(oferta);*/
-        
-        oferta.getOrigen().agregarNotificacion("la oferta por "+oferta.getJugadorObjetivo().getNombre()+" ha sido rechazada por el club "+oferta.getDestino().getNombre());
-        
+
+        oferta.getOrigen().agregarNotificacion("la oferta por " + oferta.getJugadorObjetivo().getNombre() + " ha sido rechazada por el club " + oferta.getDestino().getNombre());
+
         ClubDAO clubDAO = new ClubDAO();
         clubDAO.actualizarClub(oferta.getOrigen());
-        
+
         OfertaDAO ofertaDAO = new OfertaDAO();
         ofertaDAO.eliminarOferta(oferta);
     }
@@ -195,9 +203,18 @@ public class LogicaMercado implements Serializable {
         boolean respuesta = false;
 
         if (oferta.getMontoDeOperacion() <= oferta.getOrigen().getPresupuesto()
-                && oferta.getDestino().getPlantel().size()>MIN_PLANTEL
-                && oferta.getOrigen().getPlantel().size()<MAX_PLANTEL) {
+                && oferta.getDestino().getPlantel().size() > MIN_PLANTEL
+                && oferta.getOrigen().getPlantel().size() < MAX_PLANTEL) {
             respuesta = true;
+        }
+
+        if (oferta.getCondicion().equals(Oferta.PRESTAMO)) {
+            if (oferta.getDesde() == null
+                    || oferta.getHasta() == null
+                    || oferta.getDesde().before(new Date())
+                    || oferta.getHasta().before(new Date())) {
+                return false;
+            }
         }
 
         return respuesta;
@@ -206,6 +223,35 @@ public class LogicaMercado implements Serializable {
     public List<Jugador> buscarJugadoresPorClub(String nombreClub) {
         ClubDAO clubDAO = new ClubDAO();
         return clubDAO.obtenerJugadoresPorNombreDeClub(nombreClub);
+    }
+
+    private void programarPrestamo(Oferta oferta) {
+        
+        Prestamo prestamo = new Prestamo();
+        
+        prestamo.setClubOriginal(oferta.getDestino());
+        prestamo.setDesde(oferta.getDesde());
+        prestamo.setHasta(oferta.getHasta());
+        prestamo.setJugador(oferta.getJugadorObjetivo());
+        
+        oferta.getOrigen().getPrestamos().add(prestamo);
+        
+        
+    }
+
+    void devolverJugador(Prestamo prestamo, Club club) {
+        prestamo.getClubOriginal().agregarJugador(prestamo.getJugador());
+        prestamo.getJugador().setClub(prestamo.getClubOriginal());
+        club.getTacticas().get(0).quitarJugadorDeTactica(prestamo.getJugador().getId());
+        
+        
+    }
+
+    void prestarJugador(Prestamo prestamo, Club club){
+        club.agregarJugador(prestamo.getJugador());
+        prestamo.getJugador().setClub(club);
+        prestamo.getJugador().setNumeroCamiseta(club.getNumerosLibres().get(0));
+        club.agregarNotificacion("Se inicia el prestamo del jugador "+prestamo.getJugador().getNombre()+". Finaliza el dia "+prestamo.getHasta());
     }
 
 }

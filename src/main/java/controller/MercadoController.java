@@ -9,6 +9,7 @@ import logica.LogicaMercado;
 import entidades.Club;
 import entidades.Jugador;
 import entidades.Oferta;
+import entidades.Prestamo;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -136,4 +137,5 @@ public class MercadoController implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    
 }

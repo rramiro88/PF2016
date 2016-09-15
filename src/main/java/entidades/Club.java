@@ -44,6 +44,10 @@ public class Club implements Serializable {
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Jugador> plantel;
+    
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Prestamo> prestamos;
 
     @OneToMany(mappedBy = "origen", cascade = CascadeType.ALL)
     private List<Oferta> ofertasEnviadas;
@@ -70,7 +74,18 @@ public class Club implements Serializable {
         notificaciones = new ArrayList<>();
         ligas = new ArrayList<>();
         presupuesto = 0D;
+        prestamos = new ArrayList<>();
     }
+
+    public List<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(List<Prestamo> prestamos) {
+        this.prestamos = prestamos;
+    }
+    
+    
 
     public List<Liga> getLigas() {
         return ligas;

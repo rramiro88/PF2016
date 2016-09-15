@@ -103,6 +103,7 @@ public class UsuarioDAO {
         System.out.println("OFERTAS RECIBIDAS---> " + u.getClub().getOfertasRecibidas().size());
         System.out.println("NOTIFICACIONES---> "+ u.getClub().getNotificaciones().size());
         System.out.println("LIGAS---> "+ u.getClub().getLigas().size());
+        System.out.println("PRESTAMOS---> "+ u.getClub().getPrestamos().size());
         
         
         if(u.getClub().getLigas().size()>0){
@@ -116,6 +117,8 @@ public class UsuarioDAO {
         }else{
             System.out.println("NO HAY TACTICAS CARGADAS");
         }
+        
+        
 
         s.close();
 

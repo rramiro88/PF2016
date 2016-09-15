@@ -9,11 +9,13 @@ import dao.ClubDAO;
 import dao.JugadorDAO;
 import dao.PartidosDAO;
 import entidades.Club;
-import entidades.Jugador;
 import entidades.Partido;
+import entidades.Prestamo;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import utilidades.Simulador;
 
@@ -24,6 +26,10 @@ import utilidades.Simulador;
 @Named
 @ApplicationScoped
 public class LogicaAdministracion implements Serializable {
+    
+    
+    @Inject
+    LogicaMercado logicaMercado;
 
     public void cargarJugadoresDB() {
 
@@ -33,9 +39,6 @@ public class LogicaAdministracion implements Serializable {
 
     }
 
-    /**
-     * Metodo no testeado 28/06/2016
-     */
     public void avanzarUnDia() {
 
         PartidosDAO partidosDAO = new PartidosDAO();
@@ -44,7 +47,12 @@ public class LogicaAdministracion implements Serializable {
 
         this.simularPartidos(partidosASimular);
 
-        entrenar();
+        List<Club> clubes = buscarClubesPorNombre("");
+
+        for (Club club : clubes) {
+            entrenar(club);
+            revisarPrestamos(club);
+        }
 
     }
 
@@ -78,21 +86,28 @@ public class LogicaAdministracion implements Serializable {
         return clubDAO.obtenerClubesPorNombre(nombreClub);
     }
 
-    private void entrenar() {
+    private void entrenar(Club club) {
 
-        List<Club> clubes;
         LogicaEntrenamiento logicaEntrenamiento = new LogicaEntrenamiento();
 
-        ClubDAO clubDAO = new ClubDAO();
-        clubes = clubDAO.obtenerClubesPorNombre("");
+        logicaEntrenamiento.calcularProgresos(club.getPlantel());
 
-        for (Club club : clubes) {
+    }
 
-            logicaEntrenamiento.calcularProgresos(club.getPlantel());
+    private void revisarPrestamos(Club club) {
+        List<Prestamo> prestamos = club.getPrestamos();
+        
+        for (Prestamo prestamo : prestamos) {
+            if(prestamo.getHasta().compareTo(new Date())==0){
+                logicaMercado.devolverJugador(prestamo, club);
+                prestamos.remove(prestamo);
+            }
+            if(prestamo.getDesde().compareTo(new Date())==0){
+                logicaMercado.prestarJugador(prestamo, club);
+                
+            }
             
-
         }
-
     }
 
 }
