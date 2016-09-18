@@ -12,6 +12,7 @@ import entidades.Notificacion;
 import entidades.Tactica;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -33,16 +34,13 @@ public class ClubDAO {
 
         JugadorDAO jugadorDAO = new JugadorDAO();
         List<Jugador> jugadoresIniciales = jugadorDAO.crearJugadoresAlAzarLista();
-        
-        
+
         List<Integer> numerosLibres = club.getNumerosLibres();
-       
+
         for (int i = 0; i < jugadoresIniciales.size(); i++) {
             jugadoresIniciales.get(i).setNumeroCamiseta(numerosLibres.get(i));
         }
-        
-        
-        
+
         club.setPlantel(jugadoresIniciales);
 
         for (Jugador jugador : jugadoresIniciales) {
@@ -53,7 +51,6 @@ public class ClubDAO {
         tactica.setNombre("Liga");
         tactica.setClub(club);
 
-        
         ArrayList<String> posiciones = new ArrayList<>();
         posiciones.add("100a100");
         posiciones.add("100a100");
@@ -66,7 +63,7 @@ public class ClubDAO {
         posiciones.add("100a100");
         posiciones.add("100a100");
         posiciones.add("100a100");
-        
+
         tactica.setPosiciones(posiciones);
 
         club.getTacticas().add(tactica);
@@ -93,7 +90,6 @@ public class ClubDAO {
             tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(8).getId(), Tactica.MEDIAPUNTA);
             tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(9).getId(), Tactica.DELANTERO_CENTRO1);
             tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(10).getId(), Tactica.DELANTERO_CENTRO2);
-            
 
 //            s.save(tactica);
             s.persist(club);
@@ -141,13 +137,11 @@ public class ClubDAO {
         respuesta = consulta.list();
 
         for (Club c : respuesta) {
-            System.out.println(c.getTacticas().size());
+            System.out.println("ClubDAO.obtenerClubesPorNombre: TACTICAS-->" + c.getTacticas().size());
+            System.out.println("ClubDAO.obtenerClubesPorNombre: PRESTAMOS-->" + c.getPrestamos().size());
 
         }
 
-//        Criteria c = s.createCriteria(Alumno.class)
-//                .add(Restrictions.like("nombreYApellido", nombre, MatchMode.START));
-//        respuesta = c.list();
         s.close();
 
         return respuesta;
@@ -157,16 +151,16 @@ public class ClubDAO {
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session s = sf.openSession();
         s.beginTransaction();
-        
+
         for (Notificacion notificacion : notificaciones) {
             s.saveOrUpdate(notificacion);
         }
-        
+
         s.getTransaction().commit();
-        
+
         s.close();
     }
-    
+
     public List<Jugador> obtenerJugadoresPorNombreDeClub(String nombreClub) {
         List<Object[]> resultado;
         List<Jugador> respuesta = new ArrayList<>();
@@ -180,17 +174,55 @@ public class ClubDAO {
 
         resultado = consulta.list();
 
-        
-
         s.close();
-        
-        for ( Object[] r : resultado) {
-            
-            respuesta.add((Jugador)r[0]);
-            
+
+        for (Object[] r : resultado) {
+
+            respuesta.add((Jugador) r[0]);
+
         }
 
         return respuesta;
+    }
+
+    public void inicializarPrestamos(Club origen) {
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+
+        try {
+
+            Hibernate.initialize(origen.getPrestamos());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            s.close();
+        }
+
+    }
+
+    public Club obtenerClubPorId(long id) {
+
+        Club club = null;
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+
+        try {
+
+            club = (Club) s.get(Club.class, id);
+            System.out.println(club.getPrestamos().size());
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            s.close();
+        }
+
+        return club;
+
     }
 
 }

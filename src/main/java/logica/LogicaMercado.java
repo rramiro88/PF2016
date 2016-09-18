@@ -225,6 +225,7 @@ public class LogicaMercado implements Serializable {
         return clubDAO.obtenerJugadoresPorNombreDeClub(nombreClub);
     }
 
+
     private void programarPrestamo(Oferta oferta) {
         
         Prestamo prestamo = new Prestamo();
@@ -234,7 +235,15 @@ public class LogicaMercado implements Serializable {
         prestamo.setHasta(oferta.getHasta());
         prestamo.setJugador(oferta.getJugadorObjetivo());
         
-        oferta.getOrigen().getPrestamos().add(prestamo);
+        ClubDAO clubDAO = new ClubDAO();
+        
+        Club clubOrigen = clubDAO.obtenerClubPorId(oferta.getOrigen().getId());
+        clubOrigen.getPrestamos().add(prestamo);
+        clubDAO.actualizarClub(clubOrigen);
+        
+        /**
+         * VER!!! no persiste el prestamo.
+         */
         
         
     }
