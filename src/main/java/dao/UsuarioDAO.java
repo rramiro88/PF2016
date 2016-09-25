@@ -99,26 +99,26 @@ public class UsuarioDAO {
                 .add(Restrictions.eq("nombre", nombre)).list();
         u = resultado.get(0);
 
-        System.out.println("OFERTAS ENVIADAS---> " + u.getClub().getOfertasEnviadas().size());
-        System.out.println("OFERTAS RECIBIDAS---> " + u.getClub().getOfertasRecibidas().size());
-        System.out.println("NOTIFICACIONES---> "+ u.getClub().getNotificaciones().size());
-        System.out.println("LIGAS---> "+ u.getClub().getLigas().size());
-        System.out.println("PRESTAMOS---> "+ u.getClub().getPrestamos().size());
-        
-        
-        if(u.getClub().getLigas().size()>0){
-            System.out.println("EQUIPOS--->" +u.getClub().getLigas().get(0).getEquiposParticipantes().size());
-            System.out.println("PARTIDOS--->" +u.getClub().getLigas().get(0).getPartidos().size());
+        System.out.println("UsuarioDAO.getUsuarioByNombre: OFERTAS ENVIADAS---> " + u.getClub().getOfertasEnviadas().size());
+        System.out.println("UsuarioDAO.getUsuarioByNombre: OFERTAS RECIBIDAS---> " + u.getClub().getOfertasRecibidas().size());
+        System.out.println("UsuarioDAO.getUsuarioByNombre: NOTIFICACIONES---> " + u.getClub().getNotificaciones().size());
+        System.out.println("UsuarioDAO.getUsuarioByNombre: LIGAS---> " + u.getClub().getLigas().size());
+        System.out.println("UsuarioDAO.getUsuarioByNombre: PRESTAMOS---> " + u.getClub().getPrestamos().size());
+        System.out.println("UsuarioDAO.getUsuarioByNombre: PARTIDOS LOCAL-->" + u.getClub().getPartidosLocal().size());
+        System.out.println("UsuarioDAO.getUsuarioByNombre: PARTIDOS VISITANTE-->" + u.getClub().getPartidosVisitante().size());
+        System.out.println("UsuarioDAO.getUsuarioByNombre: TRANSACCIONES-->" + u.getClub().getTransacciones().size());
+
+        if (u.getClub().getLigas().size() > 0) {
+            System.out.println("EQUIPOS--->" + u.getClub().getLigas().get(0).getEquiposParticipantes().size());
+            System.out.println("PARTIDOS--->" + u.getClub().getLigas().get(0).getPartidos().size());
         }
-        
+
         if (u.getClub().getTacticas().size() > 0) {
             System.out.println("POSICIONES---> " + u.getClub().getTacticas().get(0).getPosiciones().size());
             System.out.println("TITULARIDADES--->" + u.getClub().getTacticas().get(0).getPosicionesEnCancha().size());
-        }else{
+        } else {
             System.out.println("NO HAY TACTICAS CARGADAS");
         }
-        
-        
 
         s.close();
 

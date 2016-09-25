@@ -45,6 +45,7 @@ public class ClubDAO {
 
         for (Jugador jugador : jugadoresIniciales) {
             jugador.setClub(club);
+            jugador.setEntrenando(Jugador.PASES_CORTOS);
         }
 
         Tactica tactica = new Tactica();
@@ -139,6 +140,9 @@ public class ClubDAO {
         for (Club c : respuesta) {
             System.out.println("ClubDAO.obtenerClubesPorNombre: TACTICAS-->" + c.getTacticas().size());
             System.out.println("ClubDAO.obtenerClubesPorNombre: PRESTAMOS-->" + c.getPrestamos().size());
+            System.out.println("ClubDAO.obtenerClubesPorNombre: PARTIDOS LOCAL-->" + c.getPartidosLocal().size());
+            System.out.println("ClubDAO.obtenerClubesPorNombre: PARTIDOS VISITANTE-->" + c.getPartidosVisitante().size());
+            System.out.println("ClubDAO.obtenerClubesPorNombre: TRANSACCIONES-->"+c.getTransacciones().size());
 
         }
 
@@ -213,6 +217,7 @@ public class ClubDAO {
 
             club = (Club) s.get(Club.class, id);
             System.out.println(club.getPrestamos().size());
+            System.out.println(club.getTransacciones().size());
             
 
         } catch (Exception e) {

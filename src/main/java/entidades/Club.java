@@ -35,6 +35,14 @@ public class Club implements Serializable {
     private Double presupuesto;
     private String urlEscudo;
     
+    
+    /**
+     * Es una lista con los detalles de las transacciones economicas del club
+     */
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<TransaccionEconomica> transacciones;
+    
+    
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Notificacion> notificaciones;
@@ -46,6 +54,12 @@ public class Club implements Serializable {
     private List<Jugador> plantel;
     
 
+    /**
+     * Cada club mantiene una lista con los jugadores externos que tiene a prestamo desde otros clubes.
+     * Tambien figuran aqui los que tienen el prestamo acordado pero aun no se incorporaron.
+     * Cuando un jugador finaliza su prestamo con este club, se borra el objeto prestamo
+     * de esta lista
+     */
     @OneToMany(cascade = CascadeType.ALL)
     private List<Prestamo> prestamos;
 
@@ -60,7 +74,10 @@ public class Club implements Serializable {
     List<Tactica> tacticas;
 
     @OneToMany(mappedBy = "visitante", cascade = CascadeType.ALL)
-    private List<Partido> partidos;
+    private List<Partido> partidosVisitante;
+    
+    @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
+    private List<Partido> partidosLocal;
 
     @ManyToMany(mappedBy = "equiposParticipantes", cascade = CascadeType.ALL)
     private List<Liga> ligas;
@@ -75,8 +92,19 @@ public class Club implements Serializable {
         ligas = new ArrayList<>();
         presupuesto = 0D;
         prestamos = new ArrayList<>();
+        transacciones = new ArrayList<>();
     }
 
+    public List<TransaccionEconomica> getTransacciones() {
+        return transacciones;
+    }
+
+    public void setTransacciones(List<TransaccionEconomica> transacciones) {
+        this.transacciones = transacciones;
+    }
+
+    
+    
     public List<Prestamo> getPrestamos() {
         return prestamos;
     }
@@ -105,12 +133,20 @@ public class Club implements Serializable {
         this.notificaciones = notificaciones;
     }
 
-    public List<Partido> getPartidos() {
-        return partidos;
+    public List<Partido> getPartidosLocal() {
+        return partidosLocal;
     }
 
-    public void setPartidos(List<Partido> partidos) {
-        this.partidos = partidos;
+    public void setPartidosLocal(List<Partido> partidos) {
+        this.partidosLocal = partidos;
+    }
+    
+    public List<Partido> getPartidosVisitante() {
+        return partidosVisitante;
+    }
+
+    public void setPartidosVisitante(List<Partido> partidos) {
+        this.partidosVisitante = partidos;
     }
     
     

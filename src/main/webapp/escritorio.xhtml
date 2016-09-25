@@ -30,7 +30,7 @@
             <ui:define name="izquierda">
 
                 <h3>Ofertas Recibidas</h3>
-                <hr/>
+
                 <p:dataTable id="tabla2" value="#{sesionController.usuarioLogueado.club.ofertasRecibidas}" var="oferta" emptyMessage="No hay ofertas    ">
 
 
@@ -47,9 +47,9 @@
                     </p:column>
 
                 </p:dataTable>
-
-                <h3>Notificaciones</h3>
                 <hr/>
+                <h3>Notificaciones</h3>
+
                 <h:form>
                     <p:commandButton update="notificaciones" action="#{sesionController.leerNotificaciones()}" value="Marcar como leidas"/>
                 </h:form>
@@ -58,6 +58,25 @@
                     <ui:repeat value="${sesionController.usuarioLogueado.club.notificaciones}" var="notificacion">
 
                         <p:outputLabel value="#{notificacion.mensaje}"/>
+
+                    </ui:repeat>
+                </p:panel>
+
+                <hr/>
+                <h3>Partidos</h3>
+
+                <p:panel>
+                    <ui:repeat value="${sesionController.usuarioLogueado.club.partidosLocal}" var="plocal">
+
+                        <p:outputLabel value="${plocal.local.nombre}   -   ${plocal.visitante.nombre}"/>
+
+                    </ui:repeat>
+
+
+
+                    <ui:repeat value="${sesionController.usuarioLogueado.club.partidosVisitante}" var="pvisitante">
+
+                        <p:outputLabel value="${pvisitante.local.nombre}   -   ${pvisitante.visitante.nombre}"/>
 
                     </ui:repeat>
                 </p:panel>

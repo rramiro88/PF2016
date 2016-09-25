@@ -12,6 +12,7 @@ import entidades.Club;
 import entidades.Jugador;
 import entidades.Oferta;
 import entidades.Prestamo;
+import entidades.TransaccionEconomica;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -25,9 +26,6 @@ public class LogicaMercado implements Serializable {
 
     @Inject
     LogicaTactica logicaTactica;
-    
-    
-    
 
     private final int MIN_PLANTEL = 11;
     private final int MAX_PLANTEL = 30;
@@ -60,6 +58,9 @@ public class LogicaMercado implements Serializable {
         JugadorDAO jugadorDAO = new JugadorDAO();
         ClubDAO clubDAO = new ClubDAO();
         OfertaDAO ofertaDAO = new OfertaDAO();
+        
+         //Obtengo el club completo desde la BD, con las collections que me hacen falta
+        oferta.setOrigen(clubDAO.obtenerClubPorId(oferta.getOrigen().getId()));
 
         System.out.println("en logica!");
 
@@ -67,20 +68,30 @@ public class LogicaMercado implements Serializable {
             return false;
         }
 
-        if (oferta.getCondicion().equals(Oferta.VENTA)) {
-            //Seteo el nuevo club del jugador
-            oferta.getJugadorObjetivo().setClub(oferta.getOrigen());
-            //Agrego el jugador al club
-            oferta.getOrigen().agregarJugador(oferta.getJugadorObjetivo());
-            //Quito al jugador del club anterior
-            oferta.getDestino().getPlantel().remove(oferta.getJugadorObjetivo());
-        }else if(oferta.getCondicion().equals(Oferta.PRESTAMO)){
-            
-            
-            
-            programarPrestamo(oferta);
-            
-            
+        switch (oferta.getCondicion()) {
+            case Oferta.VENTA:
+                //Seteo el nuevo club del jugador
+                oferta.getJugadorObjetivo().setClub(oferta.getOrigen());
+                //Agrego el jugador al club
+                oferta.getOrigen().agregarJugador(oferta.getJugadorObjetivo());
+                //Quito al jugador del club anterior
+                oferta.getDestino().getPlantel().remove(oferta.getJugadorObjetivo());
+                //Agrego las notificaciones
+                oferta.getDestino().agregarNotificacion("El jugador " + oferta.getJugadorObjetivo().getNombre() + " ha sido transferido a " + oferta.getOrigen().getNombre());
+                oferta.getOrigen().agregarNotificacion("El club " + oferta.getDestino().getNombre() + " ha aceptado la oferta por " + oferta.getJugadorObjetivo().getNombre() + ". El jugador se incorpora a tu plantel. El gasto total fue de $ " + oferta.getMontoDeOperacion());
+
+                break;
+            case Oferta.PRESTAMO:
+                programarPrestamo(oferta);
+                
+                oferta.getOrigen().agregarNotificacion("El club " + oferta.getDestino().getNombre() + " ha aceptado ceder a prestamo"
+                        + "al jugador " + oferta.getJugadorObjetivo().getNombre() +". Se incorporará a tu plantel a partir de la fecha"
+                        + oferta.getDesde() + ". El costo total de la operacion es de $"+oferta.getMontoDeOperacion());
+                
+                oferta.getDestino().agregarNotificacion("El jugador " + oferta.getJugadorObjetivo().getNombre() + " se marchará a prestamo a partir del dia "+ oferta.getDesde() +
+                        " hasta el dia " + oferta.getHasta());
+                
+                break;
         }
 
         //Acomodo las tacticas en las que participaba el jugador
@@ -89,13 +100,19 @@ public class LogicaMercado implements Serializable {
         //Transfiero los fondos
         oferta.getOrigen().setPresupuesto(oferta.getOrigen().getPresupuesto() - oferta.getMontoDeOperacion());
         oferta.getDestino().setPresupuesto(oferta.getDestino().getPresupuesto() + oferta.getMontoDeOperacion());
-
-        //Agrego las notificaciones
-        oferta.getDestino().agregarNotificacion("El jugador " + oferta.getJugadorObjetivo().getNombre() + " ha sido transferido a " + oferta.getOrigen().getNombre());
-        oferta.getOrigen().agregarNotificacion("El club " + oferta.getDestino().getNombre() + " ha aceptado la oferta por " + oferta.getJugadorObjetivo().getNombre() + ". El jugador se incorpora a tu plantel. El gasto total fue de $ " + oferta.getMontoDeOperacion());
-
+        
+        
+       
+        
+        //Agrego la transaccion economica correspondiente en la contraparte
+        oferta.getOrigen().getTransacciones().add(new TransaccionEconomica(oferta.getCondicion().toUpperCase()+". Pago por transferencia del jugador "+oferta.getJugadorObjetivo().getNombre()+" al club "+oferta.getDestino().getNombre(), -oferta.getMontoDeOperacion(), new Date()));
+        
+        //Agrego la transaccion en el club actual
+        oferta.getDestino().getTransacciones().add(new TransaccionEconomica(oferta.getCondicion().toUpperCase()+". Cobro por transferencia del jugador "+oferta.getJugadorObjetivo().getNombre()+" al club "+oferta.getOrigen().getNombre(), oferta.getMontoDeOperacion(), new Date()));
+        
         //Persisto los clubes y jugador
         jugadorDAO.actualizarJugador(oferta.getJugadorObjetivo());
+
         clubDAO.actualizarClub(oferta.getOrigen());
         clubDAO.actualizarClub(oferta.getDestino());
 
@@ -225,43 +242,40 @@ public class LogicaMercado implements Serializable {
         return clubDAO.obtenerJugadoresPorNombreDeClub(nombreClub);
     }
 
-
     private void programarPrestamo(Oferta oferta) {
-        
+
         Prestamo prestamo = new Prestamo();
-        
+
         prestamo.setClubOriginal(oferta.getDestino());
         prestamo.setDesde(oferta.getDesde());
         prestamo.setHasta(oferta.getHasta());
         prestamo.setJugador(oferta.getJugadorObjetivo());
-        
-        ClubDAO clubDAO = new ClubDAO();
-        
-        Club clubOrigen = clubDAO.obtenerClubPorId(oferta.getOrigen().getId());
-        clubOrigen.getPrestamos().add(prestamo);
-        clubDAO.actualizarClub(clubOrigen);
-        
-       
-        
-        
+        oferta.getOrigen().getPrestamos().add(prestamo);
+
+//        ClubDAO clubDAO = new ClubDAO();
+//
+//        Club clubOrigen = clubDAO.obtenerClubPorId(oferta.getOrigen().getId());
+//        clubOrigen.getPrestamos().add(prestamo);
+//        clubDAO.actualizarClub(clubOrigen);
+
     }
 
     void devolverJugador(Prestamo prestamo, Club club) {
         prestamo.getClubOriginal().agregarJugador(prestamo.getJugador());
         prestamo.getJugador().setClub(prestamo.getClubOriginal());
         club.getTacticas().get(0).quitarJugadorDeTactica(prestamo.getJugador().getId());
-        
+
         System.out.println("JUGADOR DEVUELTO ------------------------------------------");
-        
-        
+        club.agregarNotificacion("El jugador "+prestamo.getJugador().getNombre() + " finalizo su prestamo y vuelve a su club original.");
+        prestamo.getClubOriginal().agregarNotificacion("El jugador "+prestamo.getJugador().getNombre() + "finalizo su prestamo y se reintegra a tu plantel");
     }
 
-    void prestarJugador(Prestamo prestamo, Club club){
+    void prestarJugador(Prestamo prestamo, Club club) {
         club.agregarJugador(prestamo.getJugador());
         prestamo.getJugador().setClub(club);
         prestamo.getJugador().setNumeroCamiseta(club.getNumerosLibres().get(0));
-        club.agregarNotificacion("Se inicia el prestamo del jugador "+prestamo.getJugador().getNombre()+". Finaliza el dia "+prestamo.getHasta());
-        
+        club.agregarNotificacion("Se inicia el prestamo del jugador " + prestamo.getJugador().getNombre() + ". Finaliza el dia " + prestamo.getHasta());
+
         System.out.println("JUGADOR INICIA PRESTAMO ----------------------------------");
     }
 

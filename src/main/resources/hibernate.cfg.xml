@@ -20,5 +20,6 @@
     <mapping class="entidades.Liga"/>
     <mapping class="entidades.Notificacion"/>
     <mapping class="entidades.Prestamo"/>
+    <mapping class="entidades.TransaccionEconomica"/>
   </session-factory>
 </hibernate-configuration>
