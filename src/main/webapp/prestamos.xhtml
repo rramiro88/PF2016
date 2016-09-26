@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./templateEscritorio2.xhtml">
+
+            <ui:define name="titulo">
+                <title>Prestamos Vigentes</title>
+            </ui:define>
+
+            <ui:define name="centro">
+                <p:dataTable emptyMessage="No tienes jugadores prestados" value="${sesionController.usuarioLogueado.club.prestamos}" var="prestamo">
+
+                    <p:column headerText="Jugador">
+                        ${prestamo.jugador.nombre}
+                    </p:column>
+                    <p:column headerText="Desde">
+                        ${prestamo.desde}
+                    </p:column>
+                    <p:column headerText="Hasta">
+                        ${prestamo.hasta}
+                    </p:column>
+                    <p:column headerText="Club original">
+                        ${prestamo.clubOriginal.nombre}
+                    </p:column>
+                    <p:column headerText="Club Actual">
+                        ${prestamo.jugador.club.nombre}
+                    </p:column>
+
+
+                </p:dataTable>
+            </ui:define>
+
+            <ui:define name="izquierda">
+
+                <ui:include src="menuOfertas.xhtml"/>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

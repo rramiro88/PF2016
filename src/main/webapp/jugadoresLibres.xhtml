@@ -39,11 +39,7 @@
             </ui:define>
 
             <ui:define name="izquierda">
-                <p:panel header="Opciones" style="margin-top: 50%" toggleable="true">
-                    <p:link href="MisOfertas.xhtml" value="Ver ofertas enviadas / recibidas"></p:link>
-                    <hr/>
-                    <p:link href="jugadoresLibres.xhtml" value="Listar jugadores libres"></p:link>
-                </p:panel>
+                <ui:include src="menuOfertas.xhtml"/>
             </ui:define>
         </ui:composition>
 

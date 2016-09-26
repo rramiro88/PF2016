@@ -98,14 +98,18 @@ public class LogicaAdministracion implements Serializable {
         List<Prestamo> prestamos = club.getPrestamos();
         
         for (Prestamo prestamo : prestamos) {
-            if(prestamo.getHasta().compareTo(new Date())==0){
+            
+            System.out.println("COMPARE:::::::::::::::::::::::"+   prestamo.getHasta().compareTo(new Date()));
+            if(prestamo.getHasta().compareTo(new Date())<=0){
                 logicaMercado.devolverJugador(prestamo, club);
                 prestamos.remove(prestamo);
             }
-            if(prestamo.getDesde().compareTo(new Date())==0){
+            if(prestamo.getDesde().compareTo(new Date())<=0){
                 logicaMercado.prestarJugador(prestamo, club);
                 
             }
+            
+            
             
         }
     }

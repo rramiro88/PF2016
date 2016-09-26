@@ -241,9 +241,7 @@ public class LogicaMercado implements Serializable {
         clubOrigen.getPrestamos().add(prestamo);
         clubDAO.actualizarClub(clubOrigen);
         
-        /**
-         * VER!!! no persiste el prestamo.
-         */
+       
         
         
     }
@@ -253,6 +251,8 @@ public class LogicaMercado implements Serializable {
         prestamo.getJugador().setClub(prestamo.getClubOriginal());
         club.getTacticas().get(0).quitarJugadorDeTactica(prestamo.getJugador().getId());
         
+        System.out.println("JUGADOR DEVUELTO ------------------------------------------");
+        
         
     }
 
@@ -261,6 +261,8 @@ public class LogicaMercado implements Serializable {
         prestamo.getJugador().setClub(club);
         prestamo.getJugador().setNumeroCamiseta(club.getNumerosLibres().get(0));
         club.agregarNotificacion("Se inicia el prestamo del jugador "+prestamo.getJugador().getNombre()+". Finaliza el dia "+prestamo.getHasta());
+        
+        System.out.println("JUGADOR INICIA PRESTAMO ----------------------------------");
     }
 
 }

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+   
+
+    <h:body>
+
+       <h:form>
+           <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span> 
+                        </button>
+ 
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <div class="nav navbar-nav" style="float:none">
+                            <div id="menu-navegacion">
+
+                                <p:link outcome="escritorio.xhtml"><p:graphicImage value="${resource['images:dock/casa.png']}" style="width: 70px;" /></p:link>
+                                <p:link outcome="cambiarNombre.xhtml"><p:graphicImage value="${resource['images:dock/engranajes.png']}" style="width: 70px;" /></p:link>
+                                <p:link outcome="plantel.xhtml"><p:graphicImage value="${resource['images:dock/equipo.png']}" style="width: 70px;" /></p:link>
+                                <p:link outcome="tactica2.xhtml"><p:graphicImage value="${resource['images:dock/estrategia.png']}" style="width: 70px;" /></p:link>
+                                <p:link outcome="buscarJugador.xhtml"><p:graphicImage value="${resource['images:dock/exchange.png']}" style="width: 70px;" /></p:link>
+                                <p:link ><p:graphicImage value="${resource['images:dock/estadio.png']}" style="width: 70px;" /></p:link>
+                                <p:link outcome="finanzas.xhtml"><p:graphicImage value="${resource['images:dock/finanzas.png']}" style="width: 70px;" /></p:link>
+                                <p:link outcome="ligas.xhtml"><p:graphicImage value="${resource['images:dock/pelota.png']}" style="width: 70px;" /></p:link>
+                                <p:link outcome="entrenamiento.xhtml"><p:graphicImage value="${resource['images:dock/entrenamiento.png']}" style="width: 70px;" /></p:link>
+                                <p:commandLink action="${sesionController.logout()}"><p:graphicImage value="${resource['images:dock/logout.png']}" style="width: 70px;" /></p:commandLink>
+
+                                <hr/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </h:form>
+
+    </h:body>
+
+</html>
