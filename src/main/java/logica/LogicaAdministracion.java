@@ -42,6 +42,7 @@ public class LogicaAdministracion implements Serializable {
     public void avanzarUnDia() {
 
         PartidosDAO partidosDAO = new PartidosDAO();
+        ClubDAO clubDAO = new ClubDAO();
 
         List<Partido> partidosASimular = partidosDAO.obtenerPartidosDeHoy();
 
@@ -52,6 +53,7 @@ public class LogicaAdministracion implements Serializable {
         for (Club club : clubes) {
             entrenar(club);
             revisarPrestamos(club);
+            clubDAO.actualizarClub(club);
         }
 
     }
