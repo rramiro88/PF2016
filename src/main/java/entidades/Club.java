@@ -245,10 +245,10 @@ public class Club implements Serializable {
     }
     
     public List<Integer> getNumerosLibres(){
-        ArrayList<Integer> respuesta = new ArrayList();
+        
         ArrayList<Integer> numerosPosibles = new ArrayList();
         
-        for (int i = 0; i < 50; i++) {
+        for (int i = 1; i < 50; i++) {
             numerosPosibles.add(i);
         }
         
