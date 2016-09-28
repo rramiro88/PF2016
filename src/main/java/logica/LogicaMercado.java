@@ -265,10 +265,12 @@ public class LogicaMercado implements Serializable {
         prestamo.getClubOriginal().agregarJugador(prestamo.getJugador());
         prestamo.getJugador().setClub(prestamo.getClubOriginal());
         
-        //quitarlo de las tacticas del club en el que estuvo a prestamo
-        club.getTacticas().get(0).quitarJugadorDeTactica(prestamo.getJugador().getId());
+        
         //asignarle un numero de camiseta libre en el club dueño del pase
         prestamo.getJugador().setNumeroCamiseta(prestamo.getClubOriginal().getNumerosLibres().get(0));
+        
+        //quitarlo de las tacticas del club en el que estuvo a prestamo
+        club.getTacticas().get(0).quitarJugadorDeTactica(prestamo.getJugador().getId());
 
         System.out.println("JUGADOR DEVUELTO ------------------------------------------");
         
@@ -279,23 +281,35 @@ public class LogicaMercado implements Serializable {
 
     void prestarJugador(Prestamo prestamo, Club club) {
         
-        //quitar al jugador de las tacticas en las que participa en el club dueño del pase
-        prestamo.getClubOriginal().getTacticas().get(0).quitarJugadorDeTactica(prestamo.getJugador().getId());
+        
+        
         
         //agregarlo al plantel del club que lo lleva a prestamo
         club.agregarJugador(prestamo.getJugador());
         prestamo.getJugador().setClub(club);
         prestamo.getClubOriginal().getPlantel().remove(prestamo.getJugador());
         
-        /////REVISAR!!!! tira error en tactica del club dueño del pase
+        
         
         //asignarle un numero libre de camiseta
         prestamo.getJugador().setNumeroCamiseta(club.getNumerosLibres().get(0));
+        
+        //quitar al jugador de las tacticas en las que participa en el club dueño del pase
+        prestamo.getClubOriginal().getTacticas().get(0).quitarJugadorDeTactica(prestamo.getJugador().getId());
+        
+        
+        
         
         //agregar las notificaciones
         club.agregarNotificacion("Se inicia el prestamo del jugador " + prestamo.getJugador().getNombre() + ". Finaliza el dia " + prestamo.getHasta());
         prestamo.getClubOriginal().agregarNotificacion("El jugador "+prestamo.getJugador().getNombre() + "comienza su prestamo y se marcha a "+club.getNombre()+". Retorna el dia "+prestamo.getHasta());
         System.out.println("JUGADOR INICIA PRESTAMO ----------------------------------");
+        
+        JugadorDAO jugadorDAO = new JugadorDAO();
+        jugadorDAO.actualizarJugador(prestamo.getJugador());
+        
+        ClubDAO clubDAO = new ClubDAO();
+        clubDAO.actualizarClub(prestamo.getClubOriginal());
     }
 
 }

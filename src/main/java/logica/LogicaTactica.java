@@ -28,12 +28,7 @@ public class LogicaTactica implements Serializable {
         Jugador jugador = oferta.getJugadorObjetivo();
         Tactica tacticaVendedor = vendedor.getTacticas().get(0);
 
-        
-      
-       tacticaVendedor.quitarJugadorDeTactica(jugador.getId()); 
-        
-        
-       
+        tacticaVendedor.quitarJugadorDeTactica(jugador.getId());
 
         jugador.setNumeroCamiseta(comprador.getNumerosLibres().get(0));
 

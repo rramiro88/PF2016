@@ -117,6 +117,10 @@ public class Tactica implements Serializable {
 
     }
     
+    /**
+     * 
+     * @return el primer jugador que encuentre en el plantel que no este incluido en la tactica
+     */
     public Jugador obtenerReemplazo(){
         for (Jugador j : club.getPlantel()) {
             if(!posicionesEnCancha.containsKey(j.getId())){
@@ -270,7 +274,13 @@ public class Tactica implements Serializable {
         this.id = id;
     }
 
-   
+   /**
+    * Quita el jugador de la tactica y lo reemplaza por otro.
+    * 
+    * @param id es la identificacion en la base de datos del jugador a quitar de la tactica
+    * 
+    * 
+    */
 
     public void quitarJugadorDeTactica(Long id) {
         
