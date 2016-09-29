@@ -92,9 +92,6 @@ public class JugadorDAO {
         ArrayList<String> nombres = c.cargarJugadores();
         Jugador jugador = null;
 
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
 
         for (String nombre : nombres) {
 
@@ -127,9 +124,6 @@ public class JugadorDAO {
         ArrayList<String> nombres = c.cargarJugadores();
         Jugador jugador = null;
 
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
 
         for (String nombre : nombres) {
 
