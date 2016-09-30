@@ -6,36 +6,25 @@
 package dao;
 
 import entidades.Liga;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author alumno
  */
+@Stateless
 public class LigaDAO {
-    
-    
-    public boolean persistirLiga(Liga liga){
-         boolean respuesta = true;
 
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
+    @PersistenceContext
+    EntityManager em;
 
-        try {
-            s.save(liga);
-            s.getTransaction().commit();
+    public boolean persistirLiga(Liga liga) {
+        
+        
+        em.merge(liga);
 
-        } catch (Exception e) {
-            respuesta = false;
-            s.getTransaction().rollback();
-            System.out.println("ROLLBACK EN TRANSACCION");
-
-        } finally {
-            s.close();
-        }
-
-        return respuesta;
+        return true;
     }
 }

@@ -30,10 +30,19 @@ public class LogicaAdministracion implements Serializable {
     
     @Inject
     LogicaMercado logicaMercado;
+    
+    @Inject
+    JugadorDAO jugadorDAO;
+    
+    @Inject
+    ClubDAO clubDAO;
+    
+    @Inject
+    PartidosDAO partidosDAO;
 
     public void cargarJugadoresDB() {
 
-        JugadorDAO jugadorDAO = new JugadorDAO();
+        
 
         jugadorDAO.crearJugadoresAlAzar();
 
@@ -41,8 +50,7 @@ public class LogicaAdministracion implements Serializable {
 
     public void avanzarUnDia() {
 
-        PartidosDAO partidosDAO = new PartidosDAO();
-        ClubDAO clubDAO = new ClubDAO();
+        
 
         List<Partido> partidosASimular = partidosDAO.obtenerPartidosDeHoy();
 
@@ -59,7 +67,7 @@ public class LogicaAdministracion implements Serializable {
     }
 
     public void simularPartidos(List<Partido> partidosASimular) {
-        PartidosDAO partidosDAO = new PartidosDAO();
+      
         int diferenciaGoles;
 
         for (Partido p : partidosASimular) {
@@ -83,7 +91,7 @@ public class LogicaAdministracion implements Serializable {
     }
 
     public List<Club> buscarClubesPorNombre(String nombreClub) {
-        ClubDAO clubDAO = new ClubDAO();
+        
 
         return clubDAO.obtenerClubesPorNombre(nombreClub);
     }

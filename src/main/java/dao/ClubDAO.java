@@ -12,16 +12,21 @@ import entidades.Notificacion;
 import entidades.Tactica;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author ramiro
  */
+
+@Stateless
 public class ClubDAO {
+    
+    @PersistenceContext
+    EntityManager em;
 
     public Club crearClub(String nombreClub) {
         Club club = new Club();
@@ -69,15 +74,11 @@ public class ClubDAO {
 
         club.getTacticas().add(tactica);
 
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
-
-        try {
+      
 
 //            s.save(estadio);
             for (Jugador j : jugadoresIniciales) {
-                s.saveOrUpdate(j);
+                em.persist(j);
             }
 
             tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(0).getId(), Tactica.ARQUERO);
@@ -93,49 +94,30 @@ public class ClubDAO {
             tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(10).getId(), Tactica.DELANTERO_CENTRO2);
 
 //            s.save(tactica);
-            s.persist(club);
+            
+            em.persist(club);
+            
 
-            s.getTransaction().commit();
-
-        } catch (Exception ex) {
-            s.getTransaction().rollback();
-            ex.printStackTrace();
-        } finally {
-            s.close();
-        }
 
         return club;
     }
 
     public void actualizarClub(Club club) {
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
-
-        try {
-
-            s.saveOrUpdate(club);
-            s.getTransaction().commit();
-
-        } catch (Exception ex) {
-            s.getTransaction().rollback();
-            ex.printStackTrace();
-        } finally {
-            s.close();
-        }
+        em.merge(club);
+        
     }
 
     public List<Club> obtenerClubesPorNombre(String nombreClub) {
         List<Club> respuesta;
 
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
+        
 
-        Query consulta = s.createQuery("From Club where nombre like :parametro");
+        Query consulta = em.createQuery("Select c From Club  c where c.nombre like :parametro", Club.class);
         consulta.setParameter("parametro", "%" + nombreClub + "%");
+        
+        respuesta = consulta.getResultList();
 
-        respuesta = consulta.list();
+        
 
         for (Club c : respuesta) {
             System.out.println("ClubDAO.obtenerClubesPorNombre: TACTICAS-->" + c.getTacticas().size());
@@ -146,87 +128,51 @@ public class ClubDAO {
 
         }
 
-        s.close();
+        
 
         return respuesta;
     }
 
     public void actualizarNotificaciones(List<Notificacion> notificaciones) {
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
+        
 
         for (Notificacion notificacion : notificaciones) {
-            s.saveOrUpdate(notificacion);
+            em.persist(notificacion);
         }
 
-        s.getTransaction().commit();
-
-        s.close();
+       
     }
 
     public List<Jugador> obtenerJugadoresPorNombreDeClub(String nombreClub) {
         List<Object[]> resultado;
         List<Jugador> respuesta = new ArrayList<>();
 
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
+        
 
-        Query consulta = s.createQuery("From Jugador j inner join j.club where j.club.nombre like :parametro");
+        Query consulta = em.createQuery("select j From Jugador j inner join j.club c where j.club.nombre like :parametro",Jugador.class);
         consulta.setParameter("parametro", "%" + nombreClub + "%");
 
-        resultado = consulta.list();
+        respuesta = consulta.getResultList();
 
-        s.close();
+        
 
-        for (Object[] r : resultado) {
-
-            respuesta.add((Jugador) r[0]);
-
-        }
+     
 
         return respuesta;
     }
 
     public void inicializarPrestamos(Club origen) {
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
-
-        try {
-
-            Hibernate.initialize(origen.getPrestamos());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            s.close();
-        }
+        
+        em.refresh(origen.getPrestamos());
 
     }
 
     public Club obtenerClubPorId(long id) {
 
-        Club club = null;
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
-
-        try {
-
-            club = (Club) s.get(Club.class, id);
-            System.out.println(club.getPrestamos().size());
-            System.out.println(club.getTransacciones().size());
-            
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            s.close();
-        }
-
-        return club;
+       Club c = em.find(Club.class, id);
+        System.out.println(c.getPrestamos().size());
+        System.out.println(c.getTransacciones().size());
+        return c;
 
     }
 

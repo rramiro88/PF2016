@@ -9,65 +9,49 @@ import entidades.Partido;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+
+
 
 /**
  *
  * @author alumno
  */
+@Stateless
 public class PartidosDAO {
 
+    @PersistenceContext
+    EntityManager em;
+    
     public List<Partido> obtenerPartidosDeHoy() {
         Date hoy = Date.valueOf(LocalDate.now());
         List<Partido> respuesta = null;
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        try {
+        
+        
 
-            s.beginTransaction();
+          
 
-            Query consulta = s.createQuery("From Partido where fecha = :parametro");
+            Query consulta = em.createQuery("select p From Partido p where p.fecha = :parametro");
             consulta.setParameter("parametro", hoy);
-            respuesta = consulta.list();
+            respuesta = consulta.getResultList();
             
             for (Partido p : respuesta) {
                 Hibernate.initialize(p.getLocal().getTacticas());
                 Hibernate.initialize(p.getVisitante().getTacticas());
             }
-        } catch (Exception e) {
-            System.out.println("ERROR en metodo obtenerPartidosDeHoy()");
-        } finally {
-            s.close();
-        }
+        
 
         return respuesta;
     }
 
     public boolean actualizarPartido(Partido p) {
          
-        boolean respuesta = true;
-
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
-
-        try {
-            s.update(p);
-            System.out.println("update exitoso de partido! DAO");
-            s.getTransaction().commit();
-            
-        } catch (Exception e) {
-            respuesta = false;
-            s.getTransaction().rollback();
-
-        }finally{
-            s.close();
-        }
-
-        return respuesta;
+       em.merge(p);
+       return true;
     }
 
 }

@@ -26,6 +26,15 @@ public class LogicaMercado implements Serializable {
 
     @Inject
     LogicaTactica logicaTactica;
+    
+    @Inject
+    JugadorDAO jugadorDAO;
+    
+    @Inject
+    ClubDAO clubDAO;
+    
+    @Inject
+    OfertaDAO ofertaDAO;
 
     private final int MIN_PLANTEL = 11;
     private final int MAX_PLANTEL = 30;
@@ -42,7 +51,7 @@ public class LogicaMercado implements Serializable {
 
     public List<Jugador> listarLibres() {
 
-        JugadorDAO jugadorDAO = new JugadorDAO();
+        
 
         return jugadorDAO.listarLibres();
 
@@ -55,9 +64,8 @@ public class LogicaMercado implements Serializable {
      */
     public boolean transferir(Oferta oferta) {
 
-        JugadorDAO jugadorDAO = new JugadorDAO();
-        ClubDAO clubDAO = new ClubDAO();
-        OfertaDAO ofertaDAO = new OfertaDAO();
+        
+        
         
          //Obtengo el club completo desde la BD, con las collections que me hacen falta
         oferta.setOrigen(clubDAO.obtenerClubPorId(oferta.getOrigen().getId()));
@@ -124,8 +132,8 @@ public class LogicaMercado implements Serializable {
 
     public void liberarJugador(Jugador j, Club c) {
 
-        JugadorDAO jugadorDAO = new JugadorDAO();
-        ClubDAO clubDAO = new ClubDAO();
+        
+        
         j.setClub(null);
         c.getPlantel().remove(j);
         clubDAO.actualizarClub(c);
@@ -134,7 +142,7 @@ public class LogicaMercado implements Serializable {
     }
 
     public List<Jugador> buscarJugadoresPorNombre(String nombreJugador) {
-        JugadorDAO jugadorDAO = new JugadorDAO();
+        
         return jugadorDAO.obtenerJugadorPorNombre(nombreJugador);
 
     }
@@ -171,8 +179,7 @@ public class LogicaMercado implements Serializable {
 
         poseedor.agregarNotificacion("Ha llegado una oferta por el jugador " + jugador.getNombre());
 
-        ClubDAO clubDAO = new ClubDAO();
-        OfertaDAO ofertaDAO = new OfertaDAO();
+        
 
         ofertaDAO.crearOferta(oferta);
         clubDAO.actualizarClub(poseedor);
@@ -188,8 +195,8 @@ public class LogicaMercado implements Serializable {
 
         boolean respuesta = false;
 
-        JugadorDAO jugadorDAO = new JugadorDAO();
-        ClubDAO clubDAO = new ClubDAO();
+        
+        
 
         System.out.println("en logica!");
 
@@ -209,10 +216,10 @@ public class LogicaMercado implements Serializable {
 
         oferta.getOrigen().agregarNotificacion("la oferta por " + oferta.getJugadorObjetivo().getNombre() + " ha sido rechazada por el club " + oferta.getDestino().getNombre());
 
-        ClubDAO clubDAO = new ClubDAO();
+        
         clubDAO.actualizarClub(oferta.getOrigen());
 
-        OfertaDAO ofertaDAO = new OfertaDAO();
+        
         ofertaDAO.eliminarOferta(oferta);
     }
 
@@ -238,7 +245,7 @@ public class LogicaMercado implements Serializable {
     }
 
     public List<Jugador> buscarJugadoresPorClub(String nombreClub) {
-        ClubDAO clubDAO = new ClubDAO();
+     
         return clubDAO.obtenerJugadoresPorNombreDeClub(nombreClub);
     }
 
@@ -305,10 +312,10 @@ public class LogicaMercado implements Serializable {
         prestamo.getClubOriginal().agregarNotificacion("El jugador "+prestamo.getJugador().getNombre() + "comienza su prestamo y se marcha a "+club.getNombre()+". Retorna el dia "+prestamo.getHasta());
         System.out.println("JUGADOR INICIA PRESTAMO ----------------------------------");
         
-        JugadorDAO jugadorDAO = new JugadorDAO();
+        
         jugadorDAO.actualizarJugador(prestamo.getJugador());
         
-        ClubDAO clubDAO = new ClubDAO();
+       
         clubDAO.actualizarClub(prestamo.getClubOriginal());
     }
 

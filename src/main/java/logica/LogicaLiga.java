@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -29,8 +30,8 @@ import javax.inject.Named;
 public class LogicaLiga {
     
     
-    
-    private LigaDAO ligaDAO = new LigaDAO();
+    @Inject
+    LigaDAO ligaDAO;
     
     
 

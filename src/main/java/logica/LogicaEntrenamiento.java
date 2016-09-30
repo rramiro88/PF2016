@@ -5,7 +5,6 @@
  */
 package logica;
 
-import dao.ClubDAO;
 import entidades.Jugador;
 import java.util.List;
 

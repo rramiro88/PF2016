@@ -6,60 +6,27 @@
 package dao;
 
 import entidades.Oferta;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author ramiro
  */
+@Stateless
 public class OfertaDAO {
 
+    @PersistenceContext
+    EntityManager em;
+    
     public boolean crearOferta(Oferta oferta) {
-        boolean respuesta = false;
-
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
-
-        try {
-
-            s.save(oferta);
-            s.getTransaction().commit();
-
-            respuesta = true;
-
-        } catch (Exception ex) {
-            s.getTransaction().rollback();
-            ex.printStackTrace();
-        } finally {
-            s.close();
-        }
-
-        return respuesta;
+        em.persist(oferta);
+        return true;
     }
     
      public boolean eliminarOferta(Oferta oferta) {
-        boolean respuesta = false;
-
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
-
-        try {
-
-            s.delete(oferta);
-            s.getTransaction().commit();
-
-            respuesta = true;
-
-        } catch (Exception ex) {
-            s.getTransaction().rollback();
-            ex.printStackTrace();
-        } finally {
-            s.close();
-        }
-
-        return respuesta;
+      em.remove(em.contains(oferta) ? oferta : em.merge(oferta));
+      return true;
     }
 }

@@ -11,6 +11,7 @@ import entidades.Usuario;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,11 +22,17 @@ import javax.servlet.http.HttpServletRequest;
 @Named
 @SessionScoped
 public class LogicaSesion implements Serializable {
+    
+    @Inject
+    UsuarioDAO p;
+    
+    @Inject
+    ClubDAO clubDAO;
 
     public Usuario validarLogin(String user, String pass) {
 
         Usuario usuarioObj = null;
-        UsuarioDAO p = new UsuarioDAO();
+        
 
         if (p.validarLoginUsuario(user, pass)) {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -45,7 +52,7 @@ public class LogicaSesion implements Serializable {
 
     public String crearUsuario(String user, String pass, String nombreClub) {
 
-        UsuarioDAO p = new UsuarioDAO();
+        
 
         
         
@@ -61,7 +68,7 @@ public class LogicaSesion implements Serializable {
     }
 
     public boolean cargarUsuario(String u) {
-        UsuarioDAO p = new UsuarioDAO();
+        
         
         Usuario usuarioObj = p.getUsuarioByNombre(u);
         
@@ -84,7 +91,7 @@ public class LogicaSesion implements Serializable {
     }
 
     public void actualizarUsuario(Usuario usuarioObj) {
-        ClubDAO clubDAO = new ClubDAO();
+        
         clubDAO.actualizarClub(usuarioObj.getClub());
         
     }

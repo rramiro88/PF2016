@@ -30,6 +30,9 @@ public class SesionController implements Serializable {
 
     @Inject
     private LogicaSesion miLogicaSesion;
+    
+    @Inject
+    ClubDAO clubDAO;
 
     private Usuario usuarioLogueado;
 
@@ -113,7 +116,7 @@ public class SesionController implements Serializable {
 
     public void leerNotificaciones(){
         this.usuarioLogueado.getClub().getNotificaciones().clear();
-        ClubDAO clubDAO = new ClubDAO();
+       
         clubDAO.actualizarClub(usuarioLogueado.getClub());
     }
     
