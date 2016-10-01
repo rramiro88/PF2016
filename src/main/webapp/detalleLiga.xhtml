@@ -34,10 +34,10 @@
                 <p:dataTable value="${ligaController.liga.partidos}" var="partido">
                 
                     <p:column headerText="Local">
-                        ${partido.local.nombre} ${partido.golesLocal}
+                        <p:outputLabel value="${partido.local.nombre} ${partido.golesLocal}" rendered="${partido.jugado}"/>
                     </p:column>
                     <p:column headerText="Visitante">
-                        ${partido.visitante.nombre} ${partido.golesVisitantes}
+                        <p:outputLabel value="${partido.visitante.nombre} ${partido.golesVisitantes}" rendered="${partido.jugado}"/>
                     </p:column>
                 
                 </p:dataTable>

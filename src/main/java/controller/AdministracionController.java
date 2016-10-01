@@ -22,79 +22,69 @@ import utilidades.Simulador;
  *
  * @author alumno
  */
-
 @Named
 @ApplicationScoped
-public class AdministracionController implements Serializable{
-    
+public class AdministracionController implements Serializable {
+
     @Inject
     LogicaAdministracion logicaAdministracion;
-    
+
     @Inject
     LogicaLiga logicaLiga;
-    
-    
+
     List<Club> resultado;
-    
+
     List<String> posiciones;
-    
+
     List<Club> clubesInvitados = new ArrayList<>();
-    
+
     String nombreClub, nombreLiga;
-    
+
     Liga liga = new Liga();
-    
-    
-    public void generarRanking(){
-        
-        
+
+    public void generarRanking() {
+
         posiciones = logicaLiga.obtenerPosicionesLiga(liga);
-        
-        
-    }
-    
-    
-    
-    
-    public void buscarClubesPorNombre(){
-        
-        
-       resultado = logicaAdministracion.buscarClubesPorNombre(this.nombreClub);
-        
+
     }
 
-    public void crearLiga(){
-        
-        
-        
+    public void buscarClubesPorNombre() {
+
+        resultado = logicaAdministracion.buscarClubesPorNombre(this.nombreClub);
+
+    }
+
+    public void crearLiga() {
+
         liga.setEquiposParticipantes(clubesInvitados);
         liga.setNombre(nombreLiga);
         liga.organizar();
 
         logicaLiga.crearLiga(liga);
     }
-    
-    
-    public void simularPartidos(){
-        
+
+    public void simularPartidos() {
+
         int diferenciaGoles;
-         for (Partido p : liga.getPartidos()) {
-            
-            diferenciaGoles = Simulador.simular(p.getLocal().getTacticas().get(0).getTitulares(), p.getVisitante().getTacticas().get(0).getTitulares());
-            
-            if(diferenciaGoles > 0 ){
-                p.setGolesLocal(diferenciaGoles);
-                p.setGolesVisitantes(0);
-            }else if(diferenciaGoles < 0 ){
-                p.setGolesLocal(0);
-                p.setGolesVisitantes(-1*diferenciaGoles);
-            }else{
-                p.setGolesLocal(0);
-                p.setGolesVisitantes(0);
+        for (Partido p : liga.getPartidos()) {
+
+            if (!p.isJugado()) { // Si no esta jugado, lo jugamos.
+                diferenciaGoles = Simulador.simular(p.getLocal().getTacticas().get(0).getTitulares(), p.getVisitante().getTacticas().get(0).getTitulares());
+
+                if (diferenciaGoles > 0) {
+                    p.setGolesLocal(diferenciaGoles);
+                    p.setGolesVisitantes(0);
+                } else if (diferenciaGoles < 0) {
+                    p.setGolesLocal(0);
+                    p.setGolesVisitantes(-1 * diferenciaGoles);
+                } else {
+                    p.setGolesLocal(0);
+                    p.setGolesVisitantes(0);
+                }
+                
+                p.setJugado(true);
             }
-            
-            
-            
+
         }
     }
 
@@ -105,10 +95,7 @@ public class AdministracionController implements Serializable{
     public void setPosiciones(List<String> posiciones) {
         this.posiciones = posiciones;
     }
-    
-    
-    
-    
+
     public String getNombreLiga() {
         return nombreLiga;
     }
@@ -124,13 +111,12 @@ public class AdministracionController implements Serializable{
     public void setLiga(Liga liga) {
         this.liga = liga;
     }
-    
-    
-    
-    public void  eliminarInvitado(Club clubAEliminar){
+
+    public void eliminarInvitado(Club clubAEliminar) {
         clubesInvitados.remove(clubAEliminar);
     }
-    public void invitarCLub(Club clubInvitado){
+
+    public void invitarCLub(Club clubInvitado) {
         clubesInvitados.add(clubInvitado);
     }
 
@@ -141,8 +127,6 @@ public class AdministracionController implements Serializable{
     public void setClubesInvitados(List<Club> clubesInvitados) {
         this.clubesInvitados = clubesInvitados;
     }
-    
-    
 
     public List<Club> getResultado() {
         return resultado;
@@ -151,9 +135,7 @@ public class AdministracionController implements Serializable{
     public void setResultado(List<Club> resultado) {
         this.resultado = resultado;
     }
-    
 
-    
     public String getNombreClub() {
         return nombreClub;
     }
@@ -161,8 +143,5 @@ public class AdministracionController implements Serializable{
     public void setNombreClub(String nombreClub) {
         this.nombreClub = nombreClub;
     }
-    
-    
-    
-    
+
 }

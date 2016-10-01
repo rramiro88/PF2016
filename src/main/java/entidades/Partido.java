@@ -37,10 +37,21 @@ public class Partido implements Serializable {
     
     int golesLocal, golesVisitantes, concurrencia;
 
+    boolean jugado;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     Date fecha;
 
+    public boolean isJugado() {
+        return jugado;
+    }
+
+    public void setJugado(boolean jugado) {
+        this.jugado = jugado;
+    }
+
+    
+    
     public Date getFecha() {
         return fecha;
     }

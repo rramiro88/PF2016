@@ -64,7 +64,7 @@ public class LogicaMercado implements Serializable {
      */
     public boolean transferir(Oferta oferta) {
 
-        
+        //TODO Utilizar el porcentaje del pase.
         
         
          //Obtengo el club completo desde la BD, con las collections que me hacen falta
@@ -132,7 +132,7 @@ public class LogicaMercado implements Serializable {
 
     public void liberarJugador(Jugador j, Club c) {
 
-        
+        //TODO no permitir liberar un jugador prestado.
         
         j.setClub(null);
         c.getPlantel().remove(j);

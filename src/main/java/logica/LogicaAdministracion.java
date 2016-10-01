@@ -26,31 +26,26 @@ import utilidades.Simulador;
 @Named
 @ApplicationScoped
 public class LogicaAdministracion implements Serializable {
-    
-    
+
     @Inject
     LogicaMercado logicaMercado;
-    
+
     @Inject
     JugadorDAO jugadorDAO;
-    
+
     @Inject
     ClubDAO clubDAO;
-    
+
     @Inject
     PartidosDAO partidosDAO;
 
     public void cargarJugadoresDB() {
-
-        
 
         jugadorDAO.crearJugadoresAlAzar();
 
     }
 
     public void avanzarUnDia() {
-
-        
 
         List<Partido> partidosASimular = partidosDAO.obtenerPartidosDeHoy();
 
@@ -67,22 +62,26 @@ public class LogicaAdministracion implements Serializable {
     }
 
     public void simularPartidos(List<Partido> partidosASimular) {
-      
+
         int diferenciaGoles;
 
         for (Partido p : partidosASimular) {
 
-            diferenciaGoles = Simulador.simular(p.getLocal().getTacticas().get(0).getTitulares(), p.getVisitante().getTacticas().get(0).getTitulares());
+            if (!p.isJugado()) {
+                diferenciaGoles = Simulador.simular(p.getLocal().getTacticas().get(0).getTitulares(), p.getVisitante().getTacticas().get(0).getTitulares());
 
-            if (diferenciaGoles > 0) {
-                p.setGolesLocal(diferenciaGoles);
-                p.setGolesVisitantes(0);
-            } else if (diferenciaGoles < 0) {
-                p.setGolesLocal(0);
-                p.setGolesVisitantes(-1 * diferenciaGoles);
-            } else {
-                p.setGolesLocal(0);
-                p.setGolesVisitantes(0);
+                if (diferenciaGoles > 0) {
+                    p.setGolesLocal(diferenciaGoles);
+                    p.setGolesVisitantes(0);
+                } else if (diferenciaGoles < 0) {
+                    p.setGolesLocal(0);
+                    p.setGolesVisitantes(-1 * diferenciaGoles);
+                } else {
+                    p.setGolesLocal(0);
+                    p.setGolesVisitantes(0);
+                }
+                
+                p.setJugado(true);
             }
 
             partidosDAO.actualizarPartido(p);
@@ -91,7 +90,6 @@ public class LogicaAdministracion implements Serializable {
     }
 
     public List<Club> buscarClubesPorNombre(String nombreClub) {
-        
 
         return clubDAO.obtenerClubesPorNombre(nombreClub);
     }
@@ -106,21 +104,19 @@ public class LogicaAdministracion implements Serializable {
 
     private void revisarPrestamos(Club club) {
         List<Prestamo> prestamos = club.getPrestamos();
-        
+
         for (Prestamo prestamo : prestamos) {
-            
-            System.out.println("COMPARE:::::::::::::::::::::::"+   prestamo.getHasta().compareTo(new Date()));
-            if(prestamo.getHasta().compareTo(new Date())<=0){
+
+            System.out.println("COMPARE:::::::::::::::::::::::" + prestamo.getHasta().compareTo(new Date()));
+            if (prestamo.getHasta().compareTo(new Date()) <= 0) {
                 logicaMercado.devolverJugador(prestamo, club);
                 prestamos.remove(prestamo);
             }
-            if(prestamo.getDesde().compareTo(new Date())<=0){
+            if (prestamo.getDesde().compareTo(new Date()) <= 0) {
                 logicaMercado.prestarJugador(prestamo, club);
-                
+
             }
-            
-            
-            
+
         }
     }
 

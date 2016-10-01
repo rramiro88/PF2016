@@ -28,12 +28,9 @@ import javax.inject.Named;
 @Named
 @ApplicationScoped
 public class LogicaLiga {
-    
-    
+
     @Inject
     LigaDAO ligaDAO;
-    
-    
 
     public List<String> obtenerPosicionesLiga(Liga liga) {
 
@@ -46,64 +43,53 @@ public class LogicaLiga {
         }
 
         for (Partido partido : liga.getPartidos()) {
-            
-            if(partido.getGolesLocal()>partido.getGolesVisitantes()){
-                puntajes.put(partido.getLocal().getId(), puntajes.get(partido.getLocal().getId())+3);
-            }else if(partido.getGolesLocal() < partido.getGolesVisitantes()){
-                puntajes.put(partido.getVisitante().getId(), puntajes.get(partido.getVisitante().getId())+3);
-            }else{
-                puntajes.put(partido.getLocal().getId(), puntajes.get(partido.getLocal().getId())+1);
-                puntajes.put(partido.getVisitante().getId(), puntajes.get(partido.getVisitante().getId())+1);
+
+            if (partido.isJugado()) {
+                if (partido.getGolesLocal() > partido.getGolesVisitantes()) {
+                    puntajes.put(partido.getLocal().getId(), puntajes.get(partido.getLocal().getId()) + 3);
+                } else if (partido.getGolesLocal() < partido.getGolesVisitantes()) {
+                    puntajes.put(partido.getVisitante().getId(), puntajes.get(partido.getVisitante().getId()) + 3);
+                } else {
+                    puntajes.put(partido.getLocal().getId(), puntajes.get(partido.getLocal().getId()) + 1);
+                    puntajes.put(partido.getVisitante().getId(), puntajes.get(partido.getVisitante().getId()) + 1);
+                }
             }
-            
-            
+
         }
 
-        
-        
-        
-        
-        List<Entry<Long,Integer>> ordenada = ordenarRanking(puntajes);
-        
+        List<Entry<Long, Integer>> ordenada = ordenarRanking(puntajes);
+
         for (Entry<Long, Integer> o : ordenada) {
-            respuesta.add(obtenerClubParticipantePorId(o.getKey(), liga).getNombre() + " - " + o.getValue()+" puntos");
+            respuesta.add(obtenerClubParticipantePorId(o.getKey(), liga).getNombre() + " - " + o.getValue() + " puntos");
         }
-        
-        
-        
 
-        
         return respuesta;
     }
-    
-    
-    private List<Entry<Long,Integer>> ordenarRanking(Map<Long,Integer> mapaDesordenado){
-        
-        
-        List<Entry<Long,Integer>> lista = new LinkedList<>(mapaDesordenado.entrySet());
-        
-        Collections.sort(lista, new Comparator<Entry<Long,Integer>>() {
+
+    private List<Entry<Long, Integer>> ordenarRanking(Map<Long, Integer> mapaDesordenado) {
+
+        List<Entry<Long, Integer>> lista = new LinkedList<>(mapaDesordenado.entrySet());
+
+        Collections.sort(lista, new Comparator<Entry<Long, Integer>>() {
 
             @Override
             public int compare(Entry<Long, Integer> o1, Entry<Long, Integer> o2) {
                 return (-1) * o1.getValue().compareTo(o2.getValue());
             }
         });
-        
-        
+
         return lista;
-        
+
     }
-    
-    private Club obtenerClubParticipantePorId(Long id, Liga liga){
-        
-        
+
+    private Club obtenerClubParticipantePorId(Long id, Liga liga) {
+
         for (Club club : liga.getEquiposParticipantes()) {
-            if(id.equals(club.getId())){
+            if (id.equals(club.getId())) {
                 return club;
             }
         }
-        
+
         return null;
     }
 
