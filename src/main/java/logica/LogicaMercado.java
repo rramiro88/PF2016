@@ -130,14 +130,35 @@ public class LogicaMercado implements Serializable {
         return true;
     }
 
-    public void liberarJugador(Jugador j, Club c) {
+    public boolean liberarJugador(Jugador j, Club c) {
+        
+        if(c.getPlantel().size()<=MIN_PLANTEL){
+            return false;
+        }
 
-        //TODO no permitir liberar un jugador prestado.
+        for (Prestamo p : c.getPrestamos() ) {
+            if(p.getJugador().getId().equals(j.getId())){
+                return false;
+            }
+        }
+        
+        c.getPlantel().remove(j);
+        c.getTacticas().get(0).quitarJugadorDeTactica(j.getId());
         
         j.setClub(null);
-        c.getPlantel().remove(j);
-        clubDAO.actualizarClub(c);
+        
+        c.getTransacciones().add(new TransaccionEconomica("Libertad de accion del jugador "+j.getNombre(), -j.getSalario()*12, new Date()));
+        c.setPresupuesto(c.getPresupuesto()-(j.getSalario()*12));
+        
+        
+        
+        
+        
         jugadorDAO.actualizarJugador(j);
+        clubDAO.actualizarClub(c);
+        
+        
+        return true;
 
     }
 

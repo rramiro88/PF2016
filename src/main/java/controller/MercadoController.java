@@ -9,7 +9,6 @@ import logica.LogicaMercado;
 import entidades.Club;
 import entidades.Jugador;
 import entidades.Oferta;
-import entidades.Prestamo;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -25,11 +24,11 @@ import javax.inject.Inject;
  */
 @Named(value = "mercadoController")
 @SessionScoped
-public class MercadoController implements Serializable{
+public class MercadoController implements Serializable {
 
     @Inject
     private LogicaMercado miLogicaMercado;
-    
+
     @Inject
     private SesionController sesionController;
 
@@ -86,9 +85,12 @@ public class MercadoController implements Serializable{
 
     public void liberarJugador(Jugador j, Club c) {
 
-        miLogicaMercado.liberarJugador(j, c);
+        if (miLogicaMercado.liberarJugador(j, c)) {
+            this.addMessage("El jugador ahora esta libre.", null);
+        }else{
+            this.addMessage("No se puede liberar a este jugador", null);
+        }
         this.listaDeLibres = listarLibres();
-        this.addMessage("El jugador ahora esta libre.", null);
 
     }
 
@@ -112,20 +114,20 @@ public class MercadoController implements Serializable{
     public String transferirClubAClub() {
 
         if (miLogicaMercado.transferir(oferta)) {
-            
+
             sesionController.getUsuarioLogueado().getClub().getOfertasRecibidas().remove(oferta);
             System.out.println("Jugador transferido");
             this.addMessage("El jugador fue transferido al club " + oferta.getOrigen().getNombre() + ". Le quedan " + oferta.getMontoDeOperacion() + " limpios por la transaccion.", "");
             return "plantel";
         }
-        
+
         System.out.println("************* la oferta no supero la validacion ***********");
         this.addMessage("La oferta no supero la validacion del sistema. Verifique si le alcanza el dinero y el tamaño de su plantel", "");
         return "#";
     }
 
     public String rechazarOferta() {
-        
+
         miLogicaMercado.rechazarOferta(this.oferta);
         sesionController.getUsuarioLogueado().getClub().getOfertasRecibidas().remove(oferta);
         this.addMessage("La oferta fue rechazada", "");
@@ -137,5 +139,4 @@ public class MercadoController implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    
 }

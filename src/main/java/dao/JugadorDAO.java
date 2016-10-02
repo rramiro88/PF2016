@@ -29,7 +29,7 @@ public class JugadorDAO {
     public List<Jugador> listarLibres() {
         List<Jugador> lista;
 
-       Query q = em.createQuery("select j from Jugador j where j.club=NULL", Jugador.class);
+       Query q = em.createQuery("select j from Jugador j where j.club IS NULL", Jugador.class);
 
         return q.getResultList();
 
