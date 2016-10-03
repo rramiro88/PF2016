@@ -28,6 +28,9 @@ public class BuscarJugadorController implements Serializable {
     @Inject
     LogicaMercado logicaMercado;
 
+    @Inject
+    SesionController sesionController;
+
     private String nombreJugador;
     private List<Jugador> resultado;
     private Double montoDeOperacion;
@@ -41,13 +44,17 @@ public class BuscarJugadorController implements Serializable {
     public void setNombreClub(String nombreClub) {
         this.nombreClub = nombreClub;
     }
-    
-    
 
     public String irADetalleOferta(Jugador jugador) {
-        
-        jugadorEnCuestion = jugador;
-        return "detallesOferta";
+
+        if (sesionController.getUsuarioLogueado().getClub().getId() == jugador.getClub().getId()) {
+            this.addMessage("No puede ofertar por un jugador propio", null);
+            return "";
+        } else {
+            jugadorEnCuestion = jugador;
+            return "detallesOferta";
+        }
+
     }
 
     public Jugador getJugadorEnCuestion() {
@@ -57,8 +64,6 @@ public class BuscarJugadorController implements Serializable {
     public void setJugadorEnCuestion(Jugador jugadorEnCuestion) {
         this.jugadorEnCuestion = jugadorEnCuestion;
     }
-    
-    
 
     public Double getMontoDeOperacion() {
         return montoDeOperacion;
@@ -69,18 +74,18 @@ public class BuscarJugadorController implements Serializable {
     }
 
     public void buscarJugadores() {
-        
-        if("".equals(nombreJugador)){
-            if("".equals(nombreClub)){
-                resultado=logicaMercado.buscarJugadoresPorNombre("");
-            }else{
-                resultado=logicaMercado.buscarJugadoresPorClub(nombreClub);
+
+        if ("".equals(nombreJugador)) {
+            if ("".equals(nombreClub)) {
+                resultado = logicaMercado.buscarJugadoresPorNombre("");
+            } else {
+                resultado = logicaMercado.buscarJugadoresPorClub(nombreClub);
             }
-        }else{
+        } else {
             nombreClub = "";
-            resultado=logicaMercado.buscarJugadoresPorNombre(nombreJugador);
+            resultado = logicaMercado.buscarJugadoresPorNombre(nombreJugador);
         }
-        
+
     }
 
     public List<Jugador> getResultado() {
@@ -115,7 +120,6 @@ public class BuscarJugadorController implements Serializable {
 //        return "";
 //
 //    }
-
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);

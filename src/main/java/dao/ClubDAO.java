@@ -13,6 +13,7 @@ import entidades.Tactica;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -27,6 +28,9 @@ public class ClubDAO {
     
     @PersistenceContext
     EntityManager em;
+    
+    @Inject
+    JugadorDAO jugadorDAO;
 
     public Club crearClub(String nombreClub) {
         Club club = new Club();
@@ -37,7 +41,7 @@ public class ClubDAO {
         Estadio estadio = new Estadio();
         club.setEstadio(estadio);
 
-        JugadorDAO jugadorDAO = new JugadorDAO();
+        
         List<Jugador> jugadoresIniciales = jugadorDAO.crearJugadoresAlAzarLista();
 
         List<Integer> numerosLibres = club.getNumerosLibres();
@@ -92,6 +96,12 @@ public class ClubDAO {
             tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(8).getId(), Tactica.MEDIAPUNTA);
             tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(9).getId(), Tactica.DELANTERO_CENTRO1);
             tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(10).getId(), Tactica.DELANTERO_CENTRO2);
+            
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(11).getId(), Tactica.SUPLENTE1);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(12).getId(), Tactica.SUPLENTE2);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(13).getId(), Tactica.SUPLENTE3);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(14).getId(), Tactica.SUPLENTE4);
+            tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(15).getId(), Tactica.SUPLENTE5);
 
 //            s.save(tactica);
             

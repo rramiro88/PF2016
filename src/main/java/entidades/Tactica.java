@@ -52,7 +52,15 @@ public class Tactica implements Serializable {
     @Transient
     public static final String DELANTERO_CENTRO2 = "DC2";
     @Transient
-    public static final String SUPLENTE = "SUP";
+    public static final String SUPLENTE1 = "SUP1";
+    @Transient
+    public static final String SUPLENTE2 = "SUP2";
+    @Transient
+    public static final String SUPLENTE3 = "SUP3";
+    @Transient
+    public static final String SUPLENTE4 = "SUP4";
+    @Transient
+    public static final String SUPLENTE5 = "SUP5";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -80,12 +88,18 @@ public class Tactica implements Serializable {
 
         for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
 
-            if (!pos.getValue().equals(Tactica.SUPLENTE)) {
+            if (!(pos.getValue().equals(Tactica.SUPLENTE1) ||
+                    pos.getValue().equals(Tactica.SUPLENTE2) ||
+                    pos.getValue().equals(Tactica.SUPLENTE3) ||
+                    pos.getValue().equals(Tactica.SUPLENTE4) ||
+                    pos.getValue().equals(Tactica.SUPLENTE5))) {
+                
                 for (Jugador jugador : club.getPlantel()) {
                     if (jugador.getId().equals(pos.getKey())) {
                         respuesta.add(jugador);
                     }
                 }
+                
             }
 
         }

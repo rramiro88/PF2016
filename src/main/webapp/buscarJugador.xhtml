@@ -17,7 +17,7 @@
             <ui:define name="centro">
 
 
-                <p:growl id="growl2"/>
+                <p:growl id="growl2" autoUpdate="true"/>
 
 
                 <h:form>
@@ -42,10 +42,10 @@
                     <p:column headerText="Nombre" width="30%">
 
                         <p:graphicImage value="#{resource['images:jugador.png']}" styleClass="img-responsive" style="display: inline; padding:10px"/>
-                        <p:link id="botonNombre" value="#{jugador.nombre}" onclick="PF('habilidades#{jugador.nombre}').show();
+                        <p:link id="botonNombre" value="#{jugador.nombre}" onclick="PF('habilidades${jugador.nombre}${jugador.id}').show();
                                 return false;"/>
 
-                        <p:dialog header="Detalle del jugador" widgetVar="habilidades#{jugador.nombre}" modal="true">
+                        <p:dialog header="Detalle del jugador" widgetVar="habilidades${jugador.nombre}${jugador.id}" modal="true">
                             <p:outputLabel value="Nombre: #{jugador.nombre}"/><br/>
                             <p:outputLabel value="Velocidad #{jugador.velocidad}"></p:outputLabel><br/>
                             <p:outputLabel value="Resistencia #{jugador.resistencia}"></p:outputLabel><br/>

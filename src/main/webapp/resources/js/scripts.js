@@ -42,12 +42,18 @@ function dibujarJugador(x, y, numero) {
     
     ctx.beginPath();
     ctx.arc(x, y, 20, 0, 2 * Math.PI);
-    ctx.fillStyle = '#6495ED';
+    ctx.fillStyle = '#6495ED'; 
     ctx.fill();
     
     ctx.fillStyle = "black";
     ctx.font = "20px Verdana";
-    ctx.fillText(numero,x-5,y+2);
+    
+    if(numero > 9){
+        ctx.fillText(numero,x-10,y+4);
+    }else{
+        ctx.fillText(numero,x-5,y+4);
+    }
+    
 
     
 }

@@ -273,6 +273,27 @@ public class TacticaController implements Serializable {
                     RequestContext.getCurrentInstance().execute("dibujarJugador(50,90,"+j.getNumeroCamiseta()+")");
                     break;
                 }
+                case Tactica.SUPLENTE1: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(340,60,"+j.getNumeroCamiseta()+")");
+                    break;
+                }
+                case Tactica.SUPLENTE2: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(340,120,"+j.getNumeroCamiseta()+")");
+                    break;
+                }
+                case Tactica.SUPLENTE3: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(340,180,"+j.getNumeroCamiseta()+")");
+                    break;
+                }
+                case Tactica.SUPLENTE4: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(340,240,"+j.getNumeroCamiseta()+")");
+                    break;
+                }
+                case Tactica.SUPLENTE5: {
+                    RequestContext.getCurrentInstance().execute("dibujarJugador(340,300,"+j.getNumeroCamiseta()+")");
+                    break;
+                }
+                
 
             }
 
