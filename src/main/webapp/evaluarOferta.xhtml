@@ -39,10 +39,6 @@
                                 Monto: #{mercadoController.oferta.montoDeOperacion}
                             </li>
 
-
-
-
-
                         </ul>
 
                         <hr/>
@@ -52,14 +48,16 @@
                         </p:commandButton>
 
                         <p:commandButton update="growl3" action="#{mercadoController.rechazarOferta()}" value="Rechazar Oferta">
-
                             <p:confirm header="Confirmacion" message="Esta seguro que desea rechazar la oferta?" icon="ui-icon-alert" />
                         </p:commandButton>
 
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                        </p:confirmDialog>
+                        
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        
+
                     </p:fieldset>
 
                 </h:form>
