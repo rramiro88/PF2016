@@ -17,12 +17,38 @@
             
 
             <ui:define name="centro">
-                <p:dataTable value="${logicaLiga.obtenerPosicionesLiga(ligaController.liga)}" var="equipo">
-                
-                
+                <p:dataTable value="${logicaLiga.obtenerPosicionesLiga(ligaController.liga)}" var="posicion">
                     
-                    <p:column headerText="Posiciones">
-                        ${equipo}
+                    <p:column headerText="Club">
+                        ${posicion.club.nombre}
+                    </p:column>
+                    
+                    <p:column headerText="Pts">
+                        ${posicion.puntaje}
+                    </p:column>
+
+                    <p:column headerText="Pj">
+                        ${posicion.pj}
+                    </p:column>
+                    
+                    <p:column headerText="PG">
+                        ${posicion.pg}
+                    </p:column>
+                    
+                    <p:column headerText="PE">
+                        ${posicion.pe}
+                    </p:column>
+                    
+                    <p:column headerText="PP">
+                        ${posicion.pp}
+                    </p:column>
+                    
+                    <p:column headerText="Gf">
+                        ${posicion.golesAFavor}
+                    </p:column>
+                    
+                    <p:column headerText="Gc">
+                        ${posicion.golesEnContra}
                     </p:column>
                 
                 </p:dataTable>

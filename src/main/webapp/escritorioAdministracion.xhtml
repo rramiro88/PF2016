@@ -128,14 +128,26 @@
                 </h:form>
                 <p:dataTable id="tablaRanking" value="#{administracionController.posiciones}" var="posicion">
 
-
-                    <p:column headerText="Posiciones">
-
-                        #{posicion}
-
+                    <p:column headerText="Club">
+                        ${posicion.club.nombre}
+                    </p:column>
+                    
+                    <p:column headerText="Pts">
+                        ${posicion.puntaje}
                     </p:column>
 
-
+                    <p:column headerText="Pj">
+                        ${posicion.pj}
+                    </p:column>
+                    
+                    <p:column headerText="Gf">
+                        ${posicion.golesAFavor}
+                    </p:column>
+                    
+                    <p:column headerText="Gc">
+                        ${posicion.golesEnContra}
+                    </p:column>
+                    
                 </p:dataTable>
 
             </ui:define>

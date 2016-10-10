@@ -10,6 +10,7 @@ import logica.LogicaLiga;
 import entidades.Club;
 import entidades.Liga;
 import entidades.Partido;
+import entidades.PosicionLiga;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class AdministracionController implements Serializable {
 
     List<Club> resultado;
 
-    List<String> posiciones;
+    List<PosicionLiga> posiciones;
 
     List<Club> clubesInvitados = new ArrayList<>();
 
@@ -88,11 +89,11 @@ public class AdministracionController implements Serializable {
         }
     }
 
-    public List<String> getPosiciones() {
+    public List<PosicionLiga> getPosiciones() {
         return posiciones;
     }
 
-    public void setPosiciones(List<String> posiciones) {
+    public void setPosiciones(List<PosicionLiga> posiciones) {
         this.posiciones = posiciones;
     }
 
