@@ -19,7 +19,7 @@
 
 
             <ui:define name="centro">
-                
+
                 <p:growl autoUpdate="true"/>
 
                 <h:form>
@@ -33,35 +33,28 @@
 
                     <p:inputNumber id="monto" value="${ofertaController.monto}" inputStyle="width: 40%; margin-right: 10%"/>
                     <p:watermark for="monto" value="Monto de la operacion"/>
-                    
-                    <hr/>
-
-                    <h3>Prestamo</h3>   
-
-                    <p:calendar id="fechaDesde" value="${ofertaController.prestamoFechaDesde}" style="margin-right: 20px"/>
-                    <p:watermark for="fechaDesde" value="Fecha Desde"/>
-                    <p:calendar id="fechaHasta" value="${ofertaController.prestamoFechaHasta}"/>
-                    <p:watermark for="fechaHasta" value="Fecha Hasta"/>
 
                     <hr/>
 
-                    <h3>Venta</h3>
+                    <p:fieldset legend="Prestamo">
 
-                    
-                    <p:inputNumber id="porcentaje" value="${ofertaController.porcentaje}" inputStyle="width: 40%" validatorMessage="El valor de porcentaje debe estar entre 0 y 100">
-                        <f:validateDoubleRange minimum="0" maximum="100"/>
-                    </p:inputNumber>
-                    
-                    
-                    <p:watermark for="porcentaje" value="Porcentaje del pase"/>
-                    
+                        <p:calendar id="fechaDesde" value="${ofertaController.prestamoFechaDesde}" style="margin-right: 20px"/>
+                        <p:watermark for="fechaDesde" value="Fecha Desde"/>
+                        <p:calendar id="fechaHasta" value="${ofertaController.prestamoFechaHasta}"/>
+                        <p:watermark for="fechaHasta" value="Fecha Hasta"/>
+
+                    </p:fieldset>
+
+
                     <hr/>
-                    
+
+
+
                     <p:commandButton ajax="false" validateClient="true" value="Enviar Oferta" action="${ofertaController.enviarOferta()}"/>
 
                     <hr/>
+
                     
-                    <p:message for="porcentaje"/>
 
                 </h:form>
 
