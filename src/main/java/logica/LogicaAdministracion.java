@@ -9,8 +9,10 @@ import dao.ClubDAO;
 import dao.JugadorDAO;
 import dao.PartidosDAO;
 import entidades.Club;
+import entidades.Jugador;
 import entidades.Partido;
 import entidades.Prestamo;
+import entidades.TransaccionEconomica;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +31,9 @@ public class LogicaAdministracion implements Serializable {
 
     @Inject
     LogicaMercado logicaMercado;
+
+    @Inject
+    LogicaFinanzas logicaFinanzas;
 
     @Inject
     JugadorDAO jugadorDAO;
@@ -56,6 +61,7 @@ public class LogicaAdministracion implements Serializable {
         for (Club club : clubes) {
             entrenar(club);
             revisarPrestamos(club);
+            pagarSueldos(club);
             clubDAO.actualizarClub(club);
         }
 
@@ -80,7 +86,7 @@ public class LogicaAdministracion implements Serializable {
                     p.setGolesLocal(0);
                     p.setGolesVisitantes(0);
                 }
-                
+
                 p.setJugado(true);
             }
 
@@ -118,6 +124,15 @@ public class LogicaAdministracion implements Serializable {
             }
 
         }
+    }
+
+    private void pagarSueldos(Club club) {
+
+        Double montoSueldos = logicaFinanzas.calcularGastoMensual(club);
+        club.setPresupuesto(club.getPresupuesto() - montoSueldos);
+        club.getTransacciones().add(new TransaccionEconomica("Pago de sueldos", -montoSueldos, new Date()));
+        
+
     }
 
 }

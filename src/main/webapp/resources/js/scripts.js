@@ -2,7 +2,7 @@
 
 jQuery(document).ready(function () {
 
- 
+
 
 });
 
@@ -31,7 +31,7 @@ function limpiarCanvas() {
 
 
 function dibujarJugador(x, y, numero) {
-    
+
 //centro de la cancha: 160 -- 160 250 circulo central
 //50 90 DI, 160 90 DC, 270 90 DD,
 //160 180 MP
@@ -39,23 +39,35 @@ function dibujarJugador(x, y, numero) {
 //40 400 LI, 110 420 CT1, 210 420 CT2, 280 400 LD
 //160, 470 ARQ
     var ctx = cargaContextoCanvas('canvas');
-    
+
     ctx.beginPath();
+    ctx.shadowOffsetX = -10; //desplazamiento horizontal sombra.
+    ctx.shadowOffsetY = -8; //desplazamiento vertical sombra
+    ctx.shadowColor = "black"; //color de sombra
+    ctx.shadowBlur = 6; //dispersion de sombra.
     ctx.arc(x, y, 20, 0, 2 * Math.PI);
-    ctx.fillStyle = '#6495ED'; 
+    ctx.fillStyle = '#6495ED';
     ctx.fill();
+
+    ctx.beginPath();
     
+    ctx.arc(x, y, 20, 0, 2 * Math.PI);
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+
     ctx.fillStyle = "black";
     ctx.font = "20px Verdana";
-    
-    if(numero > 9){
-        ctx.fillText(numero,x-10,y+4);
-    }else{
-        ctx.fillText(numero,x-5,y+4);
-    }
-    
 
-    
+    if (numero > 9) {
+        ctx.fillText(numero, x - 10, y + 4);
+    } else {
+        ctx.fillText(numero, x - 5, y + 4);
+    }
+
+
+
 }
 
 
