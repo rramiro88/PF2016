@@ -48,7 +48,7 @@
 
                 </p:dataTable>
                 <hr/>
-                <h3>Notificaciones</h3>
+                <h3 id="titulo">Notificaciones <div class="label label-info"> ${sesionController.usuarioLogueado.club.notificaciones.size()}</div></h3>
 
                 <h:form>
                     <p:commandButton update="notificaciones" action="#{sesionController.leerNotificaciones()}" value="Marcar como leidas"/>
