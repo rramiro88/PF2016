@@ -11,6 +11,7 @@ import entidades.Usuario;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.hibernate.Hibernate;
@@ -62,7 +63,13 @@ public class UsuarioDAO {
         Query q = em.createQuery("select u from Usuario u where u.nombre = :parametro",Usuario.class);
         q.setParameter("parametro", usuario);
         
-        usuario1 = (Usuario) q.getSingleResult();
+        
+        try{
+            usuario1 = (Usuario) q.getSingleResult();
+        }catch(NoResultException e){
+            return false;
+        }
+        
         return (usuario1.getPassword().equals(contrasenia));
     }
 

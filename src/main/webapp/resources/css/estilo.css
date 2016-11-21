@@ -270,3 +270,15 @@ ul{
 
 }
 
+.ui-button, .ui-datatable thead th{
+    
+    background-image: none !important;
+    background-color: #f5f5f5 !important;
+    font-weight: normal;
+    text-shadow: none;
+}
+
+.ui-button:hover{
+    
+    box-shadow: 0 0 7px;
+}
