@@ -7,7 +7,8 @@ package controller;
 
 import entidades.TransaccionEconomica;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 
 import javax.enterprise.context.SessionScoped;
@@ -51,30 +52,37 @@ public class estadisticasController implements Serializable {
         model.getAxis(AxisType.Y).setLabel("$");
 
         LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Gastos / Ingresos");
+        series1.setLabel("Capital Actual");
+        
+        Map<Object,Number> datos = new HashMap<>();
 
         TransaccionEconomica t = null;
+        Double capital = 1000000D;
+        
         for (int i = 0; i < sesionController.getUsuarioLogueado().getClub().getTransacciones().size(); i++) {
 
             t = sesionController.getUsuarioLogueado().getClub().getTransacciones().get(i);
-
-            series1.set(t.getFecha().toString(), t.getMonto());
-
+            
+            capital += t.getMonto();
+           
+            
+            // si coinciden las fechas, muestro los datos agrupados
+            if(datos.get(t.getFecha())!=null){
+                datos.put(t.getFecha().toString(), capital + (Double)datos.get(t.getFecha().toString()));
+            }else{
+                datos.put(t.getFecha().toString(), capital); 
+            }
+            
+            
         }
 
-//        LineChartSeries series2 = new LineChartSeries();
-//        series2.setLabel("Egresos por compras");
-//
-//        series2.set(1, 6);
-//        series2.set(2, 3);
-//        series2.set(3, 2);
-//        series2.set(4, 7);
-//        series2.set(5, 9);
-        model.addSeries(series1);
-//        model.addSeries(series2);
+        series1.setData(datos);
 
-        DateAxis axis = new DateAxis("Dates");
-        axis.setTickAngle(-50);
+        model.addSeries(series1);
+
+
+        DateAxis axis = new DateAxis("Fechas");
+
 
         model.getAxes().put(AxisType.X, axis);
 
