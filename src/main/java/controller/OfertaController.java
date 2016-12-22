@@ -41,7 +41,7 @@ public class OfertaController {
     public String enviarOferta() {
 
         if (buscarJugadorController.getJugadorEnCuestion().getClub() == null) {
-            return "jugadoresLibres";
+            return "usuario/jugadoresLibres";
         }
         if (sesionController.getUsuarioLogueado().getClub().getId()==buscarJugadorController.getJugadorEnCuestion().getClub().getId()) {
             this.addMessage("No puede ofertar por un jugador propio", "");

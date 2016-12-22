@@ -25,7 +25,7 @@ public class LigaController implements Serializable{
         
         liga = ligaADetallar;
         
-        return "detalleLiga";
+        return "usuario/detalleLiga";
         
         
     }

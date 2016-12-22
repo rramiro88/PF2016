@@ -108,7 +108,7 @@ public class MercadoController implements Serializable {
         this.oferta = oferta;
         miLogicaMercado.setOfertaEnCuestion(oferta);
 
-        return "evaluarOferta";
+        return "usuario/evaluarOferta";
     }
 
     public String transferirClubAClub() {
@@ -131,7 +131,7 @@ public class MercadoController implements Serializable {
         miLogicaMercado.rechazarOferta(this.oferta);
         sesionController.getUsuarioLogueado().getClub().getOfertasRecibidas().remove(oferta);
         this.addMessage("La oferta fue rechazada", "");
-        return "plantel";
+        return "usuario/plantel";
     }
 
     public void addMessage(String summary, String detail) {

@@ -6,9 +6,7 @@
 package controller;
 
 import logica.LogicaMercado;
-import entidades.Club;
 import entidades.Jugador;
-import entidades.Oferta;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -52,7 +50,7 @@ public class BuscarJugadorController implements Serializable {
             return "";
         } else {
             jugadorEnCuestion = jugador;
-            return "detallesOferta";
+            return "usuario/detallesOferta";
         }
 
     }

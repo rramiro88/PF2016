@@ -74,7 +74,7 @@ public class SesionController implements Serializable {
 
         if (usuarioLogueado != null) {
 
-            return "escritorio";
+            return "usuario/escritorio";
         }
 
         return "";
