@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LogicaSesion implements Serializable {
     
     @Inject
-    UsuarioDAO p;
+    UsuarioDAO usuarioDAO;
     
     @Inject
     ClubDAO clubDAO;
@@ -34,10 +34,10 @@ public class LogicaSesion implements Serializable {
         Usuario usuarioObj = null;
         
 
-        if (p.validarLoginUsuario(user, pass)) {
+        if (usuarioDAO.validarLoginUsuario(user, pass)) {
             FacesContext context = FacesContext.getCurrentInstance();
             
-            usuarioObj=p.getUsuarioByNombre(user);
+            usuarioObj=usuarioDAO.getUsuarioByNombre(user);
             
             
             context.getExternalContext().getSessionMap().put("user", usuarioObj);
@@ -60,7 +60,7 @@ public class LogicaSesion implements Serializable {
         u.setNombre(user);
         u.setPassword(pass);
 
-        if (p.crearUsuario(u, nombreClub)) {
+        if (usuarioDAO.crearUsuario(u, nombreClub)) {
             
             return "exito";
         }
@@ -70,7 +70,7 @@ public class LogicaSesion implements Serializable {
     public boolean cargarUsuario(String u) {
         
         
-        Usuario usuarioObj = p.getUsuarioByNombre(u);
+        Usuario usuarioObj = usuarioDAO.getUsuarioByNombre(u);
         
         if(usuarioObj != null){
             

@@ -77,6 +77,7 @@ public class SesionController implements Serializable {
             return "usuario/escritorio";
         }
 
+        this.addMessage("Login fallido", "");
         return "";
 
     }

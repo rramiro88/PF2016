@@ -50,7 +50,7 @@ public class BuscarJugadorController implements Serializable {
             return "";
         } else {
             jugadorEnCuestion = jugador;
-            return "usuario/detallesOferta";
+            return "detallesOferta";
         }
 
     }
