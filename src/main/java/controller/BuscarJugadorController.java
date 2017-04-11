@@ -44,6 +44,10 @@ public class BuscarJugadorController implements Serializable {
     }
 
     public String irADetalleOferta(Jugador jugador) {
+        
+        if(jugador.getClub()==null){
+            return "jugadoresLibres";
+        }
 
         if (sesionController.getUsuarioLogueado().getClub().getId() == jugador.getClub().getId()) {
             this.addMessage("No puede ofertar por un jugador propio", null);

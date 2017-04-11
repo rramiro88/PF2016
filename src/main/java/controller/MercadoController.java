@@ -108,7 +108,7 @@ public class MercadoController implements Serializable {
         this.oferta = oferta;
         miLogicaMercado.setOfertaEnCuestion(oferta);
 
-        return "usuario/evaluarOferta";
+        return "evaluarOferta";
     }
 
     public String transferirClubAClub() {
