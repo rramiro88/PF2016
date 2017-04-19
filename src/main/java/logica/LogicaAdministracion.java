@@ -9,7 +9,6 @@ import dao.ClubDAO;
 import dao.JugadorDAO;
 import dao.PartidosDAO;
 import entidades.Club;
-import entidades.Jugador;
 import entidades.Partido;
 import entidades.Prestamo;
 import entidades.TransaccionEconomica;
@@ -89,7 +88,13 @@ public class LogicaAdministracion implements Serializable {
 
                 p.setJugado(true);
             }
+            
+            
+            //TODO no actualiza a los clubes
+            repartirDineroEntradas(p);
+            
 
+            
             partidosDAO.actualizarPartido(p);
 
         }
@@ -133,6 +138,15 @@ public class LogicaAdministracion implements Serializable {
         club.getTransacciones().add(new TransaccionEconomica("Pago de sueldos", -montoSueldos, new Date()));
         
 
+    }
+
+    private void repartirDineroEntradas(Partido p) {
+        
+        int concurrencia = p.getConcurrencia();
+        Double montoEntradas = concurrencia * 150.0;
+        p.getLocal().setPresupuesto(p.getLocal().getPresupuesto() + montoEntradas);
+        p.getLocal().getTransacciones().add(new TransaccionEconomica("Ingreso por entradas", montoEntradas, new Date()));
+        
     }
 
 }

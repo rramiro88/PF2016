@@ -6,9 +6,11 @@
 package entidades;
 
 import java.io.Serializable;
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,7 +34,6 @@ public class Liga implements Serializable {
 
     String nombre;
 
-    
     @OneToMany(mappedBy = "liga", cascade = CascadeType.ALL)
     List<Partido> partidos;
 
@@ -40,7 +41,14 @@ public class Liga implements Serializable {
     @JoinColumn(name = "liga_id")
     List<Club> equiposParticipantes;
 
+    /**
+     * Organiza la liga. Crea los partidos, organiza el fixture, coloca en cada
+     * partido una fecha de juego, para que luego puedan simularse ese dia dado.
+     *
+     */
     public void organizar() {
+
+        int diasAdelante = 1;
 
         for (int i = 0; i < equiposParticipantes.size(); i++) {
 
@@ -52,7 +60,14 @@ public class Liga implements Serializable {
                     p.setLocal(equiposParticipantes.get(i));
                     p.setVisitante(equiposParticipantes.get(j));
 
-                    p.setFecha(Date.valueOf(LocalDate.now()));
+                    /**
+                     * Se programan los dias para que se jueguen en dias 
+                     * consecutivos a partir de hoy
+                     */
+                    p.setFecha(sumarRestarDiasFecha(new Date(), diasAdelante));
+                    diasAdelante++;
+
+                    p.setConcurrencia(p.getLocal().getEstadio().getCapacidad());
 
                     if (!repetido(p)) {
                         partidos.add(p);
@@ -66,9 +81,10 @@ public class Liga implements Serializable {
 
     }
 
-    public Liga(){
+    public Liga() {
         partidos = new ArrayList<>();
     }
+
     public String getNombre() {
         return nombre;
     }
@@ -101,20 +117,31 @@ public class Liga implements Serializable {
         this.id = id;
     }
 
+    /**
+     * Comprueba si el partido dado como parametro ya se encuentra calendarizado
+     * en la lista de partidos.
+     *
+     * @param p partido a comprobar si se repite
+     * @return true si esta repetido, falso en caso contrario
+     */
     private boolean repetido(Partido p) {
         boolean respuesta = false;
-        
-        
+
         for (Partido partido : partidos) {
-            if(p.getLocal().equals(partido.getLocal())&&p.getVisitante().equals(partido.getVisitante())
-                    || (p.getLocal().equals(partido.getVisitante())&&p.getVisitante().equals(partido.getLocal()))){
+            if (p.getLocal().equals(partido.getLocal()) && p.getVisitante().equals(partido.getVisitante())
+                    || (p.getLocal().equals(partido.getVisitante()) && p.getVisitante().equals(partido.getLocal()))) {
                 respuesta = true;
             }
         }
-        
-        
-        
+
         return respuesta;
+    }
+
+    public Date sumarRestarDiasFecha(Date fecha, int dias) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.DAY_OF_YEAR, dias);  
+        return calendar.getTime(); 
     }
 
 }
