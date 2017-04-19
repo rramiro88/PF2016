@@ -7,6 +7,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class Partido implements Serializable {
     private Long id;
 
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     Club local;
     
     @ManyToOne
