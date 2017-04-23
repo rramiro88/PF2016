@@ -28,7 +28,7 @@
     <h:body>
 
 
-         <ui:include src="dock.xhtml"/>
+        <ui:include src="dock.xhtml"/>
 
 
 
@@ -63,7 +63,13 @@
 
 
                 <div class="col-sm-2">
-                    <ui:insert name="derecha"></ui:insert>
+                    <ui:insert name="derecha">
+
+                        <p:graphicImage id="imagenEscudo" value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="img-responsive escudo contenido-centrado"></p:graphicImage>
+                        <p:tooltip for="imagenEscudo" value="#{sesionController.usuarioLogueado.club.nombre}"/>
+
+
+                    </ui:insert>
                 </div>
 
             </div> 

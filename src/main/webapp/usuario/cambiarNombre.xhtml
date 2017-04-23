@@ -10,6 +10,9 @@
         <ui:composition template="./templateEscritorio2.xhtml">
 
 
+            <ui:define name="derecha">
+
+            </ui:define>
 
             <ui:define name="centro">
 
@@ -28,33 +31,27 @@
                     <p:accordionPanel id="accordionPanel">
 
                         <p:tab title="Cambiar Nombre">
-
-
-
                             <div class="form-group">
                                 <label for="nombre">Ingrese el nuevo nombre para su club:</label>
                                 <p:inputText value="#{sesionController.usuarioLogueado.club.nombre}" styleClass="form-control" id="nombre"></p:inputText>
-
                             </div>
-
                             <p:commandLink actionListener="#{sesionController.actualizarUsuario}" update="growl etiquetaNombre" styleClass="btn btn-success btn-lg" value="Actualizar Nombre"/>    
-
-
                         </p:tab>
+                        
                         <p:tab title="Cambiar Escudo">
-
-
-
-
                             <div class="form-group">
-
                                 <label for="escudo">Nueva URL del escudo:</label>
                                 <p:inputText value="#{sesionController.usuarioLogueado.club.urlEscudo}" styleClass="form-control" id="escudo"></p:inputText>
-
                             </div>
                             <p:commandLink actionListener="#{sesionController.actualizarUsuario}" update="growl urlEscudo" styleClass="btn btn-success btn-lg" value="Actualizar Escudo"/>    
-                               
-
+                        </p:tab>
+                        
+                        <p:tab title="Cambiar Nombre del Estadio">
+                            <div class="form-group">
+                                <label for="estadio">Nuevo nombre para el estadio:</label>
+                                <p:inputText value="#{sesionController.usuarioLogueado.club.estadio.nombre}" styleClass="form-control" id="estadio"></p:inputText>
+                            </div>
+                            <p:commandLink actionListener="#{sesionController.actualizarUsuario}" update="growl" styleClass="btn btn-success btn-lg" value="Actualizar Estadio"/>    
                         </p:tab>
 
 

@@ -19,7 +19,7 @@
             <ui:define name="centro">
                 <p:dataTable value="${logicaLiga.obtenerPosicionesLiga(ligaController.liga)}" var="posicion">
 
-                    <p:column headerText="Club">
+                    <p:column headerText="Club" width="25%">
                         ${posicion.club.nombre}
                     </p:column>
 

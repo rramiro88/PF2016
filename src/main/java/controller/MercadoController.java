@@ -131,7 +131,7 @@ public class MercadoController implements Serializable {
         miLogicaMercado.rechazarOferta(this.oferta);
         sesionController.getUsuarioLogueado().getClub().getOfertasRecibidas().remove(oferta);
         this.addMessage("La oferta fue rechazada", "");
-        return "usuario/plantel";
+        return "plantel";
     }
 
     public void addMessage(String summary, String detail) {
