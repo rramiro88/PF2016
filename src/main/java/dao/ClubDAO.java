@@ -114,7 +114,6 @@ public class ClubDAO {
 
     public void actualizarClub(Club club) {
         em.merge(club);
-        
     }
 
     public List<Club> obtenerClubesPorNombre(String nombreClub) {

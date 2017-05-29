@@ -65,4 +65,14 @@ public class Prestamo implements Serializable {
         this.jugador = jugador;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
+
 }

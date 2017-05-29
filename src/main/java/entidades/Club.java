@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -39,11 +40,13 @@ public class Club implements Serializable {
     /**
      * Es una lista con los detalles de las transacciones economicas del club
      */
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "club_id", referencedColumnName = "id")
     private List<TransaccionEconomica> transacciones;
     
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "club_id", referencedColumnName = "id")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Notificacion> notificaciones;
 
@@ -60,7 +63,8 @@ public class Club implements Serializable {
      * Cuando un jugador finaliza su prestamo con este club, se borra el objeto prestamo
      * de esta lista
      */
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "club_id", referencedColumnName = "id")
     private List<Prestamo> prestamos;
 
     @OneToMany(mappedBy = "origen", cascade = CascadeType.ALL)
@@ -73,10 +77,10 @@ public class Club implements Serializable {
     @OneToMany(mappedBy = "club", cascade = CascadeType.ALL)
     List<Tactica> tacticas;
 
-    @OneToMany(mappedBy = "visitante", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "visitante")
     private List<Partido> partidosVisitante;
     
-    @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "local")
     private List<Partido> partidosLocal;
 
     @ManyToMany(mappedBy = "equiposParticipantes", cascade = CascadeType.ALL)
