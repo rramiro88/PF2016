@@ -13,6 +13,7 @@ import entidades.Partido;
 import entidades.Prestamo;
 import entidades.TransaccionEconomica;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
@@ -51,6 +52,8 @@ public class LogicaAdministracion implements Serializable {
 
     public void avanzarUnDia() {
 
+        Calendar calendario = Calendar.getInstance();
+
         List<Partido> partidosASimular = partidosDAO.obtenerPartidosDeHoy();
 
         this.simularPartidos(partidosASimular);
@@ -60,7 +63,12 @@ public class LogicaAdministracion implements Serializable {
         for (Club club : clubes) {
             entrenar(club);
             revisarPrestamos(club);
-            pagarSueldos(club);
+
+            //Si es primero de mes, pagamos los sueldos
+            if (calendario.get(Calendar.DAY_OF_MONTH) == 1) {
+                pagarSueldos(club);
+            }
+
             clubDAO.actualizarClub(club);
         }
 
@@ -88,13 +96,10 @@ public class LogicaAdministracion implements Serializable {
 
                 p.setJugado(true);
             }
-            
-            
+
             //TODO no actualiza a los clubes
             repartirDineroEntradas(p);
-            
 
-            
             partidosDAO.actualizarPartido(p);
 
         }
@@ -136,17 +141,16 @@ public class LogicaAdministracion implements Serializable {
         Double montoSueldos = logicaFinanzas.calcularGastoMensual(club);
         club.setPresupuesto(club.getPresupuesto() - montoSueldos);
         club.getTransacciones().add(new TransaccionEconomica("Pago de sueldos", -montoSueldos, new Date()));
-        
 
     }
 
     private void repartirDineroEntradas(Partido p) {
-        
+
         int concurrencia = p.getConcurrencia();
         Double montoEntradas = concurrencia * 150.0;
         p.getLocal().setPresupuesto(p.getLocal().getPresupuesto() + montoEntradas);
         p.getLocal().getTransacciones().add(new TransaccionEconomica("Ingreso por entradas", montoEntradas, new Date()));
-        
+
     }
 
 }
