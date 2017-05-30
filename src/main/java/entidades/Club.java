@@ -45,7 +45,7 @@ public class Club implements Serializable {
     private List<TransaccionEconomica> transacciones;
     
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "club_id", referencedColumnName = "id")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Notificacion> notificaciones;

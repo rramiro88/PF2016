@@ -261,6 +261,12 @@ public class LogicaMercado implements Serializable {
                 return false;
             }
         }
+       
+        for (Oferta enviada : oferta.getOrigen().getOfertasEnviadas() ) {
+            if(enviada.getJugadorObjetivo().getId() == oferta.getJugadorObjetivo().getId()){
+                return false;
+            }
+        }
 
         return respuesta;
     }
