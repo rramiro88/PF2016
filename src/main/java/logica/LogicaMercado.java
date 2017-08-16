@@ -321,6 +321,8 @@ public class LogicaMercado implements Serializable {
         //agregarlo al plantel del club que lo lleva a prestamo
         club.agregarJugador(prestamo.getJugador());
         prestamo.getJugador().setClub(club);
+        
+        //sacarlo de la lista de jugadores del club dueño del pase
         prestamo.getClubOriginal().getPlantel().remove(prestamo.getJugador());
         
         

@@ -49,6 +49,7 @@ public class CargadorDBTest {
         ArrayList<String> result = instance.cargarJugadores();
         
         assertNotNull(result);
+        assertTrue(result.size()>0);
         
     }
 

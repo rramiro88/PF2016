@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -13,7 +14,7 @@
             <ui:define name="titulo">
                 <title>Liga</title>
             </ui:define>
-            
+
             <ui:define name="titulo-pagina">
                 Ligas y partidos
             </ui:define>
@@ -80,8 +81,11 @@
                         <p:outputLabel value="${proximo.local.nombre} - "/>
 
                         <p:outputLabel value="${proximo.visitante.nombre}"/>
+                        <hr/>
 
-                        <p:outputLabel value="${proximo.fecha.toLocaleString()}"/>
+                        <p:outputLabel value="${proximo.fecha}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy hh:mm"/>
+                        </p:outputLabel>
 
                     </p:panel>
                 </ui:repeat>
