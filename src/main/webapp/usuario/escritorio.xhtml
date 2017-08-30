@@ -83,19 +83,15 @@
                 <hr/>
                 <h3>Partidos</h3>
 
-                <p:panel>
+                <p:panel header="Local">
                     <ui:repeat value="${sesionController.usuarioLogueado.club.partidosLocal}" var="plocal">
-
-                        <p:outputLabel value="${plocal.local.nombre}   -   ${plocal.visitante.nombre}"/>
-
+                        <p:outputLabel value="${plocal.local.nombre}   -   ${plocal.visitante.nombre}"/><br/>
                     </ui:repeat>
+                </p:panel>
 
-
-
+                <p:panel header="Visitante">
                     <ui:repeat value="${sesionController.usuarioLogueado.club.partidosVisitante}" var="pvisitante">
-
-                        <p:outputLabel value="${pvisitante.local.nombre}   -   ${pvisitante.visitante.nombre}"/>
-
+                        <p:outputLabel value="${pvisitante.local.nombre}   -   ${pvisitante.visitante.nombre}"/><br/>
                     </ui:repeat>
                 </p:panel>
 

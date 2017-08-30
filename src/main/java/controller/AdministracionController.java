@@ -14,7 +14,9 @@ import entidades.PosicionLiga;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import utilidades.Simulador;
@@ -24,7 +26,7 @@ import utilidades.Simulador;
  * @author alumno
  */
 @Named
-@ApplicationScoped
+@ViewScoped
 public class AdministracionController implements Serializable {
 
     @Inject
@@ -61,7 +63,13 @@ public class AdministracionController implements Serializable {
         liga.setNombre(nombreLiga);
         liga.organizar();
 
-        logicaLiga.crearLiga(liga);
+        if(logicaLiga.crearLiga(liga)){
+            addMessage("La liga "+nombreLiga+" fue creada");
+        }else{
+            addMessage("Ocurrió un error al crear la liga. Revise que no se repitan los equipos invitados");
+        }
+        
+        
     }
 
     public void simularPartidos() {
@@ -143,6 +151,11 @@ public class AdministracionController implements Serializable {
 
     public void setNombreClub(String nombreClub) {
         this.nombreClub = nombreClub;
+    }
+    
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
 }

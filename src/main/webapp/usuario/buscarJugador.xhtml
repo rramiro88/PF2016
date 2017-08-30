@@ -13,7 +13,7 @@
             <ui:define name="titulo">
                 <title>Jugadores</title>
             </ui:define>
-            
+
             <ui:define name="titulo-pagina">
                 Mercado de pases
             </ui:define>
@@ -23,15 +23,15 @@
 
                 <p:growl id="growl2" autoUpdate="true"/>
 
-
+                
                 <h:form>
-
+                
                     <div class="form-group">
 
                         <label for="nombre">Nombre del jugador: </label>
                         <p:inputText id="nombre" styleClass="form-control" value="#{buscarJugadorController.nombreJugador}"/>
                         <p:watermark for="nombre" value="Nombre o parte del nombre del jugador"/>
-                        
+
                         <label for="nombre">Nombre del club: </label>
                         <p:inputText id="club" styleClass="form-control" value="#{buscarJugadorController.nombreClub}"/>
                         <p:watermark for="club" value="Nombre o parte del nombre del club"/>
@@ -66,11 +66,11 @@
                             <h:form>
 
 
-                                
 
-                               
-                                
-                                
+
+
+
+
                                 <p:commandButton value="Realizar una oferta" action="${buscarJugadorController.irADetalleOferta(jugador)}"/>
 
                             </h:form>
@@ -109,7 +109,7 @@
 
             <ui:define name="izquierda">
 
-               <ui:include src="menuOfertas.xhtml"/>
+                <ui:include src="menuOfertas.xhtml"/>
             </ui:define>
 
 

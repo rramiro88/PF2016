@@ -27,7 +27,13 @@
 
     <h:body>
 
-         <ui:include src="dock.xhtml"/>
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage value="#{resource['images:ajaxloadingbar.gif']}" />
+        </p:dialog>
+
+        <ui:include src="dock.xhtml"/>
 
 
 
@@ -35,7 +41,7 @@
         <div id="footer-fijo">
 
             <p:outputLabel value="Presupuesto: $ #{sesionController.usuarioLogueado.club.presupuesto}" style="margin-right: 2%"/>
-            <p:clock mode="server" id="reloj"/>
+            <p:clock mode="server" id="reloj" pattern="dd/MM/yyy hh:mm:ss"/>
         </div>
 
 
@@ -43,11 +49,11 @@
 
 
         <div class="container-fluid">
-            
+
             <div class="row">
                 <div class="col-sm-12">
                     <h3> &#8594;
-                    <ui:insert name="titulo-pagina"></ui:insert>
+                        <ui:insert name="titulo-pagina"></ui:insert>
                     </h3>
                 </div>
             </div>

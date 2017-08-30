@@ -2,13 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./templateEscritorio2.xhtml">
 
-            
+
 
             <ui:define name="titulo">
                 <title>Finanzas</title>
@@ -19,38 +20,40 @@
             </ui:define>
 
             <ui:define name="centro">
-                
+
                 <p:panel header="Salarios">
-                    
+
                     Mensualmente los salarios de tus jugadores conllevan un gasto de 
                     #{finanzasController.calcularGastoMensual()} pesos.
-                    
-                    
-                    
+
+
+
                 </p:panel>
                 <hr/>
-                
+
                 <h3>Transacciones</h3>
-                    
-                    <p:dataTable emptyMessage="No hay transacciones economicas" value="${sesionController.usuarioLogueado.club.transacciones}" var="transaccion">
-                    
-                        <p:column headerText="Descripcion">
-                            ${transaccion.descripcion}
-                        </p:column>
-                        <p:column headerText="Monto">
-                            ${transaccion.monto}
-                        </p:column>
-                        <p:column headerText="Fecha">
-                            ${transaccion.fecha}
-                        </p:column>
-                    </p:dataTable>
-                    
-                
-                
-                
+
+                <p:dataTable emptyMessage="No hay transacciones economicas" value="${sesionController.usuarioLogueado.club.transacciones}" var="transaccion">
+
+                    <p:column headerText="Descripcion">
+                        ${transaccion.descripcion}
+                    </p:column>
+                    <p:column headerText="Monto">
+                        ${transaccion.monto}
+                    </p:column>
+                    <p:column headerText="Fecha">
+                        <p:outputLabel value="${transaccion.fecha}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                        </p:outputLabel>
+                    </p:column>
+                </p:dataTable>
+
+
+
+
             </ui:define>
 
-          
+
 
         </ui:composition>
 

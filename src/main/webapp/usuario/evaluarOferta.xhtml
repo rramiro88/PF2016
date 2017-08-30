@@ -45,11 +45,11 @@
 
                         <hr/>
 
-                        <p:commandButton update="growl3" action="#{mercadoController.transferirClubAClub()}" value="Aceptar Oferta">
+                        <p:commandButton action="${mercadoController.transferirClubAClub()}" value="Aceptar Oferta">
                             <p:confirm header="Confirmacion" message="Esta seguro que desea aceptar la oferta? El jugador dejará su equipo." icon="ui-icon-alert" />
                         </p:commandButton>
 
-                        <p:commandButton update="growl3" action="#{mercadoController.rechazarOferta()}" value="Rechazar Oferta">
+                        <p:commandButton action="${mercadoController.rechazarOferta()}" value="Rechazar Oferta">
                             <p:confirm header="Confirmacion" message="Esta seguro que desea rechazar la oferta?" icon="ui-icon-alert" />
                         </p:commandButton>
 

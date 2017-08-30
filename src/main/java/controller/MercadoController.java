@@ -123,7 +123,7 @@ public class MercadoController implements Serializable {
 
         System.out.println("************* la oferta no supero la validacion ***********");
         this.addMessage("La oferta no supero la validacion del sistema. Verifique si le alcanza el dinero y el tamaño de su plantel", "");
-        return "#";
+        return "";
     }
 
     public String rechazarOferta() {

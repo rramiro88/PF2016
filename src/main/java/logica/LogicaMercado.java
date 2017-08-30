@@ -261,12 +261,12 @@ public class LogicaMercado implements Serializable {
                 return false;
             }
         }
-       
-        for (Oferta enviada : oferta.getOrigen().getOfertasEnviadas() ) {
-            if(enviada.getJugadorObjetivo().getId() == oferta.getJugadorObjetivo().getId()){
-                return false;
-            }
-        }
+//       SE DEJA COMENTADO PORQUE NO CHEQUEA CORRECTAMENTE QUE NO SEA REPETIDA LA OFERTA
+//        for (Oferta enviada : oferta.getOrigen().getOfertasEnviadas() ) {
+//            if(enviada.getJugadorObjetivo().getId() == oferta.getJugadorObjetivo().getId()){
+//                return false;
+//            }
+//        }
 
         return respuesta;
     }
@@ -321,6 +321,8 @@ public class LogicaMercado implements Serializable {
         //agregarlo al plantel del club que lo lleva a prestamo
         club.agregarJugador(prestamo.getJugador());
         prestamo.getJugador().setClub(club);
+        
+        //sacarlo de la lista de jugadores del club dueño del pase
         prestamo.getClubOriginal().getPlantel().remove(prestamo.getJugador());
         
         
