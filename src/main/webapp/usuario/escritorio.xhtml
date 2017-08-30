@@ -16,7 +16,7 @@
             <ui:define name="titulo-pagina">
                 Home
             </ui:define>
-            
+
 
             <ui:define name="centro">
 
@@ -25,39 +25,60 @@
             </ui:define>
 
             <ui:define name="izquierda">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Ofertas Recibidas</h3>
 
-                <h3>Ofertas Recibidas</h3>
-
-                <p:dataTable id="tabla2" value="#{sesionController.usuarioLogueado.club.ofertasRecibidas}" var="oferta" emptyMessage="No hay ofertas    ">
+                        <p:dataTable id="tabla2" value="#{sesionController.usuarioLogueado.club.ofertasRecibidas}" var="oferta" emptyMessage="No hay ofertas    ">
 
 
-                    <p:column headerText="Jugador">
-                        <p:outputLabel value="#{oferta.jugadorObjetivo.nombre}"/>
-                    </p:column>
+                            <p:column headerText="Jugador">
+                                <p:outputLabel value="#{oferta.jugadorObjetivo.nombre}"/>
+                            </p:column>
 
-                    <p:column headerText="Monto Ofrecido">
-                        <p:outputLabel value="#{oferta.montoDeOperacion}"/>
-                    </p:column>
+                            <p:column headerText="Monto Ofrecido">
+                                <p:outputLabel value="#{oferta.montoDeOperacion}"/>
+                            </p:column>
 
-                    <p:column headerText="Accion">
-                        <h:form><p:commandLink value="Evaluar" action="${mercadoController.evaluarOferta(oferta)}"/></h:form>
-                    </p:column>
+                            <p:column headerText="Accion">
+                                <h:form><p:commandLink value="Evaluar" action="${mercadoController.evaluarOferta(oferta)}"/></h:form>
+                            </p:column>
 
-                </p:dataTable>
-                <hr/>
-                <h3 id="titulo">Notificaciones <div class="label label-info"> ${sesionController.usuarioLogueado.club.notificaciones.size()}</div></h3>
+                        </p:dataTable>
+                    </div>
+                </div>
 
-                <h:form>
-                    <p:commandButton update="notificaciones" action="#{sesionController.leerNotificaciones()}" value="Marcar como leidas"/>
-                </h:form>
-                <br/>
-                <p:panel id="notificaciones">
-                    <ui:repeat value="${sesionController.usuarioLogueado.club.notificaciones}" var="notificacion">
 
-                        <p:outputLabel value="#{notificacion.mensaje}"/>
 
-                    </ui:repeat>
-                </p:panel>
+                <div class="row margin-row">
+
+                    <div class="col-sm-6" style="font-size: 20px">
+                        Notificaciones
+                    </div>
+
+                    <div class="col-sm-1">
+                        <p:outputLabel id="numero" style="font-size: 18px" styleClass="label label-info" 
+                                       value="${sesionController.usuarioLogueado.club.notificaciones.size()}"/>
+                    </div>
+
+                </div>
+
+                <div class="row margin-row">
+                    <h:form>
+                        <p:commandButton update="notificaciones numero" action="#{sesionController.leerNotificaciones()}" value="Marcar como leidas"/>
+                    </h:form>
+                    <br/>
+                    <p:panel id="notificaciones">
+                        <ui:repeat value="${sesionController.usuarioLogueado.club.notificaciones}" var="notificacion">
+
+                            <p:outputLabel value="#{notificacion.mensaje}"/>
+
+                        </ui:repeat>
+                    </p:panel>
+
+                </div>
+
+
 
                 <hr/>
                 <h3>Partidos</h3>

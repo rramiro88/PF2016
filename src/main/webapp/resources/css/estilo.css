@@ -290,3 +290,7 @@ ul{
 .menu-item-seleccionado{
     box-shadow: 0 15px 8px -2px gray;
 }
+
+.margin-row{
+    margin-top: 15px;
+}
