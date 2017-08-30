@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -138,8 +140,24 @@ public class LogicaLiga {
         return null;
     }
 
-    public void crearLiga(Liga liga) {
-        ligaDAO.persistirLiga(liga);
+    public boolean crearLiga(Liga liga) {
+        
+        Set<Club> clubes = new LinkedHashSet<>();
+        
+        if(liga.getEquiposParticipantes().size()<=1){
+            return false;
+        }
+        
+        
+        //se controla que no se repitan los clubes
+        for(Club club : liga.getEquiposParticipantes()){
+            if(!clubes.add(club)){
+                return false;
+            }
+        }
+        
+        
+        return ligaDAO.persistirLiga(liga);
     }
 
 }

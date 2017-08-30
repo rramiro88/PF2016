@@ -27,11 +27,16 @@
 
     <h:body>
 
-        
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage value="#{resource['images:ajaxloadingbar.gif']}" />
+        </p:dialog>
+
         <ui:include src="dock.xhtml"/>
 
 
-        
+
 
         <div id="footer-fijo">
 
@@ -45,7 +50,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h3> &#8594;
-                    <ui:insert name="titulo-pagina"></ui:insert>
+                        <ui:insert name="titulo-pagina"></ui:insert>
                     </h3>
                 </div>
             </div>
