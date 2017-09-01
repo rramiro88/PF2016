@@ -67,7 +67,7 @@ public class Club implements Serializable {
     @JoinColumn(name = "club_id", referencedColumnName = "id")
     private List<Prestamo> prestamos;
 
-    @OneToMany(mappedBy = "origen", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "origen", cascade = CascadeType.ALL)
     private List<Oferta> ofertasEnviadas;
 
     @OneToMany(mappedBy = "destino", cascade = CascadeType.ALL)
@@ -179,12 +179,12 @@ public class Club implements Serializable {
         this.ofertasRecibidas = ofertasRecibidas;
     }
 
-    public long getId() {
+    public long getIdClub() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdClub(long idClub) {
+        this.id = idClub;
     }
 
     public String getNombre() {
@@ -217,6 +217,14 @@ public class Club implements Serializable {
 
     public void setPlantel(List<Jugador> plantel) {
         this.plantel = plantel;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUrlEscudo() {

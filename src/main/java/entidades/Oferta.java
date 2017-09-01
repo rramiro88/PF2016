@@ -8,7 +8,6 @@ package entidades;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +33,7 @@ public class Oferta implements Serializable {
 
     
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     Club origen;
     
     @ManyToOne
