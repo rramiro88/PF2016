@@ -22,6 +22,31 @@
 
                 <p:chart type="line" model="#{estadisticasController.modeloAnimadoLineas}"/>
 
+                <!--este panel esta aca porque si no se encasilla en la columna lateral-->
+                <p:overlayPanel id="notificaciones" for="botonNotificaciones"
+                                hideEffect="fade" showEffect="fade"
+                                style="width: 50%; padding: 10px">
+
+                    <div class="row margin-row">
+                        <h:form>
+                            <p:commandLink update="notificaciones numero" 
+                                           action="#{sesionController.leerNotificaciones()}" 
+                                           value="Marcar como leídas"/>
+                        </h:form>
+
+                        <hr/>
+
+                        <ui:repeat value="${sesionController.usuarioLogueado.club.notificaciones}" var="notificacion">
+
+                            <p:outputLabel value="#{notificacion.mensaje}"/>
+
+                        </ui:repeat>
+
+
+                    </div>
+
+                </p:overlayPanel>
+
             </ui:define>
 
             <ui:define name="izquierda">
@@ -52,8 +77,10 @@
 
                 <div class="row margin-row">
 
-                    <div class="col-sm-6" style="font-size: 20px">
-                        Notificaciones
+                    <div class="col-sm-6">
+                        <p:commandButton id="botonNotificaciones" 
+                                         type="button" value="Notificaciones"
+                                         icon="fa fa-bell"/>
                     </div>
 
                     <div class="col-sm-1">
@@ -63,38 +90,19 @@
 
                 </div>
 
-                <div class="row margin-row">
-                    <h:form>
-                        <p:commandButton update="notificaciones numero" action="#{sesionController.leerNotificaciones()}" value="Marcar como leidas"/>
-                    </h:form>
-                    <br/>
-                    <p:panel id="notificaciones">
-                        <ui:repeat value="${sesionController.usuarioLogueado.club.notificaciones}" var="notificacion">
-
-                            <p:outputLabel value="#{notificacion.mensaje}"/>
-
-                        </ui:repeat>
-                    </p:panel>
-
-                </div>
 
 
 
-                <hr/>
-                <h3>Partidos</h3>
 
-                <p:panel header="Local">
+                <p:panel header="Partidos" style="margin-top: 20px">
                     <ui:repeat value="${sesionController.usuarioLogueado.club.partidosLocal}" var="plocal">
                         <p:outputLabel value="${plocal.local.nombre}   -   ${plocal.visitante.nombre}"/><br/>
                     </ui:repeat>
-                </p:panel>
 
-                <p:panel header="Visitante">
                     <ui:repeat value="${sesionController.usuarioLogueado.club.partidosVisitante}" var="pvisitante">
                         <p:outputLabel value="${pvisitante.local.nombre}   -   ${pvisitante.visitante.nombre}"/><br/>
                     </ui:repeat>
                 </p:panel>
-
 
             </ui:define>
 

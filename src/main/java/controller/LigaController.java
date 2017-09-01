@@ -19,6 +19,10 @@ import javax.inject.Named;
 @SessionScoped
 public class LigaController implements Serializable{
     
+    /**
+     * Refiere a la liga seleccionada actualmente,
+     * que se visualiza en detalleLiga.xhtml
+     */
     private Liga liga;
     
     public String verDetalles(Liga ligaADetallar){

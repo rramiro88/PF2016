@@ -159,5 +159,25 @@ public class LogicaLiga {
         
         return ligaDAO.persistirLiga(liga);
     }
+    
+    public boolean hayCampeon(Liga liga){
+        if(obtenerCampeon(liga) != null){
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public Club obtenerCampeon(Liga liga){
+        
+        for (Partido p : liga.getPartidos()) {
+            if(!p.isJugado()){
+                return null;
+            }
+        }
+        
+        return obtenerPosicionesLiga(liga).get(0).getClub();
+        
+    }
 
 }

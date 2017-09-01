@@ -57,6 +57,12 @@
                     </p:column>
 
                 </p:dataTable>
+                
+                <p:panel style="background-color: #00c900; margin-top: 20px"
+                         header="Campeon!" rendered="${logicaLiga.hayCampeon(ligaController.liga)}">
+                    <p:outputLabel value="El equipo ${logicaLiga.obtenerCampeon(ligaController.liga).nombre} se consagró campeón de la liga. Felicitaciones!"/>
+                </p:panel>
+                
             </ui:define>
 
             <ui:define name="izquierda">
