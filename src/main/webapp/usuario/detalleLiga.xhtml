@@ -7,7 +7,7 @@
 
     <body>
 
-        <ui:composition template="./templateEscritorio2.xhtml">
+        <ui:composition template="./templateDosColEquilibrado.xhtml">
 
 
 
@@ -57,45 +57,47 @@
                     </p:column>
 
                 </p:dataTable>
-                
+
                 <p:panel style="background-color: #00c900; margin-top: 20px"
                          header="Campeon!" rendered="${logicaLiga.hayCampeon(ligaController.liga)}">
                     <p:outputLabel value="El equipo ${logicaLiga.obtenerCampeon(ligaController.liga).nombre} se consagró campeón de la liga. Felicitaciones!"/>
                 </p:panel>
-                
+
             </ui:define>
 
             <ui:define name="izquierda">
 
                 <h3>Partidos jugados</h3>
 
-                <ui:repeat value="${ligaController.liga.partidos}" var="partido">
-                    <p:panel rendered="${partido.jugado}">
+                
+                <p:scrollPanel mode="native" style="height: 250px; padding: 5px">
+                    <ui:repeat value="${ligaController.liga.partidos}" var="partido">
+                        <ui:fragment rendered="${partido.jugado}">
+                            <p:outputLabel value="${partido.local.nombre} ${partido.golesLocal} - ${partido.visitante.nombre} ${partido.golesVisitantes}"/>
+                            <hr/>
+                        </ui:fragment>
+                    </ui:repeat>
+                </p:scrollPanel>
 
-                        <p:outputLabel value="${partido.local.nombre} ${partido.golesLocal} - "/>
 
-                        <p:outputLabel value="${partido.visitante.nombre} ${partido.golesVisitantes}"/>
 
-                    </p:panel>
-                </ui:repeat>
+            </ui:define>
 
+            <ui:define name="derecha">
                 <h3>Proximos partidos</h3>
 
-                <ui:repeat value="${ligaController.liga.partidos}" var="proximo">
-                    <p:panel rendered="${!proximo.jugado}">
-
-                        <p:outputLabel value="${proximo.local.nombre} - "/>
-
-                        <p:outputLabel value="${proximo.visitante.nombre}"/>
-                        <hr/>
-
-                        <p:outputLabel value="${proximo.fecha}">
-                            <f:convertDateTime type="date" pattern="dd/MM/yyyy hh:mm"/>
-                        </p:outputLabel>
-
-                    </p:panel>
-                </ui:repeat>
-
+                <p:scrollPanel mode="native" style="height: 250px; padding: 5px">
+                    <ui:repeat value="${ligaController.liga.partidos}" var="proximo">
+                        <ui:fragment rendered="${!proximo.jugado}">
+                            <p:outputLabel value="${proximo.local.nombre} - ${proximo.visitante.nombre}"/>
+                            &#160;
+                            <p:outputLabel value="${proximo.fecha}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy hh:mm"/>
+                            </p:outputLabel>
+                            <hr/>
+                        </ui:fragment>
+                    </ui:repeat>
+                </p:scrollPanel>
             </ui:define>
 
         </ui:composition>
