@@ -22,7 +22,6 @@ import javax.persistence.Transient;
 @Entity
 public class Tactica implements Serializable {
 
-    
     @Transient
     public static final String ARQUERO = "ARQ";
     @Transient
@@ -66,7 +65,6 @@ public class Tactica implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     @ElementCollection(fetch = FetchType.EAGER)
     private Map<Long, String> posicionesEnCancha;
 
@@ -88,22 +86,100 @@ public class Tactica implements Serializable {
 
         for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
 
-            if (!(pos.getValue().equals(Tactica.SUPLENTE1) ||
-                    pos.getValue().equals(Tactica.SUPLENTE2) ||
-                    pos.getValue().equals(Tactica.SUPLENTE3) ||
-                    pos.getValue().equals(Tactica.SUPLENTE4) ||
-                    pos.getValue().equals(Tactica.SUPLENTE5))) {
-                
+            if (!(pos.getValue().equals(Tactica.SUPLENTE1)
+                    || pos.getValue().equals(Tactica.SUPLENTE2)
+                    || pos.getValue().equals(Tactica.SUPLENTE3)
+                    || pos.getValue().equals(Tactica.SUPLENTE4)
+                    || pos.getValue().equals(Tactica.SUPLENTE5))) {
+
                 for (Jugador jugador : club.getPlantel()) {
                     if (jugador.getId().equals(pos.getKey())) {
                         respuesta.add(jugador);
                     }
                 }
-                
+
             }
 
         }
 
+        return respuesta;
+    }
+
+    public List<Jugador> getDefensores() {
+        List<Jugador> respuesta = new ArrayList<>();
+
+        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
+
+            if ((pos.getValue().equals(Tactica.DEFENSA_CENTRAL1)
+                    || pos.getValue().equals(Tactica.DEFENSA_CENTRAL2)
+                    || pos.getValue().equals(Tactica.LATERAL_DERECHO)
+                    || pos.getValue().equals(Tactica.LATERAL_IZQUIERDO))) {
+
+                for (Jugador jugador : club.getPlantel()) {
+                    if (jugador.getId().equals(pos.getKey())) {
+                        respuesta.add(jugador);
+                    }
+                }
+            }
+        }
+        return respuesta;
+    }
+    
+    public List<Jugador> getMediocampistas() {
+        List<Jugador> respuesta = new ArrayList<>();
+
+        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
+
+            if ((pos.getValue().equals(Tactica.MEDIAPUNTA)
+                    || pos.getValue().equals(Tactica.MEDIO_CENTRO1)
+                    || pos.getValue().equals(Tactica.MEDIO_CENTRO2)
+                    || pos.getValue().equals(Tactica.MEDIO_DERECHO)
+                    || pos.getValue().equals(Tactica.MEDIO_IZQUIERDO))) {
+
+                for (Jugador jugador : club.getPlantel()) {
+                    if (jugador.getId().equals(pos.getKey())) {
+                        respuesta.add(jugador);
+                    }
+                }
+            }
+        }
+        return respuesta;
+    }
+    
+    public List<Jugador> getDelanteros() {
+        List<Jugador> respuesta = new ArrayList<>();
+
+        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
+
+            if ((pos.getValue().equals(Tactica.DELANTERO_CENTRO1)
+                    || pos.getValue().equals(Tactica.DELANTERO_CENTRO2)
+                    || pos.getValue().equals(Tactica.DELANTERO_DERECHO)
+                    || pos.getValue().equals(Tactica.DELANTERO_IZQUIERDO))) {
+
+                for (Jugador jugador : club.getPlantel()) {
+                    if (jugador.getId().equals(pos.getKey())) {
+                        respuesta.add(jugador);
+                    }
+                }
+            }
+        }
+        return respuesta;
+    }
+    
+    public List<Jugador> getArquero() {
+        List<Jugador> respuesta = new ArrayList<>();
+
+        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
+
+            if ((pos.getValue().equals(Tactica.ARQUERO))) {
+
+                for (Jugador jugador : club.getPlantel()) {
+                    if (jugador.getId().equals(pos.getKey())) {
+                        respuesta.add(jugador);
+                    }
+                }
+            }
+        }
         return respuesta;
     }
 
@@ -130,117 +206,99 @@ public class Tactica implements Serializable {
         return copiaPlantel;
 
     }
-    
+
     /**
-     * 
-     * @return el primer jugador que encuentre en el plantel que no este incluido en la tactica
+     *
+     * @return el primer jugador que encuentre en el plantel que no este
+     * incluido en la tactica
      */
-    public Jugador obtenerReemplazo(){
+    public Jugador obtenerReemplazo() {
         for (Jugador j : club.getPlantel()) {
-            if(!posicionesEnCancha.containsKey(j.getId())){
+            if (!posicionesEnCancha.containsKey(j.getId())) {
                 return j;
             }
         }
-        
-        return null;
-    }
-    
-     public Jugador obtenerJugadorPorID(Long id){
-        
-         for (Jugador j : club.getPlantel()) {
-             
-             if(j.getId().equals(id)){
-                 return j;
-             }
-             
-         }
-        
+
         return null;
     }
 
-   
+    public Jugador obtenerJugadorPorID(Long id) {
+
+        for (Jugador j : club.getPlantel()) {
+
+            if (j.getId().equals(id)) {
+                return j;
+            }
+
+        }
+
+        return null;
+    }
 
     public void agregarJugador(Jugador jugador, String posicion) {
 
         String posicionAntigua = posicionesEnCancha.get(jugador.getId());
-        
+
         if (posicionAntigua != null) { //si ya estaba en la tactica
-            intercambiar(jugador,posicion,posicionAntigua);
-        }else{
+            intercambiar(jugador, posicion, posicionAntigua);
+        } else {
             posicionar(jugador, posicion);
         }
 
-
         System.out.println("TACTICA:" + this);
-        
 
-        
     }
-
-   
-
-   
 
     @Override
     public String toString() {
-        
-        
-        String cadena = "Cantidad de titulares: " +getTitulares().size()+"\n";
-        
+
+        String cadena = "Cantidad de titulares: " + getTitulares().size() + "\n";
+
         for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
 
             for (Jugador jugador : club.getPlantel()) {
                 if (jugador.getId().equals(pos.getKey())) {
-                    cadena+="\n"+jugador.getNombre() + " - " + pos.getValue();
+                    cadena += "\n" + jugador.getNombre() + " - " + pos.getValue();
                 }
             }
 
         }
-        
-        
+
         return cadena;
     }
 
-
-
-    
-   
     private void intercambiar(Jugador jugador, String posicion, String posicionAnterior) {
-        
-        
+
         posicionesEnCancha.remove(jugador.getId());
-        
+
         for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
-            if(posicion.equals(pos.getValue())){
-        
+            if (posicion.equals(pos.getValue())) {
+
                 pos.setValue(posicionAnterior);
             }
         }
-        
+
         posicionesEnCancha.put(jugador.getId(), posicion);
-      
-        
+
     }
 
     private void posicionar(Jugador jugador, String posicion) {
-        
-        Long key=null;
-         for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
-            if(posicion.equals(pos.getValue())){
-                
+
+        Long key = null;
+        for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
+            if (posicion.equals(pos.getValue())) {
+
                 key = pos.getKey();
-                
+
             }
         }
-         
-         posicionesEnCancha.remove(key);
-         posicionesEnCancha.put(jugador.getId(), posicion);
-        
-        
+
+        posicionesEnCancha.remove(key);
+        posicionesEnCancha.put(jugador.getId(), posicion);
+
     }
 
-    
-     public Club getClub() {
+    public Club getClub() {
         return club;
     }
 
@@ -288,23 +346,22 @@ public class Tactica implements Serializable {
         this.id = id;
     }
 
-   /**
-    * Quita el jugador de la tactica y lo reemplaza por otro.
-    * 
-    * @param id es la identificacion en la base de datos del jugador a quitar de la tactica
-    * 
-    * 
-    */
-
+    /**
+     * Quita el jugador de la tactica y lo reemplaza por otro.
+     *
+     * @param id es la identificacion en la base de datos del jugador a quitar
+     * de la tactica
+     *
+     *
+     */
     public void quitarJugadorDeTactica(Long id) {
-        
+
         String pos = posicionesEnCancha.remove(id);
-        if(pos!=null){
-            
+        if (pos != null) {
+
             Jugador j = obtenerReemplazo();
             posicionesEnCancha.put(j.getId(), pos);
         }
     }
 
 }
-

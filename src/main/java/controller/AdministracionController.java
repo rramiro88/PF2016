@@ -63,34 +63,25 @@ public class AdministracionController implements Serializable {
         liga.setNombre(nombreLiga);
         liga.organizar();
 
-        if(logicaLiga.crearLiga(liga)){
-            addMessage("La liga "+nombreLiga+" fue creada");
-        }else{
+        if (logicaLiga.crearLiga(liga)) {
+            addMessage("La liga " + nombreLiga + " fue creada");
+        } else {
             addMessage("Ocurrió un error al crear la liga. Revise que no se repitan los equipos invitados");
         }
-        
-        
+
     }
 
     public void simularPartidos() {
 
-        int diferenciaGoles;
+        int[] resultado;
         for (Partido p : liga.getPartidos()) {
 
             if (!p.isJugado()) { // Si no esta jugado, lo jugamos.
-                diferenciaGoles = Simulador.simular(p.getLocal().getTacticas().get(0).getTitulares(), p.getVisitante().getTacticas().get(0).getTitulares());
+                resultado = Simulador.simular(p.getLocal().getTacticas().get(0), p.getVisitante().getTacticas().get(0));
 
-                if (diferenciaGoles > 0) {
-                    p.setGolesLocal(diferenciaGoles);
-                    p.setGolesVisitantes(0);
-                } else if (diferenciaGoles < 0) {
-                    p.setGolesLocal(0);
-                    p.setGolesVisitantes(-1 * diferenciaGoles);
-                } else {
-                    p.setGolesLocal(0);
-                    p.setGolesVisitantes(0);
-                }
-                
+                p.setGolesLocal(resultado[0]);
+                p.setGolesVisitantes(resultado[1]);
+
                 p.setJugado(true);
             }
 
@@ -152,9 +143,9 @@ public class AdministracionController implements Serializable {
     public void setNombreClub(String nombreClub) {
         this.nombreClub = nombreClub;
     }
-    
+
     public void addMessage(String summary) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 

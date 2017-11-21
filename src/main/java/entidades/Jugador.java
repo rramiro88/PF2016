@@ -40,8 +40,6 @@ public class Jugador implements Serializable {
 
     private String nombre;
 
-    private String posicionTactica;
-
     private Integer numeroCamiseta;
 
     @ManyToOne
@@ -235,24 +233,8 @@ public class Jugador implements Serializable {
         this.numeroCamiseta = numeroCamiseta;
     }
 
-    public String getPosicionTactica() {
-        return posicionTactica;
-    }
-
-    public void setPosicionTactica(String posicionTactica) {
-        this.posicionTactica = posicionTactica;
-    }
-
     public int suma() {
         return arquero + cabezazo + entradas + marca + mentalidad + pelotaParada + potenciaTiro + precisionTiro + regate + resistencia + velocidad;
-    }
-
-    public String getPosicion() {
-        return posicionTactica;
-    }
-
-    public void setPosicion(String posicionTactica) {
-        this.posicionTactica = posicionTactica;
     }
 
     public String getNombre() {
