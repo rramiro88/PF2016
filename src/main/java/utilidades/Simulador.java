@@ -6,7 +6,9 @@
 package utilidades;
 
 import entidades.Jugador;
+import entidades.Partido;
 import entidades.Tactica;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,28 +34,58 @@ public class Simulador {
         List<Jugador> delanterosLocal = tacticaLocal.getDelanteros();
         List<Jugador> delanterosVisitante = tacticaVisitante.getDelanteros();
 
+        List<Partido> ultimosPartidosLocal = new ArrayList<>();
+        List<Partido> ultimosPartidosVisitante = new ArrayList<>();
+        
+        
+
         //comienzo reglas
-        
         //regla 1 - regate delanteros vs entradas defensores
-        if(calcularPromedio(delanterosLocal,"REGATE") > calcularPromedio(defensoresVisitante,"ENTRADAS")){
+        if (calcularPromedio(delanterosLocal, "REGATE") > calcularPromedio(defensoresVisitante, "ENTRADAS")) {
             resultado[0]++;
         }
-        
-        if(calcularPromedio(delanterosVisitante,"REGATE") > calcularPromedio(defensoresLocal,"ENTRADAS")){
+
+        if (calcularPromedio(delanterosVisitante, "REGATE") > calcularPromedio(defensoresLocal, "ENTRADAS")) {
             resultado[1]++;
         }
-        
-        //regla 2 - pases cortos mediocampo
-        
-        if(calcularPromedio(mediosLocal,"PASES_CORTOS") > calcularPromedio(mediosVisitante,"PASES_CORTOS")){
+
+        //regla 2 - pases cortos mediocampo        
+        if (calcularPromedio(mediosLocal, "PASES_CORTOS") > calcularPromedio(mediosVisitante, "PASES_CORTOS")) {
             resultado[0]++;
-        }else if(calcularPromedio(mediosLocal,"PASES_CORTOS") < calcularPromedio(mediosVisitante,"PASES_CORTOS")){
+        } else if (calcularPromedio(mediosLocal, "PASES_CORTOS") < calcularPromedio(mediosVisitante, "PASES_CORTOS")) {
             resultado[1]++;
         }
-        
+
+        //regla 3 - mentalidad general
+        if (calcularPromedio(titularesLocal, "MENTALIDAD") > calcularPromedio(titularesVisitante, "MENTALIDAD")) {
+            resultado[0]++;
+        } else if (calcularPromedio(titularesLocal, "MENTALIDAD") < calcularPromedio(titularesVisitante, "MENTALIDAD")) {
+            resultado[1]++;
+        }
+
+        //regla 4 - arqueros vs precision delanteros
+        if (calcularPromedio(delanterosLocal, "PRECISION_TIRO") > tacticaVisitante.getArquero().getArquero()) {
+            resultado[0]++;
+        } else if (calcularPromedio(delanterosLocal, "PRECISION_TIRO") < tacticaVisitante.getArquero().getArquero()) {
+            resultado[0]--;
+        }
+
+        if (calcularPromedio(delanterosVisitante, "PRECISION_TIRO") > tacticaLocal.getArquero().getArquero()) {
+            resultado[1]++;
+        } else if (calcularPromedio(delanterosVisitante, "PRECISION_TIRO") < tacticaLocal.getArquero().getArquero()) {
+            resultado[1]--;
+        }
+
         //TODO seguir agregando reglas y aleatoriedad
-        
-        
+        //racha de triunfos/derrotas
+        //me aseguro que no vaya a devolver resultado negativo
+        if (resultado[0] < 0) {
+            resultado[0] = 0;
+        }
+        if (resultado[1] < 1) {
+            resultado[1] = 0;
+        }
+
         return resultado;
 
     }
@@ -126,6 +158,11 @@ public class Simulador {
             case "VELOCIDAD":
                 for (Jugador jugador : jugadores) {
                     suma += jugador.getVelocidad();
+                }
+                break;
+            case "PRECISION_TIRO":
+                for (Jugador jugador : jugadores) {
+                    suma += jugador.getPrecisionTiro();
                 }
                 break;
 

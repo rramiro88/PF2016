@@ -35,16 +35,14 @@ public class Club implements Serializable {
     private String nombre;
     private Double presupuesto;
     private String urlEscudo;
-    
-    
+
     /**
      * Es una lista con los detalles de las transacciones economicas del club
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "club_id", referencedColumnName = "id")
     private List<TransaccionEconomica> transacciones;
-    
-    
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "club_id", referencedColumnName = "id")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -55,13 +53,12 @@ public class Club implements Serializable {
 
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Jugador> plantel;
-    
 
     /**
-     * Cada club mantiene una lista con los jugadores externos que tiene a prestamo desde otros clubes.
-     * Tambien figuran aqui los que tienen el prestamo acordado pero aun no se incorporaron.
-     * Cuando un jugador finaliza su prestamo con este club, se borra el objeto prestamo
-     * de esta lista
+     * Cada club mantiene una lista con los jugadores externos que tiene a
+     * prestamo desde otros clubes. Tambien figuran aqui los que tienen el
+     * prestamo acordado pero aun no se incorporaron. Cuando un jugador finaliza
+     * su prestamo con este club, se borra el objeto prestamo de esta lista
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "club_id", referencedColumnName = "id")
@@ -73,13 +70,12 @@ public class Club implements Serializable {
     @OneToMany(mappedBy = "destino", cascade = CascadeType.ALL)
     private List<Oferta> ofertasRecibidas;
 
-   
     @OneToMany(mappedBy = "club", cascade = CascadeType.ALL)
     List<Tactica> tacticas;
 
     @OneToMany(mappedBy = "visitante")
     private List<Partido> partidosVisitante;
-    
+
     @OneToMany(mappedBy = "local")
     private List<Partido> partidosLocal;
 
@@ -107,8 +103,6 @@ public class Club implements Serializable {
         this.transacciones = transacciones;
     }
 
-    
-    
     public List<Prestamo> getPrestamos() {
         return prestamos;
     }
@@ -116,8 +110,6 @@ public class Club implements Serializable {
     public void setPrestamos(List<Prestamo> prestamos) {
         this.prestamos = prestamos;
     }
-    
-    
 
     public List<Liga> getLigas() {
         return ligas;
@@ -126,8 +118,6 @@ public class Club implements Serializable {
     public void setLigas(List<Liga> ligas) {
         this.ligas = ligas;
     }
-    
-    
 
     public List<Notificacion> getNotificaciones() {
         return notificaciones;
@@ -144,7 +134,7 @@ public class Club implements Serializable {
     public void setPartidosLocal(List<Partido> partidos) {
         this.partidosLocal = partidos;
     }
-    
+
     public List<Partido> getPartidosVisitante() {
         return partidosVisitante;
     }
@@ -152,8 +142,6 @@ public class Club implements Serializable {
     public void setPartidosVisitante(List<Partido> partidos) {
         this.partidosVisitante = partidos;
     }
-    
-    
 
     public List<Tactica> getTacticas() {
         return tacticas;
@@ -239,31 +227,41 @@ public class Club implements Serializable {
         j.setClub(this);
         this.plantel.add(j);
     }
-    
-    public void agregarNotificacion(String mensaje){
+
+    public void agregarNotificacion(String mensaje) {
         Notificacion n = new Notificacion();
         n.setMensaje(mensaje);
         n.setLeida(false);
-        
+
         notificaciones.add(n);
     }
-    
-    public List<Integer> getNumerosLibres(){
-        
+
+    public List<Integer> getNumerosLibres() {
+
         ArrayList<Integer> numerosPosibles = new ArrayList();
-        
+
         for (int i = 1; i < 50; i++) {
             numerosPosibles.add(i);
         }
-        
+
         for (Jugador jugador : plantel) {
             numerosPosibles.remove(jugador.getNumeroCamiseta());
         }
-        
-        
-        
-        
+
         return numerosPosibles;
+    }
+
+    public List<Partido> ultimosPartidos(int cantidad) {
+
+        List<Partido> respuesta = new ArrayList<>();
+
+        for (int i = 0; i < cantidad; i++) {
+            if (i < partidosLocal.size()) {
+                respuesta.add(partidosLocal.get(partidosLocal.size() - 1 - i));
+            }
+        }
+
+        return respuesta;
     }
 
 }

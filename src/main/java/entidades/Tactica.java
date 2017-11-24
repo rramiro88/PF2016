@@ -166,8 +166,8 @@ public class Tactica implements Serializable {
         return respuesta;
     }
     
-    public List<Jugador> getArquero() {
-        List<Jugador> respuesta = new ArrayList<>();
+    public Jugador getArquero() {
+        
 
         for (Map.Entry<Long, String> pos : posicionesEnCancha.entrySet()) {
 
@@ -175,12 +175,12 @@ public class Tactica implements Serializable {
 
                 for (Jugador jugador : club.getPlantel()) {
                     if (jugador.getId().equals(pos.getKey())) {
-                        respuesta.add(jugador);
+                        return jugador;
                     }
                 }
             }
         }
-        return respuesta;
+        return null;
     }
 
     public List<Jugador> getConvocados() {
