@@ -167,14 +167,6 @@ public class Club implements Serializable {
         this.ofertasRecibidas = ofertasRecibidas;
     }
 
-    public long getIdClub() {
-        return id;
-    }
-
-    public void setIdClub(long idClub) {
-        this.id = idClub;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -251,14 +243,37 @@ public class Club implements Serializable {
         return numerosPosibles;
     }
 
-    public List<Partido> ultimosPartidos(int cantidad) {
+    public List<Partido> ultimosPartidosJugados(int cantidad) {
 
         List<Partido> respuesta = new ArrayList<>();
 
         for (int i = 0; i < cantidad; i++) {
-            if (i < partidosLocal.size()) {
+            if (i < partidosLocal.size() && partidosLocal.get(partidosLocal.size() - 1).isJugado()) {
                 respuesta.add(partidosLocal.get(partidosLocal.size() - 1 - i));
             }
+
+            if (i < partidosVisitante.size() && partidosVisitante.get(partidosVisitante.size() - 1).isJugado()) {
+                respuesta.add(partidosVisitante.get(partidosVisitante.size() - 1 - i));
+            }
+        }
+
+        return respuesta;
+    }
+
+    public List<Integer> racha(int longitud) {
+        List<Partido> ultimos = ultimosPartidosJugados(longitud);
+        List<Integer> respuesta = new ArrayList<>();
+
+        for (Partido partido : ultimos) {
+
+            if (partido.getIdGanador().equals(this.getId())) {
+                respuesta.add(1);
+            } else if (partido.getIdGanador().equals(-1L)) {
+                respuesta.add(0);
+            }else{
+                respuesta.add(-1);
+            }
+
         }
 
         return respuesta;

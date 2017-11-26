@@ -10,6 +10,7 @@ import entidades.Partido;
 import entidades.Tactica;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -36,8 +37,6 @@ public class Simulador {
 
         List<Partido> ultimosPartidosLocal = new ArrayList<>();
         List<Partido> ultimosPartidosVisitante = new ArrayList<>();
-        
-        
 
         //comienzo reglas
         //regla 1 - regate delanteros vs entradas defensores
@@ -76,8 +75,41 @@ public class Simulador {
             resultado[1]--;
         }
 
-        //TODO seguir agregando reglas y aleatoriedad
-        //racha de triunfos/derrotas
+        //regla 5 - racha de triunfos/derrotas
+        int longitudRacha = 3;
+
+        List<Integer> rachaLocal = tacticaLocal.getClub().racha(longitudRacha);
+        List<Integer> rachaVisitante = tacticaVisitante.getClub().racha(longitudRacha);
+        int sumaLocal = 0, sumaVisitante = 0;
+
+       for (Integer m : rachaLocal) {
+           sumaLocal+=m;
+        }
+
+        for (Integer n : rachaVisitante) {
+            sumaVisitante+=n;
+        }
+
+        
+
+        if (sumaLocal == longitudRacha) { //esto significa 3 partidos ganados al hilo
+            resultado[0]++;
+        }
+        if (sumaLocal == -longitudRacha) { //esto significa 3 partidos perdidos al hilo
+            resultado[0]--;
+        }
+
+        if (sumaVisitante == longitudRacha) { //esto significa 3 partidos ganados al hilo
+            resultado[1]++;
+        }
+        if (sumaVisitante == -longitudRacha) { //esto significa 3 partidos perdidos al hilo
+            resultado[1]--;
+        }
+
+        //regla 6 - factor suerte
+        resultado[0] += ThreadLocalRandom.current().nextInt(0, 3);
+        resultado[1] += ThreadLocalRandom.current().nextInt(0, 3);
+
         //me aseguro que no vaya a devolver resultado negativo
         if (resultado[0] < 0) {
             resultado[0] = 0;

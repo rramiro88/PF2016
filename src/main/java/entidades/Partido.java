@@ -121,7 +121,22 @@ public class Partido implements Serializable {
         this.id = id;
     }
     
-    
+    public Long getIdGanador(){
+        
+        if(jugado){
+            if(golesLocal>golesVisitantes){
+                return local.getId();
+            }
+            if(golesVisitantes>golesLocal){
+                return visitante.getId();
+            }
+            if(golesLocal==golesVisitantes){
+                return -1L;
+            }
+        }
+        
+        return null;
+    }
     
     
     
