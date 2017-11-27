@@ -44,6 +44,10 @@ public class PartidosDAO {
                 Hibernate.initialize(p.getVisitante().getTacticas());
                 Hibernate.initialize(p.getLocal().getTransacciones());
                 Hibernate.initialize(p.getVisitante().getTransacciones());
+                Hibernate.initialize(p.getLocal().getPartidosLocal());
+                Hibernate.initialize(p.getLocal().getPartidosVisitante());
+                Hibernate.initialize(p.getVisitante().getPartidosLocal());
+                Hibernate.initialize(p.getVisitante().getPartidosVisitante());
             }
         
 
