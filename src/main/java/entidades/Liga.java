@@ -56,16 +56,25 @@ public class Liga implements Serializable {
                 if (i != j) {
                     Partido p = new Partido();
 
-                    p.setLocal(equiposParticipantes.get(i));
-                    p.setVisitante(equiposParticipantes.get(j));
+                    Club uno = equiposParticipantes.get(i);
+                    Club dos = equiposParticipantes.get(j);
+
+                    if ("L".equals(ultimoPartidoLoV(uno.getId()))) {
+                        p.setLocal(dos);
+                        p.setVisitante(uno);
+                    } else {
+                        p.setLocal(uno);
+                        p.setVisitante(dos);
+                    }
 
                     /**
-                     * Se programan los dias para que se jueguen en dias 
+                     * Se programan los partidos para que se jueguen en dias
                      * consecutivos a partir de hoy
                      */
                     p.setFecha(sumarRestarDiasFecha(new Date(), diasAdelante));
                     diasAdelante++;
 
+                    //por ahora, siempre a estadio lleno
                     p.setConcurrencia(p.getLocal().getEstadio().getCapacidad());
 
                     if (!repetido(p)) {
@@ -127,8 +136,8 @@ public class Liga implements Serializable {
         boolean respuesta = false;
 
         for (Partido partido : partidos) {
-            if (p.getLocal().equals(partido.getLocal()) && p.getVisitante().equals(partido.getVisitante())
-                    || (p.getLocal().equals(partido.getVisitante()) && p.getVisitante().equals(partido.getLocal()))) {
+            if ((p.getLocal().getId() == partido.getLocal().getId()) && p.getVisitante().getId() == partido.getVisitante().getId()
+                    || (p.getLocal().getId() == partido.getVisitante().getId() && p.getVisitante().getId() == partido.getLocal().getId())) {
                 respuesta = true;
             }
         }
@@ -139,8 +148,29 @@ public class Liga implements Serializable {
     public Date sumarRestarDiasFecha(Date fecha, int dias) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fecha);
-        calendar.add(Calendar.DAY_OF_YEAR, dias);  
-        return calendar.getTime(); 
+        calendar.add(Calendar.DAY_OF_YEAR, dias);
+        return calendar.getTime();
     }
-    
+
+    public String ultimoPartidoLoV(Long idClub) {
+
+        List<Partido> partidosDelCub = new ArrayList<>();
+
+        for (Partido p : partidos) {
+            if (p.getLocal().getId() == idClub || p.getVisitante().getId() == idClub) {
+                partidosDelCub.add(p);
+            }
+        }
+
+        if (partidosDelCub.size() > 0) {
+            if (partidosDelCub.get(partidosDelCub.size() - 1).getLocal().getId() == idClub) {
+                return "L";
+            } else {
+                return "V";
+            }
+        }
+
+        return "";
+    }
+
 }
