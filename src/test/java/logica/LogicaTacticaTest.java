@@ -13,8 +13,8 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import utilidades.ConexionJPA;
 
 /**
@@ -45,7 +45,7 @@ public class LogicaTacticaTest {
     /**
      * Test of reorganizarTacticas method, of class LogicaTactica.
      */
-    @Test
+    @Ignore
     public void testReorganizarTacticas() {
         System.out.println("reorganizarTacticas");
 

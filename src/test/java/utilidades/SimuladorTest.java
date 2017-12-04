@@ -13,8 +13,8 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -44,7 +44,7 @@ public class SimuladorTest {
     /**
      * Test of simular method, of class Simulador.
      */
-    @Test
+    @Ignore
     public void testSimular() {
         System.out.println("simular");
         

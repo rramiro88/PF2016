@@ -15,7 +15,7 @@ import org.junit.AfterClass;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.Ignore;
 import utilidades.ConexionJPA;
 
 /**
@@ -46,7 +46,7 @@ public class LogicaEntrenamientoTest {
     /**
      * Test of calcularProgresos method, of class LogicaEntrenamiento.
      */
-    @Test
+    @Ignore
     public void testCalcularProgresos() {
         System.out.println("calcularProgresos");
         

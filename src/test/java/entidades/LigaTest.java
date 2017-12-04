@@ -8,7 +8,7 @@ package entidades;
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import org.junit.Ignore;
 import utilidades.ConexionJPA;
 
 /**
@@ -17,7 +17,7 @@ import utilidades.ConexionJPA;
  */
 public class LigaTest {
     
-    @Test
+    @Ignore
     public void testOrganizar(){
         
         Liga liga = new Liga();

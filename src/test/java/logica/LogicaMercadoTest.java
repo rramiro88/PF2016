@@ -11,6 +11,7 @@ import entidades.Oferta;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -61,12 +62,19 @@ public class LogicaMercadoTest {
         oferta.setMontoDeOperacion(2000D);
         oferta.setCondicion(Oferta.VENTA);
         
+        Double presupuestoAnteriorComprador = oferta.getOrigen().getPresupuesto();
+        Double presupuestoAnteriorVendedor = oferta.getDestino().getPresupuesto();
         
         LogicaMercado instance = new LogicaMercado();
         
         boolean result = instance.transferir(oferta);
         
-        em.getTransaction().commit();
+        assertTrue(result);
+        assertTrue("El jugador no fue transferido", oferta.getOrigen().getPlantel().contains(oferta.getJugadorObjetivo()));
+        assertTrue("El dinero no fue transferido",presupuestoAnteriorComprador==oferta.getMontoDeOperacion()+oferta.getOrigen().getPresupuesto());
+        assertTrue("El dinero no fue recibido",presupuestoAnteriorVendedor==oferta.getDestino().getPresupuesto()-oferta.getMontoDeOperacion());
+        
+        em.getTransaction().rollback();
         em.close();
         
     }
