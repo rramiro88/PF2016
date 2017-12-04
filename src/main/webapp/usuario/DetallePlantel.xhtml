@@ -66,6 +66,12 @@
                     <p:column headerText="Pelota Parada" sortBy="#{jugador.pelotaParada}">
                         #{jugador.pelotaParada}
                     </p:column>
+                     <p:column headerText="Pase c" sortBy="${jugador.pasesCortos}">
+                        <p:outputLabel value="${jugador.pasesCortos}"/>
+                    </p:column>
+                    <p:column headerText="Pase l" sortBy="${jugador.pasesLargos}">
+                        <p:outputLabel value="${jugador.pasesLargos}"/>
+                    </p:column>
 
 
                 </p:dataTable>

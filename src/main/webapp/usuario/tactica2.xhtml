@@ -101,6 +101,12 @@
                     <p:column headerText="PreT" sortBy="${jugador.precisionTiro}">
                         <p:outputLabel value="${jugador.precisionTiro}"/>
                     </p:column>
+                    <p:column headerText="Pase c" sortBy="${jugador.pasesCortos}">
+                        <p:outputLabel value="${jugador.pasesCortos}"/>
+                    </p:column>
+                    <p:column headerText="Pase l" sortBy="${jugador.pasesLargos}">
+                        <p:outputLabel value="${jugador.pasesLargos}"/>
+                    </p:column>
                     <p:column headerText="Arq" sortBy="${jugador.arquero}">
                         <p:outputLabel value="${jugador.arquero}"/>
                     </p:column>
@@ -121,7 +127,7 @@
                 </canvas>
 
                 <h:form>
-                    <p:commandButton icon="fa fa-save" value="Guardar Tactica" action="${sesionController.actualizarUsuario()}"/>
+                    <p:commandButton icon="fa fa-save" value="Guardar Tactica" action="${tacticaController.guardarTactica()}"/>
                 </h:form>
 
             </ui:define>

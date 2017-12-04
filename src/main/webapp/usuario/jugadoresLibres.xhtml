@@ -30,6 +30,7 @@
 
                 <p:dataTable emptyMessage="No hay jugadores libres" id="tablaLibres" value="#{mercadoController.listaDeLibres}" var="jugador">
                     <p:column headerText="Nombre">
+                        <h:outputText value="-->" rendered="${jugador.id==buscarJugadorController.jugadorEnCuestion.id}"/>
                         <h:outputText value="#{jugador.nombre}"></h:outputText>
 
                     </p:column>

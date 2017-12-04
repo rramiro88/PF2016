@@ -46,6 +46,7 @@ public class BuscarJugadorController implements Serializable {
     public String irADetalleOferta(Jugador jugador) {
         
         if(jugador.getClub()==null){
+            jugadorEnCuestion=jugador;
             return "jugadoresLibres";
         }
 

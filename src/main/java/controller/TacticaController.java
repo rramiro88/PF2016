@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
@@ -198,6 +200,19 @@ public class TacticaController implements Serializable {
 
         sesionController.actualizarUsuario();
 
+    }
+    
+    public void guardarTactica(){
+        
+        Tactica tactica = sesionController.getUsuarioLogueado().getClub().getTacticas().get(0);
+        
+        if(tactica.getTitulares().size()>11){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No puede haber mas de once jugadores en cancha"));
+        }else{
+            sesionController.actualizarUsuario();
+        }
+        
+        
     }
     
    
