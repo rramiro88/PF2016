@@ -29,38 +29,38 @@ import utilidades.Simulador;
 @Named
 @ApplicationScoped
 public class LogicaAdministracion implements Serializable {
-    
+
     @Inject
     LogicaMercado logicaMercado;
-    
+
     @Inject
     LogicaFinanzas logicaFinanzas;
-    
+
     @Inject
     JugadorDAO jugadorDAO;
-    
+
     @Inject
     ClubDAO clubDAO;
-    
+
     @Inject
     PartidosDAO partidosDAO;
-    
+
     public void cargarJugadoresDB() {
-        
+
         jugadorDAO.crearJugadoresAlAzar();
-        
+
     }
-    
+
     public void avanzarUnDia() {
-        
+
         Calendar calendario = Calendar.getInstance();
-        
+
         List<Partido> partidosASimular = partidosDAO.obtenerPartidosDeHoy();
-        
+
         this.simularPartidos(partidosASimular);
-        
+
         List<Club> clubes = buscarClubesPorNombre("");
-        
+
         for (Club club : clubes) {
             entrenar(club);
             revisarPrestamos(club);
@@ -69,56 +69,56 @@ public class LogicaAdministracion implements Serializable {
             if (calendario.get(Calendar.DAY_OF_MONTH) == 1) {
                 pagarSueldos(club);
             }
-            
+
             clubDAO.actualizarClub(club);
         }
-        
+
     }
-    
+
     public void simularPartidos(List<Partido> partidosASimular) {
-        
+
         int[] resultado;
-        
+
         for (Partido p : partidosASimular) {
-            
+
             if (!p.isJugado()) {
                 resultado = Simulador.simular(p.getLocal().getTacticas().get(0), p.getVisitante().getTacticas().get(0));
-                
+
                 p.setGolesLocal(resultado[0]);
                 p.setGolesVisitantes(resultado[1]);
-                
+
                 p.setJugado(true);
             }
-            
+
             repartirDineroEntradas(p);
-            
+
             partidosDAO.actualizarPartido(p);
-            
+
         }
     }
-    
+
     public List<Club> buscarClubesPorNombre(String nombreClub) {
-        
+
         return clubDAO.obtenerClubesPorNombre(nombreClub);
     }
-    
+
     private void entrenar(Club club) {
-        
+
         LogicaEntrenamiento logicaEntrenamiento = new LogicaEntrenamiento();
-        
+
         logicaEntrenamiento.calcularProgresos(club.getPlantel());
-        
+
     }
-    
+
     private void revisarPrestamos(Club club) {
         List<Prestamo> prestamos = club.getPrestamos();
-        
+
         for (int i=0; i< prestamos.size(); i++) {
-            
+
             Prestamo prestamo = prestamos.get(i);
-            
+
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            
+
             
             if (sdf.format(prestamo.getHasta()).equals(sdf.format(new Date()))) {
                 logicaMercado.devolverJugador(prestamo, club);
@@ -126,27 +126,27 @@ public class LogicaAdministracion implements Serializable {
             }
             if (sdf.format(prestamo.getDesde()).equals(sdf.format(new Date()))) {
                 logicaMercado.prestarJugador(prestamo, club);
-                
+
             }
-            
+
         }
     }
-    
+
     private void pagarSueldos(Club club) {
-        
+
         Double montoSueldos = logicaFinanzas.calcularGastoMensual(club);
         club.setPresupuesto(club.getPresupuesto() - montoSueldos);
         club.getTransacciones().add(new TransaccionEconomica("Pago de sueldos", -montoSueldos, new Date()));
-        
+
     }
-    
+
     private void repartirDineroEntradas(Partido p) {
-        
+
         int concurrencia = p.getConcurrencia();
         Double montoEntradas = concurrencia * 150.0;
         p.getLocal().setPresupuesto(p.getLocal().getPresupuesto() + montoEntradas);
         p.getLocal().getTransacciones().add(new TransaccionEconomica("Ingreso por entradas", montoEntradas, new Date()));
-        
+
     }
-    
+
 }
