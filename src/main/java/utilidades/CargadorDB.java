@@ -18,12 +18,11 @@ import java.util.Random;
  */
 public class CargadorDB {
 
-
     public ArrayList<String> cargarJugadores() {
 
-        
-        String archivoCSV =  "/home/ramiro/Escritorio/jugadores.csv";
-        
+        Configuracion configuracion = new Configuracion();
+        String archivoCSV = configuracion.obtenerValorPropiedad("ubicacionArchivoJugadores");
+
         BufferedReader br = null;
         String line = "";
         String separador = ",";
@@ -36,7 +35,7 @@ public class CargadorDB {
             br = new BufferedReader(new FileReader(archivoCSV));
             while ((line = br.readLine()) != null) {
 
-                // use comma as separator
+                
                 String[] contenido = line.split(separador);
 
                 nombres.add(contenido[0]);
