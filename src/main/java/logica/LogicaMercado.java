@@ -93,7 +93,7 @@ public class LogicaMercado implements Serializable {
                 programarPrestamo(oferta);
                 
                 oferta.getOrigen().agregarNotificacion("El club " + oferta.getDestino().getNombre() + " ha aceptado ceder a prestamo"
-                        + "al jugador " + oferta.getJugadorObjetivo().getNombre() +". Se incorporará a tu plantel a partir de la fecha"
+                        + " al jugador " + oferta.getJugadorObjetivo().getNombre() +". Se incorporará a tu plantel a partir de la fecha "
                         + oferta.getDesde() + ". El costo total de la operacion es de $"+oferta.getMontoDeOperacion());
                 
                 oferta.getDestino().agregarNotificacion("El jugador " + oferta.getJugadorObjetivo().getNombre() + " se marchará a prestamo a partir del dia "+ oferta.getDesde() +

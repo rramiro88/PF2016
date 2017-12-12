@@ -13,6 +13,7 @@ import entidades.Partido;
 import entidades.Prestamo;
 import entidades.TransaccionEconomica;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -112,14 +113,18 @@ public class LogicaAdministracion implements Serializable {
     private void revisarPrestamos(Club club) {
         List<Prestamo> prestamos = club.getPrestamos();
         
-        for (Prestamo prestamo : prestamos) {
+        for (int i=0; i< prestamos.size(); i++) {
             
-            System.out.println("COMPARE:::::::::::::::::::::::" + prestamo.getHasta().compareTo(new Date()));
-            if (prestamo.getHasta().compareTo(new Date()) <= 0) {
+            Prestamo prestamo = prestamos.get(i);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            
+            
+            if (sdf.format(prestamo.getHasta()).equals(sdf.format(new Date()))) {
                 logicaMercado.devolverJugador(prestamo, club);
                 prestamos.remove(prestamo);
             }
-            if (prestamo.getDesde().compareTo(new Date()) <= 0) {
+            if (sdf.format(prestamo.getDesde()).equals(sdf.format(new Date()))) {
                 logicaMercado.prestarJugador(prestamo, club);
                 
             }

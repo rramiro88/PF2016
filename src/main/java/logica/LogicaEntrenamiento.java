@@ -18,6 +18,10 @@ public class LogicaEntrenamiento {
         
         for (Jugador jugador : jugadores) {
             
+            if(jugador.getEntrenando()==null){
+                jugador.setEntrenando(Jugador.PASES_CORTOS);
+            }
+            
             switch(jugador.getEntrenando()){
                 
                 case Jugador.ARQUERO:{
