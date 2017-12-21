@@ -108,6 +108,10 @@ public class PosicionLiga implements Serializable {
     public void setPuntaje(Integer puntaje) {
         this.puntaje = puntaje;
     }
+    
+    public Integer diferenciaGoles(){
+        return golesAFavor-golesEnContra;
+    }
 
 
     

@@ -120,7 +120,14 @@ public class LogicaLiga {
 
             @Override
             public int compare(Entry<Long, PosicionLiga> o1, Entry<Long, PosicionLiga> o2) {
-                return (-1) * o1.getValue().getPuntaje().compareTo(o2.getValue().getPuntaje());
+                
+                int comparacionPuntos = (-1) * o1.getValue().getPuntaje().compareTo(o2.getValue().getPuntaje());
+                
+                if(comparacionPuntos==0){
+                    return (-1) * o1.getValue().diferenciaGoles().compareTo(o2.getValue().diferenciaGoles());
+                }
+                
+                return comparacionPuntos;
                 
             }
         });
