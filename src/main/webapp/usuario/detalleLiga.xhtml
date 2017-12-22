@@ -25,7 +25,16 @@
                 <p:dataTable value="${logicaLiga.obtenerPosicionesLiga(ligaController.liga)}" var="posicion">
 
                     <p:column headerText="Club" width="25%">
-                        ${posicion.club.nombre}
+                        <ui:fragment rendered="${posicion.club.id eq sesionController.usuarioLogueado.club.id}">
+                            <div style="color: #00c900">
+                                ${posicion.club.nombre}
+                            </div>
+                        </ui:fragment>
+                        <ui:fragment rendered="${posicion.club.id ne sesionController.usuarioLogueado.club.id}">
+
+                            ${posicion.club.nombre}
+
+                        </ui:fragment>
                     </p:column>
 
                     <p:column headerText="Pts">
@@ -69,7 +78,7 @@
 
                 <h3>Partidos jugados</h3>
 
-                
+
                 <p:scrollPanel mode="native" style="height: 250px; padding: 5px">
                     <ui:repeat value="${ligaController.liga.partidos}" var="partido">
                         <ui:fragment rendered="${partido.jugado}">

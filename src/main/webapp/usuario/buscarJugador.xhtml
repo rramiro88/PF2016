@@ -51,6 +51,8 @@
 
                         <p:dialog header="Detalle del jugador" widgetVar="habilidades${jugador.nombre}${jugador.id}" modal="true">
                             <p:outputLabel value="Nombre: #{jugador.nombre}"/><br/>
+                            <p:separator/>
+                            <p:outputLabel value="Atajando: #{jugador.arquero}"/><br/>
                             <p:outputLabel value="Velocidad #{jugador.velocidad}"></p:outputLabel><br/>
                             <p:outputLabel value="Resistencia #{jugador.resistencia}"></p:outputLabel><br/>
                             <p:outputLabel value="Cabezazo #{jugador.cabezazo}"></p:outputLabel><br/>
@@ -63,7 +65,7 @@
                             <p:outputLabel value="Regate #{jugador.regate}"></p:outputLabel><br/>
                             <p:outputLabel value="Pases cortos #{jugador.pasesCortos}"></p:outputLabel><br/>
                             <p:outputLabel value="Pases largos #{jugador.pasesLargos}"></p:outputLabel><br/>
-
+                            <p:separator/>
 
                             <h:form>
 
