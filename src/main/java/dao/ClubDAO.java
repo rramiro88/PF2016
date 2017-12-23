@@ -10,7 +10,9 @@ import entidades.Estadio;
 import entidades.Jugador;
 import entidades.Notificacion;
 import entidades.Tactica;
+import entidades.TransaccionEconomica;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -100,6 +102,9 @@ public class ClubDAO {
         tactica.getPosicionesEnCancha().put(jugadoresIniciales.get(15).getId(), Tactica.SUPLENTE5);
 
 //            s.save(tactica);
+
+
+        club.getTransacciones().add(new TransaccionEconomica("Inicio", 0D, new Date()));
         em.persist(club);
 
         return club;
